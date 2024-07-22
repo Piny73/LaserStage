@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package bs.entity.constant;
+package lgsf.entity;
 
-import bs.entity.User;
+import lgsf.entity.User;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
