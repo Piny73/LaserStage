@@ -16,7 +16,7 @@ import lgsf.entity.constant.BaseEntity;
  */
 @Entity
 @Table(name = "immaginiricette")
-public class immaginiRicetta extends BaseEntity{
+public class ImmaginiRicetta extends BaseEntity{
     @Column(nullable = false)
     private String nome;
     
@@ -24,9 +24,9 @@ public class immaginiRicetta extends BaseEntity{
     @Column(nullable = false)
     private byte[] file;
 
-    public immaginiRicetta() {}
+    public ImmaginiRicetta() {}
 
-    public immaginiRicetta(String nome, byte[] file) {
+    public ImmaginiRicetta(String nome, byte[] file) {
         this.nome = nome;
         this.file = file;
     }

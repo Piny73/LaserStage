@@ -39,7 +39,7 @@ class Ricetta extends BaseEntity {
 
     @OneToMany(mappedBy = "ricetta_id")
     @CollectionTable(name = "ImmaginiRicetta", joinColumns = @JoinColumn(name = "id"))
-    private List<immaginiRicetta> immaginiricetta;
+    private List<ImmaginiRicetta> immaginiricetta;
 
     @Column(length = 255)
     private String videoLinkR;
@@ -47,7 +47,7 @@ class Ricetta extends BaseEntity {
     public Ricetta() {
     }
 
-    public Ricetta(String nome, int tempodiCottura, String difficolta, List<Ingrediente> ingredienti, double quantita, String preparatione, List<immaginiRicetta> immaginiricetta, String videoLinkR) {
+    public Ricetta(String nome, int tempodiCottura, String difficolta, List<Ingrediente> ingredienti, double quantita, String preparatione, List<ImmaginiRicetta> immaginiricetta, String videoLinkR) {
         this.nome = nome;
         this.tempodiCottura = tempodiCottura;
         this.difficolta = difficolta;
@@ -106,11 +106,11 @@ class Ricetta extends BaseEntity {
         this.preparatione = preparatione;
     }
 
-    public List<immaginiRicetta> getImmaginiricetta() {
+    public List<ImmaginiRicetta> getImmaginiricetta() {
         return immaginiricetta;
     }
 
-    public void setImmaginiricetta(List<immaginiRicetta> immaginiricetta) {
+    public void setImmaginiricetta(List<ImmaginiRicetta> immaginiricetta) {
         this.immaginiricetta = immaginiricetta;
     }
 
