@@ -6,7 +6,9 @@ package lgsf.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lgsf.entity.constant.BaseEntity;
 
@@ -23,6 +25,10 @@ public class ImmaginiRicetta extends BaseEntity{
     @Lob
     @Column(nullable = false)
     private byte[] file;
+    
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "ricetta_Id")
+    private Ricetta ricetta;
 
     public ImmaginiRicetta() {}
 

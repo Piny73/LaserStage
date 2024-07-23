@@ -7,6 +7,8 @@ package lgsf.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lgsf.entity.constant.BaseEntity;
 
 /**
@@ -16,13 +18,14 @@ import lgsf.entity.constant.BaseEntity;
 @Entity
 @Table(name = "listaingredienti")
 public class Ingrediente extends  BaseEntity {    
-   
+    @NotNull
     @Column(nullable = false)
     private String nome; 
-    
+    @NotNull
+    @Size(max = 255)
     @Column(nullable = false, length = 255)
     private String descrizione; 
-    
+    @NotNull
     @Column(nullable = false, length = 10)
     private String unitadimisura; 
     

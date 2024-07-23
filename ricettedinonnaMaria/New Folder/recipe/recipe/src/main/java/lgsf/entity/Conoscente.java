@@ -61,7 +61,5 @@ public class Conoscente extends BaseEntity {
     @Override
     public String toString() {
         return "Conoscente{" + "nomeC=" + nomeC + ", cognomeC=" + cognomeC + ", emailC=" + emailC + '}';
-    }
-    
-    
+    }  
 }

@@ -9,6 +9,8 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lgsf.entity.constant.BaseEntity;
@@ -23,23 +25,19 @@ class Ricetta extends BaseEntity {
     private String nome;
 
     @Column(nullable = false)
-    private int tempodiCottura;
+    private Integer tempodiCottura;
 
     @Column(nullable = false)
     private String difficolta;
 
-    @OneToMany(mappedBy = "ricetta_id")
+    @ManyToMany(mappedBy = "ricetta_id")
     private List<Ingrediente> ingredienti;
     
     @Column(nullable = false)
-    private double quantita;
+    private Integer quantita;
 
     @Column(length = 255)
     private String preparatione;
-
-    @OneToMany(mappedBy = "ricetta_id")
-    @CollectionTable(name = "ImmaginiRicetta", joinColumns = @JoinColumn(name = "id"))
-    private List<ImmaginiRicetta> immaginiricetta;
 
     @Column(length = 255)
     private String videoLinkR;
@@ -47,14 +45,13 @@ class Ricetta extends BaseEntity {
     public Ricetta() {
     }
 
-    public Ricetta(String nome, int tempodiCottura, String difficolta, List<Ingrediente> ingredienti, double quantita, String preparatione, List<ImmaginiRicetta> immaginiricetta, String videoLinkR) {
+    public Ricetta(String nome, Integer tempodiCottura, String difficolta, List<Ingrediente> ingredienti, Integer quantita, String preparatione, String videoLinkR) {
         this.nome = nome;
         this.tempodiCottura = tempodiCottura;
         this.difficolta = difficolta;
         this.ingredienti = ingredienti;
         this.quantita = quantita;
         this.preparatione = preparatione;
-        this.immaginiricetta = immaginiricetta;
         this.videoLinkR = videoLinkR;
     }
 
@@ -70,7 +67,7 @@ class Ricetta extends BaseEntity {
         return tempodiCottura;
     }
 
-    public void setTempodiCottura(int tempodiCottura) {
+    public void setTempodiCottura(Integer tempodiCottura) {
         this.tempodiCottura = tempodiCottura;
     }
 
@@ -94,7 +91,7 @@ class Ricetta extends BaseEntity {
         return quantita;
     }
 
-    public void setQuantita(double quantita) {
+    public void setQuantita(Integer quantita) {
         this.quantita = quantita;
     }
 
@@ -105,15 +102,6 @@ class Ricetta extends BaseEntity {
     public void setPreparatione(String preparatione) {
         this.preparatione = preparatione;
     }
-
-    public List<ImmaginiRicetta> getImmaginiricetta() {
-        return immaginiricetta;
-    }
-
-    public void setImmaginiricetta(List<ImmaginiRicetta> immaginiricetta) {
-        this.immaginiricetta = immaginiricetta;
-    }
-
     public String getVideoLinkR() {
         return videoLinkR;
     }
@@ -124,7 +112,9 @@ class Ricetta extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Ricetta{" + "nome=" + nome + ", tempodiCottura=" + tempodiCottura + ", difficolta=" + difficolta + ", ingredienti=" + ingredienti + ", quantita=" + quantita + ", preparatione=" + preparatione + ", immaginiricetta=" + immaginiricetta + ", videoLinkR=" + videoLinkR + '}';
+        return "Ricetta{" + "nome=" + nome + ", tempodiCottura=" + tempodiCottura + ", difficolta=" + difficolta + ", ingredienti=" + ingredienti + ", quantita=" + quantita + ", preparatione=" + preparatione + ", videoLinkR=" + videoLinkR + '}';
     }
+
+    
     
 }
