@@ -17,49 +17,49 @@ import lgsf.entity.constant.BaseEntity;
 public class Conoscente extends BaseEntity {
     
     @Column(nullable = false)
-    private String nomeC;
+    private String nome;
 
     @Column(nullable = false)
-    private String cognomeC;
+    private String cognome;
 
     @Column(nullable = false, unique = true)
-    private String emailC;
+    private String email;
 
     public Conoscente() {
     }
 
-    public Conoscente(String nomeC, String cognomeC, String emailC) {
-        this.nomeC = nomeC;
-        this.cognomeC = cognomeC;
-        this.emailC = emailC;
+    public Conoscente(String nome, String cognome, String email) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
     }
 
-    public String getNomeC() {
-        return nomeC;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeC(String nomeC) {
-        this.nomeC = nomeC;
+    public void setNomeC(String nome) {
+        this.nome = nome;
     }
 
-    public String getCognomeC() {
-        return cognomeC;
+    public String getCognome() {
+        return cognome;
     }
 
-    public void setCognomeC(String cognomeC) {
-        this.cognomeC = cognomeC;
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
     }
 
-    public String getEmailC() {
-        return emailC;
+    public String getEmail() {
+        return email;
     }
 
     public void setEmailC(String emailC) {
-        this.emailC = emailC;
+        this.email = email;
     }
 
     @Override
     public String toString() {
-        return "Conoscente{" + "nomeC=" + nomeC + ", cognomeC=" + cognomeC + ", emailC=" + emailC + '}';
+        return "Conoscente{" + "nome=" + nome + ", cognome=" + cognome + ", email=" + email + '}';
     }  
 }

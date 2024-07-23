@@ -26,15 +26,16 @@ public class Ingrediente extends  BaseEntity {
     @Column(nullable = false, length = 255)
     private String descrizione; 
     @NotNull
+    @Size(max = 10)
     @Column(nullable = false, length = 10)
-    private String unitadimisura; 
+    private String unitaDiMisura; 
     
     public Ingrediente() {}
 
     public Ingrediente(String nome, String descrizione, String unitadimisura) {
         this.nome = nome;
         this.descrizione = descrizione;
-        this.unitadimisura = unitadimisura;
+        this.unitaDiMisura = unitaDiMisura;
     }
 
     public String getNome() {
@@ -54,16 +55,16 @@ public class Ingrediente extends  BaseEntity {
     }
 
     public String getUnitadimisura() {
-        return unitadimisura;
+        return unitaDiMisura;
     }
 
     public void setUnitadimisura(String unitadimisura) {
-        this.unitadimisura = unitadimisura;
+        this.unitaDiMisura = unitaDiMisura;
     }
 
     @Override
     public String toString() {
-        return "Ingrediente{" + "nome=" + nome + ", descrizione=" + descrizione + ", unitadimisura=" + unitadimisura + '}';
+        return "Ingrediente{" + "nome=" + nome + ", descrizione=" + descrizione + ", unitadimisura=" + unitaDiMisura + '}';
     }
 
     
