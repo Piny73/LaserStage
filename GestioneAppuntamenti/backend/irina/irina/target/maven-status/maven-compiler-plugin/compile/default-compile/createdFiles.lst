@@ -1,3 +1,14 @@
-lgsf\boundary\PingResource.class
+bs\service\CorsResponseFilter.class
+lgsf\entity\constant\BaseEntity.class
 lgsf\service\JAXRSConfiguration.class
-lgsf\entity\BaseEntity.class
+airhacks\service\ping\boundary\PingResource.class
+lsgf\service\OptionRequestFilter.class
+lgsf\security\JWTManager.class
+lgsf\entity\constant\UserRoles.class
+lgsf\security\JwtTokenException.class
+lgsf\entity\User.class
+lgsf\security\SecurityEncoding.class
+lgsf\boundary\UsersResources.class
+lgsf\boundary\mapping\Credential.class
+lgsf\control\BaseStore.class
+lgsf\control\UserStore.class
