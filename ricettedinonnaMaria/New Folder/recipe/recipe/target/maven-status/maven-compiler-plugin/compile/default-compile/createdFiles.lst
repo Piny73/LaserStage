@@ -1,2 +1,12 @@
-lgsf\Services\JAXRSConfiguration.class
-lgsf\Boundary\PingResource.class
+lgsf\services\JAXRSConfiguration.class
+lgsf\boundary\PingResource.class
+lgsf\entity\constant\BaseEntity.class
+lgsf\security\JWTManager.class
+lgsf\entity\constant\UserRoles.class
+lgsf\store\BaseStore.class
+lgsf\security\JwtTokenException.class
+lgsf\store\UserStore.class
+lgsf\entity\User.class
+lgsf\security\SecurityEncoding.class
+lgsf\boundary\UsersResources.class
+lgsf\boundary\mapping\Credential.class

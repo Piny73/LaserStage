@@ -14,10 +14,11 @@ import javax.validation.constraints.Size;
 import javax.ws.rs.core.UriBuilder;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import lgsf.Boundary.mapping.UsersResources;
-import lgsf.Entity.constant.BaseEntity;
-import lgsf.Entity.constant.UserRoles;
-
+import lgsf.boundary.UsersResources;
+import lgsf.entity.constant.BaseEntity;
+import lgsf.entity.constant.BaseEntity;
+import lgsf.entity.constant.UserRoles;
+import lgsf.entity.constant.UserRoles;
 
 
 /**

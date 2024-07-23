@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lgsf.Boundary.mapping;
+package lgsf.boundary;
 
-import lgsf.Boundary.mapping.Credential;
+import lgsf.boundary.mapping.Credential;
 import java.util.List;
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
@@ -32,13 +32,14 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import lgsf.boundary.mapping.Credential;
 import org.eclipse.microprofile.jwt.Claim;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import lgsf.Security.JWTManager;
+import lgsf.security.JWTManager;
 import lgsf.store.UserStore;
 import lgsf.entity.User;
 

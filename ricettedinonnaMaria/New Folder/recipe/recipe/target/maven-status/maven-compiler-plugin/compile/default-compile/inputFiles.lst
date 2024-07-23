@@ -1,2 +1,12 @@
-C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\Boundary\PingResource.java
-C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\Services\JAXRSConfiguration.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\security\SecurityEncoding.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\store\UserStore.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\boundary\PingResource.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\entity\constant\UserRoles.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\entity\constant\BaseEntity.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\boundary\mapping\Credential.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\security\JwtTokenException.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\services\JAXRSConfiguration.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\store\BaseStore.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\entity\User.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\security\JWTManager.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\boundary\UsersResources.java
