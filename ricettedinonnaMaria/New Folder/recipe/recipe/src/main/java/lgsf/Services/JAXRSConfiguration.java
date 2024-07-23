@@ -1,4 +1,4 @@
-package lgsf.Services;
+package lgsf.services;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

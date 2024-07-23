@@ -1,4 +1,4 @@
-package lgsf.Boundary;
+package lgsf.boundary;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
