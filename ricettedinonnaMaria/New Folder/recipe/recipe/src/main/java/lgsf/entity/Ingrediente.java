@@ -14,8 +14,8 @@ import lgsf.entity.constant.BaseEntity;
  */
 
 @Entity
-@Table(name = "ingredienti")
-public class Ingredienti extends  BaseEntity {    
+@Table(name = "listaingredienti")
+public class Ingrediente extends  BaseEntity {    
    
     @Column(nullable = false)
     private String nome; 
@@ -26,9 +26,9 @@ public class Ingredienti extends  BaseEntity {
     @Column(nullable = false, length = 10)
     private String unitadimisura; 
     
-    public Ingredienti() {}
+    public Ingrediente() {}
 
-    public Ingredienti(String nome, String descrizione, String unitadimisura) {
+    public Ingrediente(String nome, String descrizione, String unitadimisura) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.unitadimisura = unitadimisura;
@@ -60,7 +60,7 @@ public class Ingredienti extends  BaseEntity {
 
     @Override
     public String toString() {
-        return "Ingredienti{" + "nome=" + nome + ", descrizione=" + descrizione + ", unitadimisura=" + unitadimisura + '}';
+        return "Ingrediente{" + "nome=" + nome + ", descrizione=" + descrizione + ", unitadimisura=" + unitadimisura + '}';
     }
 
     

@@ -29,7 +29,7 @@ class Ricetta extends BaseEntity {
     private String difficolta;
 
     @OneToMany(mappedBy = "ricetta_id")
-    private List<Ingredienti> ingredienti;
+    private List<Ingrediente> ingredienti;
     
     @Column(nullable = false)
     private double quantita;
@@ -47,7 +47,7 @@ class Ricetta extends BaseEntity {
     public Ricetta() {
     }
 
-    public Ricetta(String nome, int tempodiCottura, String difficolta, List<Ingredienti> ingredienti, double quantita, String preparatione, List<immaginiRicetta> immaginiricetta, String videoLinkR) {
+    public Ricetta(String nome, int tempodiCottura, String difficolta, List<Ingrediente> ingredienti, double quantita, String preparatione, List<immaginiRicetta> immaginiricetta, String videoLinkR) {
         this.nome = nome;
         this.tempodiCottura = tempodiCottura;
         this.difficolta = difficolta;
@@ -82,11 +82,11 @@ class Ricetta extends BaseEntity {
         this.difficolta = difficolta;
     }
 
-    public List<Ingredienti> getIngredienti() {
+    public List<Ingrediente> getIngredienti() {
         return ingredienti;
     }
 
-    public void setIngredienti(List<Ingredienti> ingredienti) {
+    public void setIngredienti(List<Ingrediente> ingredienti) {
         this.ingredienti = ingredienti;
     }
 

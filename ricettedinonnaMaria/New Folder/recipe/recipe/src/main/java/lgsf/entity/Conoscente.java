@@ -14,7 +14,7 @@ import lgsf.entity.constant.BaseEntity;
  */
 @Entity
 @Table(name = "listaconoscenti")
-public class NuovoConoscente extends BaseEntity {
+public class Conoscente extends BaseEntity {
     
     @Column(nullable = false)
     private String nomeC;
@@ -25,10 +25,10 @@ public class NuovoConoscente extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String emailC;
 
-    public NuovoConoscente() {
+    public Conoscente() {
     }
 
-    public NuovoConoscente(String nomeC, String cognomeC, String emailC) {
+    public Conoscente(String nomeC, String cognomeC, String emailC) {
         this.nomeC = nomeC;
         this.cognomeC = cognomeC;
         this.emailC = emailC;
@@ -60,7 +60,7 @@ public class NuovoConoscente extends BaseEntity {
 
     @Override
     public String toString() {
-        return "NuovoConoscente{" + "nomeC=" + nomeC + ", cognomeC=" + cognomeC + ", emailC=" + emailC + '}';
+        return "Conoscente{" + "nomeC=" + nomeC + ", cognomeC=" + cognomeC + ", emailC=" + emailC + '}';
     }
     
     
