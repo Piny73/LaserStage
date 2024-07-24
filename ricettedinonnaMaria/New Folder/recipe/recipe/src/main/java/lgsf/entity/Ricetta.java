@@ -4,11 +4,8 @@
  */
 package lgsf.entity;
 
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lgsf.entity.constant.BaseEntity;
 
@@ -16,8 +13,8 @@ import lgsf.entity.constant.BaseEntity;
  * @author piny73
  */
 @Entity
-@Table(name = "listaricette")
-class Ricetta extends BaseEntity {
+@Table(name = "ricette")
+public class Ricetta extends BaseEntity {
    @Column(nullable = false)
     private String nome;
 

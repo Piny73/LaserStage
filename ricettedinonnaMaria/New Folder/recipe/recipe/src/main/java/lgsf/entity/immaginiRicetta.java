@@ -17,7 +17,7 @@ import lgsf.entity.constant.BaseEntity;
  * @author piny7
  */
 @Entity
-@Table(name = "immaginiricette")
+@Table(name = "immaginiricetta")
 public class ImmaginiRicetta extends BaseEntity{
     @Column(nullable = false)
     private String nome;

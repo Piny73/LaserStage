@@ -30,7 +30,7 @@ import lgsf.entity.User;
 public class JWTManager {
 
     private static final String PRIVATE_KEY = "/META-INF/private_key.pem";
-    private static final String ISS = "business";
+    private static final String ISS = "lericettedinonnamaria";
 
     public String generate(User usr) {
 

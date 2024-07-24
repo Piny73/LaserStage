@@ -13,7 +13,7 @@ import lgsf.entity.constant.BaseEntity;
  * @author piny7
  */
 @Entity
-@Table(name = "listaconoscenti")
+@Table(name = "conoscenti")
 public class Conoscente extends BaseEntity {
     
     @Column(nullable = false)
