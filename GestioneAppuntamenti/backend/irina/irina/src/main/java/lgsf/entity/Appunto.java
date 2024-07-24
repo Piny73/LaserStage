@@ -103,6 +103,14 @@ public class Appunto extends BaseEntity  {
         return "Appunto{" + "dataOraInizio=" + dataOraInizio + ", dataOraFine=" + dataOraFine + ", descrizione=" + descrizione + ", stato=" + stato + ", cliente=" + cliente + ", vettura=" + vettura + '}';
     }
 
+    public String getPwd() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setPwd(String shaHash) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
   
     
     
