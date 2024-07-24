@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package bs.entity.constant;
+package lgsf.entity.constant;
 
-import bs.entity.User;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -18,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
+import lgsf.entity.User;
 
 /**
  *
