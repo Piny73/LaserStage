@@ -16,7 +16,7 @@ import lgsf.entity.constant.BaseEntity;
  */
 
 @Entity
-@Table(name = "listaingredienti")
+@Table(name = "ingredienti")
 public class Ingrediente extends  BaseEntity {    
     @NotNull
     @Column(nullable = false)
