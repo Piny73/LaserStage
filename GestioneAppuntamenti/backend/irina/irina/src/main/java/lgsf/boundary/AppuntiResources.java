@@ -13,9 +13,12 @@ import javax.json.JsonArray;
 import javax.json.stream.JsonCollectors;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -23,10 +26,11 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.container.ResourceContext;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import lgsf.entity.User;
+import lgsf.entity.Appunto;
 import lgsf.security.JWTManager;
-import lgsf.store.ClienteStore;
+import lgsf.store.AppuntoStore;
 import org.eclipse.microprofile.jwt.Claim;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -38,13 +42,13 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
  *
  * @author Stage
  */
-@Path("users")
-@Tag(name = "Gestione Cliente", description = "Permette di gestire i clienti di bkmapp")
+@Path("appunti")
+@Tag(name = "Gestione Appunti", description = "Permette di gestire gli appunti di bkmapp")
 @DenyAll
-public class ClienteResources {
+public class AppuntiResources {
     
     @Inject
-    private ClienteStore storeuser;
+    private AppuntoStore storeappunto;
     
     @Context
     ResourceContext rc;
@@ -64,30 +68,16 @@ public class ClienteResources {
    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce l'elenco di tutti gli utenti")
+    @Operation(description = "Restituisce l'elenco di tutti gli appunti")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Elenco non trovato")
     })
-    @RolesAllowed({"Admin","User"})
-    public List<User> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
-        System.out.println(token);
-        return storeuser.all();
-    }
-    
-    
-    @GET
-    @Path("allslice")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce l'elenco con informazioni ridotte di tutti gli utenti")
-    @APIResponses({
-        @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
-        @APIResponse(responseCode = "404", description = "Elenco non trovato")
-    })
+    //@RolesAllowed({"Admin","User"})
     @PermitAll
-    public JsonArray allSlice() {
-        //System.out.println(token);
-        return storeuser.all().stream().map(User::toJsonSliceName).collect(JsonCollectors.toJsonArray());
+    public List<Appunto> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
+        System.out.println(token);
+        return storeappunto.all();
     }
     
     
@@ -97,12 +87,27 @@ public class ClienteResources {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(description = "Restituisce la risorsa utente identificata dall'ID")
     @APIResponses({
+        @APIResponse(responseCode = "200", description = "Appunto ritornato con successo"),
+        @APIResponse(responseCode = "404", description = "Appunto non trovato")
+    })
+    @RolesAllowed({"Admin","Cliente"})
+    public Appunto find(@PathParam("id") Long id) {
+        return storeappunto.find(id).orElseThrow(() -> new NotFoundException("appunto non trovato. id=" + id));
+    }
+    
+        
+    @GET
+    @Path("/cliente/{cliente}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(description = "Restituisce la risorsa utente identificata dall'Cliente")
+    @APIResponses({
         @APIResponse(responseCode = "200", description = "Utente ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Utente non trovato")
     })
-    @RolesAllowed({"Admin","User"})
-    public User find(@PathParam("id") Long id) {
-        return storeuser.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
+    //@RolesAllowed({"Admin","User"})
+    @PermitAll
+    public Appunto findbycliente(@PathParam("cliente") Long cliente) {
+        return storeappunto.find(cliente).orElseThrow(() -> new NotFoundException("user non trovato. id=" + cliente));
     }
     
     
@@ -115,48 +120,14 @@ public class ClienteResources {
         @APIResponse(responseCode = "404", description = "Creazione di utente fallito")
     })
     @PermitAll
-    public Response create(@Valid User entity) {
+    public Response create(@Valid Appunto entity) {
         
-        if(storeuser.findUserbyLogin(entity.getEmail()).isPresent()){
-            
-           return Response.status(Response.Status.PRECONDITION_FAILED).build();
-        }
-        
-        User saved = storeuser.save(entity);
+        Appunto saved = storeappunto.save(entity);
         
         return Response.status(Response.Status.CREATED)
                 .entity(saved)
                 .build();
 }
-    
-    
-    @POST
-    @Path("login")
-    @Operation(description = "Permette fare login e ristituisce il token valido")
-    @APIResponses({
-        @APIResponse(responseCode = "200", description = "Login fatto con successo"),
-        @APIResponse(responseCode = "404", description = "Login fallito")
-
-    })
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @PermitAll
-    public JsonObject login (@Valid Credential credential){
-        
-        User u = storeuser.login(credential).orElseThrow(() -> new NotAuthorizedException("User non Authorized",  
-                                                                       Response.status(Response.Status.UNAUTHORIZED).build()));
-        String jwt = jwtManager.generate(u);
-         
-        return  Json.createObjectBuilder()
-                .add("mail", u.getEmail())
-                .add("token",jwt)
-                .add("userid", u.getId())
-                .add("first_name", u.getFirstName())
-                .add("last_name", u.getLastName())
-                .add("role", u.getRoleuser().toString())
-                .build();
-    }
-    
     
     
     @DELETE
@@ -168,10 +139,11 @@ public class ClienteResources {
 
     })
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed("Admin")
+    //@RolesAllowed("Admin")
+    @PermitAll
     public Response delete(@PathParam("id") Long id) {
-        User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
-        storeuser.remove(found);
+        Appunto found = storeappunto.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
+        storeappunto.remove(found);
         return Response.status(Response.Status.OK)
                 .build();
     }
@@ -186,13 +158,14 @@ public class ClienteResources {
         @APIResponse(responseCode = "404", description = "Aggiornamento falito")
             
     })
-    @RolesAllowed("Admin")
-    public User update(@PathParam("id") Long id, @Valid User entity) {
-        User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
-        entity.setId(id);
-        return storeuser.update(entity);
+    //@RolesAllowed("Admin")
+    @PermitAll
+    public Appunto update(@Valid Appunto entity) {
+        Appunto found = storeappunto.find(entity.getId()).orElseThrow(() -> new NotFoundException("user non trovato. id=" + entity.getId().toString()));
+        //entity.setId(id);
+        return storeappunto.update(entity);
     }
    
-    
-    
+       
 }
+

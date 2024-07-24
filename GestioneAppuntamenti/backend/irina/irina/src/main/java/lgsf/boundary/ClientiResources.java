@@ -4,27 +4,51 @@
  */
 package lgsf.boundary;
 
+import java.util.List;
 import javax.annotation.security.DenyAll;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
+import javax.json.JsonArray;
+import javax.json.stream.JsonCollectors;
+import javax.validation.Valid;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.container.ResourceContext;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import lgsf.entity.Cliente;
+import lgsf.entity.User;
 import lgsf.security.JWTManager;
-import lgsf.store.AppuntoStore;
+import lgsf.store.ClienteStore;
+import org.eclipse.microprofile.jwt.Claim;
+import org.eclipse.microprofile.jwt.JsonWebToken;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 /**
  *
  * @author Stage
  */
+
 @Path("users")
-@Tag(name = "Gestione Users", description = "Permette di gestire gli utenti di bkmapp")
+@Tag(name = "Gestione Cliente", description = "Permette di gestire i clienti di bkmapp")
 @DenyAll
-public class AppuntoResources {
+public class ClientiResources {
     
     @Inject
-    private AppuntoStore storeuser;
+    private ClienteStore storeuser;
     
     @Context
     ResourceContext rc;
@@ -42,20 +66,23 @@ public class AppuntoResources {
     private String sub;
         
    
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce l'elenco di tutti gli utenti")
+    @Operation(description = "Restituisce l'elenco di tutti gli appunti")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Elenco non trovato")
     })
-    @RolesAllowed({"Admin","User"})
-    public List<User> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
+    //@RolesAllowed({"Admin","User"})
+    @PermitAll
+    public List<Cliente> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
         System.out.println(token);
-        return storeuser.all();
+        return storecliente.all();
     }
     
     
+    /*
     @GET
     @Path("allslice")
     @Produces(MediaType.APPLICATION_JSON)
@@ -70,7 +97,7 @@ public class AppuntoResources {
         return storeuser.all().stream().map(User::toJsonSliceName).collect(JsonCollectors.toJsonArray());
     }
     
-    
+    */
         
     @GET
     @Path("{id}")
@@ -82,11 +109,11 @@ public class AppuntoResources {
     })
     @RolesAllowed({"Admin","User"})
     public User find(@PathParam("id") Long id) {
-        return storeuser.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
+        return storecliente.find(id).orElseThrow(() -> new NotFoundException("cliente non trovato. id=" + id));
     }
     
     
-    @POST
+ @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(description = "Permette la registrazione di un nuovo utente")
@@ -95,19 +122,15 @@ public class AppuntoResources {
         @APIResponse(responseCode = "404", description = "Creazione di utente fallito")
     })
     @PermitAll
-    public Response create(@Valid User entity) {
+    public Response create(@Valid Cliente entity) {
         
-        if(storeuser.findUserbyLogin(entity.getEmail()).isPresent()){
-            
-           return Response.status(Response.Status.PRECONDITION_FAILED).build();
-        }
-        
-        User saved = storeuser.save(entity);
+        Cliente saved = storecliente.save(entity);
         
         return Response.status(Response.Status.CREATED)
                 .entity(saved)
                 .build();
 }
+    
     
     
     @POST
@@ -176,4 +199,3 @@ public class AppuntoResources {
     
     
 }
-

@@ -85,6 +85,6 @@ public class VetturaStore extends BaseStore<Vettura>  {
         }
             
     }
-         
+       
 }
 
