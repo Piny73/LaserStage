@@ -1,12 +1,16 @@
 lgsf\services\JAXRSConfiguration.class
 lgsf\boundary\PingResource.class
 lgsf\entity\constant\BaseEntity.class
+lgsf\entity\Ricetta.class
 lgsf\security\JWTManager.class
 lgsf\entity\constant\UserRoles.class
 lgsf\store\BaseStore.class
+lgsf\entity\ImmaginiRicetta.class
 lgsf\security\JwtTokenException.class
 lgsf\store\UserStore.class
 lgsf\entity\User.class
 lgsf\security\SecurityEncoding.class
+lgsf\entity\Conoscente.class
+lgsf\entity\Ingrediente.class
 lgsf\boundary\UsersResources.class
 lgsf\boundary\mapping\Credential.class
