@@ -87,6 +87,7 @@ public class User extends  BaseEntity {
     }
 
     public void setRoleuser(UserRoles roleuser) {
+        
         this.roleuser = roleuser;
     }
     
