@@ -133,7 +133,7 @@ public class VettureResources {
     @Operation(description = "Elimina una risorsa Vettura tramite l'ID")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Vettura eliminata con successo"),
-        @APIResponse(responseCode = "404", description = "Vettura non trovato")
+        @APIResponse(responseCode = "404", description = "Vettura non trovata")
 
     })
     @Produces(MediaType.APPLICATION_JSON)
@@ -159,7 +159,7 @@ public class VettureResources {
     //@RolesAllowed("Admin")
     @PermitAll
     public Vettura update(@Valid Vettura entity) {
-        Vettura found = storevettura.find(entity.getId()).orElseThrow(() -> new NotFoundException("vettura non trovatoa. id=" + entity.getId().toString()));
+        Vettura found = storevettura.find(entity.getId()).orElseThrow(() -> new NotFoundException("vettura non trovata. id=" + entity.getId().toString()));
         //entity.setId(id);
         return storevettura.update(entity);
     }
