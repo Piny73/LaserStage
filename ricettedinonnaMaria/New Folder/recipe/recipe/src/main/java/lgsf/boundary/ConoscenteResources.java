@@ -7,18 +7,12 @@ package lgsf.boundary;
 import java.util.List;
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.stream.JsonCollectors;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -86,10 +80,10 @@ public class ConoscenteResources {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce la risorsa utente identificata dall'ID")
+    @Operation(description = "Restituisce il conoscente identificato dall'ID")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente ritornato con successo"),
-        @APIResponse(responseCode = "404", description = "Utente non trovato")
+        @APIResponse(responseCode = "200", description = "Conoscente ritornato con successo"),
+        @APIResponse(responseCode = "404", description = "Conoscente non trovato")
     })
     //@RolesAllowed({"Admin"})
     @PermitAll
@@ -101,10 +95,10 @@ public class ConoscenteResources {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Permette la registrazione di un nuovo utente")
+    @Operation(description = "Permette la registrazione di un nuovo conoscente")
     @APIResponses({
-        @APIResponse(responseCode = "201", description = "Nuovo utente creato con successo"),
-        @APIResponse(responseCode = "404", description = "Creazione di utente fallito")
+        @APIResponse(responseCode = "201", description = "Nuovo conoscente creato con successo"),
+        @APIResponse(responseCode = "404", description = "Creazione di un conoscente fallito")
     })
     @PermitAll
     public Response create(@Valid Conoscente entity) {
@@ -123,10 +117,10 @@ public class ConoscenteResources {
     
     @DELETE
     @Path("{id}")
-    @Operation(description = "Elimina una risorsa Utente tramite l'ID")
+    @Operation(description = "Elimina un conoscente tramite l'ID")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente eliminato con successo"),
-        @APIResponse(responseCode = "404", description = "Utente non trovato")
+        @APIResponse(responseCode = "200", description = "Conoscente eliminato con successo"),
+        @APIResponse(responseCode = "404", description = "Conoscente non trovato")
 
     })
     @Produces(MediaType.APPLICATION_JSON)
@@ -143,9 +137,9 @@ public class ConoscenteResources {
     //@Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Aggiorna i dati dell'utente")
+    @Operation(description = "Aggiorna i dati del conoscente")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente aggirnato con successo"),
+        @APIResponse(responseCode = "200", description = "Conoscente aggiornato con successo"),
         @APIResponse(responseCode = "404", description = "Aggiornamento falito")
             
     })

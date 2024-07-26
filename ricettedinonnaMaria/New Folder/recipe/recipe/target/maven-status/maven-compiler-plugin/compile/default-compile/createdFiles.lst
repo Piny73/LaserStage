@@ -21,3 +21,4 @@ lgsf\security\SecurityEncoding.class
 lgsf\entity\Conoscente.class
 lgsf\store\ImmaginiRicettaStore.class
 lgsf\boundary\mapping\Credential.class
+lgsf\boundary\ImmaginiRicettaResources.class

@@ -4,22 +4,15 @@
  */
 package lgsf.boundary;
 
-import lgsf.boundary.mapping.Credential;
 import java.util.List;
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.stream.JsonCollectors;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -32,7 +25,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import lgsf.boundary.mapping.Credential;
+import lgsf.entity.Ingrediente;
 import org.eclipse.microprofile.jwt.Claim;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -40,168 +33,116 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import lgsf.security.JWTManager;
-import lgsf.store.UserStore;
-import lgsf.entity.User;
+import lgsf.store.IngredienteStore;
 
-/**
- *
- * @author AndreLima
- */
-@Path("users")
-@Tag(name = "Gestione Users", description = "Permette di gestire gli utenti di bkmapp")
+@Path("ingrediente")
+@Tag(name = "Gestione Ingrediente", description = "Permette di gestire gli ingredienti di lericettedinonnamaria")
 @DenyAll
 public class IngredienteResources {
-    
+
     @Inject
-    private UserStore storeuser;
-    
+    private IngredienteStore storeingrediente;
+
     @Context
     ResourceContext rc;
-    
+
     @Context
     UriInfo uriInfo;
-    
+
     @Inject
     private JWTManager jwtManager;
-    
+
     @Inject
     private JsonWebToken token;
-    
+
     @Claim(value = "sub")
     private String sub;
-        
-   
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce l'elenco di tutti gli utenti")
+    @Operation(description = "Restituisce l'elenco degli ingredienti")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Elenco non trovato")
     })
-    @RolesAllowed({"Admin","User"})
-    public List<User> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
-        System.out.println(token);
-        return storeuser.all();
-    }
-    
-    
-    @GET
-    @Path("allslice")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce l'elenco con informazioni ridotte di tutti gli utenti")
-    @APIResponses({
-        @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
-        @APIResponse(responseCode = "404", description = "Elenco non trovato")
-    })
+    //@RolesAllowed({"Admin"})
     @PermitAll
-    public JsonArray allSlice() {
-        //System.out.println(token);
-        return storeuser.all().stream().map(User::toJsonSliceName).collect(JsonCollectors.toJsonArray());
+    public List<Ingrediente> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
+        System.out.println(token);
+        return storeingrediente.all();
     }
-    
-    
-        
+
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce la risorsa utente identificata dall'ID")
+    @Operation(description = "Restituisce l'ingrediente identificato dall'ID")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente ritornato con successo"),
-        @APIResponse(responseCode = "404", description = "Utente non trovato")
+        @APIResponse(responseCode = "200", description = "Ricetta ritornata con successo"),
+        @APIResponse(responseCode = "404", description = "Ricetta non trovata")
     })
-    @RolesAllowed({"Admin","User"})
-    public User find(@PathParam("id") Long id) {
-        return storeuser.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
+    //@RolesAllowed({"Admin"})
+    @PermitAll
+    public Ingrediente find(@PathParam("id") Long id) {
+        return storeingrediente.find(id).orElseThrow(() -> new NotFoundException("ingrediente non trovato. id=" + id));
     }
-    
-    
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Permette la registrazione di un nuovo utente")
+    @Operation(description = "Permette la registrazione di un nuovo ingrediente")
     @APIResponses({
-        @APIResponse(responseCode = "201", description = "Nuovo utente creato con successo"),
-        @APIResponse(responseCode = "404", description = "Creazione di utente fallito")
+        @APIResponse(responseCode = "201", description = "Nuovo ingrediente creato con successo"),
+        @APIResponse(responseCode = "404", description = "Creazione di un ingrediente fallito")
     })
     @PermitAll
-    public Response create(@Valid User entity) {
-        
-        if(storeuser.findUserbyLogin(entity.getEmail()).isPresent()){
-            
-           return Response.status(Response.Status.PRECONDITION_FAILED).build();
+    public Response create(@Valid Ingrediente entity) {
+
+        if (storeingrediente.findIngredientebyNome(entity.getNome()).isPresent()) {
+
+            return Response.status(Response.Status.PRECONDITION_FAILED).build();
         }
-        
-        User saved = storeuser.save(entity);
-        
+
+        Ingrediente saved = storeingrediente.save(entity);
+
         return Response.status(Response.Status.CREATED)
                 .entity(saved)
                 .build();
-}
-    
-    
-    @POST
-    @Path("login")
-    @Operation(description = "Permette fare login e ristituisce il token valido")
-    @APIResponses({
-        @APIResponse(responseCode = "200", description = "Login fatto con successo"),
-        @APIResponse(responseCode = "404", description = "Login fallito")
-
-    })
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @PermitAll
-    public JsonObject login (@Valid Credential credential){
-        
-        User u = storeuser.login(credential).orElseThrow(() -> new NotAuthorizedException("User non Authorized",  
-                                                                       Response.status(Response.Status.UNAUTHORIZED).build()));
-        String jwt = jwtManager.generate(u);
-         
-        return  Json.createObjectBuilder()
-                .add("mail", u.getEmail())
-                .add("token",jwt)
-                .add("userid", u.getId())
-                .add("first_name", u.getFirstName())
-                .add("last_name", u.getLastName())
-                .add("role", u.getRoleuser().toString())
-                .build();
     }
-    
-    
-    
+
     @DELETE
     @Path("{id}")
-    @Operation(description = "Elimina una risorsa Utente tramite l'ID")
+    @Operation(description = "Elimina un ingrediente tramite l'ID")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente eliminato con successo"),
-        @APIResponse(responseCode = "404", description = "Utente non trovato")
+        @APIResponse(responseCode = "200", description = "Ingrediente eliminato con successo"),
+        @APIResponse(responseCode = "404", description = "Ingrediente non trovato")
 
     })
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed("Admin")
+    //@RolesAllowed("Admin")
+    @PermitAll
     public Response delete(@PathParam("id") Long id) {
-        User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
-        storeuser.remove(found);
+        Ingrediente found = storeingrediente.find(id).orElseThrow(() -> new NotFoundException("ingrediente non trovato. id=" + id));
+        storeingrediente.remove(found);
         return Response.status(Response.Status.OK)
                 .build();
     }
-    
+
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Aggiorna i dati dell'utente")
+    @Operation(description = "Aggiorna i dati dell'ingrediente")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente aggirnato con successo"),
+        @APIResponse(responseCode = "200", description = "Ingrediente aggiornato con successo"),
         @APIResponse(responseCode = "404", description = "Aggiornamento falito")
-            
+
     })
-    @RolesAllowed("Admin")
-    public User update(@PathParam("id") Long id, @Valid User entity) {
-        User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
+    //@RolesAllowed("Admin")
+    @PermitAll
+    public Ingrediente update(@PathParam("id") Long id, @Valid Ingrediente entity) {
+        Ingrediente found = storeingrediente.find(id).orElseThrow(() -> new NotFoundException("Ingrediente non trovato. id=" + id));
         entity.setId(id);
-        return storeuser.update(entity);
+        return storeingrediente.update(entity);
     }
-   
-    
-    
+
 }

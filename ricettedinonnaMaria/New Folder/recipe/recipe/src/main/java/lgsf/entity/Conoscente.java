@@ -54,7 +54,7 @@ public class Conoscente extends BaseEntity {
         return email;
     }
 
-    public void setEmailC(String emailC) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
