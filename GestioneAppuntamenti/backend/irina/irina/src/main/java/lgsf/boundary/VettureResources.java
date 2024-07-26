@@ -26,9 +26,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import lgsf.entity.Cliente;
+import lgsf.entity.Vettura;
 import lgsf.security.JWTManager;
-import lgsf.store.ClienteStore;
+import lgsf.store.VetturaStore;
 import org.eclipse.microprofile.jwt.Claim;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -40,14 +40,13 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
  *
  * @author Stage
  */
-
-@Path("clienti")
+@Path("vetture")
 @Tag(name = "Gestione Appunti", description = "Permette di gestire gli appunti di bkmapp")
 @DenyAll
-public class ClientiResources {
+public class VettureResources {
     
     @Inject
-    private ClienteStore storecliente;
+    private VetturaStore storevettura;
     
     @Context
     ResourceContext rc;
@@ -67,16 +66,16 @@ public class ClientiResources {
    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce l'elenco di tutti i clienti")
+    @Operation(description = "Restituisce l'elenco di tutte le vetture")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Elenco non trovato")
     })
     //@RolesAllowed({"Admin","User"})
     @PermitAll
-    public List<Cliente> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
+    public List<Vettura> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
         System.out.println(token);
-        return storecliente.all();
+        return storevettura.all();
     }
     
     
@@ -86,27 +85,27 @@ public class ClientiResources {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(description = "Restituisce la risorsa utente identificata dall'ID")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Cliente ritornato con successo"),
-        @APIResponse(responseCode = "404", description = "Cliente non trovato")
+        @APIResponse(responseCode = "200", description = "Vettura ritornato con successo"),
+        @APIResponse(responseCode = "404", description = "Vettura non trovato")
     })
     @RolesAllowed({"Admin","Cliente"})
-    public Cliente find(@PathParam("id") Long id) {
-        return storecliente.find(id).orElseThrow(() -> new NotFoundException("cliente non trovato. id=" + id));
+    public Vettura find(@PathParam("id") Long id) {
+        return storevettura.find(id).orElseThrow(() -> new NotFoundException("Vettura non trovata. id=" + id));
     }
     
         
     @GET
-    @Path("/cliente/{cliente}")
+    @Path("/vettura/{vettura}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce la risorsa utente identificata dall'Cliente")
+    @Operation(description = "Restituisce la risorsa utente identificata dalla vettura")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente ritornato con successo"),
-        @APIResponse(responseCode = "404", description = "Utente non trovato")
+        @APIResponse(responseCode = "200", description = "Vettura ritornato con successo"),
+        @APIResponse(responseCode = "404", description = "Vettura non trovato")
     })
     //@RolesAllowed({"Admin","User"})
     @PermitAll
-    public Cliente findbycliente(@PathParam("cliente") Long cliente) {
-        return storecliente.find(cliente).orElseThrow(() -> new NotFoundException("cliente non trovato. id=" + cliente));
+    public Vettura findbyvettura(@PathParam("Vettura") Long vettura) {
+        return storevettura.find(vettura).orElseThrow(() -> new NotFoundException("vettura non trovata. id=" + vettura));
     }
     
     
@@ -119,9 +118,9 @@ public class ClientiResources {
         @APIResponse(responseCode = "404", description = "Creazione di cliente fallito")
     })
     @PermitAll
-    public Response create(@Valid Cliente entity) {
+    public Response create(@Valid Vettura entity) {
         
-        Cliente saved = storecliente.save(entity);
+        Vettura saved = storevettura.save(entity);
         
         return Response.status(Response.Status.CREATED)
                 .entity(saved)
@@ -131,18 +130,18 @@ public class ClientiResources {
     
     @DELETE
     @Path("{id}")
-    @Operation(description = "Elimina una risorsa Cliente tramite l'ID")
+    @Operation(description = "Elimina una risorsa Vettura tramite l'ID")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Cliente eliminato con successo"),
-        @APIResponse(responseCode = "404", description = "Cliente non trovato")
+        @APIResponse(responseCode = "200", description = "Vettura eliminata con successo"),
+        @APIResponse(responseCode = "404", description = "Vettura non trovato")
 
     })
     @Produces(MediaType.APPLICATION_JSON)
     //@RolesAllowed("Admin")
     @PermitAll
     public Response delete(@PathParam("id") Long id) {
-        Cliente found = storecliente.find(id).orElseThrow(() -> new NotFoundException("cliente non trovato. id=" + id));
-        storecliente.remove(found);
+       Vettura found = storevettura.find(id).orElseThrow(() -> new NotFoundException("vettura non trovata. id=" + id));
+        storevettura.remove(found);
         return Response.status(Response.Status.OK)
                 .build();
     }
@@ -151,20 +150,19 @@ public class ClientiResources {
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Aggiorna i dati dell'cliente")
+    @Operation(description = "Aggiorna i dati della vettura")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Cliente aggiornato con successo"),
+        @APIResponse(responseCode = "200", description = "Vettura aggiornata con successo"),
         @APIResponse(responseCode = "404", description = "Aggiornamento falito")
             
     })
     //@RolesAllowed("Admin")
     @PermitAll
-    public Cliente update(@Valid Cliente entity) {
-        Cliente found = storecliente.find(entity.getId()).orElseThrow(() -> new NotFoundException("cliente non trovato. id=" + entity.getId().toString()));
+    public Vettura update(@Valid Vettura entity) {
+        Vettura found = storevettura.find(entity.getId()).orElseThrow(() -> new NotFoundException("vettura non trovatoa. id=" + entity.getId().toString()));
         //entity.setId(id);
-        return storecliente.update(entity);
+        return storevettura.update(entity);
     }
    
        
 }
-
