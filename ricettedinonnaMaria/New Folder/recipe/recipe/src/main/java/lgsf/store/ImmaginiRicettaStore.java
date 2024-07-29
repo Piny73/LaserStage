@@ -56,5 +56,9 @@ public class ImmaginiRicettaStore extends BaseStore<ImmaginiRicetta>  {
         }
             
     }
+
+    public void remove(ImmaginiRicettaStore found) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
 

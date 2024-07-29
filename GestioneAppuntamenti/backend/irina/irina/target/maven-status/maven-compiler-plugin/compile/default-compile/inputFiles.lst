@@ -1,6 +1,7 @@
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\lgsf\store\UserStore.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\lgsf\entity\Appunto.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\lgsf\entity\constant\UserRoles.java
+C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\lgsf\boundary\VettureResources.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\lgsf\security\JWTManager.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\lgsf\boundary\ClientiResources.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\lgsf\entity\constant\BaseEntity.java
@@ -14,7 +15,6 @@ C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\lgsf\service\CorsResponseFilter.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\lgsf\boundary\mapping\Credential.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\lgsf\security\SecurityEncoding.java
-C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\lgsf\boundary\VetturaResources.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\airhacks\service\ping\boundary\PingResource.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\lgsf\entity\constant\StatoAppuntoType.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\lgsf\store\BaseStore.java
