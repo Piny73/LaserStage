@@ -5,6 +5,9 @@
 package project_lgsf.entity;
 
 import java.time.LocalDateTime;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.bind.annotation.JsonbTypeAdapter;
 import project_lgsf.entity.constant.BaseEntity;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +15,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import project_lgsf.entity.adapter.ClienteTypeAdapter;
+import project_lgsf.entity.adapter.VetturaTypeAdapter;
 import project_lgsf.entity.constant.StatoAppuntoType;
 
 /**
@@ -30,10 +35,12 @@ public class Appunto extends BaseEntity  {
     @Enumerated(EnumType.STRING)
     private StatoAppuntoType stato;
     
+    @JsonbTypeAdapter(ClienteTypeAdapter.class)
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
     
+     @JsonbTypeAdapter(VetturaTypeAdapter.class)
     @ManyToOne
     @JoinColumn(name = "vettura_id")
     private Vettura vettura;
@@ -112,6 +119,16 @@ public class Appunto extends BaseEntity  {
     }
 
   
-    
+        @Override
+         public JsonObject toJsonSlice() {
+
+        return Json.createObjectBuilder()
+                .add("id", this.id)
+                .add("descrizione", this.descrizione)
+                .add("", this.stato.toString())
+                .add("cliente", this.cliente.getNome())
+                .build();
+                
+    }
     
 }
