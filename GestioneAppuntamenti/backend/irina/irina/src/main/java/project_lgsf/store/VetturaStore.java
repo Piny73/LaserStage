@@ -39,7 +39,7 @@ public class VetturaStore extends BaseStore<Vettura>  {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Vettura e where e.annoProduzione = :login and e.canceled = false", Vettura.class)
+                    em.createQuery("select e from Vettura e where e.targa :login and e.benzina = false", Vettura.class)
                     .setParameter("login", login)
                     .getSingleResult()
                     );
@@ -56,7 +56,7 @@ public class VetturaStore extends BaseStore<Vettura>  {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Cliente e where e.createdby = :login and e.canceled = false", Vettura.class)
+                    em.createQuery("select e from Cliente e where e.nome = :login and e.telefono false", Vettura.class)
                     .setParameter("login", login)
                     .getSingleResult()
                     );
@@ -73,7 +73,7 @@ public class VetturaStore extends BaseStore<Vettura>  {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Appunto e where e.cliente = :login and e.canceled = false", Vettura.class)
+                    em.createQuery("select e from Appunto e where e.cliente = :login and e.vettura.targa = false", Vettura.class)
                     .setParameter("login", login)
                     .getSingleResult()
                     );
