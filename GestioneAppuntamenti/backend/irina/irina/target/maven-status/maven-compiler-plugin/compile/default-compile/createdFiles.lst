@@ -7,7 +7,9 @@ lgsf\entity\constant\UserRoles.class
 lgsf\entity\Appunto.class
 lgsf\boundary\UsersResources.class
 lgsf\Enum\TipoAlimentazioneType.class
+lgsf\boundary\VettureResources.class
 lgsf\service\CorsResponseFilter.class
+lgsf\boundary\ClientiResources.class
 lgsf\service\JAXRSConfiguration.class
 airhacks\service\ping\boundary\PingResource.class
 lgsf\boundary\AppuntiResources.class
