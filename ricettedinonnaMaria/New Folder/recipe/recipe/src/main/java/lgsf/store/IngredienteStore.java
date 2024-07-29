@@ -39,7 +39,7 @@ public class IngredienteStore extends BaseStore<Ingrediente>  {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Ingrediente e where e.nome = : nome e.canceled = false", Ingrediente.class)
+                    em.createQuery("select e from Ingrediente e where e.nome = : nome and e.canceled = false", Ingrediente.class)
                     .setParameter("nome", nome)
                     .getSingleResult()
                     );

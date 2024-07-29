@@ -19,22 +19,23 @@ import lgsf.entity.constant.BaseEntity;
 @Table(name = "ingredienti")
 public class Ingrediente extends  BaseEntity {    
     @NotNull
-    @Column(nullable = false)
+    @Size(max = 255)
+    @Column(nullable = false, length = 255)
     private String nome; 
     @NotNull
     @Size(max = 255)
     @Column(nullable = false, length = 255)
-    private String descrizione; 
+    private String tipologia; 
     @NotNull
-    @Size(max = 10)
-    @Column(nullable = false, length = 10)
+    @Size(max = 255)
+    @Column(nullable = false, length = 255)
     private String unitaDiMisura; 
     
     public Ingrediente() {}
 
-    public Ingrediente(String nome, String descrizione, String unitadimisura) {
+    public Ingrediente(String nome, String tipologia, String unitaDiMisura) {
         this.nome = nome;
-        this.descrizione = descrizione;
+        this.tipologia = tipologia;
         this.unitaDiMisura = unitaDiMisura;
     }
 
@@ -46,25 +47,25 @@ public class Ingrediente extends  BaseEntity {
         this.nome = nome;
     }
 
-    public String getDescrizione() {
-        return descrizione;
+    public String getTipologia() {
+        return tipologia;
     }
 
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
+    public void setTipologia(String tipologia) {
+        this.tipologia = tipologia;
     }
 
-    public String getUnitadimisura() {
+    public String getUnitaDiMisura() {
         return unitaDiMisura;
     }
 
-    public void setUnitadimisura(String unitadimisura) {
+    public void setUnitaDiMisura(String unitaDiMisura) {
         this.unitaDiMisura = unitaDiMisura;
     }
 
     @Override
     public String toString() {
-        return "Ingrediente{" + "nome=" + nome + ", descrizione=" + descrizione + ", unitadimisura=" + unitaDiMisura + '}';
+        return "Ingrediente{" + "nome=" + nome + ", tipologia=" + tipologia + ", unitaDiMisura=" + unitaDiMisura + '}';
     }
 
     

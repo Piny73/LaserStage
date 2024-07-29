@@ -38,7 +38,7 @@ public class Conoscente extends BaseEntity {
         return nome;
     }
 
-    public void setNomeC(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
