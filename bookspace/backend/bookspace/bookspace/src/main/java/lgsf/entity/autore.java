@@ -4,6 +4,8 @@
  */
 package lgsf.entity;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -67,5 +69,17 @@ public class autore extends BaseEntity {
         return "autore{" + "nome=" + nome + ", cognome=" + cognome + ", nazionalita=" + nazionalita + ", annonascita=" + annonascita + '}';
     }
 
- 
+    @Override
+     public JsonObject toJsonSlice() {
+
+        return Json.createObjectBuilder()
+                .add("id", this.id)
+                .add("nome", this.nome)
+                .add("cognome", this.cognome)
+                .add("nazionalita", this.nazionalita)
+                .add("annonascita", this.annonascita)
+                .build();
+    }
+    
+    
 }

@@ -4,8 +4,12 @@
  */
 package lgsf.entity;
 
+import javax.json.bind.annotation.JsonbTypeAdapter;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lgsf.entity.adapter.AutoreTypeAdapter;
 
 /**
  *
@@ -17,6 +21,9 @@ public class libro extends BaseEntity {
   
   private String titolo;
   
+  @JsonbTypeAdapter(AutoreTypeAdapter.class)
+  @ManyToOne(optional = true)
+  @JoinColumn(name = "autore_id")
   private autore autore;
   
   private Integer annopubbl;
