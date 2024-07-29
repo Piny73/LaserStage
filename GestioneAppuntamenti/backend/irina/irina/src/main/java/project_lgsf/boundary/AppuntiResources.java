@@ -114,10 +114,10 @@ public class AppuntiResources {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Permette la registrazione di un nuovo utente")
+    @Operation(description = "Permette la registrazione di un nuovo appunto")
     @APIResponses({
-        @APIResponse(responseCode = "201", description = "Nuovo utente creato con successo"),
-        @APIResponse(responseCode = "404", description = "Creazione di utente fallito")
+        @APIResponse(responseCode = "201", description = "Nuovo appunto creato con successo"),
+        @APIResponse(responseCode = "404", description = "Creazione di appunto fallito")
     })
     @PermitAll
     public Response create(@Valid Appunto entity) {
@@ -132,17 +132,17 @@ public class AppuntiResources {
     
     @DELETE
     @Path("{id}")
-    @Operation(description = "Elimina una risorsa Utente tramite l'ID")
+    @Operation(description = "Elimina una risorsa Appunto tramite l'ID")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente eliminato con successo"),
-        @APIResponse(responseCode = "404", description = "Utente non trovato")
+        @APIResponse(responseCode = "200", description = "Appunto eliminato con successo"),
+        @APIResponse(responseCode = "404", description = "Appunto non trovato")
 
     })
     @Produces(MediaType.APPLICATION_JSON)
     //@RolesAllowed("Admin")
     @PermitAll
     public Response delete(@PathParam("id") Long id) {
-        Appunto found = storeappunto.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
+        Appunto found = storeappunto.find(id).orElseThrow(() -> new NotFoundException("appunto non trovato. id=" + id));
         storeappunto.remove(found);
         return Response.status(Response.Status.OK)
                 .build();
@@ -152,16 +152,16 @@ public class AppuntiResources {
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Aggiorna i dati dell'utente")
+    @Operation(description = "Aggiorna i dati degli appunti")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente aggirnato con successo"),
+        @APIResponse(responseCode = "200", description = "Appunto aggirnato con successo"),
         @APIResponse(responseCode = "404", description = "Aggiornamento falito")
             
     })
     //@RolesAllowed("Admin")
     @PermitAll
     public Appunto update(@Valid Appunto entity) {
-        Appunto found = storeappunto.find(entity.getId()).orElseThrow(() -> new NotFoundException("user non trovato. id=" + entity.getId().toString()));
+        Appunto found = storeappunto.find(entity.getId()).orElseThrow(() -> new NotFoundException("appunto non trovato. id=" + entity.getId().toString()));
         //entity.setId(id);
         return storeappunto.update(entity);
     }

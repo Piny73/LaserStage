@@ -43,7 +43,7 @@ public class Vettura extends BaseEntity  {
         this.marca = marca;
         this.modello = modello;
         this.annoProduzione = annoProduzione;
-        this.disponibile = disponibile;
+    
         this.diesel = diesel;
         this.benzina = benzina;
         this.gpl = gpl;
@@ -82,13 +82,7 @@ public class Vettura extends BaseEntity  {
         this.annoProduzione = annoProduzione;
     }
 
-    public boolean isDisponibile() {
-        return disponibile;
-    }
-
-    public void setDisponibile(boolean disponibile) {
-        this.disponibile = disponibile;
-    }
+   
 
     public boolean isDiesel() {
         return diesel;
@@ -124,7 +118,7 @@ public class Vettura extends BaseEntity  {
 
     @Override
     public String toString() {
-        return "Vettura{" + "targa=" + targa + ", marca=" + marca + ", modello=" + modello + ", annoProduzione=" + annoProduzione + ", disponibile=" + disponibile + ", diesel=" + diesel + ", benzina=" + benzina + ", gpl=" + gpl + ", elettrica=" + elettrica + '}';
+        return "Vettura{" + "targa=" + targa + ", marca=" + marca + ", modello=" + modello + ", annoProduzione=" + annoProduzione +  ", diesel=" + diesel + ", benzina=" + benzina + ", gpl=" + gpl + ", elettrica=" + elettrica + '}';
     }
      
          
