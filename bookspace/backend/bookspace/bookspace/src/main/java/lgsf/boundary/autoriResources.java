@@ -48,7 +48,7 @@ import lgsf.store.libroStore;
 
 /**
  *
- * @author AndreLima
+ * @author rlanz
  */
 @Path("autori")
 @Tag(name = "Gestione autori", description = "Permette di gestire gli utenti di bookspace")

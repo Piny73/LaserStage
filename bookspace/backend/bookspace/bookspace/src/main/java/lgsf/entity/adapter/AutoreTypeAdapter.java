@@ -16,7 +16,7 @@ import lgsf.store.autoreStore;
 
 /**
  *
- * @author AndreLima
+ * @author rlanz
  */
 public class AutoreTypeAdapter implements JsonbAdapter<autore, JsonObject>  {
     

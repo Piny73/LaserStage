@@ -46,10 +46,10 @@ import lgsf.store.libroStore;
 
 /**
  *
- * @author AndreLima
+ * @author rlanz
  */
 @Path("libri")
-@Tag(name = "Gestione libri", description = "Permette di gestire gli utenti di bookspace")
+@Tag(name = "Creazione libri", description = "Permette di creare nuovi libri")
 @DenyAll
 public class libriResources {
     
@@ -74,7 +74,7 @@ public class libriResources {
    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce l'elenco di tutti gli utenti")
+    @Operation(description = "Restituisce l'elenco di tutti i libri")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Elenco non trovato")
@@ -106,7 +106,7 @@ public class libriResources {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Permette la registrazione di un nuovo utente")
+    @Operation(description = "Permette la registrazione di un nuovo libro")
     @APIResponses({
         @APIResponse(responseCode = "201", description = "Nuovo utente creato con successo"),
         @APIResponse(responseCode = "404", description = "Creazione di utente fallito")
@@ -148,7 +148,7 @@ public class libriResources {
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Aggiorna i dati dell'utente")
+    @Operation(description = "Aggiorna i dati dei libri")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Utente aggirnato con successo"),
         @APIResponse(responseCode = "404", description = "Aggiornamento falito")

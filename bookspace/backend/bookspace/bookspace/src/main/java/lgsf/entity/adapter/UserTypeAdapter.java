@@ -14,7 +14,7 @@ import lgsf.store.UserStore;
 
 /**
  *
- * @author AndreLima
+ * @author rlanz
  */
 public class UserTypeAdapter implements JsonbAdapter<User, JsonObject>  {
     
