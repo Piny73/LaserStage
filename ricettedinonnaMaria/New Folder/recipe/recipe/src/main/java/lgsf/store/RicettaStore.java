@@ -11,6 +11,7 @@ import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import lgsf.entity.Ricetta;
 
+
 /**
  *
  * @author andrelima
@@ -38,8 +39,7 @@ public class RicettaStore extends BaseStore<Ricetta>  {
          public Optional<Ricetta> findRicettabyNome(String nome) {
         try{
             
-            return Optional.of(
-                    em.createQuery("select e from Ricetta e where e.nome = :nome and e.canceled = false", Ricetta.class)
+            return Optional.of(em.createQuery("select e from Ricetta e where e.nome = :nome and e.canceled = false", Ricetta.class)
                     .setParameter("nome", nome)
                     .getSingleResult()
                     );

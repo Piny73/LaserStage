@@ -2,31 +2,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lgsf.entity.adapter;
+package lgsf.entity.Adapter;
 
 import javax.json.bind.adapter.JsonbAdapter;
 import javax.json.JsonObject;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
-import lgsf.entity.Ingrediente;
-import lgsf.store.IngredienteStore;
+import lgsf.entity.Ricetta;
+import lgsf.store.RicettaStore;
 
 /**
  *
  * @author AndreLima
  */
-public class UserTypeAdapter implements JsonbAdapter<Ingrediente, JsonObject>  {
+public class RicettaTypeAdapter implements JsonbAdapter<Ricetta, JsonObject>  {
     
     @Inject
-    IngredienteStore store;
+    RicettaStore store;
 
     @Override
-    public JsonObject adaptToJson(Ingrediente entity) throws Exception {
+    public JsonObject adaptToJson(Ricetta entity) throws Exception {
         return entity.toJsonSlice();
     }
 
     @Override
-    public Ingrediente adaptFromJson(JsonObject json) throws Exception {
+    public Ricetta adaptFromJson(JsonObject json) throws Exception {
         if (!json.containsKey("id")) {
             return null;
         }

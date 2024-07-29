@@ -4,12 +4,14 @@
  */
 package lgsf.entity;
 
+import javax.json.bind.annotation.JsonbTypeAdapter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lgsf.entity.Adapter.RicettaTypeAdapter;
 import lgsf.entity.constant.BaseEntity;
 
 /**
@@ -26,6 +28,7 @@ public class ImmaginiRicetta extends BaseEntity{
     @Column(nullable = false)
     private byte[] file;
     
+    @JsonbTypeAdapter(RicettaTypeAdapter.class)
     @ManyToOne(optional = true)
     @JoinColumn(name = "ricetta_Id")
     private Ricetta ricetta;

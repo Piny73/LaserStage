@@ -3,9 +3,11 @@ lgsf\store\RicettaStore.class
 lgsf\entity\constant\BaseEntity.class
 lgsf\entity\constant\UserRoles.class
 lgsf\store\ConoscenteStore.class
+lgsf\entity\Adapter\RicettaTypeAdapter.class
 lgsf\entity\Ingrediente.class
 lgsf\boundary\UsersResources.class
 lgsf\services\JAXRSConfiguration.class
+lgsf\entity\Adapter\IngredienteTypeAdapter.class
 lgsf\entity\Ricetta.class
 lgsf\security\JWTManager.class
 lgsf\boundary\ConoscenteResources.class
