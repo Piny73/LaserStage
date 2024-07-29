@@ -12,8 +12,7 @@ import lgsf.entity.Ricetta;
 import lgsf.store.RicettaStore;
 
 /**
- *
- * @author AndreLima
+ * @author piny73
  */
 public class RicettaTypeAdapter implements JsonbAdapter<Ricetta, JsonObject>  {
     

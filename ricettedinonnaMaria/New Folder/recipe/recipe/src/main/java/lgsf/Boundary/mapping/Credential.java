@@ -7,8 +7,7 @@ package lgsf.boundary.mapping;
 import javax.validation.constraints.NotBlank;
 
 /**
- *
- * @author tss
+ * @author piny73
  */
 public class Credential {
     

@@ -22,11 +22,6 @@ import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import lgsf.entity.User;
 
-
-/**
- *
- * @author alfonso
- */
 public class JWTManager {
 
     private static final String PRIVATE_KEY = "/META-INF/private_key.pem";

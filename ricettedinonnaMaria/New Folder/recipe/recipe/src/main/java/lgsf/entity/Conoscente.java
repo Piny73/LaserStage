@@ -9,8 +9,7 @@ import javax.persistence.Table;
 import lgsf.entity.constant.BaseEntity;
 
 /**
- *
- * @author piny7
+ * @author piny73
  */
 @Entity
 @Table(name = "conoscenti")

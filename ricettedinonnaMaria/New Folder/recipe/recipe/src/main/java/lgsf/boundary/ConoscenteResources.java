@@ -36,8 +36,7 @@ import lgsf.security.JWTManager;
 import lgsf.store.ConoscenteStore;
 
 /**
- *
- * @author AndreLima
+ * @author Piny73
  */
 @Path("conoscente")
 @Tag(name = "Gestione Conoscente", description = "Permette di gestire i conoscenti di lericettedinonnamaria")

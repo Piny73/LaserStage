@@ -15,8 +15,7 @@ import lgsf.entity.Adapter.RicettaTypeAdapter;
 import lgsf.entity.constant.BaseEntity;
 
 /**
- *
- * @author piny7
+ * @author piny73
  */
 @Entity
 @Table(name = "immaginiricetta")

@@ -22,8 +22,7 @@ import lgsf.entity.constant.UserRoles;
 
 
 /**
- *
- * @author tss
+ * @author piny73
  */
 @Entity
 @Table(name = "user")

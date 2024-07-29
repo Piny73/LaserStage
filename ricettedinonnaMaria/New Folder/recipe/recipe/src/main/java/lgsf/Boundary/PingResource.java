@@ -6,8 +6,7 @@ import javax.ws.rs.Path;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 /**
- *
- * @author airhacks.com
+ * @author piny73
  */
 @Path("ping")
 public class PingResource {

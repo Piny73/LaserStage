@@ -12,8 +12,7 @@ import lgsf.entity.Ingrediente;
 import lgsf.store.IngredienteStore;
 
 /**
- *
- * @author Piny
+ * @author piny73
  */
 public class IngredienteTypeAdapter implements JsonbAdapter<Ingrediente, JsonObject>  {
     

@@ -13,8 +13,7 @@ import lgsf.entity.Ricetta;
 
 
 /**
- *
- * @author andrelima
+ * @author piny73
  */
 @RequestScoped
 @Transactional(Transactional.TxType.REQUIRED)

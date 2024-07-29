@@ -31,6 +31,10 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import lgsf.security.JWTManager;
 import lgsf.store.ImmaginiRicettaStore;
 
+/**
+ * @author piny73
+ */
+
 @Path("immaginiricetta")
 @Tag(name = "Gestione immaginiricetta", description = "Permette di gestire le immagini delle ricette di lericettedinonnamaria")
 @DenyAll

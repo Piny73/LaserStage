@@ -8,10 +8,7 @@ import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 
 /**
- * Configures a JAX-RS endpoint. Delete this class, if you are not exposing
- * JAX-RS resources in your application.
- *
- * @author airhacks.com
+ * @author piny73
  */
 @SecurityScheme(securitySchemeName = "jwt", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "jwt")
 @LoginConfig(authMethod = "MP-JWT", realmName = "MP-JWT")

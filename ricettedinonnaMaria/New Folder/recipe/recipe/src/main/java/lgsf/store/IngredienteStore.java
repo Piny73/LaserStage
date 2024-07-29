@@ -12,8 +12,7 @@ import javax.transaction.Transactional;
 import lgsf.entity.Ingrediente;
 
 /**
- *
- * @author andrelima
+ * @author piny73
  */
 @RequestScoped
 @Transactional(Transactional.TxType.REQUIRED)
