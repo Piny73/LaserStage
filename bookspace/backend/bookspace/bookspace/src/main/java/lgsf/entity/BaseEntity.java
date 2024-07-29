@@ -21,7 +21,7 @@ import javax.persistence.Version;
 
 /**
  *
- * @author andrelima
+ * @author rlanz
  */
 @MappedSuperclass
 public class BaseEntity implements Serializable {

@@ -50,7 +50,7 @@ import lgsf.store.libroStore;
 
 /**
  *
- * @author AndreLima
+ * @author rlanz
  */
 @Path("librerie")
 @Tag(name = "Gestione librerie", description = "Permette di gestire gli utenti di bookspace")
