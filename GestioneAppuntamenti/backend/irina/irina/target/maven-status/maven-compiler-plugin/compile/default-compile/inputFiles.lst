@@ -1,5 +1,6 @@
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\store\VetturaStore.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\entity\Cliente.java
+C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\entity\adapter\ClienteTypeAdapter.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\store\UserStore.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\security\JwtTokenException.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\boundary\mapping\Credential.java
@@ -14,6 +15,7 @@ C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\entity\User.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\boundary\VettureResources.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\entity\TipoAlimentazione.java
+C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\entity\adapter\UserTypeAdapter.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\entity\constant\BaseEntity.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\boundary\ClientiResources.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\entity\constant\UserRoles.java
@@ -22,5 +24,6 @@ C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\entity\Appunto.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\service\CorsResponseFilter.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\boundary\UsersResources.java
+C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\entity\adapter\VetturaTypeAdapter.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\service\JAXRSConfiguration.java
 C:\LaserStage\LaserStage\GestioneAppuntamenti\backend\irina\irina\src\main\java\project_lgsf\Enum\TipoAlimentazioneType.java

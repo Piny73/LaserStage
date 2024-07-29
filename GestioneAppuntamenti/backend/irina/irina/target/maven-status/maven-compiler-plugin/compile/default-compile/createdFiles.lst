@@ -3,6 +3,7 @@ project_lgsf\security\JwtTokenException.class
 project_lgsf\store\AppuntoStore.class
 project_lgsf\entity\Cliente.class
 project_lgsf\boundary\mapping\Credential.class
+project_lgsf\entity\adapter\VetturaTypeAdapter.class
 project_lgsf\boundary\ClientiResources.class
 project_lgsf\entity\constant\UserRoles.class
 project_lgsf\service\JAXRSConfiguration.class
@@ -12,6 +13,7 @@ project_lgsf\entity\Appunto.class
 project_lgsf\Enum\TipoAlimentazioneType.class
 project_lgsf\store\BaseStore.class
 airhacks\service\ping\boundary\PingResource.class
+project_lgsf\entity\adapter\UserTypeAdapter.class
 project_lgsf\boundary\AppuntiResources.class
 project_lgsf\entity\constant\BaseEntity.class
 project_lgsf\store\UserStore.class
@@ -23,3 +25,4 @@ project_lgsf\entity\Vettura.class
 project_lgsf\service\OptionRequestFilter.class
 project_lgsf\entity\User.class
 project_lgsf\service\CorsResponseFilter.class
+project_lgsf\entity\adapter\ClienteTypeAdapter.class
