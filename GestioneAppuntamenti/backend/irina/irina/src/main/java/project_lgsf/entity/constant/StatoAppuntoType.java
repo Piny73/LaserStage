@@ -10,9 +10,9 @@ package project_lgsf.entity.constant;
  */
 public enum StatoAppuntoType {
     NUOVO,
-    INATIVO,
+    MODIFICATO,
     PROGRAMMATO,
     INIZIATO,
     FINITO,
-    CANCELATO
+    CANCELLATO
 }

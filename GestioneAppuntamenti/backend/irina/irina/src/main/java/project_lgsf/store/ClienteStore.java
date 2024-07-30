@@ -57,7 +57,7 @@ public class ClienteStore extends BaseStore<Cliente>  {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Vettura e where e.targa = :login and e.canceled = false", Cliente.class)
+                    em.createQuery("select e from Vettura e where e.targa = :vettura and e.canceled = false", Cliente.class)
                     .setParameter("vettura", vettura)
                     .getSingleResult()
                     );

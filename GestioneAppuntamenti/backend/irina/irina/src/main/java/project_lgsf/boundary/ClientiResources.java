@@ -42,7 +42,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
  */
 
 @Path("clienti")
-@Tag(name = "Gestione Appunti", description = "Permette di gestire gli appunti di bkmapp")
+@Tag(name = "Gestione Clienti", description = "Permette di gestire i clienti di bkmapp")
 @DenyAll
 public class ClientiResources {
     
@@ -72,7 +72,7 @@ public class ClientiResources {
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Elenco non trovato")
     })
-    //@RolesAllowed({"Admin","User"})
+    //@RolesAllowed({"Admin","Cliente"})
     @PermitAll
     public List<Cliente> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
         System.out.println(token);
@@ -84,7 +84,7 @@ public class ClientiResources {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce la risorsa utente identificata dall'ID")
+    @Operation(description = "Restituisce la risorsa cliente identificata dall'ID")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Cliente ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Cliente non trovato")
@@ -96,12 +96,12 @@ public class ClientiResources {
     
         
     @GET
-    @Path("/cliente/{cliente}")
+    @Path("/clienti/{cliente}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce la risorsa utente identificata dall'Cliente")
+    @Operation(description = "Restituisce la risorsa cliente identificata dall'Cliente")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente ritornato con successo"),
-        @APIResponse(responseCode = "404", description = "Utente non trovato")
+        @APIResponse(responseCode = "200", description = "Cliente ritornato con successo"),
+        @APIResponse(responseCode = "404", description = "Cliente non trovato")
     })
     //@RolesAllowed({"Admin","User"})
     @PermitAll

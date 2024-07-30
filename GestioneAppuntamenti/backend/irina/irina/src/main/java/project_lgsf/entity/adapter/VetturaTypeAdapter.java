@@ -12,30 +12,30 @@ import javax.json.bind.adapter.JsonbAdapter;
 import javax.json.JsonObject;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
-import project_lgsf.entity.User;
-import project_lgsf.store.UserStore;
+import project_lgsf.entity.Vettura;
+import project_lgsf.store.VetturaStore;
 
 
 /**
  *
- * @author AndreLima
+ * @author Stage
  */
-public class VetturaTypeAdapter implements JsonbAdapter<User, JsonObject>  {
+public class VetturaTypeAdapter implements JsonbAdapter<Vettura, JsonObject>  {
     
     @Inject
-    UserStore store;
+    VetturaStore store;
 
     @Override
-    public JsonObject adaptToJson(User entity) throws Exception {
+    public JsonObject adaptToJson(Vettura entity) throws Exception {
         return entity.toJsonSlice();
     }
 
     @Override
-    public User adaptFromJson(JsonObject json) throws Exception {
-        if (!json.containsKey("id")) {
+    public Vettura adaptFromJson(JsonObject json) throws Exception {
+        if (!json.containsKey("id_vettura")) {
             return null;
         }
-        return store.find(json.getJsonNumber("id").longValue()).orElseThrow(() -> new NotFoundException("VetturaTypeAdapter.adaptFromJson not found"));
+        return store.find(json.getJsonNumber("id_vettura").longValue()).orElseThrow(() -> new NotFoundException("VetturaTypeAdapter.adaptFromJson not found"));
     }
     
     

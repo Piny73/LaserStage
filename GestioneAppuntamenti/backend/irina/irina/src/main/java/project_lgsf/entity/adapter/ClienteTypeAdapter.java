@@ -12,26 +12,26 @@ import javax.json.bind.adapter.JsonbAdapter;
 import javax.json.JsonObject;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
-import project_lgsf.entity.User;
-import project_lgsf.store.UserStore;
+import project_lgsf.entity.Cliente;
+import project_lgsf.store.ClienteStore;
 
 
 /**
  *
  * @author AndreLima
  */
-public class ClienteTypeAdapter implements JsonbAdapter<User, JsonObject>  {
+public class ClienteTypeAdapter implements JsonbAdapter<Cliente, JsonObject>  {
     
     @Inject
-    UserStore store;
+    ClienteStore store;
 
     @Override
-    public JsonObject adaptToJson(User entity) throws Exception {
+    public JsonObject adaptToJson(Cliente entity) throws Exception {
         return entity.toJsonSlice();
     }
 
     @Override
-    public User adaptFromJson(JsonObject json) throws Exception {
+    public Cliente adaptFromJson(JsonObject json) throws Exception {
         if (!json.containsKey("id")) {
             return null;
         }
