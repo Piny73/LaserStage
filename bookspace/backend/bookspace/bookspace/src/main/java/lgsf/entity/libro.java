@@ -35,7 +35,7 @@ public class libro extends BaseEntity {
   private String lingua;
   
   private String genere;
-  
+   
   private String descrizione;
 
 
