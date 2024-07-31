@@ -35,6 +35,10 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import lgsf.security.JWTManager;
 import lgsf.store.IngredienteStore;
 
+/**
+ * @author piny73
+ */
+
 @Path("ingrediente")
 @Tag(name = "Gestione Ingrediente", description = "Permette di gestire gli ingredienti di lericettedinonnamaria")
 @DenyAll

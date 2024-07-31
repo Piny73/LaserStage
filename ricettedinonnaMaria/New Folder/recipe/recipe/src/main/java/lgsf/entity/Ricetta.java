@@ -24,14 +24,15 @@ public class Ricetta extends BaseEntity {
     @Column(nullable = false)
     private String difficolta;
 
+    //@JsonbTypeAdapter(IngredienteTypeAdapter.class)
     //@ManyToMany(mappedBy = "ricetta_id", fetch = FetchType.LAZY)
     //private List<Ingrediente> ingredienti;
     
+    @Column(length = 1500)
+    private String procedimento;
+    
     @Column(nullable = false)
-    private Integer quantita;
-
-    @Column(length = 255)
-    private String preparazione;
+    private Integer tempodiEsecuzione;
 
     @Column(length = 255)
     private String videoLinkR;
@@ -39,13 +40,13 @@ public class Ricetta extends BaseEntity {
     public Ricetta() {
     }
 
-    public Ricetta(String nome, Integer tempodiCottura, String difficolta, Integer quantita, String preparazione, String videoLinkR) {
+    public Ricetta(String nome, Integer tempodiCottura, String difficolta, Integer quantita, String procedimento, String videoLinkR) {
         this.nome = nome;
         this.tempodiCottura = tempodiCottura;
         this.difficolta = difficolta;
         //this.ingredienti = ingredienti;
-        this.quantita = quantita;
-        this.preparazione = preparazione;
+        this.procedimento = procedimento;
+        this.tempodiEsecuzione = tempodiEsecuzione;
         this.videoLinkR = videoLinkR;
     }
 
@@ -79,23 +80,25 @@ public class Ricetta extends BaseEntity {
 
     public void setIngredienti(List<Ingrediente> ingredienti) {
         this.ingredienti = ingredienti;
-    }
-*/
-    public double getQuantita() {
-        return quantita;
+    }*/
+
+    public String getProcedimento() {
+        return procedimento;
     }
 
-    public void setQuantita(Integer quantita) {
-        this.quantita = quantita;
+    public void setProcedimento(String procedimento) {
+        this.procedimento = procedimento;
     }
 
-    public String getPreparatione() {
-        return preparazione;
+    public Integer getTempodiEsecuzione() {
+        return tempodiEsecuzione;
     }
 
-    public void setPreparatione(String preparatione) {
-        this.preparazione = preparazione;
+    public void setTempodiEsecuzione(Integer tempodiEsecuzione) {
+        this.tempodiEsecuzione = tempodiEsecuzione;
     }
+    
+    
     public String getVideoLinkR() {
         return videoLinkR;
     }
@@ -103,12 +106,12 @@ public class Ricetta extends BaseEntity {
     public void setVideoLinkR(String videoLinkR) {
         this.videoLinkR = videoLinkR;
     }
-/*
+
     @Override
     public String toString() {
-        return "Ricetta{" + "nome=" + nome + ", tempodiCottura=" + tempodiCottura + ", difficolta=" + difficolta + ", ingredienti=" + ingredienti + ", quantita=" + quantita + ", preparazione=" + preparazione + ", videoLinkR=" + videoLinkR + '}';
+        return "Ricetta{" + "nome=" + nome + ", tempodiCottura=" + tempodiCottura + ", difficolta=" + difficolta + ", procedimento=" + procedimento + ", tempodiEsecuzione=" + tempodiEsecuzione + ", videoLinkR=" + videoLinkR + '}';
     }
-*/
     
+   
     
 }

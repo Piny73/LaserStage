@@ -8,26 +8,24 @@ import javax.json.bind.adapter.JsonbAdapter;
 import javax.json.JsonObject;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
-import lgsf.entity.User;
-import lgsf.store.UserStore;
-
+import lgsf.entity.Ingrediente;
+import lgsf.store.IngredienteStore;
 
 /**
- *
- * @author rlanz
+ * @author piny73
  */
-public class UserTypeAdapter implements JsonbAdapter<User, JsonObject>  {
+public class IngredienteTypeAdapter implements JsonbAdapter<Ingrediente, JsonObject>  {
     
     @Inject
-    UserStore store;
+    IngredienteStore store;
 
     @Override
-    public JsonObject adaptToJson(User entity) throws Exception {
+    public JsonObject adaptToJson(Ingrediente entity) throws Exception {
         return entity.toJsonSlice();
     }
 
     @Override
-    public User adaptFromJson(JsonObject json) throws Exception {
+    public Ingrediente adaptFromJson(JsonObject json) throws Exception {
         if (!json.containsKey("id")) {
             return null;
         }

@@ -44,10 +44,10 @@ import lgsf.entity.User;
 
 /**
  *
- * @author AndreLima
+ * @author rlanz
  */
 @Path("users")
-@Tag(name = "Gestione Users", description = "Permette di gestire gli utenti di bkmapp")
+@Tag(name = "Gestione Users", description = "Permette di gestire gli utenti di bookspace")
 @DenyAll
 public class UsersResources {
     

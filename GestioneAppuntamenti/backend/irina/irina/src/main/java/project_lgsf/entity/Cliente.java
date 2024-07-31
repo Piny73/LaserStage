@@ -4,6 +4,8 @@
  */
 package project_lgsf.entity;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import project_lgsf.entity.constant.BaseEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            import javax.persistence.NamedQueries;
@@ -30,10 +32,7 @@ public class Cliente extends BaseEntity {
     public static final String FIND_ALL = "Account.findAll";
     
     
-    public Cliente() {}
-    
-    
-     @NotBlank(message = "la proprietà nome non può avere solo spazi")
+      @NotBlank(message = "la proprietà nome non può avere solo spazi")
     @Column(nullable = false)
     private String nome;
    
@@ -62,13 +61,9 @@ public class Cliente extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-   
+     public Cliente() {}
+     
  //costruttori
-     public Cliente(String telefono,  @Email(message = "la proprietà email non contiene un indirizzo email valido") String email) {
-        
-        this.telefono = telefono;
-        this.email = email;
-    }
     
     public Cliente(String nome, String cognome, String indirizzo, String telefono, @Email(message = "la proprietà email non contiene un indirizzo email valido") String email) {
         this.nome = nome;
@@ -78,10 +73,7 @@ public class Cliente extends BaseEntity {
         this.email = email;
     }
 
-   
-    //costruttore vuoto
-    
-    
+       
     // Getters e setters
     public String getNome() {
         return nome;
@@ -128,6 +120,18 @@ public class Cliente extends BaseEntity {
         return "Cliente{" + "nome=" + nome + ", cognome=" + cognome + ", indirizzo=" + indirizzo + ", telefono=" + telefono + ", email=" + email + '}';
     }
 
-    
-    
+
+     
+    @Override
+         public JsonObject toJsonSlice() {
+
+        return Json.createObjectBuilder()
+                .add("id", this.id)
+                .add("nome", this.nome)
+                .add("cognome", this.cognome)
+                .add("inirizzo", this.indirizzo)
+                .add("telefono", this.telefono)
+                .add("email", this.email)
+                .build();
+    }
 }

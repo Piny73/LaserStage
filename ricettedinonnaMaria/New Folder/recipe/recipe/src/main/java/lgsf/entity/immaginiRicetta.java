@@ -4,63 +4,62 @@
  */
 package lgsf.entity;
 
-import javax.persistence.Column;
+import javax.json.bind.annotation.JsonbTypeAdapter;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lgsf.entity.Adapter.RicettaTypeAdapter;
 import lgsf.entity.constant.BaseEntity;
 
 /**
- *
- * @author piny7
+ * @author piny73
  */
 @Entity
 @Table(name = "immaginiricetta")
 public class ImmaginiRicetta extends BaseEntity{
-    @Column(nullable = false)
-    private String nome;
+    private String fileName;
+    private String fileType;
+    private long fileSize;
     
-    @Lob
-    @Column(nullable = false)
-    private byte[] file;
-    
+    @JsonbTypeAdapter(RicettaTypeAdapter.class)
     @ManyToOne(optional = true)
     @JoinColumn(name = "ricetta_Id")
     private Ricetta ricetta;
 
-    public ImmaginiRicetta() {}
-
-    public ImmaginiRicetta(String nome, byte[] file) {
-        this.nome = nome;
-        this.file = file;
+    public ImmaginiRicetta() {
     }
 
-    @Override
-    public Long getId() {
-        return id;
+    public ImmaginiRicetta(String fileName, String fileType, long fileSize) {
+        this.fileName = fileName;
+        this.fileType = fileType;
+        this.fileSize = fileSize;
     }
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
+    public String getFileName() {
+        return fileName;
     }
 
-    public String getNome() {
-        return nome;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getFileType() {
+        return fileType;
     }
 
-    public byte[] getFile() {
-        return file;
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
     }
 
-    public void setFile(byte[] file) {
-        this.file = file;
+    public long getFileSize() {
+        return fileSize;
     }
+
+    public void setFileSize(long fileSize) {
+        this.fileSize = fileSize;
+    }
+    
+    
 
 }

@@ -44,8 +44,7 @@ import lgsf.store.UserStore;
 import lgsf.entity.User;
 
 /**
- *
- * @author AndreLima
+ * @author piny73
  */
 @Path("users")
 @Tag(name = "Gestione Users", description = "Permette di gestire gli utenti di bkmapp")

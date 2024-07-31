@@ -15,8 +15,7 @@ import lgsf.security.SecurityEncoding;
 import lgsf.entity.User;
 
 /**
- *
- * @author andrelima
+ * @author piny73
  */
 @RequestScoped
 @Transactional(Transactional.TxType.REQUIRED)

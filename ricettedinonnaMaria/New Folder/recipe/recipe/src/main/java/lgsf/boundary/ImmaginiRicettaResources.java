@@ -31,6 +31,10 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import lgsf.security.JWTManager;
 import lgsf.store.ImmaginiRicettaStore;
 
+/**
+ * @author piny73
+ */
+
 @Path("immaginiricetta")
 @Tag(name = "Gestione immaginiricetta", description = "Permette di gestire le immagini delle ricette di lericettedinonnamaria")
 @DenyAll
@@ -93,7 +97,7 @@ public class ImmaginiRicettaResources {
     @PermitAll
     public Response create(@Valid ImmaginiRicetta entity) {
 
-        if (storeimmaginiricetta.findImmaginiRicettabyNome(entity.getNome()).isPresent()) {
+        if (storeimmaginiricetta.findImmaginiRicettabyNome(entity.getFileName()).isPresent()) {
 
             return Response.status(Response.Status.PRECONDITION_FAILED).build();
         }

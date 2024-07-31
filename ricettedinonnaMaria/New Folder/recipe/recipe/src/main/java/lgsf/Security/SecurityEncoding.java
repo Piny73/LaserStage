@@ -10,10 +10,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
-/**
- *
- * @author alfonso
- */
 public class SecurityEncoding {
 
     public static String shaHash(String value) {

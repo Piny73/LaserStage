@@ -9,9 +9,8 @@ import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-import javax.json.JsonArray;
-import javax.json.stream.JsonCollectors;
 import javax.validation.Valid;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -90,24 +89,24 @@ public class AppuntiResources {
         @APIResponse(responseCode = "200", description = "Appunto ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Appunto non trovato")
     })
-    @RolesAllowed({"Admin","Cliente"})
+    @RolesAllowed({"Admin","Appunto"})
     public Appunto find(@PathParam("id") Long id) {
         return storeappunto.find(id).orElseThrow(() -> new NotFoundException("appunto non trovato. id=" + id));
     }
     
         
     @GET
-    @Path("/cliente/{cliente}")
+    @Path("/appunti/{appunto}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce la risorsa utente identificata dall'Cliente")
+    @Operation(description = "Restituisce la risorsa utente identificata dall'Appunto")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente ritornato con successo"),
-        @APIResponse(responseCode = "404", description = "Utente non trovato")
+        @APIResponse(responseCode = "200", description = "Appunto ritornato con successo"),
+        @APIResponse(responseCode = "404", description = "Appunto non trovato")
     })
-    //@RolesAllowed({"Admin","User"})
+    //@RolesAllowed({"Admin","Appunto"})
     @PermitAll
     public Appunto findbycliente(@PathParam("cliente") Long cliente) {
-        return storeappunto.find(cliente).orElseThrow(() -> new NotFoundException("user non trovato. id=" + cliente));
+        return storeappunto.find(cliente).orElseThrow(() -> new NotFoundException("cliente non trovato. id=" + cliente));
     }
     
     
@@ -147,16 +146,16 @@ public class AppuntiResources {
         return Response.status(Response.Status.OK)
                 .build();
     }
-    
+   
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Aggiorna i dati degli appunti")
+    @Operation(description = "Aggiorna i dati dell'appunto")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Appunto aggirnato con successo"),
-        @APIResponse(responseCode = "404", description = "Aggiornamento falito")
-            
+        @APIResponse(responseCode = "404", description = "Aggiornamento falito"),
+        @APIResponse(responseCode = "500", description = "Errore interno del server")  
     })
     //@RolesAllowed("Admin")
     @PermitAll
@@ -166,6 +165,34 @@ public class AppuntiResources {
         return storeappunto.update(entity);
     }
    
-       
+    /*
+    @PUT
+@Path("{id}")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+@Operation(description = "Aggiorna i dati dell'appunto")
+@APIResponses({
+    @APIResponse(responseCode = "200", description = "Appunto aggiornato con successo"),
+    @APIResponse(responseCode = "404", description = "Appunto non trovato"),
+    @APIResponse(responseCode = "500", description = "Errore interno del server")
+})
+@PermitAll
+public Appunto update(@PathParam("id") Long id, @Valid Appunto entity) {
+    // Assicurati che l'ID nel payload corrisponda a quello passato nel path
+    if (!id.equals(entity.getId())) {
+        throw new BadRequestException("L'ID nel payload non corrisponde all'ID nel path.");
+    }
+    /*
+    // Trova l'appunto
+    Appunto found = storeappunto.find(id).orElseThrow(() -> {
+        throw new NotFoundException("Appunto non trovato. id=" + id);
+    });
+
+    // Aggiornare il record dell'appunto
+    return storeappunto.update(entity);
+
+*/
 }
+       
+
 

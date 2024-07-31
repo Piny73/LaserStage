@@ -9,9 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 /**
- *
- * @author andrelima
- * @param <TEntity>
+ * @author piny73
  */
 
 @Transactional(Transactional.TxType.REQUIRED)

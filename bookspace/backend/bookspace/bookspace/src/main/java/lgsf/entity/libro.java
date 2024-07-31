@@ -35,8 +35,11 @@ public class libro extends BaseEntity {
   private String lingua;
   
   private String genere;
+   
+  private String descrizione;
 
-    public libro(String titolo, autore autore, Integer annopubbl, String isbn, String luogo, String lingua, String genere) {
+
+    public libro(String titolo, autore autore, Integer annopubbl, String isbn, String luogo, String lingua, String genere, String descrizione) {
         this.titolo = titolo;
         this.autore = autore;
         this.annopubbl = annopubbl;
@@ -44,6 +47,7 @@ public class libro extends BaseEntity {
         this.luogo = luogo;
         this.lingua = lingua;
         this.genere = genere;
+        this.descrizione = descrizione;
     }
 
     public libro() {
@@ -105,10 +109,19 @@ public class libro extends BaseEntity {
         this.genere = genere;
     }
 
+     public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
     @Override
     public String toString() {
-        return "libro{" + "titolo=" + titolo + ", autore=" + autore + ", annopubbl=" + annopubbl + ", isbn=" + isbn + ", luogo=" + luogo + ", lingua=" + lingua + ", genere=" + genere + '}';
+        return "libro{" + "titolo=" + titolo + ", autore=" + autore + ", annopubbl=" + annopubbl + ", isbn=" + isbn + ", luogo=" + luogo + ", lingua=" + lingua + ", genere=" + genere + ", descrizione=" + descrizione + '}';
     }
+ 
   
    
 }

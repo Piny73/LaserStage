@@ -4,6 +4,8 @@
  */
 package project_lgsf.entity;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import project_lgsf.entity.constant.BaseEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -121,6 +123,12 @@ public class Vettura extends BaseEntity  {
         return "Vettura{" + "targa=" + targa + ", marca=" + marca + ", modello=" + modello + ", annoProduzione=" + annoProduzione +  ", diesel=" + diesel + ", benzina=" + benzina + ", gpl=" + gpl + ", elettrica=" + elettrica + '}';
     }
      
-         
+           public JsonObject toJsonSliceName() {
+
+        return Json.createObjectBuilder()
+                .add("targa", this.targa)
+                
+                .build();
+    }
 
 }

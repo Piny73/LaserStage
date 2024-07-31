@@ -8,15 +8,13 @@ import javax.json.bind.adapter.JsonbAdapter;
 import javax.json.JsonObject;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
-import lgsf.entity.User;
 import lgsf.entity.autore;
-import lgsf.store.UserStore;
 import lgsf.store.autoreStore;
 
 
 /**
  *
- * @author AndreLima
+ * @author rlanz
  */
 public class AutoreTypeAdapter implements JsonbAdapter<autore, JsonObject>  {
     

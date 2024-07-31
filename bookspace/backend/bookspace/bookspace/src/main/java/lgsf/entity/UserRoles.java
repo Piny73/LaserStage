@@ -6,7 +6,7 @@ package lgsf.entity;
 
 /**
  *
- * @author andrelima
+ * @author rlanz
  */
 public enum UserRoles {
     Admin, User

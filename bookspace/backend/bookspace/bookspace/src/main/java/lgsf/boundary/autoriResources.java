@@ -48,10 +48,10 @@ import lgsf.store.libroStore;
 
 /**
  *
- * @author AndreLima
+ * @author rlanz
  */
 @Path("autori")
-@Tag(name = "Gestione autori", description = "Permette di gestire gli utenti di bookspace")
+@Tag(name = "Gestione autori", description = "Permette di creare nuovi autori")
 @DenyAll
 public class autoriResources {
     
