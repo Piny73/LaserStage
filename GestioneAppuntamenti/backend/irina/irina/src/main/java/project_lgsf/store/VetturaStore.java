@@ -47,11 +47,11 @@ public class VetturaStore extends BaseStore<Vettura>  {
     }
      */
      
-         public Optional<Vettura> findUserbyVettura(String vettura) {
+         public Optional<Vettura> findVetturabyVettura(String vettura) {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Vettura e where e.targa :vettura and e.benzina = false", Vettura.class)
+                    em.createQuery("select e from Vettura e where e.targa :vettura and e.id = false", Vettura.class)
                     .setParameter("vettura", vettura)
                     .getSingleResult()
                     );
@@ -64,11 +64,11 @@ public class VetturaStore extends BaseStore<Vettura>  {
             
     }
          
-       public Optional<Vettura> findUserbyCliente(String cliente) {
+       public Optional<Vettura> findVetturayCliente(String cliente) {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Cliente e where e.nome = :login and e.telefono false", Vettura.class)
+                    em.createQuery("select e from Cliente e where e.nome = :cliente and e.telefono false", Vettura.class)
                     .setParameter("cliente", cliente)
                     .getSingleResult()
                     );
@@ -81,11 +81,11 @@ public class VetturaStore extends BaseStore<Vettura>  {
             
     }
     
-         public Optional<Vettura> findUserbyAppunto(String appunto) {
+         public Optional<Vettura> findVetturabyAppunto(String appunto) {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Appunto e where e.cliente = :login and e.vettura.targa = false", Vettura.class)
+                    em.createQuery("select e from Appunto e where e.cliente = :appunto and e.vettura.targa = false", Vettura.class)
                     .setParameter("appunto", appunto)
                     .getSingleResult()
                     );

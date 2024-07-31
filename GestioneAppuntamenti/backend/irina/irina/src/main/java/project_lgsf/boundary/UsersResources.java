@@ -48,7 +48,7 @@ import project_lgsf.entity.User;
  * @author AndreLima
  */
 @Path("users")
-@Tag(name = "Gestione Users", description = "Permette di gestire gli utenti di bkmapp")
+@Tag(name = "Gestione Users", description = "Permette di gestire gli admin di bkmapp")
 @DenyAll
 public class UsersResources {
     
@@ -73,7 +73,7 @@ public class UsersResources {
    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce l'elenco di tutti gli utenti")
+    @Operation(description = "Restituisce l'elenco di tutti gli admin")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Elenco non trovato")

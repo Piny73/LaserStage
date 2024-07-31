@@ -106,7 +106,7 @@ public class ClientiResources {
     //@RolesAllowed({"Admin","User"})
     @PermitAll
     public Cliente findbycliente(@PathParam("cliente") String cliente) {
-        return storecliente.findUserbyCliente(cliente).orElseThrow(() -> new NotFoundException("cliente non trovato. id=" + cliente));
+        return storecliente.findClientebyCliente(cliente).orElseThrow(() -> new NotFoundException("cliente non trovato. id=" + cliente));
     }
     
     

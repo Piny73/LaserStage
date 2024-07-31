@@ -1,0 +1,6 @@
+/* src/app/app.component.css */
+.content {
+    padding: 20px;
+    margin-bottom: 40px; /* Para evitar que o conteúdo se sobreponha ao rodapé */
+  }
+  

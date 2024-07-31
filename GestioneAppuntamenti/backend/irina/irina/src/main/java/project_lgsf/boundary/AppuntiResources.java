@@ -159,7 +159,7 @@ public class AppuntiResources {
     })
     //@RolesAllowed("Admin")
     @PermitAll
-    public Appunto update(@Valid Appunto entity) {
+    public Appunto update(@PathParam("id") Long id, @Valid Appunto entity) {
         Appunto found = storeappunto.find(entity.getId()).orElseThrow(() -> new NotFoundException("appunto non trovato. id=" + entity.getId().toString()));
         //entity.setId(id);
         return storeappunto.update(entity);
