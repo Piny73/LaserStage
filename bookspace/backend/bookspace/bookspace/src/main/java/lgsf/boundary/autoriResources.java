@@ -88,7 +88,6 @@ public class autoriResources {
         return store.all();
     }
     
-    
         
     @GET
     @Path("{id}")
