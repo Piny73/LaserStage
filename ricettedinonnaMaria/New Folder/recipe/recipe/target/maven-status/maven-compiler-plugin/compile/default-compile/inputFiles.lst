@@ -1,4 +1,5 @@
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\entity\ImmaginiRicetta.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\services\ImmaginiRicettaServices.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\entity\constant\BaseEntity.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\boundary\RicettaResources.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\security\JwtTokenException.java
@@ -18,6 +19,7 @@ C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\mai
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\security\SecurityEncoding.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\store\ImmaginiRicettaStore.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\store\UserStore.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\repository\ImmaginiRicettaRepository.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\boundary\IngredienteResources.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\entity\Conoscente.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\services\JAXRSConfiguration.java

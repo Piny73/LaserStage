@@ -97,7 +97,7 @@ public class ImmaginiRicettaResources {
     @PermitAll
     public Response create(@Valid ImmaginiRicetta entity) {
 
-        if (storeimmaginiricetta.findImmaginiRicettabyNome(entity.getNome()).isPresent()) {
+        if (storeimmaginiricetta.findImmaginiRicettabyNome(entity.getFileName()).isPresent()) {
 
             return Response.status(Response.Status.PRECONDITION_FAILED).build();
         }
