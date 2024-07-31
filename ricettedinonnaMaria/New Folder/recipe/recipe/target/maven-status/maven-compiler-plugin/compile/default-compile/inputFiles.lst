@@ -8,6 +8,7 @@ C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\mai
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\security\JWTManager.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\store\RicettaStore.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\entity\Ricetta.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\services\OptionRequestFilter.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\boundary\PingResource.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\entity\constant\UserRoles.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\entity\Ingrediente.java
@@ -25,4 +26,5 @@ C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\mai
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\services\JAXRSConfiguration.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\store\BaseStore.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\store\ConoscenteStore.java
+C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\services\CorsResponseFilter.java
 C:\StageProjects\LaserStage\ricettedinonnaMaria\New Folder\recipe\recipe\src\main\java\lgsf\boundary\UsersResources.java

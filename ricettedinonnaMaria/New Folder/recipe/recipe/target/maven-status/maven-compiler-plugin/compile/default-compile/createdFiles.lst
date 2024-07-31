@@ -1,5 +1,6 @@
 lgsf\boundary\PingResource.class
 lgsf\store\RicettaStore.class
+bs\service\CorsResponseFilter.class
 lgsf\entity\constant\BaseEntity.class
 lgsf\entity\constant\UserRoles.class
 lgsf\store\ConoscenteStore.class
@@ -17,6 +18,7 @@ lgsf\security\JwtTokenException.class
 lgsf\store\UserStore.class
 lgsf\boundary\IngredienteResources.class
 lgsf\store\IngredienteStore.class
+bs\service\OptionRequestFilter.class
 lgsf\entity\User.class
 lgsf\boundary\RicettaResources.class
 lgsf\security\SecurityEncoding.class
