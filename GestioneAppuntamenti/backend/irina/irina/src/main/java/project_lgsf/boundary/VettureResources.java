@@ -71,7 +71,7 @@ public class VettureResources {
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Elenco non trovato")
     })
-    //@RolesAllowed({"Admin","Vettura"})
+    @RolesAllowed({"Admin","Vettura"})
     @PermitAll
     public List<Vettura> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
         System.out.println(token);
@@ -88,7 +88,9 @@ public class VettureResources {
         @APIResponse(responseCode = "200", description = "Vettura ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Vettura non trovato")
     })
+    
     @RolesAllowed({"Admin","Vettura"})
+    @PermitAll
     public Vettura find(@PathParam("id_vettura") Long id_vettura) {
         return storevettura.find(id_vettura).orElseThrow(() -> new NotFoundException("Vettura non trovata. id_vettura=" + id_vettura));
     }
@@ -102,7 +104,7 @@ public class VettureResources {
         @APIResponse(responseCode = "200", description = "Vettura ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Vettura non trovato")
     })
-    //@RolesAllowed({"Admin","User"})
+    @RolesAllowed({"Admin","User"})
     @PermitAll
     public Vettura findbyvettura(@PathParam("Vettura") Long vettura) {
         return storevettura.find(vettura).orElseThrow(() -> new NotFoundException("vettura non trovata. id_vettura=" + vettura));
@@ -137,7 +139,7 @@ public class VettureResources {
 
     })
     @Produces(MediaType.APPLICATION_JSON)
-    //@RolesAllowed("Admin")
+    @RolesAllowed("Admin")
     @PermitAll
     public Response delete(@PathParam("id_vettura") Long id_vettura) {
        Vettura found = storevettura.find(id_vettura).orElseThrow(() -> new NotFoundException("vettura non trovata. id_vettura=" + id_vettura));
@@ -156,7 +158,7 @@ public class VettureResources {
         @APIResponse(responseCode = "404", description = "Aggiornamento falito")
             
     })
-    //@RolesAllowed("Admin")
+    @RolesAllowed("Admin")
     @PermitAll
     public Vettura update(@Valid Vettura entity) {
         Vettura found = storevettura.find(entity.getId()).orElseThrow(() -> new NotFoundException("vettura non trovata. id_vettura=" + entity.getId().toString()));

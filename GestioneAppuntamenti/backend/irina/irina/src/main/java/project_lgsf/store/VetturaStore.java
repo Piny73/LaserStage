@@ -46,12 +46,12 @@ public class VetturaStore extends BaseStore<Vettura>  {
         
     }
      */
-     
+     /*
          public Optional<Vettura> findVetturabyVettura(String vettura) {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Vettura e where e.targa :vettura and e.id = false", Vettura.class)
+                    em.createQuery("select e from Vettura e where e.targa :vettura and e.annoProduzione = false", Vettura.class)
                     .setParameter("vettura", vettura)
                     .getSingleResult()
                     );
@@ -63,12 +63,12 @@ public class VetturaStore extends BaseStore<Vettura>  {
         }
             
     }
-         
+        */ 
        public Optional<Vettura> findVetturayCliente(String cliente) {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Cliente e where e.nome = :cliente and e.telefono false", Vettura.class)
+                    em.createQuery("select e from Cliente e where e.nome = :cliente and e.cognome false", Vettura.class)
                     .setParameter("cliente", cliente)
                     .getSingleResult()
                     );

@@ -70,9 +70,10 @@ public class AppuntiResources {
     @Operation(description = "Restituisce l'elenco di tutti gli appunti")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
-        @APIResponse(responseCode = "404", description = "Elenco non trovato")
+        @APIResponse(responseCode = "404", description = "Elenco non trovato"),
+        @APIResponse(responseCode = "500", description = "Errore interno del server")  
     })
-    //@RolesAllowed({"Admin","User"})
+    @RolesAllowed({"Admin","User"})
     @PermitAll
     public List<Appunto> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
         System.out.println(token);
@@ -87,9 +88,10 @@ public class AppuntiResources {
     @Operation(description = "Restituisce la risorsa utente identificata dall'ID")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Appunto ritornato con successo"),
-        @APIResponse(responseCode = "404", description = "Appunto non trovato")
+        @APIResponse(responseCode = "404", description = "Appunto non trovato"),
+        @APIResponse(responseCode = "500", description = "Errore interno del server")  
     })
-    @RolesAllowed({"Admin","Appunto"})
+    //@RolesAllowed({"Admin","Appunto"})
     public Appunto find(@PathParam("id") Long id) {
         return storeappunto.find(id).orElseThrow(() -> new NotFoundException("appunto non trovato. id=" + id));
     }
@@ -116,7 +118,8 @@ public class AppuntiResources {
     @Operation(description = "Permette la registrazione di un nuovo appunto")
     @APIResponses({
         @APIResponse(responseCode = "201", description = "Nuovo appunto creato con successo"),
-        @APIResponse(responseCode = "404", description = "Creazione di appunto fallito")
+        @APIResponse(responseCode = "404", description = "Creazione di appunto fallito"),
+        @APIResponse(responseCode = "500", description = "Errore interno del server")  
     })
     @PermitAll
     public Response create(@Valid Appunto entity) {
@@ -134,7 +137,8 @@ public class AppuntiResources {
     @Operation(description = "Elimina una risorsa Appunto tramite l'ID")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Appunto eliminato con successo"),
-        @APIResponse(responseCode = "404", description = "Appunto non trovato")
+        @APIResponse(responseCode = "404", description = "Appunto non trovato"),
+        @APIResponse(responseCode = "500", description = "Errore interno del server")  
 
     })
     @Produces(MediaType.APPLICATION_JSON)
