@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
+import project_lgsf.entity.User;
 import project_lgsf.entity.Vettura;
 
 /**
@@ -17,27 +18,24 @@ import project_lgsf.entity.Vettura;
  */
 @RequestScoped
 @Transactional(Transactional.TxType.REQUIRED)
-public class VetturaStore extends BaseStore<Vettura>  {
-    
-    
-    
+public class VetturaStore extends BaseStore<Vettura> {
+
     public List<Vettura> all() {
 
-        return em.createQuery("select e from Vettura e where e.canceled = false",Vettura.class)
+        return em.createQuery("select e from Vettura e where e.canceled = false", Vettura.class)
                 .getResultList();
 
     }
-    
-    public Optional<Vettura> find(Long id_vettura) {
-    try {
-        Vettura found = em.find(Vettura.class, id_vettura);
-        return Optional.ofNullable(found);
-    } catch (Exception e) {
-        System.err.println("Errore durante la ricerca della vettura: " + e.getMessage());
-        return Optional.empty();
+
+      public Optional<Vettura> find(Long id){
+        
+        Vettura found = em.find(Vettura.class, id);
+       
+        return found == null ? Optional.empty() : Optional.of(found);
+        
     }
-}
-/*
+     
+    /*
      public Optional<Vettura> find(Long id_vettura){
         
        Vettura found = em.find(Vettura.class, id_vettura);
@@ -46,7 +44,7 @@ public class VetturaStore extends BaseStore<Vettura>  {
         
     }
      */
-     /*
+ /*
          public Optional<Vettura> findVetturabyVettura(String vettura) {
         try{
             
@@ -63,40 +61,39 @@ public class VetturaStore extends BaseStore<Vettura>  {
         }
             
     }
-        */ 
-       public Optional<Vettura> findVetturayCliente(String cliente) {
-        try{
-            
+     */
+    public Optional<Vettura> findVetturayCliente(String cliente) {
+        try {
+
             return Optional.of(
                     em.createQuery("select e from Cliente e where e.nome = :cliente and e.cognome false", Vettura.class)
-                    .setParameter("cliente", cliente)
-                    .getSingleResult()
-                    );
-            
+                            .setParameter("cliente", cliente)
+                            .getSingleResult()
+            );
+
         } catch (NoResultException ex) {
-            
-            return Optional.empty();                    
-            
+
+            return Optional.empty();
+
         }
-            
+
     }
-    
-         public Optional<Vettura> findVetturabyAppunto(String appunto) {
-        try{
-            
+
+    public Optional<Vettura> findVetturabyAppunto(String appunto) {
+        try {
+
             return Optional.of(
                     em.createQuery("select e from Appunto e where e.cliente = :appunto and e.vettura.targa = false", Vettura.class)
-                    .setParameter("appunto", appunto)
-                    .getSingleResult()
-                    );
-            
-        } catch (NoResultException ex) {
-            
-            return Optional.empty();                    
-            
-        }
-            
-    }
-       
-}
+                            .setParameter("appunto", appunto)
+                            .getSingleResult()
+            );
 
+        } catch (NoResultException ex) {
+
+            return Optional.empty();
+
+        }
+
+    }
+
+}

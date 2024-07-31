@@ -4,6 +4,7 @@
  */
 package project_lgsf.store;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
@@ -21,7 +22,7 @@ public class ClienteStore extends BaseStore<Cliente>  {
     
     public List<Cliente> all() {
 
-        return em.createQuery("select e from Cliente e where e.email = false",Cliente.class)
+        return em.createQuery("select e from Cliente e where e.canceled = false",Cliente.class)
                 .getResultList();
 
     }
@@ -35,12 +36,12 @@ public class ClienteStore extends BaseStore<Cliente>  {
     }
      
      
-         public Optional<Cliente> findClientebyCliente(String cliente) {
+         public Optional<Cliente> findClientebyNome(String nome) {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Cliente e where e.email = :cliente and e.cognome = false", Cliente.class)
-                    .setParameter("cliente", cliente)
+                    em.createQuery("select e from Cliente e where e.nome = :nome and e.canceled = false", Cliente.class)
+                    .setParameter("nome", nome)
                     .getSingleResult()
                     );
             
@@ -53,11 +54,11 @@ public class ClienteStore extends BaseStore<Cliente>  {
     }
          
     
-         public Optional<Cliente> findClientebyVettura(String vettura) {
+         /*public Optional<Cliente> findClientebyVettura(String vettura) {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Vettura e where e.targa = :vettura and e.disponibile = false", Cliente.class)
+                    em.createQuery("select e from Cliente e where e.targa = :vettura and e.disponibile = false", Cliente.class)
                     .setParameter("vettura", vettura)
                     .getSingleResult()
                     );
@@ -68,7 +69,41 @@ public class ClienteStore extends BaseStore<Cliente>  {
             
         }
             
-    }
+    }*/
+       
+        public Cliente findClientebyVettura(String vettura) {
+        try{
+            
+             return  (Cliente) em.createNativeQuery(""
+                    + "select c.id, "
+                    + "c.canceled, "
+                    + "c.created, "
+                    + "c.dateCanceled, "
+                    + "c.version, "
+                    + "c.cognome, "
+                    + "c.email, "
+                    + "c.indirizzo, "
+                    + "c.nome, "
+                    + "c.telefono, "
+                    + "c.canceledby, "
+                    + "c.createdby\n" +
+                    " FROM \n" +
+                    "	cliente c \n" +
+                    "    inner join vettura v on v.cliente_id = c.id\n" +
+                    " where \n" +
+                    "	c.canceled = false\n" +
+                    "and v.targa = :vettura", Cliente.class)
+                    .setParameter("vettura", vettura)
+                    .getSingleResult();
+                   
+            } catch (NoResultException ex) {
+           
+                return null;
+
+            }
+            
+        }
+         
          
         public Optional<Cliente> findClientebyAppunto(String appunto) {
         try{

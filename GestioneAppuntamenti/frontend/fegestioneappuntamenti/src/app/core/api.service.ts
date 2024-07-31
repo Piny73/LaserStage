@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private baseUrl = 'http://localhost:8080/business/api'; // URL base da sua API
+  private baseUrl = 'http://localhost:8080/irina/api'; // URL base da sua API
 
   constructor(private http: HttpClient) { }
 

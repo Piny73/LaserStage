@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
  * @param <TEntity>
  */
 
+
 @Transactional(Transactional.TxType.REQUIRED)
 public class BaseStore<TEntity>{
 

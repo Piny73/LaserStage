@@ -4,9 +4,9 @@
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <jta-data-source>java:global/jdbc/gestioneappuntamenti</jta-data-source>
     <properties>
-      <property name="javax.persistence.schema-generation.database.action" value="none"/>
       <property name="javax.persistence.schema-generation.scripts.action" value="none"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+      <property name="javax.persistence.schema-generation.database.action" value="none"/>
     </properties>
   </persistence-unit>
 </persistence>

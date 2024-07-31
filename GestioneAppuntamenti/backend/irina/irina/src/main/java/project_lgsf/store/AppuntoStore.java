@@ -21,7 +21,7 @@ public class AppuntoStore extends BaseStore<Appunto>  {
     
     public List<Appunto> all() {
 
-        return em.createQuery("select e from Appunto e where e.cliente = false",Appunto.class)
+        return em.createQuery("select e from Appunto e where e.canceled = false",Appunto.class)
                 .getResultList();
 
     }
@@ -57,7 +57,7 @@ public class AppuntoStore extends BaseStore<Appunto>  {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Appunto e where e.cliente.nome = :cliente and e.vettura = false", Appunto.class)
+                    em.createQuery("select e from Appunto e where e.cliente.nome = :cliente and e.canceled = false", Appunto.class)
                     .setParameter("cliente", cliente)
                     .getSingleResult()
                     );

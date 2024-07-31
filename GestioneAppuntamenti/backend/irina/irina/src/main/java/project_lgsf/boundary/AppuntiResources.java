@@ -71,9 +71,9 @@ public class AppuntiResources {
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Elenco non trovato"),
-        @APIResponse(responseCode = "500", description = "Errore interno del server")  
+         
     })
-    @RolesAllowed({"Admin","User"})
+    //@RolesAllowed({"Admin","User"})
     @PermitAll
     public List<Appunto> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
         System.out.println(token);
