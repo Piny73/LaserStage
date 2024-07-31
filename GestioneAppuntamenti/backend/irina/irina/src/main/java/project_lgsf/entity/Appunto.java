@@ -52,7 +52,7 @@ public class Appunto extends BaseEntity  {
         this.dataOraInizio = dataOraInizio;
         this.dataOraFine = dataOraFine;
         this.descrizione = descrizione;
-        this.stato = StatoAppuntoType.MODIFICATO;
+        this.stato = StatoAppuntoType.NUOVO;
         this.cliente = cliente;
         this.vettura = vettura;
     }
