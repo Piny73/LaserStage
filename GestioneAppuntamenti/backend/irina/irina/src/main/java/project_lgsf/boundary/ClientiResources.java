@@ -72,7 +72,7 @@ public class ClientiResources {
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Elenco non trovato")
     })
-    //@RolesAllowed({"Admin","Cliente"})
+    @RolesAllowed({"Admin","Cliente"})
     @PermitAll
     public List<Cliente> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
         System.out.println(token);
@@ -89,7 +89,7 @@ public class ClientiResources {
         @APIResponse(responseCode = "200", description = "Cliente ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Cliente non trovato")
     })
-    @RolesAllowed({"Admin","Cliente"})
+    //@RolesAllowed({"Admin","Cliente"})
     public Cliente find(@PathParam("id") Long id) {
         return storecliente.find(id).orElseThrow(() -> new NotFoundException("cliente non trovato. id=" + id));
     }
@@ -105,8 +105,8 @@ public class ClientiResources {
     })
     //@RolesAllowed({"Admin","User"})
     @PermitAll
-    public Cliente findbycliente(@PathParam("cliente") String cliente) {
-        return storecliente.findUserbyCliente(cliente).orElseThrow(() -> new NotFoundException("cliente non trovato. id=" + cliente));
+    public Cliente findbyCliente(@PathParam("cliente") String cliente) {
+        return storecliente.findClientebyCliente(cliente).orElseThrow(() -> new NotFoundException("cliente non trovato. id=" + cliente));
     }
     
     

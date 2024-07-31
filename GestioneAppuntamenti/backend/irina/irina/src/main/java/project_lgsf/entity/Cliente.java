@@ -28,7 +28,7 @@ import javax.validation.constraints.Size;
 @Table(name = "cliente")
 public class Cliente extends BaseEntity {
    
-    public static final String FIND_BY_USR = "Account.findByUser";
+    public static final String FIND_BY_USR = "Account.findByCliente";
     public static final String FIND_ALL = "Account.findAll";
     
     

@@ -21,7 +21,7 @@ public class ClienteStore extends BaseStore<Cliente>  {
     
     public List<Cliente> all() {
 
-        return em.createQuery("select e from Cliente e where e.canceled = false",Cliente.class)
+        return em.createQuery("select e from Cliente e where e.email = false",Cliente.class)
                 .getResultList();
 
     }
@@ -35,11 +35,11 @@ public class ClienteStore extends BaseStore<Cliente>  {
     }
      
      
-         public Optional<Cliente> findUserbyCliente(String cliente) {
+         public Optional<Cliente> findClientebyCliente(String cliente) {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Cliente e where e.email = :login and e.canceled = false", Cliente.class)
+                    em.createQuery("select e from Cliente e where e.email = :cliente and e.cognome = false", Cliente.class)
                     .setParameter("cliente", cliente)
                     .getSingleResult()
                     );
@@ -53,11 +53,11 @@ public class ClienteStore extends BaseStore<Cliente>  {
     }
          
     
-         public Optional<Cliente> findUserbyVettura(String vettura) {
+         public Optional<Cliente> findClientebyVettura(String vettura) {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Vettura e where e.targa = :vettura and e.canceled = false", Cliente.class)
+                    em.createQuery("select e from Vettura e where e.targa = :vettura and e.disponibile = false", Cliente.class)
                     .setParameter("vettura", vettura)
                     .getSingleResult()
                     );
@@ -70,11 +70,11 @@ public class ClienteStore extends BaseStore<Cliente>  {
             
     }
          
-        public Optional<Cliente> findUserbyAppunto(String appunto) {
+        public Optional<Cliente> findClientebyAppunto(String appunto) {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Appunto e where e.created :login and e.canceled = false", Cliente.class)
+                    em.createQuery("select e from Appunto e where e.created :cliente and e.stato = false", Cliente.class)
                     .setParameter("appunto", appunto)
                     .getSingleResult()
                     );

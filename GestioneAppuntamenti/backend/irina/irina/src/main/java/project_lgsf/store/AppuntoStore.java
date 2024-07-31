@@ -9,9 +9,7 @@ import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
-import project_lgsf.boundary.mapping.Credential;
 import project_lgsf.entity.Appunto;
-import project_lgsf.security.SecurityEncoding;
 
 /**
  *
@@ -23,7 +21,7 @@ public class AppuntoStore extends BaseStore<Appunto>  {
     
     public List<Appunto> all() {
 
-        return em.createQuery("select e from Appunto e where e.canceled = false",Appunto.class)
+        return em.createQuery("select e from Appunto e where e.cliente = false",Appunto.class)
                 .getResultList();
 
     }
@@ -59,7 +57,7 @@ public class AppuntoStore extends BaseStore<Appunto>  {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Appunto e where e.cliente.nome = :cliente and e.canceled = false", Appunto.class)
+                    em.createQuery("select e from Appunto e where e.cliente.nome = :cliente and e.vettura = false", Appunto.class)
                     .setParameter("cliente", cliente)
                     .getSingleResult()
                     );
@@ -71,12 +69,12 @@ public class AppuntoStore extends BaseStore<Appunto>  {
         }
             
     }
-     
-      public Optional<Appunto> findUserbyAppunto(String appunto) {
+     /*
+      public Optional<Appunto> findAppuntobyAppunto(String appunto) {
         try{
             
             return Optional.of(
-                    em.createQuery("select e from Appunto e where e.created :login and e.canceled = false", Appunto.class)
+                    em.createQuery("select e from Appunto e where e.created :appunto and e.dataOraInizio = false", Appunto.class)
                     .setParameter("appunto", appunto)
                     .getSingleResult()
                     );
@@ -88,5 +86,6 @@ public class AppuntoStore extends BaseStore<Appunto>  {
         }
             
     }
+*/
 }
 
