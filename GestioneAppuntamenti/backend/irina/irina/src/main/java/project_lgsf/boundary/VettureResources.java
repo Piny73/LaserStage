@@ -41,7 +41,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
  * @author Stage
  */
 @Path("vetture")
-@Tag(name = "Gestione Appunti", description = "Permette di gestire gli appunti di bkmapp")
+@Tag(name = "Gestione Vetture", description = "Permette di gestire le vetture di bkmapp")
 @DenyAll
 public class VettureResources {
     
@@ -71,7 +71,7 @@ public class VettureResources {
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Elenco non trovato")
     })
-    //@RolesAllowed({"Admin","User"})
+    //@RolesAllowed({"Admin","Vettura"})
     @PermitAll
     public List<Vettura> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
         System.out.println(token);
@@ -81,21 +81,21 @@ public class VettureResources {
     
         
     @GET
-    @Path("{id}")
+    @Path("{id_vettura}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Restituisce la risorsa utente identificata dall'ID")
+    @Operation(description = "Restituisce la risorsa vettura identificata dall'ID")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Vettura ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Vettura non trovato")
     })
-    @RolesAllowed({"Admin","Cliente"})
-    public Vettura find(@PathParam("id") Long id) {
-        return storevettura.find(id).orElseThrow(() -> new NotFoundException("Vettura non trovata. id=" + id));
+    @RolesAllowed({"Admin","Vettura"})
+    public Vettura find(@PathParam("id_vettura") Long id_vettura) {
+        return storevettura.find(id_vettura).orElseThrow(() -> new NotFoundException("Vettura non trovata. id_vettura=" + id_vettura));
     }
     
         
     @GET
-    @Path("/vettura/{vettura}")
+    @Path("/vetture/{vettura}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(description = "Restituisce la risorsa utente identificata dalla vettura")
     @APIResponses({
@@ -105,17 +105,17 @@ public class VettureResources {
     //@RolesAllowed({"Admin","User"})
     @PermitAll
     public Vettura findbyvettura(@PathParam("Vettura") Long vettura) {
-        return storevettura.find(vettura).orElseThrow(() -> new NotFoundException("vettura non trovata. id=" + vettura));
+        return storevettura.find(vettura).orElseThrow(() -> new NotFoundException("vettura non trovata. id_vettura=" + vettura));
     }
     
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Permette la registrazione di un nuovo cliente")
+    @Operation(description = "Permette la registrazione di una nuova vettura")
     @APIResponses({
-        @APIResponse(responseCode = "201", description = "Nuovo cliente creato con successo"),
-        @APIResponse(responseCode = "404", description = "Creazione di cliente fallito")
+        @APIResponse(responseCode = "201", description = "Nuova vettura creato con successo"),
+        @APIResponse(responseCode = "404", description = "Creazione di vettura fallito")
     })
     @PermitAll
     public Response create(@Valid Vettura entity) {
@@ -129,7 +129,7 @@ public class VettureResources {
     
     
     @DELETE
-    @Path("{id}")
+    @Path("{id_vettura}")
     @Operation(description = "Elimina una risorsa Vettura tramite l'ID")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Vettura eliminata con successo"),
@@ -139,15 +139,15 @@ public class VettureResources {
     @Produces(MediaType.APPLICATION_JSON)
     //@RolesAllowed("Admin")
     @PermitAll
-    public Response delete(@PathParam("id") Long id) {
-       Vettura found = storevettura.find(id).orElseThrow(() -> new NotFoundException("vettura non trovata. id=" + id));
+    public Response delete(@PathParam("id_vettura") Long id_vettura) {
+       Vettura found = storevettura.find(id_vettura).orElseThrow(() -> new NotFoundException("vettura non trovata. id_vettura=" + id_vettura));
         storevettura.remove(found);
         return Response.status(Response.Status.OK)
                 .build();
     }
     
     @PUT
-    @Path("{id}")
+    @Path("{id_vettura}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(description = "Aggiorna i dati della vettura")
@@ -159,7 +159,7 @@ public class VettureResources {
     //@RolesAllowed("Admin")
     @PermitAll
     public Vettura update(@Valid Vettura entity) {
-        Vettura found = storevettura.find(entity.getId()).orElseThrow(() -> new NotFoundException("vettura non trovata. id=" + entity.getId().toString()));
+        Vettura found = storevettura.find(entity.getId()).orElseThrow(() -> new NotFoundException("vettura non trovata. id_vettura=" + entity.getId().toString()));
         //entity.setId(id);
         return storevettura.update(entity);
     }

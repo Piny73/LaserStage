@@ -40,7 +40,7 @@ public class Appunto extends BaseEntity  {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
     
-     @JsonbTypeAdapter(VetturaTypeAdapter.class)
+    @JsonbTypeAdapter(VetturaTypeAdapter.class)
     @ManyToOne
     @JoinColumn(name = "vettura_id")
     private Vettura vettura;
@@ -52,7 +52,7 @@ public class Appunto extends BaseEntity  {
         this.dataOraInizio = dataOraInizio;
         this.dataOraFine = dataOraFine;
         this.descrizione = descrizione;
-        this.stato = StatoAppuntoType.NUOVO;
+        this.stato = StatoAppuntoType.MODIFICATO;
         this.cliente = cliente;
         this.vettura = vettura;
     }

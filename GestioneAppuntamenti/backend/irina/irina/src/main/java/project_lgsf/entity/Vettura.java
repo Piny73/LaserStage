@@ -11,8 +11,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.Table;
-import javax.ws.rs.core.UriBuilder;
-import project_lgsf.boundary.UsersResources;
 
 /**
  *
