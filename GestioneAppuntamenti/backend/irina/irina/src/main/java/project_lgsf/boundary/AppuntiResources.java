@@ -35,7 +35,6 @@ import project_lgsf.entity.Appunto;
 import project_lgsf.security.JWTManager;
 import project_lgsf.store.AppuntoStore;
 import javax.enterprise.context.RequestScoped;
-import project_lgsf.store.UserStore;
 /**
  *
  * @author Stage
@@ -145,8 +144,9 @@ public class AppuntiResources {
     })
      @Produces(MediaType.APPLICATION_JSON)
    //@RolesAllowed({"Admin","User"})
-    public Response deleteCompany(@PathParam("id") Long id) {
-        Appunto found = storeappunto.find(id).orElseThrow(() -> new NotFoundException("Appunto non fondata. id=" + id));
+     @PermitAll
+    public Response deleteAppunti(@PathParam("id") Long id) {
+        Appunto found = storeappunto.find(id).orElseThrow(() -> new NotFoundException("Appunto non fondato. id=" + id));
         found.setCanceled(true);
         storeappunto.remove(found);
         //store.delete(id, Company.class);

@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
-  address: string = 'Via Enzo Migliore - 55';
+  @Input() address: string = '';
 }
