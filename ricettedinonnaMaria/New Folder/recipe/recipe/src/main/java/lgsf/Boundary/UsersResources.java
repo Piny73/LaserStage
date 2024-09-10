@@ -4,7 +4,6 @@
  */
 package lgsf.boundary;
 
-import lgsf.boundary.mapping.Credential;
 import java.util.List;
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
@@ -177,7 +176,7 @@ public class UsersResources {
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("Admin")
     public Response delete(@PathParam("id") Long id) {
-        User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("ingrediente non trovato. id=" + id));
+        User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("user non trovata. id=" + id));
         found.setCanceled(true);
         storeuser.remove(found);
         return Response.status(Response.Status.OK).build();

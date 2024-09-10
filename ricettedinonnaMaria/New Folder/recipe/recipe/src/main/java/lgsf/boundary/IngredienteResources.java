@@ -123,7 +123,7 @@ public class IngredienteResources {
     })
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("Admin")
-    public Response delete(@PathParam("id") Long id) {
+    public Response deleteIngrediente(@PathParam("id") Long id) {
         Ingrediente found = storeingrediente.find(id).orElseThrow(() -> new NotFoundException("ingrediente non trovato. id=" + id));
         found.setCanceled(true);
         storeingrediente.remove(found);

@@ -119,8 +119,8 @@ public class RicettaResources {
     })
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("Admin")
-    public Response delete(@PathParam("id") Long id) {
-        Ricetta found = storericetta.find(id).orElseThrow(() -> new NotFoundException("ingrediente non trovato. id=" + id));
+    public Response deleteRicetta(@PathParam("id") Long id) {
+        Ricetta found = storericetta.find(id).orElseThrow(() -> new NotFoundException("ricetta non trovata. id=" + id));
         found.setCanceled(true);
         storericetta.remove(found);
         return Response.status(Response.Status.OK).build();

@@ -124,7 +124,7 @@ public class ConoscenteResources {
     })
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("Admin")
-    public Response delete(@PathParam("id") Long id) {
+    public Response deleteConoscente(@PathParam("id") Long id) {
         Conoscente found = storeconoscente.find(id).orElseThrow(() -> new NotFoundException("conoscente non trovato. id=" + id));
         found.setCanceled(true);
         storeconoscente.remove(found);
