@@ -122,7 +122,8 @@ public class IngredienteResources {
         @APIResponse(responseCode = "404", description = "Ingrediente non trovato")
     })
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed("Admin")
+    //@RolesAllowed("Admin")
+    @PermitAll
     public Response deleteIngrediente(@PathParam("id") Long id) {
         Ingrediente found = storeingrediente.find(id).orElseThrow(() -> new NotFoundException("ingrediente non trovato. id=" + id));
         found.setCanceled(true);

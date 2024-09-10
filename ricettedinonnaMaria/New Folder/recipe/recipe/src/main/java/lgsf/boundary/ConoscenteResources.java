@@ -123,7 +123,8 @@ public class ConoscenteResources {
         @APIResponse(responseCode = "404", description = "Conoscente non trovato")
     })
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed("Admin")
+    //@RolesAllowed("Admin")
+    @PermitAll
     public Response deleteConoscente(@PathParam("id") Long id) {
         Conoscente found = storeconoscente.find(id).orElseThrow(() -> new NotFoundException("conoscente non trovato. id=" + id));
         found.setCanceled(true);

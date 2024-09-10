@@ -83,7 +83,7 @@ public class JWTManager {
         jwt.put("iat", currentTimeInSecs);
         jwt.put("auth_time", currentTimeInSecs);
         jwt.put("exp", expirationTime);
-        jwt.put("sub", usr.getId().toString());
+        jwt.put("sub", usr.getId().toString()); 
         jwt.put("upn", usr.getEmail());
         jwt.put("groups", loadGroups(usr));
         return jwt;

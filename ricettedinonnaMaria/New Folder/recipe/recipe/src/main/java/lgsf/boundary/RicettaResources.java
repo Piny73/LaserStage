@@ -118,7 +118,8 @@ public class RicettaResources {
         @APIResponse(responseCode = "404", description = "ricetta non trovata")
     })
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed("Admin")
+    //@RolesAllowed("Admin")
+    @PermitAll
     public Response deleteRicetta(@PathParam("id") Long id) {
         Ricetta found = storericetta.find(id).orElseThrow(() -> new NotFoundException("ricetta non trovata. id=" + id));
         found.setCanceled(true);

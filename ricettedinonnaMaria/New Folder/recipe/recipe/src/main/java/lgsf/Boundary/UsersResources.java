@@ -174,7 +174,8 @@ public class UsersResources {
         @APIResponse(responseCode = "404", description = "user non trovata")
     })
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed("Admin")
+    //@RolesAllowed("Admin")
+    @PermitAll
     public Response delete(@PathParam("id") Long id) {
         User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("user non trovata. id=" + id));
         found.setCanceled(true);
