@@ -43,10 +43,7 @@ import project_lgsf.security.JWTManager;
 import project_lgsf.store.UserStore;
 import project_lgsf.entity.User;
 
-/**
- *
- * @author AndreLima
- */
+
 @Path("users")
 @Tag(name = "Gestione Users", description = "Permette di gestire gli admin di bkmapp")
 @DenyAll
