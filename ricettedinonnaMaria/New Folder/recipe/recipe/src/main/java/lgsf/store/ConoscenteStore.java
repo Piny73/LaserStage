@@ -4,15 +4,14 @@
  */
 package lgsf.store;
 
-import lgsf.boundary.mapping.Credential;
 import java.util.List;
 import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import lgsf.entity.Conoscente;
-import lgsf.security.SecurityEncoding;
-import lgsf.entity.User;
 
 /**
  * @author piny73
@@ -26,6 +25,11 @@ public class ConoscenteStore extends BaseStore<Conoscente>  {
         return em.createQuery("select e from Conoscente e where e.canceled = false",Conoscente.class)
                 .getResultList();
 
+    }
+    @PersistenceContext(unitName = "pu")
+    private EntityManager em;
+    public EntityManager getEm() {
+        return em;
     }
 
      public Optional<Conoscente> find(Long id){

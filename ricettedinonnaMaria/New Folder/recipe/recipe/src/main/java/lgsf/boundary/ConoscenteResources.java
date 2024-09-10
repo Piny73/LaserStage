@@ -7,6 +7,7 @@ package lgsf.boundary;
 import java.util.List;
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -120,16 +121,14 @@ public class ConoscenteResources {
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Conoscente eliminato con successo"),
         @APIResponse(responseCode = "404", description = "Conoscente non trovato")
-
     })
     @Produces(MediaType.APPLICATION_JSON)
-    //@RolesAllowed("Admin")
-    @PermitAll
+    @RolesAllowed("Admin")
     public Response delete(@PathParam("id") Long id) {
-        Conoscente found = storeconoscente.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
+        Conoscente found = storeconoscente.find(id).orElseThrow(() -> new NotFoundException("conoscente non trovato. id=" + id));
+        found.setCanceled(true);
         storeconoscente.remove(found);
-        return Response.status(Response.Status.OK)
-                .build();
+        return Response.status(Response.Status.OK).build();
     }
     
     @PUT

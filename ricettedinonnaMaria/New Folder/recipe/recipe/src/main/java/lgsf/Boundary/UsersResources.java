@@ -169,19 +169,18 @@ public class UsersResources {
     
     @DELETE
     @Path("{id}")
-    @Operation(description = "Elimina una risorsa Utente tramite l'ID")
+    @Operation(description = "Elimina una user tramite l'ID")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente eliminato con successo"),
-        @APIResponse(responseCode = "404", description = "Utente non trovato")
-
+        @APIResponse(responseCode = "200", description = "user eliminata con successo"),
+        @APIResponse(responseCode = "404", description = "user non trovata")
     })
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed("Admin")
     public Response delete(@PathParam("id") Long id) {
-        User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
+        User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("ingrediente non trovato. id=" + id));
+        found.setCanceled(true);
         storeuser.remove(found);
-        return Response.status(Response.Status.OK)
-                .build();
+        return Response.status(Response.Status.OK).build();
     }
     
     @PUT
