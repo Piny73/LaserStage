@@ -1,0 +1,82 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Employee</h2>
+
+  <!-- Form Container -->
+  <div class="form-container">
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <!-- Hidden Fields -->
+        <div class="col-md-6">
+          <input type="hidden" formControlName="id">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" id="name" formControlName="name" class="form-control" placeholder="Name">
+        </div>
+        <div class="col-md-6">
+          <label for="employeeRole" class="form-label">Role</label>
+          <input type="text" id="employeeRole" formControlName="employeeRole" class="form-control" placeholder="Role">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="area" class="form-label">Área</label>
+          <app-cb-area 
+            [selectedItem]="currentArea" 
+            [isUpdate]="isEditMode"
+            (selectedItemChange)="onAreaSelected($event)">
+          </app-cb-area>
+        </div>
+        <div class="col-md-6">
+          <label for="salary" class="form-label">Salary</label>
+          <input type="text" id="salary" formControlName="salary" class="form-control" placeholder="Salary">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="startedAt" class="form-label">Started At</label>
+          <input type="date" id="startedAt" formControlName="startedAt" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="endedat" class="form-label">Ended At</label>
+          <input type="date" id="endedat" formControlName="endedat" class="form-control">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="user" class="form-label">User</label>
+          <input type="text" id="user" formControlName="user" class="form-control" placeholder="User">
+        </div>
+        <div class="col-md-6">
+          <label for="manager" class="form-label">Manager</label>
+          <input type="text" id="manager" formControlName="manager" class="form-control" placeholder="Manager">
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="row">
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-primary me-2" [disabled]="!employeeForm.valid">Save</button>
+          <button type="button" class="btn btn-secondary me-2" (click)="resetForm(employeeForm)">Reset</button>
+          <button type="button" class="btn btn-secondary" (click)="newObject(employeeForm)">New</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Component Table List -->
+  <div class="mt-5">
+    <div class="table-container">
+      <app-employee-list
+        (onSelectEmployee)="selectEmployee($event)"
+        [isUpdated]="isUpdated">
+      </app-employee-list>
+    </div>
+  </div>
+</div>

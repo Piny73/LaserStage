@@ -1,0 +1,9 @@
+.cb-area-container {
+    width: 100%;
+  }
+  
+  .cb-area-container select {
+    height: 38px; /* altura típica dos inputs do Bootstrap */
+    padding: 6px 12px;
+  }
+  

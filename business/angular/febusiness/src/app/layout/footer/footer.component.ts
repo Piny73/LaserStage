@@ -1,5 +1,5 @@
 // src/app/layout/footer/footer.component.ts
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
-  address: string = 'Via Enzo Migliore - 55';
+  @Input() address: string = '';
 }

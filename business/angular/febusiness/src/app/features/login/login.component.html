@@ -1,33 +1,34 @@
 <div class="login-container">
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="username">User</label>
+      <label for="usr">User</label>
       <input
-        id="username"
-        formControlName="username"
+        id="usr"
+        formControlName="usr"
         placeholder="User"
         class="form-control"
       />
-      <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="error-message">
+      <div *ngIf="loginForm.get('usr')?.invalid && loginForm.get('usr')?.touched" class="error-message">
         Username is required
       </div>
     </div>
 
     <div class="form-group">
-      <label for="password">Password</label>
+      <label for="pwd">Password</label>
       <input
         type="password"
-        id="password"
-        formControlName="password"
+        id="pwd"
+        formControlName="pwd"
         placeholder="Password"
         class="form-control"
       />
-      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+      <div *ngIf="loginForm.get('pwd')?.invalid && loginForm.get('pwd')?.touched" class="error-message">
         Password is required
       </div>
     </div>
-
-    <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">Login</button>
+    <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">
+      <fa-icon [icon]="icon"></fa-icon> Login
+    </button>
   </form>
   
   <div *ngIf="errorMessage" class="alert alert-danger">

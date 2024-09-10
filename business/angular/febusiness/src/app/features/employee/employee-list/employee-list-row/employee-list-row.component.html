@@ -1,0 +1,29 @@
+<td>
+    <input
+      type="radio"
+      name="Select"
+      [value]="ep.id"
+      [checked]="_selected"
+      (change)="openChangeDialog($event)"
+    />
+  </td>
+  <td>{{ ep.name }}</td>
+  <td>{{ ep.employeeRole }}</td>
+  <td>{{ ep.area ? ep.area.description : ep.areaid  }}</td>
+  <td>{{ ep.salary }}</td>
+  <td>{{ ep.startedAt }}</td>
+  <td>{{ ep.endedAt? ep.endedAt : null  }}</td>
+  <td>{{ ep.user? ep.user.email : null  }}</td>
+  <td>{{ ep.managerid? ep.managerid : null  }}</td>
+  
+  
+  <div id="logout-confirmation" class="dialog-overlay" *ngIf="showDialog">
+    <div class="dialog-content text-center">
+      <p class="mb-4">Do you want to change Employee?</p>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-danger me-2" (click)="confirmChange()">Yes</button>
+        <button class="btn btn-secondary" (click)="cancelChange()">No</button>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,10 @@
+<div class="w-100">
+  <select class="form-control" id="area-select" (change)="onAreaSelected($event)">
+    <option [value]="-1" [selected]="selectedItem === -1">-- Selecione uma Área --</option>
+    <option *ngFor="let area of areaList" 
+            [value]="area.id" 
+            [selected]="selectedItem === area.id">
+      {{ area.description }}
+    </option>
+  </select>
+</div>
