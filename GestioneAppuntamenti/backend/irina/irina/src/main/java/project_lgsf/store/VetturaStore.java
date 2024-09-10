@@ -7,7 +7,9 @@ package project_lgsf.store;
 import java.util.List;
 import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import project_lgsf.entity.User;
 import project_lgsf.entity.Vettura;
@@ -26,7 +28,12 @@ public class VetturaStore extends BaseStore<Vettura> {
                 .getResultList();
 
     }
+ @PersistenceContext(unitName = "pu")
+    private EntityManager em;
 
+    public EntityManager getEm() {
+        return em;
+    }
       public Optional<Vettura> find(Long id){
         
         Vettura found = em.find(Vettura.class, id);

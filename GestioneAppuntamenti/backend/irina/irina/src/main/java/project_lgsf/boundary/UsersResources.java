@@ -165,7 +165,7 @@ public class UsersResources {
     
     
     
-    @DELETE
+     @DELETE
     @Path("{id}")
     @Operation(description = "Elimina una risorsa Utente tramite l'ID")
     @APIResponses({
