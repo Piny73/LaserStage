@@ -7,9 +7,12 @@ package project_lgsf.store;
 import java.util.List;
 import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import project_lgsf.entity.Appunto;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -25,7 +28,12 @@ public class AppuntoStore extends BaseStore<Appunto>  {
                 .getResultList();
 
     }
+ @PersistenceContext(unitName = "pu")
+    private EntityManager em;
 
+    public EntityManager getEm() {
+        return em;
+    }
      public Optional<Appunto> find(Long id){
         
         Appunto found = em.find(Appunto.class, id);

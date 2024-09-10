@@ -4,13 +4,11 @@
  */
 package project_lgsf.boundary;
 
+
 import java.util.List;
-import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.validation.Valid;
-import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -27,27 +25,31 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import project_lgsf.entity.Appunto;
-import project_lgsf.security.JWTManager;
-import project_lgsf.store.AppuntoStore;
 import org.eclipse.microprofile.jwt.Claim;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-
+import project_lgsf.entity.Appunto;
+import project_lgsf.security.JWTManager;
+import project_lgsf.store.AppuntoStore;
+import javax.enterprise.context.RequestScoped;
+import project_lgsf.store.UserStore;
 /**
  *
  * @author Stage
  */
 @Path("appunti")
 @Tag(name = "Gestione Appunti", description = "Permette di gestire gli appunti di bkmapp")
-@DenyAll
+@PermitAll
+@RequestScoped
 public class AppuntiResources {
     
     @Inject
     private AppuntoStore storeappunto;
+    
+     
     
     @Context
     ResourceContext rc;
@@ -141,12 +143,14 @@ public class AppuntiResources {
         @APIResponse(responseCode = "500", description = "Errore interno del server")  
 
     })
-    @Produces(MediaType.APPLICATION_JSON)
-    //@RolesAllowed("Admin")
-    @PermitAll
-    public Response delete(@PathParam("id") Long id) {
-        Appunto found = storeappunto.find(id).orElseThrow(() -> new NotFoundException("appunto non trovato. id=" + id));
+     @Produces(MediaType.APPLICATION_JSON)
+   //@RolesAllowed({"Admin","User"})
+    public Response deleteCompany(@PathParam("id") Long id) {
+        Appunto found = storeappunto.find(id).orElseThrow(() -> new NotFoundException("Appunto non fondata. id=" + id));
+        found.setCanceled(true);
         storeappunto.remove(found);
+        //store.delete(id, Company.class);
+        
         return Response.status(Response.Status.OK)
                 .build();
     }

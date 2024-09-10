@@ -35,6 +35,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import project_lgsf.entity.Appunto;
 
 /**
  *
@@ -138,14 +139,17 @@ public class ClientiResources {
 
     })
     @Produces(MediaType.APPLICATION_JSON)
-    //@RolesAllowed("Admin")
-    @PermitAll
-    public Response delete(@PathParam("id") Long id) {
-        Cliente found = storecliente.find(id).orElseThrow(() -> new NotFoundException("cliente non trovato. id=" + id));
+   //@RolesAllowed({"Admin","User"})
+    public Response deleteCompany(@PathParam("id") Long id) {
+        Cliente found = storecliente.find(id).orElseThrow(() -> new NotFoundException("CSliente not founded. id=" + id));
+        found.setCanceled(true);
         storecliente.remove(found);
+        //store.delete(id, Company.class);
+        
         return Response.status(Response.Status.OK)
                 .build();
     }
+      
     
     @PUT
     @Path("{id}")

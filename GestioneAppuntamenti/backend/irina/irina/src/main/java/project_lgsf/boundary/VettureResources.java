@@ -35,6 +35,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import project_lgsf.entity.Cliente;
 
 /**
  *
@@ -138,18 +139,17 @@ public class VettureResources {
         @APIResponse(responseCode = "404", description = "Vettura non trovata")
 
     })
-    @Produces(MediaType.APPLICATION_JSON)
-    //@RolesAllowed("Admin")
-    @PermitAll
-    public Response delete(@PathParam("id_vettura") Long id_vettura) {
-        System.out.println("Deleting ...");
-        Vettura found = storevettura.find(id_vettura).orElseThrow(() -> new NotFoundException("vettura non trovata. id_vettura=" + id_vettura));
-        System.out.println(found);
+     @Produces(MediaType.APPLICATION_JSON)
+   //@RolesAllowed({"Admin","User"})
+    public Response deleteCompany(@PathParam("id") Long id) {
+        Vettura found = storevettura.find(id).orElseThrow(() -> new NotFoundException("appunti not founded. id=" + id));
+        found.setCanceled(true);
         storevettura.remove(found);
+        //store.delete(id, Company.class);
+        
         return Response.status(Response.Status.OK)
                 .build();
     }
-    
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
