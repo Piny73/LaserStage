@@ -7,7 +7,9 @@ package lgsf.store;
 import java.util.List;
 import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import lgsf.entity.Ingrediente;
 
@@ -23,6 +25,11 @@ public class IngredienteStore extends BaseStore<Ingrediente>  {
         return em.createQuery("select e from Ingrediente e where e.canceled = false",Ingrediente.class)
                 .getResultList();
 
+    }
+    @PersistenceContext(unitName = "pu")
+    private EntityManager em;
+    public EntityManager getEm() {
+        return em;
     }
 
      public Optional<Ingrediente> find(Long id){

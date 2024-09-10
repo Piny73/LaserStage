@@ -7,7 +7,9 @@ package lgsf.store;
 import java.util.List;
 import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import lgsf.entity.Ricetta;
 
@@ -24,6 +26,11 @@ public class RicettaStore extends BaseStore<Ricetta>  {
         return em.createQuery("select e from Ricetta e where e.canceled = false",Ricetta.class)
                 .getResultList();
 
+    }
+    @PersistenceContext(unitName = "pu")
+    private EntityManager em;
+    public EntityManager getEm() {
+        return em;
     }
 
      public Optional<Ricetta> find(Long id){
