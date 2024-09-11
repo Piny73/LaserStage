@@ -182,6 +182,38 @@ public class UsersResources {
                 .build();
     }
     
+    /*
+    @DELETE
+@Path("{id}")
+@Operation(description = "Elimina un utente tramite l'ID")
+@APIResponses({
+    @APIResponse(responseCode = "200", description = "Utente eliminato con successo"),
+    @APIResponse(responseCode = "404", description = "Utente non trovato")
+})
+@Produces(MediaType.APPLICATION_JSON)
+@PermitAll
+public Response delete(@PathParam("id") Long id) {
+    // Trova l'utente nel database
+    User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("Utente non trovato. id=" + id));
+
+    // Imposta lo stato dell'utente come cancellato
+    found.setCanceled(true);
+
+    // Prova a rimuovere l'utente dal database
+    try {
+        storeuser.remove(found); // O storeuser.save(found) se stai salvando le modifiche.
+    } catch (Exception e) {
+        // Gestisci l'eccezione e invia un messaggio di errore
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                       .entity("Errore durante l'eliminazione dell'utente: " + e.getMessage())
+                       .build();
+    }
+
+    // Restituisci una risposta positiva
+    return Response.status(Response.Status.OK).build();
+} 
+    */
+    
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)

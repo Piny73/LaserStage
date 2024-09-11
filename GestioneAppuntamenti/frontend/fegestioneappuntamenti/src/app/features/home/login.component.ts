@@ -1,104 +1,147 @@
-// src/app/auth/login/login.component.ts
-/*import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
-})
-export class LoginComponent {
-  loginForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {
-    this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
-
-  onSubmit() {
-    if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      console.log('Login:', username, password);
-      // Adicione a lógica de autenticação aqui
-    } else {
-      console.log('Formulário inválido');
-    }
-  }
-}
-
-import { Component } from '@angular/core';
-import { AuthService } from '../../core/auth/auth.service';
-
-
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
-})
-export class LoginComponent {
-
-  username: string = '';
-  password: string = '';
-  errorMessage: string = '';
-
-  constructor(private authService: AuthService) { }
-
-  login() {
-    this.authService.login(this.username, this.password).subscribe({
-      next: (response) => {
-        console.log('Login bem-sucedido', response);
-        // Redirecionar o usuário para a página inicial ou outra página após login bem-sucedido
-      },
-      error: (error) => {
-        console.error('Erro no login', error);
-        this.errorMessage = 'Falha no login. Verifique suas credenciais.';
-      }
-    });
-  }
-}
-*/
-
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../core/auth/auth.service';
+import { catchError, map, Observable, of, startWith } from 'rxjs';
+import { Area } from '../../core/models/area.model';
+import { Company } from '../../core/models/company.model';
+import { Employee } from '../../core/models/employee.model';
+import { UserCompany } from '../../core/models/user-company.model';
+import { AreaService } from '../../core/services/area.service';
+import { CompanyService } from '../../core/services/company.service';
+import { EmployeeService } from '../../core/services/employee.service';
+import { UserCompanyService } from '../../core/services/user-company.service';
 
-
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
-})
-export class LoginComponent implements OnInit {
-
-  loginForm: FormGroup;
-  errorMessage: string = '';
-
-  constructor(private fb: FormBuilder, private authService: AuthService) {
-    this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
-
-  ngOnInit(): void {
-  }
-
-  onSubmit() {
-    if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      this.authService.login(username, password).subscribe({
-        next: (response) => {
-          console.log('Login bem-sucedido', response);
-          // Redirecionar ou realizar ação pós-login
-        },
-        error: (error) => {
-          console.error('Erro no login', error);
-          this.errorMessage = 'Falha no login. Verifique suas credenciais.';
-        }
-      });
-    }
-  }
+interface CompanyData {
+  loading: boolean;
+  companyList: Company[] | null;
+  error: string | null;
 }
 
+interface UserData {
+  loading: boolean;
+  userList: UserCompany[] | null;
+  error: string | null;
+}
+
+interface AreaData {
+  loading: boolean;
+  areaList: Area[] | null;
+  error: string | null;
+}
+
+interface EmployeeData {
+  loading: boolean;
+  employeeList: Employee[] | null;
+  error: string | null;
+}
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css'
+})
+export class HomeComponent implements OnInit {
+
+  companyData$!: Observable<CompanyData>;
+  userData$!: Observable<UserData>;
+  areaData$!: Observable<AreaData>;
+  employeeData$!: Observable<EmployeeData>;
+
+  constructor(
+    private companyService: CompanyService, 
+    private userCompanyService: UserCompanyService,
+    private areaService: AreaService,
+    private employeeService: EmployeeService) {
+  }
+
+  ngOnInit() {
+    try {
+      this.loadUser();
+      this.loadCompany();
+      this.loadArea();
+      this.loadEmployee();
+    } catch (error) {
+      console.error('Erro ao inicializar o componente:', error);
+    }
+  }
+
+  loadCompany(): void {
+    console.log("Load Company...");
+    this.companyData$ = this.companyService.fill().pipe(
+      map((data: Company[]) => ({
+        loading: false,
+        companyList: data,
+        error: null
+      })),
+      catchError(error => {
+        console.error('Erro ao carregar Company:', error);
+        return of({
+          loading: false,
+          companyList: null,
+          error: 'Erro ao carregar Company.'
+        });
+      }),
+      startWith({ loading: true, companyList: null, error: null })
+    );
+    this.companyService.setMainCompany();
+  }
+
+  loadUser(): void {
+    console.log("Load User...");
+    this.userData$ = this.userCompanyService.fill().pipe(
+      map((data: UserCompany[]) => ({
+        loading: false,
+        userList: data,
+        error: null
+      })),
+      catchError(error => {
+        console.error('Erro ao carregar Users Company:', error);
+        return of({
+          loading: false,
+          userList: null,
+          error: 'Erro ao carregar Users.'
+        });
+      }),
+      startWith({ loading: true, userList: null, error: null })
+    );
+  }
+
+  loadArea(): void {
+    console.log("Load Area...");
+    this.areaData$ = this.areaService.fill().pipe(
+      map((data: Area[]) => ({
+        loading: false,
+        areaList: data,
+        error: null
+      })),
+      catchError(error => {
+        console.error('Erro ao carregar Areas:', error);
+        return of({
+          loading: false,
+          areaList: null,
+          error: 'Erro ao carregar Areas.'
+        });
+      }),
+      startWith({ loading: true, areaList: null, error: null })
+    );
+  }
+
+  loadEmployee(): void {
+    console.log("Load Employee...");
+    this.employeeData$ = this.employeeService.fill().pipe(
+      map((data: Employee[]) => ({
+        loading: false,
+        employeeList: data,
+        error: null
+      })),
+      catchError(error => {
+        console.error('Erro ao carregar Employee:', error);
+        return of({
+          loading: false,
+          employeeList: null,
+          error: 'Erro ao carregar Employee.'
+        });
+      }),
+      startWith({ loading: true, employeeList: null, error: null })
+    );
+  }
+
+}

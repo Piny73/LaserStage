@@ -31,6 +31,7 @@ public class VetturaStore extends BaseStore<Vettura> {
  @PersistenceContext(unitName = "pu")
     private EntityManager em;
 
+    @Override
     public EntityManager getEm() {
         return em;
     }
