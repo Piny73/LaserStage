@@ -163,9 +163,6 @@ public class UsersResources {
                 .add("role", u.getRoleuser().toString())
                 .build();
     }
-    
-    
-    
     @DELETE
     @Path("{id}")
     @Operation(description = "Elimina una user tramite l'ID")
