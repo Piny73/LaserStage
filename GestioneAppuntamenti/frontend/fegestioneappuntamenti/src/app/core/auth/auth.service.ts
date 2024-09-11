@@ -1,6 +1,6 @@
 
-import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ApiService } from '../api.service';
@@ -21,8 +21,7 @@ export class AuthService {
     });
 
     // Passa o endpoint 'login' e os dados para o método 'post' do ApiService
-    return this.apiService.post(this.loginEndpoint, loginData, headers).pipe(
-      map(response => {
+    return this.apiService.post(this.loginEndpoint, loginData, headers).pipe(map(response => {
         // Armazenar token ou outros dados de sessão se necessário
         if (response && response.token) {
           localStorage.setItem('authToken', response.token);

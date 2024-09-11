@@ -16,10 +16,7 @@ import project_lgsf.entity.User;
 import project_lgsf.store.UserStore;
 
 
-/**
- *
- * @author AndreLima
- */
+
 public class UserTypeAdapter implements JsonbAdapter<User, JsonObject>  {
     
     @Inject
