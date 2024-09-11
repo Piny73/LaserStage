@@ -1,0 +1,10 @@
+.app-footer {
+    background: linear-gradient(to right, #b58270, #ff6a6a); /* Sfumature color salmone */
+    color: white; /* Colore del testo */
+    text-align: center; /* Allinea il testo al centro */
+    padding: 20px; /* Spaziatura interna */
+    position: relative; /* Posizionamento relativo */
+    bottom: 0; /* Posizione in basso */
+    width: 100%; /* Larghezza al 100% */
+    font-family: Arial, sans-serif; /* Font del testo */
+}
