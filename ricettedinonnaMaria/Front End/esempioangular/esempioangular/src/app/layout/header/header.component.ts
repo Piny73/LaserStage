@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
-  title: string = 'Il mio Programma';
+  title: string = 'Le ricette di Nonna Maria';
 }
