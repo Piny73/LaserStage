@@ -7,4 +7,12 @@
     bottom: 0;
     width: 100%;
     font-family: Arial, sans-serif;
+    border: 3px solid white;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+.app-content {
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
 }

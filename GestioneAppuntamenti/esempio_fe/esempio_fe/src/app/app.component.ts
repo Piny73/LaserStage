@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'esempio_fe';
+  
+openChangeDialog(risp: string) {
+console.log('ho ricevuto il messaggio','risp');
+}
+title: string = "Test";
+  
 }

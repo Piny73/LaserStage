@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'esempio';
+bookspace: string = "test Sara";
+
+openChangeDialog(resp : string){
+
+  console.log ("ho ricevuto il messaggio:",resp);
+}
+
 }
