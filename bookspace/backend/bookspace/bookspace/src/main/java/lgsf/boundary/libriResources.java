@@ -42,6 +42,7 @@ import lgsf.security.JWTManager;
 import lgsf.store.UserStore;
 import lgsf.entity.User;
 import lgsf.entity.libro;
+import lgsf.store.libreriaStore;
 import lgsf.store.libroStore;
 
 /**
@@ -54,7 +55,7 @@ import lgsf.store.libroStore;
 public class libriResources {
     
     @Inject
-    private libroStore store;
+    private libroStore storelibro;
     
     @Context
     ResourceContext rc;
@@ -83,7 +84,7 @@ public class libriResources {
     @PermitAll
     public List<libro> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
         System.out.println(token);
-        return store.all();
+        return storelibro.all();
     }
     
     
@@ -99,7 +100,7 @@ public class libriResources {
     //@RolesAllowed({"Admin","User"})
     @PermitAll
     public libro find(@PathParam("id") Long id) {
-        return store.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
+        return storelibro.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
     }
     
     
@@ -115,31 +116,30 @@ public class libriResources {
     public Response create(@Valid libro entity) {
         
             
-        libro saved = store.save(entity);
+        libro saved = storelibro.save(entity);
         
         return Response.status(Response.Status.CREATED)
                 .entity(saved)
                 .build();
 }
     
-    
- 
-    
-    
-    @DELETE
+     @DELETE
     @Path("{id}")
-    @Operation(description = "Elimina una risorsa Utente tramite l'ID")
+    @Operation(description = "Elimina i libri tramite l'ID")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente eliminato con successo"),
-        @APIResponse(responseCode = "404", description = "Utente non trovato")
+        @APIResponse(responseCode = "200", description = "Libri eliminati con successo"),
+        @APIResponse(responseCode = "404", description = "Libri non trovati"),
+        @APIResponse(responseCode = "500", description = "Errore interno del server")  
 
     })
-    @Produces(MediaType.APPLICATION_JSON)
-    //@RolesAllowed("Admin")
-    @PermitAll
-    public Response delete(@PathParam("id") Long id) {
-        libro found = store.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
-        store.remove(found);
+     @Produces(MediaType.APPLICATION_JSON)
+     @PermitAll
+    public Response deleteLibro(@PathParam("id") Long id) {
+        libro found = storelibro.find(id).orElseThrow(() -> new NotFoundException("Libro non creato. id=" + id));
+        found.setCanceled(true);
+        storelibro.remove(found);
+        //store.delete(id, Company.class);
+        
         return Response.status(Response.Status.OK)
                 .build();
     }
@@ -157,8 +157,8 @@ public class libriResources {
     //@RolesAllowed("Admin")
     @PermitAll
     public libro update(@Valid libro entity) {
-        libro found = store.find(entity.getId()).orElseThrow(() -> new NotFoundException("user non trovato. id=" + entity.getId()));
-        return store.update(entity);
+        libro found = storelibro.find(entity.getId()).orElseThrow(() -> new NotFoundException("user non trovato. id=" + entity.getId()));
+        return storelibro.update(entity);
     }
    
     

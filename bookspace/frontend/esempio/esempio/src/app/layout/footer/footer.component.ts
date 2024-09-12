@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
-  title: string = "RICETTE"
+title :string= "Ciao Ciao"
 }
