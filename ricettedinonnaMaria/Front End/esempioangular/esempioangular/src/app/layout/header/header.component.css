@@ -3,4 +3,22 @@
     color: white; /* Testo bianco */
     padding: 10px; /* Padding interno */
     text-align: center; /* Allineamento al centro */
+    border: 5px solid rgb(118, 64, 64); /* Cornice bianca di 5 pixel */
+    border-radius: 10px; /* Angoli arrotondati della cornice */
+    width: 500px; /* Larghezza fissa */
+    margin: 0 auto; /* Centra l'elemento */
   }
+
+  .header-container {
+    display: flex;                /* Utilizza il layout flexbox */
+    flex-direction: column;      /* Dispone gli elementi in colonna */
+    align-items: center;         /* Centra gli elementi orizzontalmente */
+    justify-content: center;      /* Centra gli elementi verticalmente */
+    height: 200px;               /* Imposta un'altezza per l'header */
+}
+
+.logo {
+    width: 200px; /* Larghezza del logo */
+    height: auto; /* Mantiene le proporzioni del logo */
+    margin-right: 15px; /* Margine a destra per distanziare il titolo */
+}
