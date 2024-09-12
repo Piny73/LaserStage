@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
 bookspace: string = "test Sara";
 
+openChangeDialog(resp : string){
+
+  console.log ("ho ricevuto il messaggio:",resp);
+}
+
 }

@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { emit } from 'process';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,12 @@ import { Component, Input } from '@angular/core';
 })
 export class HeaderComponent {
  @Input ("titolo") title?: string ;
+ @Output ("ritorno") title2 = new EventEmitter<string>();
+
+ onclick(){
+
+  console.log ("entrato nel metodo onclick")
+this.title2?.emit("avanti")
+ }
+
 }
