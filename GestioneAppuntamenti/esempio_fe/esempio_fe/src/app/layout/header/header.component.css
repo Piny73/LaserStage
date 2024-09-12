@@ -1,0 +1,10 @@
+.app-header {
+    background: linear-gradient(to right, #96e9e2, #0627e0);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}

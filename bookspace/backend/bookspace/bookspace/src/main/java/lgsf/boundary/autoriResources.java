@@ -56,7 +56,7 @@ import lgsf.store.libroStore;
 public class autoriResources {
     
     @Inject
-    private autoreStore store;
+    private autoreStore storeautore;
     
     @Context
     ResourceContext rc;
@@ -85,7 +85,7 @@ public class autoriResources {
     @PermitAll
     public List<autore> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
         System.out.println(token);
-        return store.all();
+        return storeautore.all();
     }
     
         
@@ -100,7 +100,7 @@ public class autoriResources {
     //@RolesAllowed({"Admin","User"})
     @PermitAll
     public autore find(@PathParam("id") Long id) {
-        return store.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
+        return storeautore.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
     }
     
     
@@ -116,28 +116,29 @@ public class autoriResources {
     public Response create(@Valid autore entity) {
         
             
-        autore saved = store.save(entity);
+        autore saved = storeautore.save(entity);
         
         return Response.status(Response.Status.CREATED)
                 .entity(saved)
                 .build();
 }
-    
-    @DELETE
+     @DELETE
     @Path("{id}")
-    @Operation(description = "Elimina una risorsa Utente tramite l'ID")
+    @Operation(description = "Elimina un autore tramite l'ID")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente eliminato con successo"),
-        @APIResponse(responseCode = "404", description = "Utente non trovato")
+        @APIResponse(responseCode = "200", description = "Appunto eliminato con successo"),
+        @APIResponse(responseCode = "404", description = "Appunto non trovato"),
+        @APIResponse(responseCode = "500", description = "Errore interno del server")  
 
     })
-    
-    @Produces(MediaType.APPLICATION_JSON)
-    //@RolesAllowed("Admin")
-    @PermitAll
-    public Response delete(@PathParam("id") Long id) {
-        autore found = store.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
-        store.remove(found);
+     @Produces(MediaType.APPLICATION_JSON)
+   //@RolesAllowed({"Admin","User"})
+    public Response deleteAutore(@PathParam("id") Long id) {
+        autore found = storeautore.find(id).orElseThrow(() -> new NotFoundException("Autore non creato. id=" + id));
+        found.setCanceled(true);
+        storeautore.remove(found);
+        //store.delete(id, Company.class);
+        
         return Response.status(Response.Status.OK)
                 .build();
     }
@@ -155,8 +156,8 @@ public class autoriResources {
     //@RolesAllowed("Admin")
     @PermitAll
     public autore update(@Valid autore entity) {
-        autore found = store.find(entity.getId()).orElseThrow(() -> new NotFoundException("user non trovato. id=" + entity.getId()));
-        return store.update(entity);
+        autore found = storeautore.find(entity.getId()).orElseThrow(() -> new NotFoundException("user non trovato. id=" + entity.getId()));
+        return storeautore.update(entity);
     }
    
     

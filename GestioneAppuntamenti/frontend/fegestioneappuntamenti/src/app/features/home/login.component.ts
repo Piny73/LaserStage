@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { catchError, map, Observable, of, startWith } from 'rxjs';
-import { Area } from '../../core/models/area.model';
 import { Company } from '../../core/models/company.model';
-import { Employee } from '../../core/models/employee.model';
-import { UserCompany } from '../../core/models/user-company.model';
-import { AreaService } from '../../core/services/area.service';
 import { CompanyService } from '../../core/services/company.service';
-import { EmployeeService } from '../../core/services/employee.service';
+import { UserCompany } from '../../core/models/user-company.model';
 import { UserCompanyService } from '../../core/services/user-company.service';
+import { Area } from '../../core/models/area.model';
+import { Employee } from '../../core/models/employee.model';
+import { catchError, map, Observable, of, startWith } from 'rxjs';
+import { AreaService } from '../../core/services/area.service';
+import { EmployeeService } from '../../core/services/employee.service';
 
 interface CompanyData {
   loading: boolean;
