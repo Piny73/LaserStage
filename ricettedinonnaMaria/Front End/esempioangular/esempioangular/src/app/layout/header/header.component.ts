@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,5 +7,15 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
-  title: string = 'Le ricette di Nonna Maria';
+
+  @Input("titolo") title?: string;
+  @Output("ritorno") back = new EventEmitter<string>();
+
+  onclick() {
+    console.log("entrato nel metodo on click")
+    this.back.emit("ENTRATO!");
+    }
+
+
+
 }
