@@ -58,7 +58,7 @@ import lgsf.store.libroStore;
 public class librerieResources {
     
     @Inject
-    private libreriaStore store;
+    private libreriaStore storelibreria;
     
     @Context
     ResourceContext rc;
@@ -87,7 +87,7 @@ public class librerieResources {
     @PermitAll
     public List<libreria> all(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
         System.out.println(token);
-        return store.all();
+        return storelibreria.all();
     }
     
     
@@ -103,7 +103,7 @@ public class librerieResources {
     //@RolesAllowed({"Admin","User"})
     @PermitAll
     public libreria find(@PathParam("id") Long id) {
-        return store.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
+        return storelibreria.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
     }
     
     
@@ -119,7 +119,7 @@ public class librerieResources {
     public Response create(@Valid libreria entity) {
         
             
-        libreria saved = store.save(entity);
+        libreria saved = storelibreria.save(entity);
         
         return Response.status(Response.Status.CREATED)
                 .entity(saved)
@@ -128,19 +128,21 @@ public class librerieResources {
     
     @DELETE
     @Path("{id}")
-    @Operation(description = "Elimina una risorsa Utente tramite l'ID")
+    @Operation(description = "Elimina la libreria tramite l'ID")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente eliminato con successo"),
-        @APIResponse(responseCode = "404", description = "Utente non trovato")
+        @APIResponse(responseCode = "200", description = "Libreria eliminata con successo"),
+        @APIResponse(responseCode = "404", description = "Libreria non trovato"),
+        @APIResponse(responseCode = "500", description = "Errore interno del server")  
 
     })
-    
-    @Produces(MediaType.APPLICATION_JSON)
-    //@RolesAllowed("Admin")
-    @PermitAll
-    public Response delete(@PathParam("id") Long id) {
-        libreria found = store.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
-        store.remove(found);
+     @Produces(MediaType.APPLICATION_JSON)
+   //@RolesAllowed({"Admin","User"})
+    public Response deleteLibreria(@PathParam("id") Long id) {
+        libreria found = storelibreria.find(id).orElseThrow(() -> new NotFoundException("Libreria non creata. id=" + id));
+        found.setCanceled(true);
+        storelibreria.remove(found);
+        //store.delete(id, Company.class);
+        
         return Response.status(Response.Status.OK)
                 .build();
     }
@@ -158,8 +160,8 @@ public class librerieResources {
     //@RolesAllowed("Admin")
     @PermitAll
     public libreria update(@Valid libreria entity) {
-        libreria found = store.find(entity.getId()).orElseThrow(() -> new NotFoundException("user non trovato. id=" + entity.getId()));
-        return store.update(entity);
+        libreria found = storelibreria.find(entity.getId()).orElseThrow(() -> new NotFoundException("user non trovato. id=" + entity.getId()));
+        return storelibreria.update(entity);
     }
     
 }

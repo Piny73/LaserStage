@@ -35,6 +35,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import project_lgsf.entity.Appunto;
 
 /**
  *
@@ -106,7 +107,7 @@ public class VettureResources {
     })
    // @RolesAllowed({"Admin","User"})
     @PermitAll
-    public Vettura findbyvettura(@PathParam("vettura") Long vettura) {
+    public Vettura findbyVettura(@PathParam("vettura") Long vettura) {
         return storevettura.find(vettura).orElseThrow(() -> new NotFoundException("vettura non trovata. id_vettura=" + vettura));
     }
     
@@ -130,22 +131,25 @@ public class VettureResources {
 }
     
     
+      
     @DELETE
-    @Path("{id_vettura}")
-    @Operation(description = "Elimina una risorsa Vettura tramite l'ID")
+    @Path("{id}")
+    @Operation(description = "Elimina una risorsa vettura tramite l'ID")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Vettura eliminata con successo"),
-        @APIResponse(responseCode = "404", description = "Vettura non trovata")
+        @APIResponse(responseCode = "200", description = "vettura eliminata con successo"),
+        @APIResponse(responseCode = "404", description = "Vettura non trovata"),
+        @APIResponse(responseCode = "500", description = "Errore interno del server")  
 
     })
-    @Produces(MediaType.APPLICATION_JSON)
-    //@RolesAllowed("Admin")
+     @Produces(MediaType.APPLICATION_JSON)
+   //@RolesAllowed({"Admin","User"})
     @PermitAll
-    public Response delete(@PathParam("id_vettura") Long id_vettura) {
-        System.out.println("Deleting ...");
-        Vettura found = storevettura.find(id_vettura).orElseThrow(() -> new NotFoundException("vettura non trovata. id_vettura=" + id_vettura));
-        System.out.println(found);
+    public Response deleteVettura(@PathParam("id") Long id) {
+        Vettura found = storevettura.find(id).orElseThrow(() -> new NotFoundException("Vettura non fondata. id=" + id));
+        found.setCanceled(true);
         storevettura.remove(found);
+        //store.delete(id, Company.class);
+        
         return Response.status(Response.Status.OK)
                 .build();
     }

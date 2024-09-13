@@ -128,7 +128,7 @@ public class ClientiResources {
                 .build();
 }
     
-    
+    /*
     @DELETE
     @Path("{id}")
     @Operation(description = "Elimina una risorsa Cliente tramite l'ID")
@@ -138,15 +138,42 @@ public class ClientiResources {
 
     })
     @Produces(MediaType.APPLICATION_JSON)
-    //@RolesAllowed("Admin")
-    @PermitAll
-    public Response delete(@PathParam("id") Long id) {
-        Cliente found = storecliente.find(id).orElseThrow(() -> new NotFoundException("cliente non trovato. id=" + id));
+   //@RolesAllowed({"ROLE_AUTORIZZATO"})
+    public Response deleteCliente(@PathParam("id") Long id) {
+        Cliente found = storecliente.find(id).orElseThrow(() -> new NotFoundException("CSliente not founded. id=" + id));
+        found.setCanceled(true);
         storecliente.remove(found);
+        //store.delete(id, Company.class);
+        
         return Response.status(Response.Status.OK)
                 .build();
     }
+      */
+    @DELETE
+@Path("{id}")
+@Operation(description = "Elimina una risorsa Cliente tramite l'ID")
+@APIResponses({
+    @APIResponse(responseCode = "204", description = "Cliente eliminato con successo"),
+    @APIResponse(responseCode = "404", description = "Cliente non trovato")
+})
+@Produces(MediaType.APPLICATION_JSON)
+//@RolesAllowed({"ROLE_AUTORIZZATO"}) 
+       @PermitAll
+public Response deleteCliente(@PathParam("id") Long id) {
+    // Trova il cliente tramite ID o lancia eccezione se non trovato
+    Cliente found = storecliente.find(id).orElseThrow(() -> new NotFoundException("Cliente non trovato. id=" + id));
     
+    // Imposta il cliente come cancellato
+    found.setCanceled(true);
+    
+    // Rimuovi il cliente dallo store
+    storecliente.remove(found);
+    
+    // Restituisci una risposta 204 No Content poiché non c'è un corpo da restituire
+    return Response.status(Response.Status.NO_CONTENT).build();
+}
+    
+
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)

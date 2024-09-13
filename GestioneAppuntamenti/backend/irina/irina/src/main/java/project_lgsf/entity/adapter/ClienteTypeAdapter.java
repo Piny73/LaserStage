@@ -16,10 +16,7 @@ import project_lgsf.entity.Cliente;
 import project_lgsf.store.ClienteStore;
 
 
-/**
- *
- * @author AndreLima
- */
+
 public class ClienteTypeAdapter implements JsonbAdapter<Cliente, JsonObject>  {
     
     @Inject

@@ -8,10 +8,13 @@ import lgsf.boundary.mapping.Credential;
 import java.util.List;
 import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import lgsf.security.SecurityEncoding;
 import lgsf.entity.User;
+import lgsf.entity.libreria;
 import lgsf.entity.libro;
 
 /**
@@ -22,13 +25,22 @@ import lgsf.entity.libro;
 @Transactional(Transactional.TxType.REQUIRED)
 public class libroStore extends BaseStore<libro> {
 
+    public static void remove(libreria found) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public List<libro> all() {
 
         return em.createQuery("select e from libro e where e.canceled = false", libro.class)
                 .getResultList();
 
     }
+@PersistenceContext(unitName = "pu")
+    private EntityManager em;
 
+    public EntityManager getEm() {
+        return em;
+    }
     public Optional<libro> find(Long id) {
 
         libro found = em.find(libro.class, id);

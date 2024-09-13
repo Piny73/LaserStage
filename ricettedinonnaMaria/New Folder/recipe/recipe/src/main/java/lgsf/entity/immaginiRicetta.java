@@ -4,62 +4,55 @@
  */
 package lgsf.entity;
 
-import javax.json.bind.annotation.JsonbTypeAdapter;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import lgsf.entity.Adapter.RicettaTypeAdapter;
+import javax.json.bind.annotation.JsonbProperty;
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
 import lgsf.entity.constant.BaseEntity;
 
 /**
- * @author piny73
+ *
+ * @author piny7
  */
-@Entity
-@Table(name = "immaginiricetta")
 public class ImmaginiRicetta extends BaseEntity{
-    private String fileName;
-    private String fileType;
-    private long fileSize;
     
-    @JsonbTypeAdapter(RicettaTypeAdapter.class)
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "ricetta_Id")
-    private Ricetta ricetta;
+    @JsonbProperty(value = "file")
+    @NotBlank
+    @Column(name = "file", nullable = false)
+    private byte[] file;
+    
+    @JsonbProperty(value = "nome")
+    @NotBlank
+    @Column(name = "nome", nullable = false)
+    private String nome;
+    
+    @JsonbProperty(value = "ricetta_id")
+    @NotBlank
+    @Column(name = "ricetta_id", nullable = false)
+    private Long ricetta_id;
 
-    public ImmaginiRicetta() {
+    public byte[] getFile() {
+        return file;
     }
 
-    public ImmaginiRicetta(String fileName, String fileType, long fileSize) {
-        this.fileName = fileName;
-        this.fileType = fileType;
-        this.fileSize = fileSize;
+    public void setFile(byte[] file) {
+        this.file = file;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getNome() {
+        return nome;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getFileType() {
-        return fileType;
+    public Long getRicetta_id() {
+        return ricetta_id;
     }
 
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
-    }
-
-    public long getFileSize() {
-        return fileSize;
-    }
-
-    public void setFileSize(long fileSize) {
-        this.fileSize = fileSize;
+    public void setRicetta_id(Long ricetta_id) {
+        this.ricetta_id = ricetta_id;
     }
     
     
-
 }

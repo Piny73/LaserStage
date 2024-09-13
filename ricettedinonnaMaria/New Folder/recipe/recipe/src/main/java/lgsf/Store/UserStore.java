@@ -8,7 +8,9 @@ import lgsf.boundary.mapping.Credential;
 import java.util.List;
 import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import lgsf.security.SecurityEncoding;
 import lgsf.entity.User;
@@ -25,6 +27,11 @@ public class UserStore extends BaseStore<User>  {
         return em.createQuery("select e from User e where e.canceled = false",User.class)
                 .getResultList();
 
+    }
+    @PersistenceContext(unitName = "pu")
+    private EntityManager em;
+    public EntityManager getEm() {
+        return em;
     }
 
      public Optional<User> find(Long id){

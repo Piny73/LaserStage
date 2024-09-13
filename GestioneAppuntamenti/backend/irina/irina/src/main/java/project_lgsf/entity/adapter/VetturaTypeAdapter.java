@@ -16,10 +16,6 @@ import project_lgsf.entity.Vettura;
 import project_lgsf.store.VetturaStore;
 
 
-/**
- *
- * @author Stage
- */
 public class VetturaTypeAdapter implements JsonbAdapter<Vettura, JsonObject>  {
     
     @Inject

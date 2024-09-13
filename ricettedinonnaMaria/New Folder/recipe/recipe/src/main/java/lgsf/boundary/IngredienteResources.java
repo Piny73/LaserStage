@@ -7,6 +7,7 @@ package lgsf.boundary;
 import java.util.List;
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -119,16 +120,15 @@ public class IngredienteResources {
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Ingrediente eliminato con successo"),
         @APIResponse(responseCode = "404", description = "Ingrediente non trovato")
-
     })
     @Produces(MediaType.APPLICATION_JSON)
     //@RolesAllowed("Admin")
     @PermitAll
-    public Response delete(@PathParam("id") Long id) {
+    public Response deleteIngrediente(@PathParam("id") Long id) {
         Ingrediente found = storeingrediente.find(id).orElseThrow(() -> new NotFoundException("ingrediente non trovato. id=" + id));
+        found.setCanceled(true);
         storeingrediente.remove(found);
-        return Response.status(Response.Status.OK)
-                .build();
+        return Response.status(Response.Status.OK).build();
     }
 
     @PUT

@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import project_lgsf.entity.Cliente;
 
@@ -26,7 +28,12 @@ public class ClienteStore extends BaseStore<Cliente>  {
                 .getResultList();
 
     }
+ @PersistenceContext(unitName = "pu")
+    private EntityManager em;
 
+    public EntityManager getEm() {
+        return em;
+    }
      public Optional<Cliente> find(Long id){
         
         Cliente found = em.find(Cliente.class, id);
