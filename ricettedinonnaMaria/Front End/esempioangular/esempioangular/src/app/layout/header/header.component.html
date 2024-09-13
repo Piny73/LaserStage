@@ -1,10 +1,15 @@
 <!-- header.component.html -->
 <header class="app-header">
+  <div class="header-container">
+    <img src="assets/images/LRDNMlogo.png" alt="Logo" class="logo" />
     <h1>{{ title }}</h1>
-    <button class="header-button" (click)="onclick()">Cliccami</button> <!-- Aggiungi il pulsante qui -->
-    <div class="header-container">
-      <img src="assets/images/LRDNMlogo.png" alt="Logo" class="logo" />
-      <h1></h1>
+    <button class="header-button" (click)="toggleLogin()">Login</button>
   </div>
-  </header>
+
+  <div *ngIf="showLogin" class="login-container">
+    <app-login></app-login>
+  </div>
+</header>
+
+
   
