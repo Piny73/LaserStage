@@ -2,7 +2,7 @@
     background: linear-gradient(to right, #d1a797, #ff6a6a); /* Sfumature color salmone */
     color: white; /* Colore del testo */
     text-align: center; /* Allinea il testo al centro */
-    padding: 10px; /* Spaziatura interna */
+    padding: 80px; /* Spaziatura interna */
     border: 5px solid rgb(118, 64, 64); /* Cornice di 5 pixel */
     border-radius: 10px; /* Angoli arrotondati della cornice */
 }
@@ -21,4 +21,31 @@
     height: auto;                     /* Mantiene le proporzioni del logo */
     margin: 0;                         /* Rimuove eventuali margini */
 }
+
+.footer-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 24px; /* Regola la dimensione del font */
+    font-weight: 400; /* Pacifico è già piuttosto decorativo, quindi il peso 400 va bene */
+    color: #333; /* Cambia il colore del testo se necessario */
+}
+
+.btn {
+    padding: 8px 16px; /* Padding del bottone */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-secondary {
+    font-family: 'Pacifico', cursive;
+    background-color: #ff6a6a;
+    color: black;
+    border: 2px solid rgb(118, 64, 64);
+  }
+/* Stile per i bottoni quando sono cliccati */
+.btn-secondary:active {
+    background-color: #5a6268; /* Colore più scuro per feedback visivo */
+    transform: scale(0.98); /* Effetto di riduzione per il clic */
+  }
+
     

@@ -6,6 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+createContact() {
+throw new Error('Method not implemented.');
+}
+createRecipe() {
+throw new Error('Method not implemented.');
+}
+createIngredient() {
+throw new Error('Method not implemented.');
+}
 
   title = '';  // Definisci la proprietà title
   showLogin = false;

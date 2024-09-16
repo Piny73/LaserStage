@@ -1,17 +1,55 @@
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    background-color: #f8f9fa;
-    padding: 10px;
-  }
+  display: flex;
+  justify-content: space-between; /* Spinge gli elementi ai lati opposti */
+  align-items: center; /* Allinea verticalmente */
+  background: linear-gradient(to right, #d1a797, #ff6a6a); /* Sfumature color salmone */
+  border: 5px solid rgb(118, 64, 64);
+  padding: 10px;
+  height: 60px;
+}
+
+.navbar-nav {
+  display: flex; /* Rende la lista dei pulsanti una riga flessibile */
+  align-items: center; /* Allinea verticalmente */
+  margin: 0;
+  padding: 0;
+  list-style-type: none; /* Rimuove i puntini */
+}
+
+.navbar-nav.left {
+  margin-left: 0; /* Nessun margine a sinistra per allineare i pulsanti "Crea" a sinistra */
+}
+
+.navbar-nav.right {
+  margin-left: auto; /* Spinge il contenuto a destra */
+}
+
+.nav-item {
+  display: inline-block; /* Allinea gli elementi orizzontalmente */
+  margin-right: 10px; /* Spazio tra i pulsanti */
+}
+
+.nav-item:last-child {
+  margin-right: 0; /* Rimuove lo spazio extra dall'ultimo elemento */
+}
+
+.btn {
+  padding: 10px 15px; /* Padding per i pulsanti */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  font-family: 'Pacifico', cursive;
+  background-color: #ff6a6a;
+  color: black;
+  border: 2px solid rgb(118, 64, 64);
+}
+.btn-secondary:active {
+  background-color: #5a6268; /* Colore più scuro per feedback visivo */
+  transform: scale(0.98); /* Effetto di riduzione per il clic */
+}
   
-  .navbar a {
-    margin-right: 20px;
-    text-decoration: none;
-    color: #000;
-  }
-  
-  .navbar .btn {
-    margin-left: auto;
-  }
+
   

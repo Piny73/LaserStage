@@ -1,20 +1,27 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <h1 class="navbar-title">{{ title }}</h1>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <!-- Spostiamo il pulsante di login qui -->
-          <button class="btn btn-primary" (click)="toggleLogin()">Login</button>
-        </li>
-      </ul>
+<nav class="navbar">
+  <div class="navbar-nav left">
+    <div class="nav-item">
+      <button class="btn btn-secondary btn-secondary:active" (click)="createIngredient()">Nuovo Ingrediente</button>
     </div>
-  </nav>
-  
-  <div *ngIf="showLogin" class="login-container">
-    <app-login></app-login>
+    <div class="nav-item">
+      <button class="btn btn-secondary btn-secondary:active" (click)="createRecipe()">Nuova Ricetta</button>
+    </div>
+    <div class="nav-item">
+      <button class="btn btn-secondary btn-secondary:active" (click)="createContact()">Nuovo Conoscente</button>
+    </div>
   </div>
-  
-  
+
+  <!-- Spingere il pulsante "Accedi" a destra -->
+  <div class="navbar-nav right">
+    <div class="nav-item">
+      <button class="btn btn-secondary btn-secondary:active" (click)="toggleLogin()">Accedi</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Condizione per mostrare il form di login -->
+<div *ngIf="showLogin" class="login-container">
+  <app-login></app-login>
+</div>
+
+

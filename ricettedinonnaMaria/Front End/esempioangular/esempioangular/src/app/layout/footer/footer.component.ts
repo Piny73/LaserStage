@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
-  title: string = "RICETTE"
+listLievitati() {
+throw new Error('Method not implemented.');
+}
+  title: string = "R i c e t t e"
 }
