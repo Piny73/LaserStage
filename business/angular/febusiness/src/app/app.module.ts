@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { AppRoutingModule } from './app-routing.module';
 import { FeaturesModule } from './features/features.module';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
 import { AuthInterceptor } from './core/auth/auth.interceptor';
 
 @NgModule({
@@ -16,11 +16,11 @@ import { AuthInterceptor } from './core/auth/auth.interceptor';
     BrowserModule,
     LayoutModule,
     FeaturesModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
+    AppRoutingModule
+    ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    provideHttpClient(withFetch()),
+   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

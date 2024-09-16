@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Login } from '../../core/models/login.model';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'; // Importando o ícone de lápis
@@ -11,13 +11,14 @@ import { AuthService } from '../../core/auth/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   //private router: Router = new Router;
   loginForm: FormGroup;
   errorMessage: string = '';
   private encryptionKey: string = 'clarinha';
   icon = faSignInAlt;
+  @Output() onLogin = new EventEmitter<boolean>();
 
   constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) {
         
@@ -32,9 +33,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-  }
-
+  
   onSubmit() {
     if (this.loginForm.valid) {
       //const { username, password } = this.loginForm.value;

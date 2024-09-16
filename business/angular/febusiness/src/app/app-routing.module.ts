@@ -8,7 +8,8 @@ import { RoteGuardService } from './core/rote-guard.service';
 import { BusinessPlanComponent } from './features/business-plan/business-plan/business-plan.component';
 import { AreaComponent } from './features/area/area/area.component';
 import { EmployeeComponent } from './features/employee/employee/employee.component';
-import { Emp2Component } from './features/emp2/emp2.component';
+import { E2ListComponent } from './features/e2/e2-list/e2-list.component';
+
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -16,7 +17,7 @@ const routes: Routes = [
   { path: 'company', component: CompanyComponent, canActivate: [RoteGuardService]},
   { path: 'businessplan', component: BusinessPlanComponent, canActivate: [RoteGuardService]},
   { path: 'area', component: AreaComponent, canActivate: [RoteGuardService]},
-  { path: 'employee', component: Emp2Component, canActivate: [RoteGuardService]},
+  { path: 'employee', component: E2ListComponent, canActivate: [RoteGuardService]},
   // ...
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];  

@@ -1,0 +1,41 @@
+<div class="table-responsive">
+    <ng-container *ngIf="areaData$ | async as areaData">
+      
+      <!-- Exibe uma mensagem de carregamento enquanto a lista está sendo carregada -->
+      <div *ngIf="areaData.loading" class="alert alert-info">
+        Loading Companies Areas
+      </div>
+  
+      <!-- Exibe uma mensagem de erro caso ocorra -->
+      <div *ngIf="areaData.error" class="alert alert-danger">
+        {{ areaData.error }}
+      </div>
+  
+      <!-- Exibe a tabela apenas se houver dados na lista -->
+      <table *ngIf="!areaData.loading && areaData.areaList?.length" class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Select</th>
+            <th scope="col">Description</th>
+            <th scope="col">Responsible</th>
+            <th scope="col">Parent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            app-area-list-row
+            *ngFor="let area of areaData.areaList"
+            [area-data]="area"
+            [area-selected]="selectedArea"
+            (onSelectArea)="selectArea($event)"
+          ></tr>
+        </tbody>
+      </table>
+  
+      <!-- Exibe uma mensagem se não houver Business Plans após o carregamento -->
+      <div *ngIf="!areaData.loading && !areaData.areaList?.length" class="alert alert-warning">
+        There isn't areas for this Company
+      </div>
+    </ng-container>
+  </div>
+  

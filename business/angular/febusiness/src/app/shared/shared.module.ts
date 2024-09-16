@@ -13,6 +13,6 @@ import { CbEmployeeComponent } from './cb-employee/cb-employee.component';
   imports: [
     CommonModule
   ],
-  exports: [CbAreaComponent]
+  exports: [CbAreaComponent, CbEmployeeComponent]
 })
 export class SharedModule { }

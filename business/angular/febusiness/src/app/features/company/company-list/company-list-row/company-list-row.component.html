@@ -1,0 +1,29 @@
+
+  <td>
+    <input
+      type="radio"
+      name="Select"
+      [value]="company.id"
+      [checked]="_selected && companySelected.id === company.id"
+      (change)="openChangeCompanyDialog($event)"
+    />
+  </td>
+  <td>{{company.name}}</td>
+  <td>{{company.socialName}}</td>
+  <td>{{company.responsible}}</td>
+  <td>{{company.address}}</td>
+  <td>{{company.city}}</td>
+  <td>{{company.country}}</td>
+  <td>{{company.phone}}</td>
+  <td>{{company.email}}</td>
+  <td>{{company.foundedin}}</td>
+  <td>{{company.legaltype}}</td>
+  <td>{{company.legalnumber}}</td>
+  <div id="logout-confirmation" class="dialog-overlay" *ngIf="showDialog">
+    <div class="dialog-content text-center">
+      <p class="mb-4">Do you want to change the Main Company?</p>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-danger me-2" (click)="confirmCompanyChange()">Yes</button>
+        <button class="btn btn-secondary" (click)="cancelCompanyChange()">No</button>
+      </div>
+    </div>
