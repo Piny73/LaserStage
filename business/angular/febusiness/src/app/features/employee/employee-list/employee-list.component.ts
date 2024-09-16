@@ -18,7 +18,7 @@ interface EmployeeData {
 export class EmployeeListComponent implements OnInit, OnDestroy, OnChanges {
 
   @Output() onSelectEmployee = new EventEmitter<Employee>();
-  @Input() isUpdated!: boolean;
+  @Input() isUpdated!: number;
 
   title = 'Employee';
   employeeData$!: Observable<EmployeeData>;
@@ -32,7 +32,12 @@ export class EmployeeListComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['isUpdated'].currentValue) {
+    console.log("employee list changes: ", changes['isUpdated']);
+    console.log("selected changes: ", changes['selectedEmployee']);
+    let cur_up = changes['isUpdated'].currentValue != null ? changes['isUpdated'].currentValue : 0;
+    let cur_last = changes['isUpdated'].previousValue != null ? changes['isUpdated'].previousValue : 0;
+
+    if (cur_up > cur_last) {
       this.load();
     }
       // Adicionar lógica para responder a seleção de funcionário
@@ -64,8 +69,6 @@ export class EmployeeListComponent implements OnInit, OnDestroy, OnChanges {
     this.subscription = this.employeeData$.subscribe(data => {
       if (data.employeeList) {
         this.selectedEmployee = this.employeeService.getSelectedEmployee();
-        //console.log("Load EP Selected: ", this.selectedEmployee);
-        //console.log("selected bp table: ", data.employeeList);
         if(data.employeeList.length == 1){
           this.selectEmployee(this.employeeService.getSelectedEmployee());
         }
@@ -76,7 +79,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy, OnChanges {
 
   selectEmployee(ep: Employee) {
     const epCopy = { ...ep };
-    //console.log("selected bp table: ", bpCopy)
+    console.log("selected row employee table: ", epCopy)
     this.onSelectEmployee.emit(epCopy);
   }
 

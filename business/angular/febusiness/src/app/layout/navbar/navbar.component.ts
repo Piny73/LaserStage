@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AuthService } from '../../core/auth/auth.service';
 import { Router } from '@angular/router';
 
@@ -8,11 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+
   isCollapsed: boolean = false;
   showDialog: boolean = false;
+  @Input("logged") logged: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
-
+  
   toggleMenu() {
     this.isCollapsed = !this.isCollapsed;
   }
@@ -26,6 +28,7 @@ export class NavbarComponent {
     this.authService.logout();
     this.showDialog = false;
     this.router.navigate(['']);
+    this.logged = false;
   }
 
 

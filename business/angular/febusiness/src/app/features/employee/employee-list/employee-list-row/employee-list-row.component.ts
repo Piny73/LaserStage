@@ -32,8 +32,7 @@ export class EmployeeListRowComponent {
       this._selected = this.ep.id === this.epSelected.id;
       
       if (this._selected){
-
-        //console.log("selected bp row: ", this._copyBPSelected)
+        //console.log("selected bp row: ", this._copyEPSelected);
         this.onSelectEmployee.emit(this._copyEPSelected);
 
       }
@@ -52,14 +51,14 @@ export class EmployeeListRowComponent {
 
   confirmChange() {
 
-    console.log("Employee Selected: ", this.employeeService.getSelectedEmployee());
-    console.log("New Employee Selected: ", this.ep);
+    //console.log("Employee Selected: ", this.employeeService.getSelectedEmployee());
+    console.log("Employee Selected: ", this.ep);
     if (this.ep && this.employeeService.getSelectedEmployee()) {
       if (this.employeeService.getSelectedEmployee().id !== this.ep.id) {
         this._copyEPSelected = { ...this.ep };
         this._selected = true;
         this.employeeService.setSelectedEmployee(this.ep);
-        console.log('Employee Changed:', this.employeeService.getSelectedEmployee());
+        //console.log('Employee Changed:', this.employeeService.getSelectedEmployee());
         this.onSelectEmployee.emit(this.ep);
       }
     } else {

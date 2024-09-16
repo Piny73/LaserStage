@@ -1,0 +1,43 @@
+<div class="table-responsive">
+  <ng-container *ngIf="businessPlanData$ | async as businessPlanData">
+    
+    <!-- Exibe uma mensagem de carregamento enquanto a lista está sendo carregada -->
+    <div *ngIf="businessPlanData.loading" class="alert alert-info">
+      Carregando Business Plan...
+    </div>
+
+    <!-- Exibe uma mensagem de erro caso ocorra -->
+    <div *ngIf="businessPlanData.error" class="alert alert-danger">
+      {{ businessPlanData.error }}
+    </div>
+
+    <!-- Exibe a tabela apenas se houver dados na lista -->
+    <table *ngIf="!businessPlanData.loading && businessPlanData.businessPlanList?.length" class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Select</th>
+          <th scope="col">Responsible</th>
+          <th scope="col">Start Year</th>
+          <th scope="col">Years Planning</th>
+          <th scope="col">Wacc</th>
+          <th scope="col">Tir</th>
+          <th scope="col">Conclusion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          app-business-plan-list-row
+          *ngFor="let bp of businessPlanData.businessPlanList"
+          [bp-data]="bp"
+          [bp-selected]="selectedBusinessPlan"
+          (onSelectBusinessPlan)="selectBusinessPlan($event)"
+        ></tr>
+      </tbody>
+    </table>
+
+    <!-- Exibe uma mensagem se não houver Business Plans após o carregamento -->
+    <div *ngIf="!businessPlanData.loading && !businessPlanData.businessPlanList?.length" class="alert alert-warning">
+      Nenhum Business Plan encontrado.
+    </div>
+  </ng-container>
+</div>

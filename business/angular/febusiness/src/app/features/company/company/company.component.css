@@ -1,0 +1,33 @@
+/* Border styles for the form container and table */
+.form-container {
+    border: 1px solid #a9a9a9; /* Light gray border */
+    padding: 15px;
+    border-radius: 5px; /* Optional: adds rounded corners */
+    background-color: #ffffff; /* Optional: sets background color */
+  }
+  
+  .table-container {
+    border: 1px solid #a9a9a9; /* Light gray border */
+    border-radius: 5px; /* Optional: adds rounded corners */
+    background-color: #ffffff; /* Optional: sets background color */
+    padding: 15px;
+  }
+  
+  /* Optional: To enhance spacing and look */
+  .table-container .table {
+    margin-bottom: 0; /* Removes default margin at the bottom of the table */
+  }
+  
+  .table th, .table td {
+    text-align: left; /* Optional: aligns text to the left */
+  }
+  
+  /* Se estiver usando Bootstrap, a classe d-flex e align-items-center já fazem o trabalho */
+.d-flex {
+  display: flex;
+  align-items: center; /* Alinha verticalmente no centro */
+}
+
+.ms-2 {
+  margin-left: 0.5rem; /* Ajusta o espaço entre o checkbox e a label */
+}

@@ -1,0 +1,66 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Company Areas</h2>
+  
+    <!-- Form Container -->
+    <div class="form-container">
+      <form [formGroup]="areaForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <!-- Hidden Fields -->
+          <div class="col-md-6">
+            <input type="hidden" formControlName="id">
+          </div>
+        </div>
+  
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" id="description" formControlName="description" class="form-control" placeholder="Description">
+          </div>
+          <!--div class="col-md-3">
+            <label for="responsableid" class="form-label">ResponsibleID</label>
+            <input type="text" id="responsableid" formControlName="responsableid" class="form-control" placeholder="Responsableidg" min="1" step="1">
+          </div-->
+          <div class="col-md-6">
+            <label for="responsible" class="form-label">Responsible</label>
+            <app-cb-employee 
+              [selectedEmployee]="currentEmployee" 
+              (selectedItemChange)="onEmployeeSelected($event)">
+            </app-cb-employee>
+          </div>
+          <!--div class="col-md-3">
+            <label for="parentid" class="form-label">Parent</label>
+            <input type="text" id="parentid" formControlName="parentid" class="form-control" placeholder="Parentid">
+          </div-->
+          <div class="col-md-6">
+            <label for="area" class="form-label">Área</label>
+            <app-cb-area 
+              [selectedArea]="currentArea" 
+              (selectedItemChange)="onAreaSelected($event)">
+            </app-cb-area>
+          </div>
+        </div>
+  
+        
+        <!-- Submit Button -->
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary me-2" [disabled]="!areaForm.valid">Save</button>
+            <button type="button" class="btn btn-secondary me-2" (click)="resetForm(areaForm)">Reset</button>
+            <button type="button" class="btn btn-secondary" (click)="newObject(areaForm)">New</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  
+    <!-- Component Table List -->
+    <div class="mt-5">
+      <div class="table-container">
+        <app-area-list
+          (onSelectArea)="selectArea($event)"
+          [isUpdated] = "isUpdated"
+          >
+        </app-area-list>
+      </div>
+    </div>
+  </div>
+  

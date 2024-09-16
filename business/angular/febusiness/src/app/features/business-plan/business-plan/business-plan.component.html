@@ -1,0 +1,82 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Business Plan</h2>
+  
+    <!-- Form Container -->
+    <div class="form-container">
+      <form [formGroup]="businessPlanForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <!-- Hidden Fields -->
+          <div class="col-md-6">
+            <input type="hidden" formControlName="id">
+          </div>
+        </div>
+  
+        <!-- Responsible -->
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <label for="responsible" class="form-label">Responsible</label>
+            <input type="text" id="responsible" formControlName="responsible" class="form-control" placeholder="Responsible">
+          </div>
+        </div>
+  
+        <!-- Start Year YearsPlanning -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="startYear" class="form-label">Start Year</label>
+            <input type="text" id="startYear" formControlName="startYear" class="form-control" placeholder="Start Year" mask="00/00/0000">
+          </div>
+          <div class="col-md-6">
+            <label for="yearsPlanning" class="form-label">Years Planning</label>
+            <input type="number" id="yearsPlanning" formControlName="yearsPlanning" class="form-control" placeholder="Years Planning" min="1" step="1">
+          </div>
+        </div>
+  
+        <!-- Wacc and Tir -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="wacc" class="form-label">Wacc</label>
+            <input type="text" id="wacc" formControlName="wacc" class="form-control" placeholder="Wacc">
+          </div>
+          <div class="col-md-6">
+            <label for="tir" class="form-label">Tir</label>
+            <input type="text" id="tir" formControlName="tir" class="form-control" placeholder="Tir">
+          </div>
+        </div>
+  
+        <!-- Conclusion and InWork -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="conclusion" class="form-label">Conclusion</label>
+                <input type="text" id="conclusion" formControlName="conclusion" class="form-control" placeholder="Business Plan Result">
+              </div>
+              <div class="d-flex align-items-center col-md-6">
+                <div>
+                  <input type="checkbox" id="inWork" formControlName="inWork" class="form-check-input">
+                  <label for="inWork" class="form-check-label ms-2">InWork?</label>
+                </div>
+              </div>
+        </div> 
+  
+        <!-- Submit Button -->
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary me-2" [disabled]="!businessPlanForm.valid">Save</button>
+            <button type="button" class="btn btn-secondary me-2" (click)="resetForm(businessPlanForm)">Reset</button>
+            <button type="button" class="btn btn-secondary" (click)="newObject(businessPlanForm)">New</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  
+    <!-- Component Table List -->
+    <div class="mt-5">
+      <div class="table-container">
+        <app-business-plan-list
+          (onSelectBusinessPlan)="selectBusinessPlan($event)"
+          [isUpdated] = "isUpdated"
+          >
+        </app-business-plan-list>
+      </div>
+    </div>
+  </div>
+  

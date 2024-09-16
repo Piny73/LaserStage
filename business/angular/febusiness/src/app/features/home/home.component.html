@@ -1,125 +1,31 @@
 <div class="container mt-5">
-    <!-- Título da Página>
+  <!-- Verificação se todos os dados foram carregados -->
+  <div *ngIf="!isLoading; else loadingTemplate">
+    <!-- Exibe os dados das empresas após todos os dados serem carregados -->
     <div class="row">
-      <div class="col text-center">
-        <h2>Company Managed</h2>
-      </div>
-    </div-->
-  
-    <!-- Resumo de Companies -->
-    <div class="row mt-4" *ngIf="companyData$ | async as companyData">
-      <div class="col-md-6">
+      <div class="col-md-6 mb-4">
         <div class="card">
-          <div class="card-header">
-            Companies
-          </div>
+          <div class="card-header">Empresas</div>
           <div class="card-body">
-            <div *ngIf="companyData.loading">
-              <div class="spinner-border text-primary" role="status">
-                <span class="sr-only">Carregando...</span>
-              </div>
-            </div>
-            <div *ngIf="!companyData.loading && companyData.companyList">
-              <p>Total of Companies: {{ companyData.companyList.length }}</p>
-              <ul class="list-group">
-                <li *ngFor="let company of companyData.companyList" class="list-group-item">
-                  {{ company.name }}
-                </li>
-              </ul>
-            </div>
-            <div *ngIf="companyData.error" class="alert alert-danger">
-              {{ companyData.error }}
-            </div>
+            <p>Total de Empresas: {{ companyData.data.length }}</p> <!-- Substitua com o acesso direto -->
+            <ul class="list-group">
+              <li *ngFor="let company of companyData.data" class="list-group-item">
+                {{ company.name }}
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-  
-    <!-- Resumo de Users >
-    <div class="row mt-4" *ngIf="userData$ | async as userData">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            Usuários
-          </div>
-          <div class="card-body">
-            <div *ngIf="userData.loading">
-              <div class="spinner-border text-primary" role="status">
-                <span class="sr-only">Carregando...</span>
-              </div>
-            </div>
-            <div *ngIf="!userData.loading && userData.userList">
-              <p>Total de Usuários: {{ userData.userList.length }}</p>
-              <ul class="list-group">
-                <li *ngFor="let user of userData.userList" class="list-group-item">
-                  {{ user.email }}
-                </li>
-              </ul>
-            </div>
-            <div *ngIf="userData.error" class="alert alert-danger">
-              {{ userData.error }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div-->
-  
-    <!-- Resumo de Áreas >
-    <div class="row mt-4" *ngIf="areaData$ | async as areaData">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            Áreas
-          </div>
-          <div class="card-body">
-            <div *ngIf="areaData.loading">
-              <div class="spinner-border text-primary" role="status">
-                <span class="sr-only">Carregando...</span>
-              </div>
-            </div>
-            <div *ngIf="!areaData.loading && areaData.areaList">
-              <p>Total de Áreas: {{ areaData.areaList.length }}</p>
-              <ul class="list-group">
-                <li *ngFor="let area of areaData.areaList" class="list-group-item">
-                  {{ area.description }}
-                </li>
-              </ul>
-            </div>
-            <div *ngIf="areaData.error" class="alert alert-danger">
-              {{ areaData.error }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div-->
-  
-    <!-- Resumo de Funcionários >
-    <div class="row mt-4" *ngIf="employeeData$ | async as employeeData">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">
-            Funcionários
-          </div>
-          <div class="card-body">
-            <div *ngIf="employeeData.loading">
-              <div class="spinner-border text-primary" role="status">
-                <span class="sr-only">Carregando...</span>
-              </div>
-            </div>
-            <div *ngIf="!employeeData.loading && employeeData.employeeList">
-              <p>Total de Funcionários: {{ employeeData.employeeList.length }}</p>
-              <ul class="list-group">
-                <li *ngFor="let employee of employeeData.employeeList" class="list-group-item">
-                  {{ employee.name }}
-                </li>
-              </ul>
-            </div>
-            <div *ngIf="employeeData.error" class="alert alert-danger">
-              {{ employeeData.error }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div-->
   </div>
-  
+
+  <!-- Template de Carregamento -->
+  <ng-template #loadingTemplate>
+    <div class="text-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Carregando...</span>
+      </div>
+      <p>Carregando dados necessários para iniciar a aplicação...</p>
+    </div>
+  </ng-template>
+</div>

@@ -1,1 +1,11 @@
-<p>cb-employee works!</p>
+<div class="w-100">
+    <select class="form-control" id="responsible" (change)="onSelected($event)">
+      <option [value]="-1" [selected]="selectedItem === -1">-- Select an Employee --</option>
+      <option *ngFor="let ep of employeeList" 
+              [value]="ep.id" 
+              [selected]="selectedItem == ep.id">
+        {{ ep.name }}
+      </option>
+    </select>
+  </div>
+  
