@@ -17,7 +17,8 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
   ]
 })
 export class LayoutModule { }

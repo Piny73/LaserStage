@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  title :string = 'Le ricette di nonna Maria';
+  title :string = '';
 
   openChangeDialog(risp: string) {
     console.log("ho ricevuto il msg:", risp);
