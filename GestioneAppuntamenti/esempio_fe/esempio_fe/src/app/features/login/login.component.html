@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Errore Pagina</title>
+    <style>
+        .error {
+            color: red;
+            font-weight: bold;
+            border: 1px solid red;
+            padding: 10px;
+            margin: 20px 0;
+            background-color: #f7d1d1;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <!-- Contenuto principale della pagina -->
+
+    <div v-if="errorMessage" class="error">
+        {{ errorMessage }}
+    </div>
+
+    <!-- Altri contenuti -->
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            errorMessage: '' // qui puoi impostare l'errore, ad esempio 'Si è verificato un errore.'
+        },
+        mounted() {
+            // Simulazione di un errore per dimostrazione
+            this.errorMessage = 'Si è verificato un errore durante il caricamento.';
+        }
+    });
+</script>
+
+</body>
+</html>
