@@ -81,9 +81,8 @@ export class E2ListComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   selectEmployee(ep: Employee) {
-    const epCopy = { ...ep };
     this.selectedEmployee = { ...ep};
-    console.log("selected row employee table: ", epCopy)
+    console.log("selected row employee table: ", this.selectedEmployee)
     //this.onSelectEmployee.emit(epCopy);
     
   }
@@ -99,6 +98,7 @@ export class E2ListComponent implements OnInit, OnDestroy, OnChanges {
 	}
 
   reload(load : boolean){
+    this.modalService.dismissAll();
     console.log("reload.0");
     if(load){
       console.log("Reload.1");

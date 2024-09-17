@@ -20,7 +20,6 @@ export class EmployeeListRowComponent {
   constructor(private employeeService: EmployeeService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    // Verifica se os dados do BusinessPlan foram alterados e se estão disponíveis
     if (changes['ep'] && this.ep) {
       this.initializeSelection();
     }
@@ -29,13 +28,7 @@ export class EmployeeListRowComponent {
   initializeSelection() {
     if (this.epSelected) {
       this._copyEPSelected = { ...this.epSelected };
-      this._selected = this.ep.id === this.epSelected.id;
-      
-      if (this._selected){
-        //console.log("selected bp row: ", this._copyEPSelected);
-        this.onSelectEmployee.emit(this._copyEPSelected);
-
-      }
+      this._selected = this.ep.id === this.epSelected.id;  
     }
   }
 
@@ -45,42 +38,29 @@ export class EmployeeListRowComponent {
       console.warn('Attempted to open dialog before BP data is available');
       return;
     }
-    console.log('Selected:', this.ep);
+    console.log('Employee Selected Row:', this.ep);
     this.showDialog = true;
   }
 
-  confirmChange() {
-
-    //console.log("Employee Selected: ", this.employeeService.getSelectedEmployee());
-    console.log("Employee Selected: ", this.ep);
-    if (this.ep && this.employeeService.getSelectedEmployee()) {
-      if (this.employeeService.getSelectedEmployee().id !== this.ep.id) {
-        this._copyEPSelected = { ...this.ep };
-        this._selected = true;
-        this.employeeService.setSelectedEmployee(this.ep);
-        //console.log('Employee Changed:', this.employeeService.getSelectedEmployee());
-        this.onSelectEmployee.emit(this.ep);
-      }
-    } else {
-      console.warn('Employee is not defined.');
-    }
-  
+  confirmChange(event: Event) {
+    event.preventDefault();
+    //console.log("Employee Selected: ", this.ep);
     this.showDialog = false; // Fechar o diálogo após a operação
+
+    if (this.ep) {
+        this._selected = true;
+        this.onSelectEmployee.emit(this.ep);
+    } else {
+      console.warn('Area is not defined.');
+    }
+
+    this.showDialog = false;
   }
-  
-  
+   
 
   cancelChange() {
-    // Fechar o diálogo
     this.showDialog = false;
-    if (this.employeeService.getSelectedEmployee() && this.ep) {
-      this._selected = this.employeeService.getSelectedEmployee().id == this.ep.id;
-    } else {
-      console.warn('Employee is not defined.');
-      this._selected = false;
-    }
   }
-
 
 }
 

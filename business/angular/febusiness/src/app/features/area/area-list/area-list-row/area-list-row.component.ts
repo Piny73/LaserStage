@@ -19,8 +19,8 @@ export class AreaListRowComponent implements OnInit{
   showDialog: boolean = false;
 
   constructor(private areaService: AreaService, private employeeService : EmployeeService) {
-    
   }
+
   ngOnInit(): void {
     if(this.area && this.area.responsibleid){
       this.area.responsible = this.employeeService.findById(this.area.responsibleid) as Employee;

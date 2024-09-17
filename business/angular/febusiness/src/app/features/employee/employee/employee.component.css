@@ -1,55 +1,47 @@
-/* Border styles for the form container and table */
+/* Styling for the form container */
 .form-container {
-    border: 1px solid #a9a9a9; /* Light gray border */
-    padding: 15px;
-    border-radius: 5px; /* Optional: adds rounded corners */
-    background-color: #ffffff; /* Optional: sets background color */
-  }
-  
-  .table-container {
-    border: 1px solid #a9a9a9; /* Light gray border */
-    border-radius: 5px; /* Optional: adds rounded corners */
-    background-color: #ffffff; /* Optional: sets background color */
-    padding: 15px;
-  }
-  
-  /* Optional: To enhance spacing and look */
-  .table-container .table {
-    margin-bottom: 0; /* Removes default margin at the bottom of the table */
-  }
-  
-  .table th, .table td {
-    text-align: left; /* Optional: aligns text to the left */
-  }
-  
-  /* Se estiver usando Bootstrap, a classe d-flex e align-items-center já fazem o trabalho */
-.d-flex {
-  display: flex;
-  align-items: center; /* Alinha verticalmente no centro */
+  border: 2px solid #f01717 !important;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #9318eb;
 }
 
-.ms-2 {
-  margin-left: 0.5rem; /* Ajusta o espaço entre o checkbox e a label */
+/* Margin adjustments */
+.mb-3 {
+  margin-bottom: 1rem;
 }
+
+/* Button spacing */
+.btn + .btn {
+  margin-left: 10px;
+}
+
+/* Disable button style */
+button[disabled] {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+/* Dialog overlay */
 .dialog-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro com opacidade */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Garante que esteja acima de outros elementos */
 }
 
 .dialog-content {
   background-color: #fff;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 100%;
-  text-align: center;
+  border-radius: 5px;
+}
+
+.text-danger {
+  color: red;
+  font-size: 0.875rem;
 }
