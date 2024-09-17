@@ -1,45 +1,40 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserCompanyService } from '../../../core/services/user-company.service';
 import { Employee } from '../../../core/models/employee.model';
 import { EmployeeService } from '../../../core/services/employee.service';
-import { Area } from '../../../core/models/area.model';
-import { AreaService } from '../../../core/services/area.service';
+import { UtilsService } from '../../../core/utils.service';
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
-  styleUrl: './employee.component.css'
+  styleUrls: ['./employee.component.css'] // Corrigido para 'styleUrls'
 })
 export class EmployeeComponent implements OnInit {
 
   employeeForm!: FormGroup;
   private employeeCopy!: Employee;
-  employee: Employee = new Employee();
   currentArea!: number | null;
-  currentEmployee!: number | null;
-  isEditArea: number = 0;
-  isEditManager: number= 0;   
-  isUpdated: number = 0;
+  currentManager!: number | null;
   showSaveDialog = false;
-  showDeleteDialog = false; 
+  showDeleteDialog = false;
 
-  @Output("changeArea") cb_employee_change = new EventEmitter<number>();
-  
+  @Input("employee") employee!: Employee;
+  @Output("reload") reload = new EventEmitter<boolean>(); 
 
   constructor(
     private fb: FormBuilder, 
     private employeeService: EmployeeService, 
     private userCompanyService: UserCompanyService,
-    private areaService : AreaService
+    private utils : UtilsService
   ) {}
 
   ngOnInit(): void {
     this.employeeForm = this.fb.group({
       id: [null],
-      companyid:[null],
-      managerid:[null],
-      areaid:[null],
+      companyid: [null],
+      managerid: [null],
+      areaid: [null],
       name: ['', Validators.required],
       employeeRole: ['', Validators.required],
       area: [''],
@@ -50,7 +45,19 @@ export class EmployeeComponent implements OnInit {
       manager: ['']
     });
 
-    this.employeeService.setSelectedEmployee(null);
+    this.employeeService.setSelectedEmployee(this.employee);
+
+    if(this.employee){
+      this.currentArea = this.employee.areaid;
+      this.currentManager = this.employee.managerid;
+      this.employee.startedAt = this.employee.startedAt != null ? this.utils.formatDate(this.employee.startedAt, true) : null;
+      this.employee.endedAt = this.employee.endedAt != null ? this.utils.formatDate(this.employee.endedAt, true) : null;
+      this.employeeCopy = { ...this.employee };
+
+      this.employeeForm.patchValue({
+        ...this.employee
+      });
+    }
   }
 
   onSubmit(): void {
@@ -59,11 +66,12 @@ export class EmployeeComponent implements OnInit {
       this.openSaveConfirmation();
     } else {
       console.log('Form is invalid');
+      this.employeeForm.markAllAsTouched(); // Marca todos os campos como "tocados" para exibir as mensagens de erro
     }
   }
-  
 
   save() {
+    console.log("This.employee: ", this.employee)
     const _ep = { ...this.employee };
 
     _ep.area = null;
@@ -72,13 +80,8 @@ export class EmployeeComponent implements OnInit {
     _ep.user = null;
 
     // Converte as datas para o formato do backend (dd-MM-yyyy)
-    if (_ep.startedAt) {
-      _ep.startedAt = this.formatDate(this.employee.startedAt, false);
-    }
-
-    if (_ep.endedAt || _ep.endedAt ==="")  {
-      _ep.endedAt = this.formatDate(this.employee.endedAt, false);
-    }
+    _ep.startedAt  = this.employee.startedAt != null ? this.utils.formatDate(this.employeeCopy.startedAt, false) : null;
+    _ep.endedAt = this.employee.endedAt != null ? this.utils.formatDate(this.employeeCopy.endedAt, false) : null;
 
     if(_ep.areaid == 0){
       _ep.areaid = null;
@@ -94,10 +97,8 @@ export class EmployeeComponent implements OnInit {
         this.employeeService.update(_ep).subscribe({
           next: () => {
             console.log('Update Employee Ok');
-            console.log("Employee salvo, set selected: ", _ep);
             this.employeeService.setSelectedEmployee(_ep);
-            this.isUpdated = this.isUpdated+1;
-            console.log("isUpdate", this.isUpdated);
+            this.reload.emit(true);
           },
           error: (error) => {
             console.error('Error updating Employee', error);
@@ -116,39 +117,29 @@ export class EmployeeComponent implements OnInit {
       this.employeeService.save(_ep).subscribe({
         next: () => {
           console.log('Create Employee Ok');
+          this.employeeService.setSelectedEmployee(_ep);
+          this.reload.emit(true);
         },
         error: (error: any) => {
           console.error('Error creating Employee', error);
           alert('Erro ao criar Employee. Verifique o console para mais detalhes.');
         }
       });
-
-      //this.currentArea = null;
-      //this.currentEmployee = null;
-      //this.isEditArea = this.isEditArea + 1;
-      //this.isEditManager = this.isEditManager + 1 ;
-      //this.employeeService.setSelectedEmployee(null);
-
     }   
   }
 
   deleteObject() {
     const _ep = { ...this.employee };
   
-    console.log("Delete request data", _ep);
     if (_ep.id && _ep.id !== 0) {
-      console.log("Deleting Employee with ID:", _ep.id);
-  
       this.employeeService.delete(_ep).subscribe({
         next: () => {
-          console.log('Delete Employee successful');
           this.employee = new Employee();
           this.employeeCopy = new Employee();
-          this.employeeForm.patchValue(this.employee);
           this.currentArea = null;
-          this.currentEmployee = null;
+          this.currentManager = null;
           this.employeeService.setSelectedEmployee(null);
-          this.isUpdated = this.isUpdated + 1;
+          this.reload.emit(true);
         },
         error: (error) => {
           console.error('Error deleting Employee', error);
@@ -162,116 +153,31 @@ export class EmployeeComponent implements OnInit {
   }
   
   resetForm(form: FormGroup): void {
-    this.employee = this.employeeCopy;
-    this.employee.startedAt = this.employee.startedAt != null ? this.formatDate(this.employeeCopy.startedAt, true) : null;
-    this.employee.endedAt = this.employee.endedAt != null ? this.formatDate(this.employeeCopy.endedAt, true) : null;
+    this.employee = { ...this.employeeCopy };
+    this.employeeForm.reset(this.employee);
+  }
 
-    //this.currentArea = this.employee.areaid;
-    //this.currentEmployee = this.employee.managerid;
-    this.isEditArea = this.isEditArea + 1;
-    this.isEditManager = this.isEditManager + 1 ;
+  newObject(form: FormGroup): void {
+    this.employee = new Employee();
+    this.currentArea = null;
+    this.currentManager = null;
+    form.patchValue(this.employee);
+  }
 
-
-    console.log("this.employee:", this.employee);
-
+  onAreaSelected(_idarea: number): void {
+    this.currentArea = _idarea;
+    this.employee.areaid = _idarea;
     this.employeeForm.patchValue({
       ...this.employee
     });
   }
 
-  newObject(form: FormGroup): void {
-    this.employee = new Employee();
-    //this.currentArea = null;
-    //this.currentEmployee = null;
-    this.isEditArea = this.isEditArea + 1;
-    this.isEditManager = this.isEditManager + 1 ;
-    form.patchValue(this.employee);
-  }
-
-  selectEmployee(_employee: Employee): void {
-    
-    this.employeeCopy = { ..._employee };
-    this.employee = {...this.employeeCopy};
-
-    //this.currentArea = _employee.areaid;
-    //this.currentEmployee = _employee.managerid;
-
-    _employee.startedAt = _employee.startedAt != null ? this.formatDate(_employee.startedAt, true): null;
-    _employee.endedAt = _employee.endedAt != null ? this.formatDate(_employee.endedAt, true): null;
-
-    this.employeeForm.patchValue({
-      ..._employee
-    });
-  }
-
-  onAreaSelected(_idarea: number): void {
-    //console.log('Área selecionada: ', _idarea);
-    this.currentArea = _idarea;
-    this.employee.areaid = _idarea;
-    this.employee.area = this.areaService.findById(_idarea) ? this.areaService.findById(_idarea) as Area : new Area();
-    this.isEditArea = this.isEditArea + 1;
-      this.employeeForm.patchValue({
-      startedAt: this.employee.startedAt != null ? this.formatDate(this.employee.startedAt, true): null, 
-      endedAt: this.employee.endedAt != null ? this.formatDate(this.employee.endedAt, true) : null,
-      area: this.currentArea,
-      areaid: _idarea
-    });
-  }
-
   onEmployeeSelected(_idemployee: number): void {
-    console.log('Employee selected: ', _idemployee);
-    this.currentEmployee = _idemployee != 0 ? _idemployee : null;
+    this.currentManager = _idemployee != 0 ? _idemployee : null;
     this.employee.managerid = _idemployee != 0 ? _idemployee : null;
-    if(this.employee.managerid){
-      this.employee.manager = this.employeeService.findById(_idemployee) ? this.employeeService.findById(_idemployee) as Employee : new Employee();
-    }
-    this.isEditManager = this.isEditManager + 1 ;
-    console.log("this.employee: ", this.employee);
     this.employeeForm.patchValue({
-      startedAt: this.employee.startedAt != null ? this.formatDate(this.employee.startedAt, true): null, 
-      endedAt: this.employee.endedAt != null ? this.formatDate(this.employee.endedAt, true) : null,
-      employee: this.currentEmployee,
-      managerid: _idemployee
+      ...this.employee
     });
-  }
-
-  // Método atualizado para lidar com formatação de data (com / ou -)
-  formatDate(_date: string | null, toFrontendFormat: boolean): string | null {
-   
-    if (!_date || _date.trim() === '') {
-      console.error("data null:", _date);
-      return null;  // Retorna null se a data for nula ou vazia
-    }
-
-    let day: string, month: string, year: string;
-    
-    // Detecta o separador de datas (/ ou -)
-    const separator = _date.includes('/') ? '/' : '-';
-    const parts = _date.split(separator);
-    
-    // Verifica se a data tem o formato correto e converte
-    if (toFrontendFormat && parts.length === 3) {
-      // Supondo que a data vinda do backend seja dd-MM-yyyy ou dd/MM/yyyy
-      [day, month, year] = parts;
-      if ((day && month && year) && day.length < 3) {
-        return `${year}-${month}-${day}`;
-      } else {
-        console.warn("formato nao reconhecido:", _date);
-        return _date;
-      }
-    } else if (!toFrontendFormat && parts.length === 3) {
-      // Supondo que a data vinda do frontend seja yyyy-MM-dd
-      [year, month, day] = parts;
-      if ((day && month && year) && year.length > 2) {
-        return `${day}/${month}/${year}`;
-      } else {
-        console.warn("formato nao reconhecido:", _date);
-        return _date;
-      }
-    } else {
-      console.error("Formato de data inválido:", _date);
-      return null;
-    }
   }
 
   openSaveConfirmation() {
@@ -293,11 +199,16 @@ export class EmployeeComponent implements OnInit {
 
   confirmDelete() {
     this.showDeleteDialog = false;
-    this.deleteObject(); 
+    this.deleteObject();
+    this.currentArea = null;
+    this.currentManager = null;
+    this.employee = new Employee();
+    this.employeeForm.patchValue({
+      ...this.employee
+    });
   }
 
   cancelDelete() {
     this.showDeleteDialog = false;
   }
-
 }

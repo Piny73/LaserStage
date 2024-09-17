@@ -9,6 +9,7 @@ import { BusinessPlanComponent } from './features/business-plan/business-plan/bu
 import { AreaComponent } from './features/area/area/area.component';
 import { EmployeeComponent } from './features/employee/employee/employee.component';
 import { E2ListComponent } from './features/e2/e2-list/e2-list.component';
+import { EmployeeListComponent } from './features/employee/employee-list/employee-list.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'company', component: CompanyComponent, canActivate: [RoteGuardService]},
   { path: 'businessplan', component: BusinessPlanComponent, canActivate: [RoteGuardService]},
   { path: 'area', component: AreaComponent, canActivate: [RoteGuardService]},
-  { path: 'employee', component: E2ListComponent, canActivate: [RoteGuardService]},
+  { path: 'employee', component: EmployeeListComponent, canActivate: [RoteGuardService]},
   // ...
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];  

@@ -1,46 +1,69 @@
-<div class="table-responsive">
-    <ng-container *ngIf="employeeData$ | async as employeeData">
-      
-      <!-- Exibe uma mensagem de carregamento enquanto a lista está sendo carregada -->
-      <div *ngIf="employeeData.loading" class="alert alert-info">
-        Carregando employee...
-      </div>
-  
-      <!-- Exibe uma mensagem de erro caso ocorra -->
-      <div *ngIf="employeeData.error" class="alert alert-danger">
-        {{ employeeData.error }}
-      </div>
-  
-      <!-- Exibe a tabela apenas se houver dados na lista -->
-      <table *ngIf="!employeeData.loading && employeeData.employeeList?.length" class="table table-striped table-sm">
-        <thead>
-          <tr>
-            <th scope="col">Select</th>
-            <th scope="col">Name</th>
-            <th scope="col">Role</th>
-            <th scope="col">Area</th>
-            <th scope="col">Salary</th>
-            <th scope="col">StartedAt</th>
-            <th scope="col">EndedAt</th>
-            <th scope="col">User</th>
-            <th scope="col">Manager</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            app-employee-list-row
-            *ngFor="let ep of employeeData.employeeList"
-            [ep-data]="ep"
-            [ep-selected]="selectedEmployee"
-            (onSelectEmployee)="selectEmployee($event)"
-          ></tr>
-        </tbody>
-      </table>
-  
-      <!-- Exibe uma mensagem se não houver Business Plans após o carregamento -->
-      <div *ngIf="!employeeData.loading && !employeeData.employeeList?.length" class="alert alert-warning">
-        Nenhum employee encontrado.
-      </div>
-    </ng-container>
+  <!-- Form Container -->
+  <h2 class="mb-4">Employee</h2>
+  <div class="form-container">
+  <div class="fixed-button">
+    <button type="button" class="btn btn-primary me-2" (click)="openDetail(content)">Detail</button>
+    <button type="button" class="btn btn-success me-2" (click)="openNew(content)">New</button>
   </div>
-  
+  <div class="table-responsive">
+      <ng-container *ngIf="employeeData$ | async as employeeData">
+        
+        <!-- Exibe uma mensagem de carregamento enquanto a lista está sendo carregada -->
+        <div *ngIf="employeeData.loading" class="alert alert-info">
+          Carregando employee...
+        </div>
+    
+        <!-- Exibe uma mensagem de erro caso ocorra -->
+        <div *ngIf="employeeData.error" class="alert alert-danger">
+          {{ employeeData.error }}
+        </div>
+    
+        <!-- Exibe a tabela apenas se houver dados na lista -->
+        <table *ngIf="!employeeData.loading && employeeData.employeeList?.length" class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Select</th>
+              <th scope="col">Name</th>
+              <th scope="col">Role</th>
+              <th scope="col">Area</th>
+              <th scope="col">Salary</th>
+              <th scope="col">StartedAt</th>
+              <th scope="col">EndedAt</th>
+              <!--th scope="col">User</th-->
+              <th scope="col">Manager</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              app-employee-list-row
+              *ngFor="let ep of employeeData.employeeList"
+              [ep-data]="ep"
+              [ep-selected]="selectedEmployee"
+              (onSelectEmployee)="selectEmployee($event)"
+            ></tr>
+          </tbody>
+        </table>
+    
+        <!-- Exibe uma mensagem se não houver Business Plans após o carregamento -->
+        <div *ngIf="!employeeData.loading && !employeeData.employeeList?.length" class="alert alert-warning">
+          Nenhum employee encontrado.
+        </div>
+      </ng-container>
+    </div>
+
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Employee Detail</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+        <div class="modal-body">
+          <app-e2-detail         
+            [employee] = "selectedEmployee"
+            (reload) = "reload($event)">
+          </app-e2-detail>
+        </div>
+      <!--div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+      </div-->
+    </ng-template>
+  </div>

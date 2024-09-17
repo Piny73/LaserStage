@@ -16,15 +16,10 @@ export class E2DetailComponent implements OnInit {
 
   employeeForm!: FormGroup;
   private employeeCopy!: Employee;
-  //employee: Employee = new Employee();
   currentArea!: number | null;
   currentManager!: number | null;
-  isEditArea: number = 0;
-  isEditManager: number= 0;   
-  isUpdated: number = 0;
   showSaveDialog = false;
   showDeleteDialog = false; 
-  ischange : boolean = false;
 
   @Input("employee") employee!: Employee;
   @Output("reload") reload = new EventEmitter<boolean>();
@@ -65,6 +60,7 @@ export class E2DetailComponent implements OnInit {
       this.employee.startedAt = this.employee.startedAt != null ? this.utils.formatDate(this.employee.startedAt, true) : null;
       this.employee.endedAt = this.employee.endedAt != null ? this.utils.formatDate(this.employee.endedAt, true) : null;
     }
+    this.employeeCopy = {... this.employee};
 
     this.employeeForm.patchValue({
       ...this.employee
@@ -74,6 +70,8 @@ export class E2DetailComponent implements OnInit {
   onSubmit(): void {
     if (this.employeeForm.valid) {
       this.employee = this.employeeForm.value;
+      //this.employee.areaid = this.currentArea;
+      //this.employee.managerid = this.currentManager;
       this.openSaveConfirmation();
     } else {
       console.log('Form is invalid');
@@ -82,6 +80,7 @@ export class E2DetailComponent implements OnInit {
   
 
   save() {
+    console.log("This.employee: ", this.employee)
     const _ep = { ...this.employee };
 
     _ep.area = null;
@@ -110,8 +109,9 @@ export class E2DetailComponent implements OnInit {
             console.log('Update Employee Ok');
             console.log("Employee salvo, set selected: ", _ep);
             this.employeeService.setSelectedEmployee(_ep);
-            this.isUpdated = this.isUpdated+1;
-            console.log("isUpdate", this.isUpdated);
+            //this.isUpdated = this.isUpdated+1;
+            //console.log("isUpdate", this.isUpdated);
+            this.reload.emit(true);
           },
           error: (error) => {
             console.error('Error updating Employee', error);
@@ -130,6 +130,8 @@ export class E2DetailComponent implements OnInit {
       this.employeeService.save(_ep).subscribe({
         next: () => {
           console.log('Create Employee Ok');
+          this.employeeService.setSelectedEmployee(_ep);
+          this.reload.emit(true);
         },
         error: (error: any) => {
           console.error('Error creating Employee', error);
@@ -152,11 +154,11 @@ export class E2DetailComponent implements OnInit {
           console.log('Delete Employee successful');
           this.employee = new Employee();
           this.employeeCopy = new Employee();
-          this.employeeForm.patchValue(this.employee);
           this.currentArea = null;
           this.currentManager = null;
           this.employeeService.setSelectedEmployee(null);
-          this.isUpdated = this.isUpdated + 1;
+          //this.isUpdated = this.isUpdated + 1;
+          this.reload.emit(true);
         },
         error: (error) => {
           console.error('Error deleting Employee', error);
@@ -170,17 +172,8 @@ export class E2DetailComponent implements OnInit {
   }
   
   resetForm(form: FormGroup): void {
-    this.employee = this.employeeCopy;
-    this.employee.startedAt = this.employee.startedAt != null ? this.utils.formatDate(this.employeeCopy.startedAt, true) : null;
-    this.employee.endedAt = this.employee.endedAt != null ? this.utils.formatDate(this.employeeCopy.endedAt, true) : null;
-
-    this.currentArea = this.employee.areaid;
-    this.currentManager = this.employee.managerid;
-    //this.isEditArea = this.isEditArea + 1;
-    //this.isEditManager = this.isEditManager + 1 ;
-
+    this.employee = {... this.employeeCopy};
     console.log("this.employee:", this.employee);
-
     this.employeeForm.patchValue({
       ...this.employee
     });
@@ -195,52 +188,24 @@ export class E2DetailComponent implements OnInit {
     form.patchValue(this.employee);
   }
 
-  /*selectEmployee(_employee: Employee): void {
-    
-    this.employeeCopy = { ..._employee };
-    this.employee = {...this.employeeCopy};
-
-    //this.currentArea = _employee.areaid;
-    //this.currentEmployee = _employee.managerid;
-
-    _employee.startedAt = _employee.startedAt != null ? this.formatDate(_employee.startedAt, true): null;
-    _employee.endedAt = _employee.endedAt != null ? this.formatDate(_employee.endedAt, true): null;
-
-    this.employeeForm.patchValue({
-      ..._employee
-    });
-  }*/
-
   onAreaSelected(_idarea: number): void {
     //console.log('Área selecionada: ', _idarea);
     this.currentArea = _idarea;
     this.employee.areaid = _idarea;
-    this.employee.area = this.areaService.findById(_idarea) ? this.areaService.findById(_idarea) as Area : new Area();
-    //this.isEditArea = this.isEditArea + 1;
-      /*this.employeeForm.patchValue({
-      startedAt: this.employee.startedAt != null ? this.formatDate(this.employee.startedAt, true): null, 
-      endedAt: this.employee.endedAt != null ? this.formatDate(this.employee.endedAt, true) : null,
-      area: this.currentArea,
-      areaid: _idarea
-    });*/
+    this.employeeForm.patchValue({
+      ...this.employee
+    });
+
   }
 
   onEmployeeSelected(_idemployee: number): void {
-    console.log('Employee selected: ', _idemployee);
-    
+    //console.log('Employee selected: ', _idemployee);
     this.currentManager = _idemployee != 0 ? _idemployee : null;
-    
     this.employee.managerid = _idemployee != 0 ? _idemployee : null;
-    this.employee.manager = this.employeeService.findById(_idemployee) ? this.employeeService.findById(_idemployee) as Employee : new Employee();
-    
-    //this.isEditManager = this.isEditManager + 1 ;
-    console.log("this.employee: ", this.employee);
-    /*this.employeeForm.patchValue({
-      startedAt: this.employee.startedAt != null ? this.formatDate(this.employee.startedAt, true): null, 
-      endedAt: this.employee.endedAt != null ? this.formatDate(this.employee.endedAt, true) : null,
-      employee: this.currentEmployee,
-      managerid: _idemployee
-    });*/
+    this.employeeForm.patchValue({
+      ...this.employee
+    });
+
   }
 
   openSaveConfirmation() {
@@ -263,7 +228,13 @@ export class E2DetailComponent implements OnInit {
   confirmDelete() {
     this.showDeleteDialog = false;
     this.deleteObject();
+    this.currentArea = null;
+    this.currentManager = null;
     this.employee = new Employee()
+    this.employeeForm.patchValue({
+      ...this.employee
+    });
+
   }
 
   cancelDelete() {
