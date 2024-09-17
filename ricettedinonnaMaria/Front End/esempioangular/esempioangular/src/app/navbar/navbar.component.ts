@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Contact } from '../models/contact.model';  // Assicurati di importare il modello
+import { Contact, Ricetta } from '../models/contact.model';  // Assicurati di importare il modello
 
 
 @Component({
@@ -15,6 +15,8 @@ export class NavbarComponent {
   showForm: boolean = false;  // Variabile per gestire la visibilità del form
   showIngredientForm: boolean = false;
   ingredienti: { nome: string; unita: string }[] = [];
+  showRecipeForm = false;
+  ricette: Ricetta[] = [];  // Definisci ricette come un array di oggetti Ricetta
 
 
   toggleLogin() {
@@ -34,10 +36,16 @@ export class NavbarComponent {
     this.toggleIngredientForm(); // Nasconde il form dopo la creazione dell'ingrediente
   }
 
-  createRecipe() {
-    throw new Error('Method not implemented.');
+  createRecipe(nome: string, difficolta: string, procedimento: string, tempoEsecuzione: String, tempoCottura: String) {
+    const nuovaRicetta = new Ricetta (nome, difficolta, procedimento, tempoEsecuzione, tempoCottura);
+    console.log('Contact created:', nuovaRicetta);
+    this.ricette.push(nuovaRicetta);
+    this.toggleRecipeForm(); // Chiude il form dopo la creazione
   }
 
+  toggleRecipeForm() {
+    this.showRecipeForm = !this.showRecipeForm;
+  }
   // Metodo per mostrare il form
   toggleForm() {
     this.showForm = !this.showForm;  // Alterna tra true e false
