@@ -27,6 +27,7 @@
 .nav-item {
   display: inline-block; /* Allinea gli elementi orizzontalmente */
   margin-right: 10px; /* Spazio tra i pulsanti */
+  position: relative; /* Per evitare che il form si sovrapponga al pulsante */
 }
 
 .nav-item:last-child {
@@ -38,9 +39,12 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 .btn-secondary {
+  margin-top: 10px;
   font-family: 'Pacifico', cursive;
   background-color: #ff6a6a;
   color: black;
@@ -50,6 +54,32 @@
   background-color: #5a6268; /* Colore più scuro per feedback visivo */
   transform: scale(0.98); /* Effetto di riduzione per il clic */
 }
-  
+
+.form-container {
+  margin-top: 200px; /* Aggiunge uno spazio tra il pulsante e il form */
+  padding: 15px;
+  background-color: #d1a797;
+  border: 2px solid rgb(118, 64, 64);
+  border-radius: 8px;
+  position: relative; /* Mantiene il form in posizione relativa rispetto al contenitore */
+  display: block; /* Mantiene visibile il form quando toggleForm è attivo */
+}
+
+.form-group input {
+  width: 100%; /* Assicura che il campo di input occupi tutto lo spazio disponibile */
+  padding: 8px;
+  box-sizing: border-box; /* Include padding e border nel calcolo della larghezza totale */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px; /* Spazio tra l'etichetta e il campo di input */
+}
+
+.form-group {
+  margin-bottom: 15px; /* Spazio tra i campi del form */
+}
+
+
 
   

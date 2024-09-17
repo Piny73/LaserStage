@@ -18,8 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     AppRoutingModule,
     LayoutModule, // Importa LayoutModule che contiene HeaderComponent
     HttpClientModule,
-    FormsModule,
-    LayoutModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
