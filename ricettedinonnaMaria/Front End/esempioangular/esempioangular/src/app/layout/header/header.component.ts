@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class HeaderComponent {
 
   @Input("titolo") title?: string;
+  @Input() hideLogo: boolean = false;
   @Output("ritorno") back = new EventEmitter<string>();
 
   showLogin = false; // Variabile per gestire la visibilità del form di login

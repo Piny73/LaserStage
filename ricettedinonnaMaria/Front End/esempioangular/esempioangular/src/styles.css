@@ -1,1 +1,50 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 /* You can add global styles to this file, and also import other style files */
+/* Contenitore principale del layout */
+.layout-container {
+    padding: 20px; /* Padding intorno al contenuto del layout */
+  }
+  /* Stili per la disposizione degli header */
+.header-wrapper {
+  display: flex; /* Utilizza Flexbox per il layout */
+  flex-direction: row; /* Disporre i header in una riga (colonne affiancate) */
+  justify-content: space-between; /* Spaziatura tra gli header */
+  margin-bottom: 20px; /* Spazio sotto l'header wrapper, per separarlo dal resto della pagina */
+}
+
+/* Stili per i singoli header */
+.header-one  {
+  flex: 1; /* Ogni header occupa una porzione dello spazio disponibile */
+  padding: 5px; /* Ridotto il padding per contenere meglio */
+  box-sizing: border-box; /* Include padding e bordi nella larghezza totale */ 
+}
+
+.header-two{
+  font-style: oblique;
+  font-family: 'Pacifico', cursive;
+  font-size: 25px; /* Regola la dimensione del font */
+  font-weight: 400; /* Pacifico è già piuttosto decorativo, quindi il peso 400 va bene */
+  flex: 8; /* Ogni header occupa una porzione dello spazio disponibile */
+  padding: 5px; /* Ridotto il padding per contenere meglio */
+  box-sizing: border-box; /* Include padding e bordi nella larghezza totale */
+}
+
+/* Opzionale: Aggiungi uno spazio tra i due header */
+.header-one {
+  margin-right: 10px;
+}
+
+.header-two {
+  margin-left: px;
+}
+
+/* Visibilità del logo solo per header-one */
+.header-one .logo {
+  display: block; /* Mostra il logo */
+}
+
+.header-two .logo {
+  display: none; /* Nascondi il logo */
+}
+  

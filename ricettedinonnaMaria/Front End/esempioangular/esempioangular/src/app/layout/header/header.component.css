@@ -1,15 +1,13 @@
 .app-header {
-  margin-top: 20px; /* Spazio sopra la header */
-  margin-bottom: 20px; /* Spazio sotto la header */
+  margin-top: 10px; /* Spazio sopra la header */
+  margin-bottom:10px; /* Spazio sotto la header */
   background-color: #d1a797; /* Salmone */
-  color: white; /* Testo bianco */
+  color: #080000; /* Testo bianco */
   padding: 10px; /* Padding interno */
   text-align: center; /* Allineamento al centro */
   border: 5px solid rgb(118, 64, 64); /* Cornice bianca di 5 pixel */
   border-radius: 10px; /* Angoli arrotondati della cornice */
-  width: 500px; /* Larghezza fissa */
-  margin-left: auto;
-  margin-right: auto; /* Centra l'elemento */
+  
 }
 
   .header-container {
@@ -17,11 +15,16 @@
     flex-direction: column;      /* Dispone gli elementi in colonna */
     align-items: center;         /* Centra gli elementi orizzontalmente */
     justify-content: center;      /* Centra gli elementi verticalmente */
-    height: 400px;               /* Imposta un'altezza per l'header */
+    height: 250px;               /* Imposta un'altezza per l'header */
 }
 
 .logo {
     width: 400px; /* Larghezza del logo */
     height: auto; /* Mantiene le proporzioni del logo */
-    margin-right: 15px; /* Margine a destra per distanziare il titolo */
+    margin-right: 0; /* Margine a destra per distanziare il titolo */
+    margin-left: 0;
 }
+
+
+
+

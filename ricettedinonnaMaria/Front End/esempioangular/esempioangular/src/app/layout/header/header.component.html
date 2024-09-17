@@ -1,12 +1,8 @@
 <!-- header.component.html -->
 <header class="app-header">
   <div class="header-container">
-    <img src="assets/images/LRDNMLogo.png" alt="Logo" class="logo" />
+    <img *ngIf="!hideLogo" img src="assets/images/LRDNMLogo.png" alt="Logo" class="logo" />
     <h1>{{ title }}</h1>
-  </div>
-
-  <div *ngIf="showLogin" class="login-container">
-    <app-login></app-login>
   </div>
 </header>
 

@@ -1,4 +1,19 @@
-<app-navbar></app-navbar>
-<app-header [titolo]="title" (ritorno)="openChangeDialog($event)"></app-header>
-<router-outlet></router-outlet> <!-- Qui viene caricato il componente specifico in base alla rotta -->
-<app-footer></app-footer>
+<!-- Layout principale dell'applicazione -->
+<div class="layout-container">
+  <!-- Intestazione con due header affiancati -->
+  <div class="header-wrapper">
+    <!-- Header con il logo -->
+    <app-header class="header-one" [titolo]="title" (ritorno)="openChangeDialog($event)"></app-header>
+    <!-- Header senza logo -->
+    <app-header class="header-two" [titolo]="titletwo" [hideLogo]="true"></app-header>
+  </div>
+
+  <!-- Barra di navigazione -->
+  <app-navbar></app-navbar>
+
+  <!-- Contenuto principale della tua applicazione -->
+  <router-outlet></router-outlet> <!-- Qui viene caricato il componente specifico in base alla rotta -->
+
+  <!-- Footer -->
+  <app-footer></app-footer>
+</div>
