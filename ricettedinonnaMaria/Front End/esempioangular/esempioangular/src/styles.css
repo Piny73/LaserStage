@@ -1,48 +1,12 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 
 .layout-container {
-    padding: 20px; /* Padding intorno al contenuto del layout */
-  }
-  /* Stili per la disposizione degli header */
-.header-wrapper {
-  display: flex; /* Utilizza Flexbox per il layout */
-  flex-direction: row; /* Disporre i header in una riga (colonne affiancate) */
-  justify-content: space-between; /* Spaziatura tra gli header */
-  margin-bottom: 20px; /* Spazio sotto l'header wrapper, per separarlo dal resto della pagina */
-}
-
-/* Stili per i singoli header */
-.header-one  {
-  flex: 1; /* Ogni header occupa una porzione dello spazio disponibile */
-  padding: 5px; /* Ridotto il padding per contenere meglio */
-  box-sizing: border-box; /* Include padding e bordi nella larghezza totale */ 
-}
-
-.header-two{
-  font-style: oblique;
-  font-family: 'Dancing Script', cursive;
-  font-size: 35px; /* Regola la dimensione del font */
-  font-weight: 400; /* Pacifico è già piuttosto decorativo, quindi il peso 400 va bene */
-  flex: 8; /* Ogni header occupa una porzione dello spazio disponibile */
-  padding: 5px; /* Ridotto il padding per contenere meglio */
-  box-sizing: border-box; /* Include padding e bordi nella larghezza totale */
-}
-
-/* Opzionale: Aggiungi uno spazio tra i due header */
-.header-one {
-  margin-right: 10px;
-}
-
-.header-two {
-  margin-left: px;
-}
-
-/* Visibilità del logo solo per header-one */
-.header-one .logo {
-  display: block; /* Mostra il logo */
-}
-
-.header-two .logo {
-  display: none; /* Nascondi il logo */
+  position: relative;
+  min-height: 100vh; /* Assicura che il contenitore occupi almeno tutta l'altezza della vista */
 }
 
 .image-container {
@@ -52,8 +16,19 @@
 
 .image-container img {
   width: 100%; /* L'immagine si adatta alla larghezza del contenitore */
-  max-width: 1200px; /* Imposta una larghezza massima per l'immagine */
+  max-width: 100%; /* Imposta una larghezza massima per l'immagine */
   height: auto; /* Mantiene le proporzioni dell'immagine */
   display: block; /* Impedisce spazi extra attorno all'immagine */
   margin: 0 auto; /* Centra l'immagine orizzontalmente */
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(231, 179, 179);
+  background-size: cover;
+  z-index: 0; /* L'immagine di sfondo è sotto tutto il contenuto */
 }

@@ -1,8 +1,9 @@
 <!-- header.component.html -->
 <header class="app-header">
   <div class="header-container">
-    <img *ngIf="!hideLogo" img src="assets/images/LRDNMLogo.png" alt="Logo" class="logo" />
-    <h1>{{ title }}</h1>
+    <!-- Mostra l'immagine se hideLogo è false -->
+    <img *ngIf="!hideLogo" src="assets/images/LRDNMLogo.png" alt="Logo" class="header-image" />
+    <h1 class="header-title">{{ title }}</h1>
   </div>
 </header>
 

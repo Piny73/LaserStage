@@ -8,6 +8,7 @@
   border: 5px solid rgb(118, 64, 64);
   padding: 10px;
   height: 60px;
+  border-radius: 10px;
 }
 
 .left-buttons {
@@ -35,7 +36,7 @@
 }
 
 .btn-secondary {
-  font-family: 'Pacifico', cursive;
+  font-family: 'Dancing Script', cursive;
   background-color: #ff6a6a;
   color: black;
   border: 2px solid rgb(118, 64, 64);

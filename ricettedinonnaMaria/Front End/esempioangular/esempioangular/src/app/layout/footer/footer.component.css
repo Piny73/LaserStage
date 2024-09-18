@@ -3,7 +3,7 @@
     background: linear-gradient(to right, #d1a797, #ff6a6a); /* Sfumature color salmone */
     color: white; /* Colore del testo */
     text-align: center; /* Allinea il testo al centro */
-    padding: 80px; /* Spaziatura interna */
+    padding: 40px; /* Spaziatura interna */
     border: 5px solid rgb(118, 64, 64); /* Cornice di 5 pixel */
     border-radius: 10px; /* Angoli arrotondati della cornice */
 }
@@ -39,7 +39,7 @@
   }
   
   .btn-secondary {
-    font-family: 'Pacifico', cursive;
+    font-family: 'Dancing Script', cursive;
     background-color: #ff6a6a;
     color: black;
     border: 2px solid rgb(118, 64, 64);

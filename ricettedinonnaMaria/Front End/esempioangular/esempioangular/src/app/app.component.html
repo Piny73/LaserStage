@@ -1,19 +1,23 @@
 <!-- Layout principale dell'applicazione -->
 <div class="layout-container">
+  <!-- Immagine di sfondo posizionata dietro tutto il contenuto -->
+  
+
   <!-- Intestazione con due header affiancati -->
   <div class="header-wrapper">
-    <!-- Header con il logo -->
     <app-header class="header-one" [titolo]="title" (ritorno)="openChangeDialog($event)"></app-header>
-    <!-- Header senza logo -->
     <app-header class="header-two" [titolo]="titletwo" [hideLogo]="true"></app-header>
   </div>
 
   <!-- Barra di navigazione -->
   <app-navbar></app-navbar>
-  
-  <!-- Contenuto principale della tua applicazione -->
-  <router-outlet></router-outlet> <!-- Qui viene caricato il componente specifico in base alla rotta -->
+
+  <div class="content-container">
+    <!-- Contenuto principale della tua applicazione -->
+    <router-outlet></router-outlet>
+  </div>
 
   <!-- Footer -->
   <app-footer></app-footer>
 </div>
+
