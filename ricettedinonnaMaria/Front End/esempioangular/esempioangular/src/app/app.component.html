@@ -1,23 +1,20 @@
-<!-- Layout principale dell'applicazione -->
 <div class="layout-container">
-  <!-- Immagine di sfondo posizionata dietro tutto il contenuto -->
-  
-
-  <!-- Intestazione con due header affiancati -->
-  <div class="header-wrapper">
-    <app-header class="header-one" [titolo]="title" (ritorno)="openChangeDialog($event)"></app-header>
-    <app-header class="header-two" [titolo]="titletwo" [hideLogo]="true"></app-header>
+  <!-- Intestazione con due header -->
+  <div>
+    <app-header [titolo]="title" (ritorno)="openChangeDialog($event)"></app-header>
+    <app-header class="header-title" [titolo]="titletwo" [hideLogo]="true"></app-header>
   </div>
 
   <!-- Barra di navigazione -->
   <app-navbar></app-navbar>
 
+  <!-- Contenuto principale della tua applicazione -->
   <div class="content-container">
-    <!-- Contenuto principale della tua applicazione -->
     <router-outlet></router-outlet>
   </div>
 
   <!-- Footer -->
   <app-footer></app-footer>
 </div>
+
 

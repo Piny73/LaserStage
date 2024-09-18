@@ -1,34 +1,6 @@
 html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-.layout-container {
-  position: relative;
-  min-height: 100vh; /* Assicura che il contenitore occupi almeno tutta l'altezza della vista */
-}
-
-.image-container {
-  text-align: center; /* Centra l'immagine */
-  margin: 20px 0; /* Spazio sopra e sotto l'immagine */
-}
-
-.image-container img {
-  width: 100%; /* L'immagine si adatta alla larghezza del contenitore */
-  max-width: 100%; /* Imposta una larghezza massima per l'immagine */
-  height: auto; /* Mantiene le proporzioni dell'immagine */
-  display: block; /* Impedisce spazi extra attorno all'immagine */
-  margin: 0 auto; /* Centra l'immagine orizzontalmente */
-}
-
-.background-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgb(231, 179, 179);
-  background-size: cover;
-  z-index: 0; /* L'immagine di sfondo è sotto tutto il contenuto */
-}
+    margin: 0;              /* Rimuove margini di default */
+    padding: 0;             /* Rimuove padding di default */
+    height: 100%;           /* Assicura che l'altezza del body sia al 100% */
+  }
+  

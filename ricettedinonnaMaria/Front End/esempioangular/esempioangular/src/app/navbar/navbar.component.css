@@ -1,3 +1,4 @@
+/* navbar.component.css */
 .navbar {
   position: relative;
   z-index: 1; /* Assicura che la navbar sia sopra l'immagine */
@@ -7,8 +8,9 @@
   background: linear-gradient(to right, #d1a797, #ff6a6a);
   border: 5px solid rgb(118, 64, 64);
   padding: 10px;
-  height: 60px;
+  height: 90px;
   border-radius: 10px;
+  margin: 0;
 }
 
 .left-buttons {
@@ -29,7 +31,7 @@
 }
 
 .btn {
-  padding: 10px 15px;
+  padding: 20px 25px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
