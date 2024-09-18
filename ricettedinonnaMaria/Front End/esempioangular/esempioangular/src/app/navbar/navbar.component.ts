@@ -14,7 +14,7 @@ export class NavbarComponent {
   contacts: Contact[] = []; // Array per contenere i contatti creati
   showForm: boolean = false;  // Variabile per gestire la visibilità del form
   showIngredientForm: boolean = false;
-  ingredienti: { nome: string; unita: string }[] = [];
+  ingredienti: { nome: string; unitaDiMisura: string }[] = [];
   showRecipeForm = false;
   ricette: Ricetta[] = [];  // Definisci ricette come un array di oggetti Ricetta
 
@@ -31,13 +31,13 @@ export class NavbarComponent {
   }
 
   // Creazione del nuovo ingrediente
-  createIngredient(nome: string, unita: string) {
-    this.ingredienti.push({ nome, unita });
+  createIngredient(nome: string, unitaDiMisura: string) {
+    this.ingredienti.push({ nome, unitaDiMisura });
     this.toggleIngredientForm(); // Nasconde il form dopo la creazione dell'ingrediente
   }
 
-  createRecipe(nome: string, difficolta: string, procedimento: string, tempoEsecuzione: String, tempoCottura: String) {
-    const nuovaRicetta = new Ricetta (nome, difficolta, procedimento, tempoEsecuzione, tempoCottura);
+  createRecipe(nome: string, difficolta: string, procedimento: string, tempodiEsecuzione: String, tempodiCottura: String) {
+    const nuovaRicetta = new Ricetta (nome, difficolta, procedimento, tempodiEsecuzione, tempodiCottura);
     console.log('Contact created:', nuovaRicetta);
     this.ricette.push(nuovaRicetta);
     this.toggleRecipeForm(); // Chiude il form dopo la creazione

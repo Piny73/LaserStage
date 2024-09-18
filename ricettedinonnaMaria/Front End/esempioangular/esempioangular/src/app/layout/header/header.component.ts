@@ -10,7 +10,8 @@ export class HeaderComponent {
   @Input("titolo") title?: string;
   @Input() hideLogo: boolean = false;
   @Output("ritorno") back = new EventEmitter<string>();
-
+ // hideRightImage: boolean = false; // Imposta a true se vuoi nascondere l'immagine a destra
+  //hideLeftImage: boolean = false;  // Imposta a true se vuoi nascondere l'immagine a sinistra
   showLogin = false; // Variabile per gestire la visibilità del form di login
 
   onclick() {

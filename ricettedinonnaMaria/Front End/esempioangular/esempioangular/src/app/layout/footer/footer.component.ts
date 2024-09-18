@@ -9,5 +9,5 @@ export class FooterComponent {
 listLievitati() {
 throw new Error('Method not implemented.');
 }
-  title: string = "R i c e t t e"
+  title: string = "Ricette"
 }

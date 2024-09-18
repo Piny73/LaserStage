@@ -1,10 +1,12 @@
+/* footer.component.css */
 .app-footer {
     background: linear-gradient(to right, #d1a797, #ff6a6a); /* Sfumature color salmone */
     color: white; /* Colore del testo */
     text-align: center; /* Allinea il testo al centro */
-    padding: 80px; /* Spaziatura interna */
+    padding: 20px; /* Spaziatura interna */
     border: 5px solid rgb(118, 64, 64); /* Cornice di 5 pixel */
     border-radius: 10px; /* Angoli arrotondati della cornice */
+    margin: 0;
 }
 
 .footer-container {
@@ -23,21 +25,22 @@
 }
 
 .footer-title {
-    font-family: 'Pacifico', cursive;
+    font-style: oblique;
+    font-family: 'Dancing Script', cursive;
     font-size: 60px; /* Regola la dimensione del font */
     font-weight: 400; /* Pacifico è già piuttosto decorativo, quindi il peso 400 va bene */
     color: #333; /* Cambia il colore del testo se necessario */
 }
 
 .btn {
-    padding: 8px 16px; /* Padding del bottone */
+   padding: 20px 25px; /* Padding del bottone */
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
   
   .btn-secondary {
-    font-family: 'Pacifico', cursive;
+    font-family: 'Dancing Script', cursive;
     background-color: #ff6a6a;
     color: black;
     border: 2px solid rgb(118, 64, 64);

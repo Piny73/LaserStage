@@ -1,11 +1,16 @@
+/* navbar.component.css */
 .navbar {
+  position: relative;
+  z-index: 1; /* Assicura che la navbar sia sopra l'immagine */
   display: flex;
   justify-content: space-between; /* Spaziatura tra il gruppo di sinistra e il pulsante di destra */
   align-items: center;
   background: linear-gradient(to right, #d1a797, #ff6a6a);
   border: 5px solid rgb(118, 64, 64);
   padding: 10px;
-  height: 60px;
+  height: 90px;
+  border-radius: 10px;
+  margin: 0;
 }
 
 .left-buttons {
@@ -26,14 +31,14 @@
 }
 
 .btn {
-  padding: 10px 15px;
+  padding: 20px 25px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .btn-secondary {
-  font-family: 'Pacifico', cursive;
+  font-family: 'Dancing Script', cursive;
   background-color: #ff6a6a;
   color: black;
   border: 2px solid rgb(118, 64, 64);
