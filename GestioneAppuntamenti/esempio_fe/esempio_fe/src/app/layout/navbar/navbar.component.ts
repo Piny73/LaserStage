@@ -7,7 +7,7 @@ import { AuthService } from '../../core/services/auth.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavBarComponent {
 
   isCollapsed: boolean = false;
   showDialog: boolean = false;
@@ -38,7 +38,7 @@ export class NavbarComponent {
 
   isLogged(): boolean {
     try {
-      return this.authService.isTokenValid();  
+      return this.authService.isTokenValid();
     } catch (error) {
       return false;
     }

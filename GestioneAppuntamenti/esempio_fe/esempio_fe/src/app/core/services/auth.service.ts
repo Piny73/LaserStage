@@ -1,22 +1,32 @@
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { jwtDecode, JwtPayload } from "jwt-decode";
+import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js'; // Assicurati di avere CryptoJS installato
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ApiService } from '../api.service';
+
+
+import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { Login } from '../models/login.model';
 import { User } from '../models/user.model';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
   private encryptionKey: string = 'emily';
   private readonly endpoint = 'users/login'; // login endpoint
 
-  constructor(private apiService: ApiService) { }
+  constructor(private http: HttpClient, private router: Router) { }
+
+  encrypt(data: string): string {
+    return CryptoJS.AES.encrypt(data, this.encryptionKey).toString();
+  }
+
+  private decrypt(data: string): string {
+    const bytes = CryptoJS.AES.decrypt(data, this.encryptionKey);
+    return bytes.toString(CryptoJS.enc.Utf8);
+  }
 
   login(login: Login): Observable<any> {
     const loginData = login;
@@ -24,7 +34,7 @@ export class AuthService {
       'Content-Type': 'application/json'
     });
 
-    return this.apiService.post(this.endpoint, loginData, headers).pipe(
+    return this.http.post<any>(this.endpoint, loginData, { headers }).pipe(
       map(response => {
         if (response && response.token) {
           this.saveUserInLocalStorage(response);
@@ -33,8 +43,6 @@ export class AuthService {
       })
     );
   }
-
-
 
   getUser(): User | null {
     try {
@@ -47,46 +55,36 @@ export class AuthService {
           if (this.isValidUser(parsedUser)?.id) {
             return this.isValidUser(parsedUser);
           } else {
-            console.log('Objeto parseado não corresponde ao tipo User.');
+            console.log('Parsed object does not match User type.');
             this.logout();
           }
         } catch (e) {
-          console.error('Erro ao parsear os dados do usuário:', e);
+          console.error('Error parsing user data:', e);
           this.logout();
         }
       }
     } catch {
-      console.warn('Erro ao acessar LocalStore:');
+      console.warn('Error accessing LocalStorage.');
     }
 
     return null;
   }
 
   private isValidUser(obj: any): User | null {
-    const _user = new User();
-
     if (obj) {
-      _user.id = obj.id;
-      _user.version = obj.version;
-      _user.email = obj.email;
-      _user.firstname = obj.firstname;
-      _user.lastname = obj.lastname;
-      _user.role = "";
+      return {
+        id: obj.id,
+        version: obj.version,
+        email: obj.email,
+        first_name: obj.firstname,
+        last_name: obj.lastname,
+        role: ''
+      };
     }
-
-    return _user;
+    return null;
   }
 
-  encrypt(data: string): string {
-    return Crypto.AES.encrypt(data, this.encryptionKey).toString();
-  }
-
-  private decrypt(data: string): string {
-    const bytes = Crypto.AES.decrypt(data, this.encryptionKey);
-    return bytes.toString(Crypto.enc.Utf8);
-  }
-
-  saveUserInLocalStorage(user: string) {
+  saveUserInLocalStorage(user: any) {
     const encryptedUser = this.encrypt(JSON.stringify(user));
     localStorage.setItem('user', encryptedUser);
   }
@@ -101,52 +99,37 @@ export class AuthService {
 
         if (decodedToken.exp) {
           const expirationDate = new Date(decodedToken.exp * 1000);
-          console.log("Data de expiração do token:", expirationDate.toLocaleString());
+          console.log("Token expiration date:", expirationDate.toLocaleString());
 
           if (decodedToken.exp > currentTime) {
             return true;
           } else {
-            console.warn('Token JWT expirado.');
+            console.warn('JWT token expired.');
             this.logout();
           }
         }
       } catch (error) {
-        console.error('isToken Valid: - Erro ao decodificar o token JWT:', error);
+        console.error('Error decoding JWT token:', error);
       }
     } else {
-      console.warn('isToken Valid: - Usuário ou token JWT não encontrado.');
+      console.warn('User or JWT token not found.');
     }
     return false;
   }
 
   getToken(): string | null {
-    let encryptedUser: string | null;
-    let decryptedUser: string | null;
+    const encryptedUser = localStorage.getItem('user');
 
-    try {
-      encryptedUser = localStorage.getItem('user');
-      decryptedUser = this.decrypt(encryptedUser!);
-      //console.log("Get Token - dati decript: ", decryptedUser);
-    }
-    catch {
-      console.warn('GetToken: - Erro ao acessar LocalStore:');
-    }
-
-    if (encryptedUser!) {
+    if (encryptedUser) {
       try {
-        let parsedUser = JSON.parse(decryptedUser!);
-        if (parsedUser.token) {
-          return parsedUser.token;
-        } else {
-          console.log('Objeto parseado não corresponde ao tipo User.');
-          return null;
-        }
+        const decryptedUser = this.decrypt(encryptedUser);
+        const parsedUser = JSON.parse(decryptedUser);
+        return parsedUser.token || null;
       } catch (e) {
-        console.error('Erro ao parsear os dados do usuário:', e);
+        console.error('Error parsing user data:', e);
         return null;
       }
     }
-
     return null;
   }
 
@@ -154,9 +137,64 @@ export class AuthService {
     try {
       localStorage.removeItem('user');
     } catch (error) {
-      console.error('JWT Delete:', error);
+      console.error('Error removing user from LocalStorage:', error);
     }
+    this.router.navigate(['/login']);
+  }
+}
+
+  
+
+/*
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  private apiUrl = 'http://localhost:4200'; // URL del tuo backend
+  private token: string | null = null;
+
+  constructor(private http: HttpClient, private router: Router) {
+    this.token = localStorage.getItem('token'); // Recupera il token da localStorage al momento della creazione del servizio
   }
 
+  login(email: string, password: string): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { email, password });
+  }
 
+  handleLogin(email: string, password: string) {
+    this.login(email, password).subscribe(
+      response => {
+        this.token = response.token;
+        localStorage.setItem('token', this.token);
+        this.router.navigate(['/']); // Redirigi l'utente dopo il login
+      },
+      error => {
+        alert('Errore durante il login: ' + error.error);
+      }
+    );
+  }
+
+  logout() {
+    this.token = null;
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
+
+  isLoggedIn(): boolean {
+    return this.token !== null;
+  }
+
+  isTokenValid(): boolean {
+    // Verifica se il token esiste e, se necessario, implementa una logica per verificare la sua validità
+    return this.token !== null; // Puoi estendere questa logica per controlli più complessi
+  }
 }
+
+    */
+
+

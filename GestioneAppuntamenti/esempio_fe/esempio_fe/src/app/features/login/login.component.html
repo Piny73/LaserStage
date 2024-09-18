@@ -1,45 +1,26 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Errore Pagina</title>
-    <style>
-        .error {
-            color: red;
-            font-weight: bold;
-            border: 1px solid red;
-            padding: 10px;
-            margin: 20px 0;
-            background-color: #f7d1d1;
-        }
-    </style>
-</head>
-<body>
+<div class="login-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="usr">User</label>
+            <input id="usr" formControlName="usr" placeholder="User" class="form-control" />
+            <div *ngIf="loginForm.get('usr')?.invalid && loginForm.get('usr')?.touched" class="error-message">
+                Username is required
+            </div>
+        </div>
 
-<div id="app">
-    <!-- Contenuto principale della pagina -->
+        <div class="form-group">
+            <label for="pwd">Password</label>
+            <input type="password" id="pwd" formControlName="pwd" placeholder="Password" class="form-control" />
+            <div *ngIf="loginForm.get('pwd')?.invalid && loginForm.get('pwd')?.touched" class="error-message">
+                Password is required
+            </div>
+        </div>
+        <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary">
+            <fa-icon [icon]="icon"></fa-icon> Login
+        </button>
+    </form>
 
-    <div v-if="errorMessage" class="error">
+    <div *ngIf="errorMessage" class="alert alert-danger">
         {{ errorMessage }}
     </div>
-
-    <!-- Altri contenuti -->
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<script>
-    new Vue({
-        el: '#app',
-        data: {
-            errorMessage: '' // qui puoi impostare l'errore, ad esempio 'Si è verificato un errore.'
-        },
-        mounted() {
-            // Simulazione di un errore per dimostrazione
-            this.errorMessage = 'Si è verificato un errore durante il caricamento.';
-        }
-    });
-</script>
-
-</body>
-</html>

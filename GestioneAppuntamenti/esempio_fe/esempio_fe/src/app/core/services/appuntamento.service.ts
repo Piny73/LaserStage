@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Appuntamento } from '../models/appuntamento.model';
-
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +8,15 @@ import { Appuntamento } from '../models/appuntamento.model';
 export class AppuntamentoService {
   private appuntamenti: Appuntamento[] = [];
 
-  getAppuntamenti(): Appuntamento[] {
-    return this.appuntamenti;
+  getAppuntamenti(): Observable<Appuntamento[]> {
+    return of(this.appuntamenti);
   }
 
-  addCliente(appuntamento: Appuntamento) {
+  addAppuntamento(appuntamento: Appuntamento): Observable<Appuntamento> {
     this.appuntamenti.push(appuntamento);
+    return of(appuntamento);
   }
 
   // Altre funzioni come update, delete
 }
+
