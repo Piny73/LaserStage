@@ -1,9 +1,7 @@
-
-import { Component, EventEmitter, Output } from '@angular/core';
+/*import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
-import { Login } from '../../core/models/login.model';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
@@ -15,33 +13,27 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string = '';
   icon = faSignInAlt;
-  @Output() onLogin = new EventEmitter<boolean>();
+  @Output() close = new EventEmitter<void>(); // Evento per chiudere il form
 
   constructor(
-    private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
-      usr: ['', Validators.required],
-      pwd: ['', Validators.required]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
     });
-
-    if (this.authService.isTokenValid()) {
-      this.router.navigate(['/home']);
-    }
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
-      const login: Login = this.loginForm.value;
+      const login = this.loginForm.value;
       this.authService.login(login).subscribe({
-        next: (response) => {
-          console.log('Login ben riuscito:', response);
+        next: () => {
           this.router.navigate(['/home']);
         },
-        error: (error) => {
-          console.error('Errore nel login:', error);
+        error: () => {
           this.errorMessage = 'Errore di login. Verifica le tue credenziali.';
         }
       });
@@ -49,7 +41,14 @@ export class LoginComponent {
   }
 }
 
-/*import { Component } from '@angular/core';
+
+*/
+
+
+
+
+
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -67,5 +66,4 @@ export class LoginComponent {
     console.log('Password:', this.pwd);
     }
   }
-}
-*/
+

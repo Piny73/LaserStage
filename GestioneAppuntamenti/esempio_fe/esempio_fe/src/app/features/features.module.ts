@@ -12,7 +12,12 @@ import { LoginComponent } from './login/login.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FontAwesomeModule 
+    FontAwesomeModule
+  ],
+  exports: [
+    LoginComponent
+    
   ]
 })
 export class FeaturesModule { }
+

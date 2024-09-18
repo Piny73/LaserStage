@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary" *ngIf="isLogged()">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"></a>
+        <a class="navbar-brand" routerLink="">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,18 +8,17 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" routerLink="">Home</a>
+                    <a class="nav-link active" routerLink="">Home</a>
                 </li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         BaseData
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" routerLink="company">Company</a></li>
-                        <li><a class="dropdown-item" href="#" routerLink="area">Area</a></li>
-                        <li><a class="dropdown-item" href="#" routerLink="employee">Employee</a></li>
+                        <li><a class="dropdown-item" routerLink="company">Company</a></li>
+                        <li><a class="dropdown-item" routerLink="area">Area</a></li>
+                        <li><a class="dropdown-item" routerLink="employee">Employee</a></li>
                         <li><a class="dropdown-item" href="#">Fixed Costs</a></li>
                         <li><a class="dropdown-item" href="#">Variable Costs</a></li>
                         <li><a class="dropdown-item" href="#">Products</a></li>
@@ -84,10 +83,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Bussiness Plan
+                        Business Plan
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" routerLink="businessplan">New BP</a></li>
+                        <li><a class="dropdown-item" routerLink="businessplan">New BP</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -111,29 +110,27 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#" (click)="openLogoutDialog($event)">Logout</a>
                 </li>
-
-
-                <!--li class="nav-item">
-            <a class="nav-link" aria-disabled="true"  routerLink="logout">Logout</a>
-          </li-->
-
-                <!--li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li-->
             </ul>
-            <div id="logout-confirmation" class="dialog-overlay" *ngIf="showDialog">
-                <div class="dialog-content text-center">
-                    <p class="mb-4">Are you sure you want to logout?</p>
-                    <div class="d-flex justify-content-center">
-                        <button class="btn btn-danger me-2" (click)="confirmLogout()">Yes</button>
-                        <button class="btn btn-secondary" (click)="cancelLogout()">No</button>
-                    </div>
-                </div>
-            </div>
-            <!--form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form-->
         </div>
     </div>
 </nav>
+
+<!-- Logout Dialog -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to logout?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="cancelLogout()">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="confirmLogout()">Logout</button>
+            </div>
+        </div>
+    </div>
+</div>

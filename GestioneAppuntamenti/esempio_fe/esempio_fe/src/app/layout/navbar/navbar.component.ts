@@ -5,7 +5,7 @@ import { AuthService } from '../../core/services/auth.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrls: ['./navbar.component.css'] // Corretto styleUrls
 })
 export class NavBarComponent {
 
@@ -30,7 +30,6 @@ export class NavBarComponent {
     this.router.navigate(['']);
     this.logged = false;
   }
-
 
   cancelLogout() {
     this.showDialog = false;

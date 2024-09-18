@@ -1,13 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import * as CryptoJS from 'crypto-js'; // Assicurati di avere CryptoJS installato
+import * as CryptoJS from 'crypto-js';
+import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-
-import { jwtDecode, JwtPayload } from 'jwt-decode';
-import { Login } from '../models/login.model';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -15,9 +12,14 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
   private encryptionKey: string = 'emily';
-  private readonly endpoint = 'users/login'; // login endpoint
+  private readonly endpoint = 'users/login';
 
   constructor(private http: HttpClient, private router: Router) { }
+
+  // Metodo per verificare se localStorage è disponibile
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
+  }
 
   encrypt(data: string): string {
     return CryptoJS.AES.encrypt(data, this.encryptionKey).toString();
@@ -28,7 +30,7 @@ export class AuthService {
     return bytes.toString(CryptoJS.enc.Utf8);
   }
 
-  login(login: Login): Observable<any> {
+  login(login: { email: string; password: string }): Observable<any> {
     const loginData = login;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
@@ -45,28 +47,29 @@ export class AuthService {
   }
 
   getUser(): User | null {
-    try {
-      const encryptedUser = localStorage.getItem('user');
+    if (this.isBrowser()) {
+      try {
+        const encryptedUser = localStorage.getItem('user');
 
-      if (encryptedUser) {
-        const decryptedUser = this.decrypt(encryptedUser);
-        try {
-          const parsedUser = JSON.parse(decryptedUser);
-          if (this.isValidUser(parsedUser)?.id) {
-            return this.isValidUser(parsedUser);
-          } else {
-            console.log('Parsed object does not match User type.');
+        if (encryptedUser) {
+          const decryptedUser = this.decrypt(encryptedUser);
+          try {
+            const parsedUser = JSON.parse(decryptedUser);
+            if (this.isValidUser(parsedUser)?.id) {
+              return this.isValidUser(parsedUser);
+            } else {
+              console.log('Parsed object does not match User type.');
+              this.logout();
+            }
+          } catch (e) {
+            console.error('Error parsing user data:', e);
             this.logout();
           }
-        } catch (e) {
-          console.error('Error parsing user data:', e);
-          this.logout();
         }
+      } catch {
+        console.warn('Error accessing LocalStorage.');
       }
-    } catch {
-      console.warn('Error accessing LocalStorage.');
     }
-
     return null;
   }
 
@@ -85,8 +88,10 @@ export class AuthService {
   }
 
   saveUserInLocalStorage(user: any) {
-    const encryptedUser = this.encrypt(JSON.stringify(user));
-    localStorage.setItem('user', encryptedUser);
+    if (this.isBrowser()) {
+      const encryptedUser = this.encrypt(JSON.stringify(user));
+      localStorage.setItem('user', encryptedUser);
+    }
   }
 
   isTokenValid(): boolean {
@@ -118,30 +123,36 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    const encryptedUser = localStorage.getItem('user');
+    if (this.isBrowser()) {
+      const encryptedUser = localStorage.getItem('user');
 
-    if (encryptedUser) {
-      try {
-        const decryptedUser = this.decrypt(encryptedUser);
-        const parsedUser = JSON.parse(decryptedUser);
-        return parsedUser.token || null;
-      } catch (e) {
-        console.error('Error parsing user data:', e);
-        return null;
+      if (encryptedUser) {
+        try {
+          const decryptedUser = this.decrypt(encryptedUser);
+          const parsedUser = JSON.parse(decryptedUser);
+          return parsedUser.token || null;
+        } catch (e) {
+          console.error('Error parsing user data:', e);
+          return null;
+        }
       }
     }
     return null;
   }
 
   logout() {
-    try {
-      localStorage.removeItem('user');
-    } catch (error) {
-      console.error('Error removing user from LocalStorage:', error);
+    if (this.isBrowser()) {
+      try {
+        localStorage.removeItem('user');
+      } catch (error) {
+        console.error('Error removing user from LocalStorage:', error);
+      }
     }
     this.router.navigate(['/login']);
   }
 }
+
+
 
   
 
