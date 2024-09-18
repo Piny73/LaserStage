@@ -1,3 +1,4 @@
+
 .app-footer {
     background: linear-gradient(to right, #d1a797, #ff6a6a); /* Sfumature color salmone */
     color: white; /* Colore del testo */
@@ -24,7 +25,7 @@
 
 .footer-title {
     font-style: oblique;
-    font-family: 'DancingScript-Regular';
+    font-family: 'Dancing Script', cursive;
     font-size: 60px; /* Regola la dimensione del font */
     font-weight: 400; /* Pacifico è già piuttosto decorativo, quindi il peso 400 va bene */
     color: #333; /* Cambia il colore del testo se necessario */

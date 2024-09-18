@@ -1,4 +1,6 @@
 .navbar {
+  position: relative;
+  z-index: 1; /* Assicura che la navbar sia sopra l'immagine */
   display: flex;
   justify-content: space-between; /* Spaziatura tra il gruppo di sinistra e il pulsante di destra */
   align-items: center;

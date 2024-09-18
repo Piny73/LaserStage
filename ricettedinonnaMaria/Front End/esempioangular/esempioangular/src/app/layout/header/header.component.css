@@ -1,7 +1,7 @@
 .app-header {
   margin-top: 10px; /* Spazio sopra la header */
   margin-bottom:10px; /* Spazio sotto la header */
-  background-color: #d1a797; /* Salmone */
+  background: linear-gradient(to right, #d1a797, #ff6a6a); /* Sfumature color salmone */
   color: #080000; /* Testo bianco */
   padding: 10px; /* Padding interno */
   text-align: center; /* Allineamento al centro */

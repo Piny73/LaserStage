@@ -13,8 +13,8 @@ export class Ricetta {
     public nome: string,
     public difficolta: string,
     public procedimento: string,
-    public tempoEsecuzione: String,
-    public tempoCottura: String
+    public tempodiEsecuzione: String,
+    public tempodiCottura: String
   ) {}
 }
   

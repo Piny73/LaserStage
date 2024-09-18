@@ -33,14 +33,14 @@
 <div class="content">
   <!-- Form di creazione ingrediente -->
   <div *ngIf="showIngredientForm" class="form-container">
-    <form (ngSubmit)="createIngredient(nomeIngredienteInput.value, unitaInput.value)">
+    <form (ngSubmit)="createIngredient(nomeIngredienteInput.value, unitaDiMisuraInput.value)">
       <div class="form-group">
         <label for="nomeIngrediente">Nome Ingrediente</label>
         <input type="text" id="nomeIngrediente" #nomeIngredienteInput required />
       </div>
       <div class="form-group">
         <label for="unita">Unità di Misura</label>
-        <input type="text" id="unita" #unitaInput required />
+        <input type="text" id="unita" #unitaDiMisuraInput required />
       </div>
       <button type="submit" class="btn btn-secondary">Crea Ingrediente</button>
       <button type="button" class="btn btn-secondary" (click)="toggleIngredientForm()">Annulla</button>
@@ -98,14 +98,14 @@
   <!-- Elenco degli ingredienti -->
   <ul>
     <li *ngFor="let ingrediente of ingredienti">
-      {{ ingrediente.nome }} - {{ ingrediente.unita }}
+      {{ ingrediente.nome }} - {{ ingrediente.unitaDiMisura }}
     </li>
   </ul>
 
   <!-- Elenco delle ricette -->
   <ul>
     <li *ngFor="let ricetta of ricette">
-      {{ ricetta.nome }} - Difficoltà: {{ ricetta.difficolta }} - Tempo di Esecuzione: {{ ricetta.tempoEsecuzione }} min - Tempo di Cottura: {{ ricetta.tempoCottura }} min
+      {{ ricetta.nome }} - Difficoltà: {{ ricetta.difficolta }} - Tempo di Esecuzione: {{ ricetta.tempodiEsecuzione }} min - Tempo di Cottura: {{ ricetta.tempodiCottura }} min
     </li>
   </ul>
 
