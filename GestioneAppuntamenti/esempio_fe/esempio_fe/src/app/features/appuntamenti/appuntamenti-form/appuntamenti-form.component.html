@@ -1,14 +1,19 @@
-<h2>Aggiungi Appuntamento</h2>
-<form (ngSubmit)="onSubmit()">
-  <label for="data">Data:</label>
-  <input type="text" id="data" [(ngModel)]="appuntamento.data" name="data" required>
-
-  <label for="clienteNome">Nome Cliente:</label>
-  <input type="text" id="clienteNome" [(ngModel)]="appuntamento.clienteNome" name="clienteNome" required>
-
-  <label for="vetturaModello">Modello Vettura:</label>
-  <input type="text" id="vetturaModello" [(ngModel)]="appuntamento.vetturaModello" name="vetturaModello" required>
-
-  <button type="submit">Aggiungi</button>
+<form (ngSubmit)="onSubmit()" #appuntamentoForm="ngForm">
+  <div>
+    <label for="data">Data</label>
+    <input type="date" [(ngModel)]="appuntamento.data" name="data" required>
+  </div>
+  
+  <div>
+    <label for="clienteNome">Nome Cliente</label>
+    <input type="text" [(ngModel)]="appuntamento.clienteNome" name="clienteNome" required>
+  </div>
+  
+  <div>
+    <label for="vetturaModello">Modello Vettura</label>
+    <input type="text" [(ngModel)]="appuntamento.vetturaModello" name="vetturaModello" required>
+  </div>
+  
+  <button type="submit" [disabled]="!appuntamentoForm.valid">Aggiungi Appuntamento</button>
 </form>
 

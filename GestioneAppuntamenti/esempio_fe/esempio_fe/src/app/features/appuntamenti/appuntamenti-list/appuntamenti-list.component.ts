@@ -16,9 +16,13 @@ export class AppuntamentiListComponent implements OnInit {
     this.loadAppuntamenti();
   }
 
-  loadAppuntamenti() {
-    this.appuntamentoService.getAppuntamenti().subscribe(data => {
-      this.appuntamenti = data;
+  loadAppuntamenti(): void {
+    this.appuntamentoService.getAppuntamenti().subscribe((data: Appuntamento[]) => {
+      this.appuntamenti = data.map(app => ({
+        ...app,
+        data: new Date(app.data)  // Converti il campo data in un oggetto Date
+      }));
     });
   }
+  
 }

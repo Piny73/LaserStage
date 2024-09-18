@@ -1,4 +1,4 @@
 export interface Login {
-    usr: string;
+    mail: string;
     pwd: string;
   }
