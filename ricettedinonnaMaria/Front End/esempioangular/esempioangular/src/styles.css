@@ -22,7 +22,7 @@
 
 .header-two{
   font-style: oblique;
-  font-family: 'Pacifico', cursive;
+  font-family: 'DancingScript-Regulart';
   font-size: 25px; /* Regola la dimensione del font */
   font-weight: 400; /* Pacifico è già piuttosto decorativo, quindi il peso 400 va bene */
   flex: 8; /* Ogni header occupa una porzione dello spazio disponibile */

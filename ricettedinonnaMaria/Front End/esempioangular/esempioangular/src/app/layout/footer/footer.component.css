@@ -23,7 +23,8 @@
 }
 
 .footer-title {
-    font-family: 'Pacifico', cursive;
+    font-style: oblique;
+    font-family: 'DancingScript-Regular';
     font-size: 60px; /* Regola la dimensione del font */
     font-weight: 400; /* Pacifico è già piuttosto decorativo, quindi il peso 400 va bene */
     color: #333; /* Cambia il colore del testo se necessario */
