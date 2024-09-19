@@ -6,7 +6,7 @@
   justify-content: space-between; /* Spaziatura tra il gruppo di sinistra e il pulsante di destra */
   align-items: center;
   background: linear-gradient(to right, #d1a797, #ff6a6a);
-  border: 5px solid rgb(118, 64, 64);
+  border: 5px ridge rgb(118, 64, 64);
   padding: 10px;
   height: 90px;
   border-radius: 10px;

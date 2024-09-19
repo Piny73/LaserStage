@@ -4,7 +4,7 @@
     color: white; /* Colore del testo */
     text-align: center; /* Allinea il testo al centro */
     padding: 20px; /* Spaziatura interna */
-    border: 5px solid rgb(118, 64, 64); /* Cornice di 5 pixel */
+    border: 5px ridge rgb(118, 64, 64); /* Cornice di 5 pixel */
     border-radius: 10px; /* Angoli arrotondati della cornice */
     margin: 0;
 }
@@ -30,6 +30,14 @@
     font-size: 60px; /* Regola la dimensione del font */
     font-weight: 400; /* Pacifico è già piuttosto decorativo, quindi il peso 400 va bene */
     color: #333; /* Cambia il colore del testo se necessario */
+}
+
+/* Stile per il messaggio di nessuna ricetta trovata */
+.no-recipes-message {
+  margin-top: 40px;
+  font-style: oblique;
+  font-family: 'Dancing Script', cursive;
+  color: rgb(251, 249, 249);
 }
 
 .btn {
