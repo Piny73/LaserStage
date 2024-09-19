@@ -10,6 +10,7 @@ export class Contact {
   // src/app/models/ricetta.model.ts
 export class Ricetta {
   constructor(
+    public categoria: string,
     public nome: string,
     public difficolta: string,
     public procedimento: string,

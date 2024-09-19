@@ -36,11 +36,15 @@ export class NavbarComponent {
     this.toggleIngredientForm(); // Nasconde il form dopo la creazione dell'ingrediente
   }
 
-  createRecipe(nome: string, difficolta: string, procedimento: string, tempodiEsecuzione: String, tempodiCottura: String) {
-    const nuovaRicetta = new Ricetta (nome, difficolta, procedimento, tempodiEsecuzione, tempodiCottura);
-    console.log('Contact created:', nuovaRicetta);
+  createRecipe(categoria: string, nome: string, difficolta: string, procedimento: string, tempodiEsecuzione: string, tempodiCottura: string) {
+    // Creazione di un nuovo oggetto Ricetta con tutti i campi (compresa categoria e difficoltà)
+    const nuovaRicetta = new Ricetta(categoria, nome, difficolta, procedimento, tempodiEsecuzione, tempodiCottura);
+    // Log per debugging
+    console.log('Ricetta creata:', nuovaRicetta);
+    // Aggiunge la nuova ricetta all'array delle ricette
     this.ricette.push(nuovaRicetta);
-    this.toggleRecipeForm(); // Chiude il form dopo la creazione
+    // Chiude il form dopo la creazione
+    this.toggleRecipeForm();
   }
 
   toggleRecipeForm() {

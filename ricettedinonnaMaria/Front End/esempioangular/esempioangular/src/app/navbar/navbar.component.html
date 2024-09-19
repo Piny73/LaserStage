@@ -32,6 +32,9 @@
 
 <!-- Contenitore dei form, che compaiono tra la navbar e il footer -->
 <div class="content">
+  <!-- Contenitore dei form, che compaiono tra la navbar e il footer -->
+<div class="content">
+  
   <!-- Form di creazione ingrediente -->
   <div *ngIf="showIngredientForm" class="form-container">
     <form (ngSubmit)="createIngredient(nomeIngredienteInput.value, unitaDiMisuraInput.value)">
@@ -47,73 +50,156 @@
       <button type="button" class="btn btn-secondary" (click)="toggleIngredientForm()">Annulla</button>
     </form>
   </div>
+  
+  <!-- Tabella per mostrare gli ingredienti creati -->
+  <div *ngIf="ingredienti.length > 0">
+    <h2>Elenco degli Ingredienti</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Nome Ingrediente</th>
+          <th>Unità di Misura</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ingrediente of ingredienti">
+          <td>{{ ingrediente.nome }}</td>
+          <td>{{ ingrediente.unitaDiMisura }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
 
   <!-- Form di creazione ricetta -->
-  <div *ngIf="showRecipeForm" class="form-container">
-    <form (ngSubmit)="createRecipe(nomeRicettaInput.value, difficoltaInput.value, procedimentoInput.value, tempoEsecuzioneInput.value, tempoCotturaInput.value)">
-      <div class="form-group">
-        <label for="nomeRicetta">Nome della Ricetta</label>
-        <input type="text" id="nomeRicetta" #nomeRicettaInput required />
-      </div>
-      <div class="form-group">
-        <label for="difficolta">Difficoltà</label>
-        <input type="text" id="difficolta" #difficoltaInput required />
-      </div>
-      <div class="form-group">
-        <label for="procedimento">Procedimento</label>
-        <textarea id="procedimento" #procedimentoInput required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="tempoEsecuzione">Tempo di Esecuzione (in minuti)</label>
-        <input type="number" id="tempoEsecuzione" #tempoEsecuzioneInput required />
-      </div>
-      <div class="form-group">
-        <label for="tempoCottura">Tempo di Cottura (in minuti)</label>
-        <input type="number" id="tempoCottura" #tempoCotturaInput required />
-      </div>
-      <button type="submit" class="btn btn-secondary">Crea Ricetta</button>
-      <button type="button" class="btn btn-secondary" (click)="toggleRecipeForm()">Annulla</button>
-    </form>
-  </div>
+<!-- Form di creazione ricetta (visibile solo se il toggle è attivato) -->
+<div *ngIf="showRecipeForm" class="form-container">
+  <form (ngSubmit)="createRecipe(
+    categoriaRicettaInput.value, 
+    nomeRicettaInput.value, 
+    difficoltaInput.value, 
+    procedimentoInput.value, 
+    tempoEsecuzioneInput.value, 
+    tempoCotturaInput.value
+  )">
+    
+    <!-- Categoria -->
+    <div class="form-group">
+      <label for="categoria">Categoria:</label>
+      <select id="categoria" #categoriaRicettaInput required>
+        <option value="Lievitati">Lievitati</option>
+        <option value="Primi">Primi</option>
+        <option value="Secondi">Secondi</option>
+        <option value="Contorni">Contorni</option>
+        <option value="Dolci">Dolci</option>
+      </select>
+    </div>
+
+    <!-- Nome della Ricetta -->
+    <div class="form-group">
+      <label for="nomeRicetta">Nome della Ricetta</label>
+      <input type="text" id="nomeRicetta" #nomeRicettaInput required />
+    </div>
+
+    <!-- Difficoltà -->
+    <div class="form-group">
+      <label for="difficolta">Difficoltà</label>
+      <select id="difficolta" #difficoltaInput required>
+        <option value="Facile">Facile</option>
+        <option value="Media">Media</option>
+        <option value="Difficile">Difficile</option>
+      </select>
+    </div>
+
+    <!-- Procedimento -->
+    <div class="form-group">
+      <label for="procedimento">Procedimento</label>
+      <textarea id="procedimento" #procedimentoInput required></textarea>
+    </div>
+
+    <!-- Tempo di Esecuzione -->
+    <div class="form-group">
+      <label for="tempoEsecuzione">Tempo di Esecuzione (in minuti)</label>
+      <input type="number" id="tempoEsecuzione" #tempoEsecuzioneInput required />
+    </div>
+
+    <!-- Tempo di Cottura -->
+    <div class="form-group">
+      <label for="tempoCottura">Tempo di Cottura (in minuti)</label>
+      <input type="number" id="tempoCottura" #tempoCotturaInput required />
+    </div>
+
+    <!-- Pulsanti -->
+    <button type="submit" class="btn btn-secondary">Crea Ricetta</button>
+    <button type="button" class="btn btn-secondary" (click)="toggleRecipeForm()">Annulla</button>
+  </form>
+</div>
+
+<!-- Tabella per mostrare le ricette create -->
+<div *ngIf="ricette.length > 0">
+  <h2>Elenco delle Ricette</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Categoria</th>
+        <th>Nome</th>
+        <th>Difficoltà</th>
+        <th>Tempo di Esecuzione (min)</th>
+        <th>Tempo di Cottura (min)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ricetta of ricette">
+        <td>{{ ricetta.categoria }}</td>
+        <td>{{ ricetta.nome }}</td>
+        <td>{{ ricetta.difficolta }}</td>
+        <td>{{ ricetta.tempodiEsecuzione }}</td>
+        <td>{{ ricetta.tempodiCottura }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
   <!-- Form di creazione conoscente -->
-  <div *ngIf="showForm" class="form-container">
-    <form (ngSubmit)="createContact(nomeInput.value, cognomeInput.value, emailInput.value)">
-      <div class="form-group">
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" #nomeInput required />
-      </div>
-      <div class="form-group">
-        <label for="cognome">Cognome</label>
-        <input type="text" id="cognome" #cognomeInput required />
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" #emailInput required />
-      </div>
-      <button type="submit" class="btn btn-secondary">Crea Contatto</button>
-      <button type="button" class="btn btn-secondary" (click)="toggleForm()">Annulla</button>
-    </form>
-  </div>
+<div *ngIf="showForm" class="form-container">
+  <form (ngSubmit)="createContact(nomeInput.value, cognomeInput.value, emailInput.value)">
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" #nomeInput required />
+    </div>
+    <div class="form-group">
+      <label for="cognome">Cognome</label>
+      <input type="text" id="cognome" #cognomeInput required />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" #emailInput required />
+    </div>
+    <button type="submit" class="btn btn-secondary">Crea Contatto</button>
+    <button type="button" class="btn btn-secondary" (click)="toggleForm()">Annulla</button>
+  </form>
+</div>
 
-  <!-- Elenco degli ingredienti -->
-  <ul>
-    <li *ngFor="let ingrediente of ingredienti">
-      {{ ingrediente.nome }} - {{ ingrediente.unitaDiMisura }}
-    </li>
-  </ul>
-
-  <!-- Elenco delle ricette -->
-  <ul>
-    <li *ngFor="let ricetta of ricette">
-      {{ ricetta.nome }} - Difficoltà: {{ ricetta.difficolta }} - Tempo di Esecuzione: {{ ricetta.tempodiEsecuzione }} min - Tempo di Cottura: {{ ricetta.tempodiCottura }} min
-    </li>
-  </ul>
-
-  <!-- Elenco dei contatti -->
-  <ul>
-    <li *ngFor="let contact of contacts">
-      {{ contact.nome }} {{ contact.cognome }} - {{ contact.email }}
-    </li>
-  </ul>
+<!-- Tabella per mostrare i contatti creati -->
+<div *ngIf="contacts.length > 0">
+  <h2>Elenco dei Contatti</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of contacts">
+        <td>{{ contact.nome }}</td>
+        <td>{{ contact.cognome }}</td>
+        <td>{{ contact.email }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
