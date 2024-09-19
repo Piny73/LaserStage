@@ -1,13 +1,40 @@
 .home-container {
-    text-align: center;
-    margin: 20px;
-  }
-  
-  .statistics {
-    margin: 20px 0;
-  }
-  
-  .actions button {
-    margin: 5px;
-  }
-  
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 1200px; /* Aumenta la larghezza massima per una visualizzazione migliore su schermi più grandi */
+}
+
+.home-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center; /* Centra il testo */
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra i dati */
+}
+
+.stats p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+/* Stili per mantenere consistenza con header, navbar e footer */
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f8f9fa;
+}
+
+.home-header h1 {
+  margin: 0;
+}
+
+.home-header button {
+  margin-left: auto;
+}
+

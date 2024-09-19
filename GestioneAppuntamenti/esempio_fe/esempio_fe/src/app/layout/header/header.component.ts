@@ -1,20 +1,24 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-@Input('titolo') title?:string;
-@Output('ritorno') back=new EventEmitter<string>(); //è molto utilizzando, scambiare info che usa il browser come passagio
+  @Input('titolo') title?: string;
+  @Output() ritorno = new EventEmitter<string>();
 
+  constructor(private router: Router) {}
 
-
-onclick() {
-  console.log('entrato nel metodo onclick')
-  this.back?.emit('ok')
-
+  openLoginForm() {
+    // Naviga alla pagina di login
+    this.router.navigate(['/login']);
   }
-
 }
+
+
+
+
+

@@ -1,18 +1,24 @@
 .app-header {
-    background: linear-gradient(to right, #96e9e2, #0627e0);
-    color: white;
-    text-align: center;
-    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #cde6b0;
+    color: #7bd7ee;
+    padding: 10px;
     position: relative;
-    bottom: 0;
-    width: 100%;
-    font-family: Arial, sans-serif;
-    border: 3px solid white;
-    border-radius: 15px;
-    box-sizing: border-box;
 }
-.app-content {
-    padding: 16px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
+
+.login-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: auto; /* Allinea il pulsante a destra */
+}
+
+.login-button:hover {
+    background-color: #0056b3;
 }
