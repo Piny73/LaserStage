@@ -2,29 +2,15 @@
     <div class="hero-content">
         <h1>Benvenuti all'Officina Meccanica di GP Baudino</h1>
         <p>Esperienza e professionalità per la manutenzione della tua auto</p>
-        <button (click)="navigateToContact()">Richiedi Informazioni</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#infoModal">
+            Maggiori Info
+        </button>
     </div>
 </section>
 
-<section class="testimonials">
-    <h2>Cosa dicono i nostri clienti</h2>
-    <div class="testimonial">
-        <blockquote>"Servizio impeccabile e sempre puntuale. La mia auto è in mani sicure!"</blockquote>
-        <p>- Mario Rossi</p>
-    </div>
-    <div class="testimonial">
-        <blockquote>"Ottimo servizio e staff cortese. Consiglio vivamente!"</blockquote>
-        <p>- Lucia Bianchi</p>
-    </div>
-</section>
+<!-- Modal per informazioni generiche -->
+<app-modal-basic
+    title="Informazioni sull'Officina"
+    bodyContent="Scopri di più sulla nostra officina, i nostri servizi e la nostra esperienza. Contattaci per ulteriori dettagli."
+></app-modal-basic>
 
-<app-footer>
-    <footer>
-        <p>&copy; 2024 Officina Meccanica di GP Baudino</p>
-        <ul>
-            <li><a href="tel:+390123456789">Telefono: +39 012 3456789</a></li>
-            <li><a href="mailto:info&#64;officinabaudino.it">Email: info&#64;officinabaudino.it</a></li>
-            <li>Indirizzo: Via Roma 123, Torino, Italia</li>
-        </ul>
-    </footer>
-</app-footer>

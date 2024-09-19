@@ -1,48 +1,16 @@
-import { Component, inject, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-modal-basic',
-  templateUrl: './modal-basic.component.html',
-  styleUrl: './modal-basic.component.css',
-  encapsulation: ViewEncapsulation.None
+	selector: 'app-modal-basic',
+	templateUrl: './modal-basic.component.html',
+	styleUrls: ['./modal-basic.component.css']
 })
-export class ModalBasicComponent {
-  private modalService = inject(NgbModal);
+export class ModalBasicComponent implements OnInit {
+	@Input() title: string = 'Modale di Base';
+	@Input() bodyContent: string = 'Contenuto del modale';
 
-	openBackDropCustomClass(content: TemplateRef<any>) {
-		this.modalService.open(content, { backdropClass: 'light-blue-backdrop' });
-	}
-
-	openWindowCustomClass(content: TemplateRef<any>) {
-		this.modalService.open(content, { windowClass: 'dark-modal' });
-	}
-
-	openSm(content: TemplateRef<any>) {
-		this.modalService.open(content, { size: 'sm' });
-	}
-
-	openLg(content: TemplateRef<any>) {
-		this.modalService.open(content, { size: 'lg' });
-	}
-
-	openXl(content: TemplateRef<any>) {
-		this.modalService.open(content, { size: 'xl' });
-	}
-
-	openFullscreen(content: TemplateRef<any>) {
-		this.modalService.open(content, { fullscreen: true });
-	}
-
-	openVerticallyCentered(content: TemplateRef<any>) {
-		this.modalService.open(content, { centered: true });
-	}
-
-	openScrollableContent(longContent: any) {
-		this.modalService.open(longContent, { scrollable: true });
-	}
-
-	openModalDialogCustomClass(content: TemplateRef<any>) {
-		this.modalService.open(content, { modalDialogClass: 'dark-modal' });
+	ngOnInit(): void {
+		// Inizializza il modale se necessario
+		// For example, you might use jQuery or Bootstrap's JavaScript API
 	}
 }

@@ -11,7 +11,7 @@ export class NavbarComponent {
   isCollapsed: boolean = false;
   showDialog: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   toggleMenu() {
     this.isCollapsed = !this.isCollapsed;
@@ -28,14 +28,13 @@ export class NavbarComponent {
     this.router.navigate(['']);
   }
 
-
   cancelLogout() {
     this.showDialog = false;
   }
 
   isLogged(): boolean {
     try {
-      return this.authService.isTokenValid();  
+      return this.authService.isTokenValid();
     } catch (error) {
       return false;
     }

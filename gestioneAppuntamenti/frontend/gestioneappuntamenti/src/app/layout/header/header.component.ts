@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,14 +6,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  @Input('titolo') title?: string;
-  @Output() ritorno = new EventEmitter<string>();
+  @Input() title: string = 'Agenda - Officina Meccanica di GP Baudino';
+  @Output() ritorno = new EventEmitter<void>();
 
-  constructor(private router: Router) {}
+  constructor() {}
 
-  openLoginForm() {
-    // Naviga alla pagina di login
-    this.router.navigate(['/login']);
+  // Emette un evento per la chiusura o il ritorno
+  onReturn(): void {
+    this.ritorno.emit();
   }
 }
 

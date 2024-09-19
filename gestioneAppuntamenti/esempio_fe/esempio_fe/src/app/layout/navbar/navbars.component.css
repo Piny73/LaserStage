@@ -4,11 +4,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitrasparente */
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1050; /* Garantire che si trovi sopra il contenuto */
+  z-index: 1050; /* Garantir que fique acima do conteúdo */
 }
 
 .dialog-content {
