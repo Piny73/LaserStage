@@ -1,7 +1,7 @@
 .app-header {
   height: 250px; /* Imposta l'altezza desiderata dell'header */
   background: linear-gradient(to right, #d1a797, #ff6a6a); /* Sfumature color salmone */
-  border: 5px solid rgb(118, 64, 64); /* Cornice colorata */
+  border: 5px ridge rgb(118, 64, 64); /* Cornice colorata */
   border-radius: 10px; /* Angoli arrotondati */
   display: flex; /* Flexbox per centrare il contenuto */
   justify-content: center; /* Centra il contenuto orizzontalmente */

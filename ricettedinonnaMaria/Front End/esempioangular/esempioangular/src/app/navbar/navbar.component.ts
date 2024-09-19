@@ -1,3 +1,4 @@
+//navbar.components.ts
 import { Component } from '@angular/core';
 import { Contact, Ricetta } from '../models/contact.model';  // Assicurati di importare il modello
 
