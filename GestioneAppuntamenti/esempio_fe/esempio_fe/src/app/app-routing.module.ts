@@ -5,7 +5,6 @@ import { AppuntamentiComponent } from './features/appuntamenti/appuntamenti/appu
 import { HomeComponent } from './features/home/home.component';
 import { LoginComponent } from './features/login/login.component';
 
-
 const routes: Routes = [
   { path: 'appuntamenti', component: AppuntamentiComponent, canActivate: [RoteGuardService] },
   { path: 'login', component: LoginComponent },
@@ -18,6 +17,7 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
 
 
 
