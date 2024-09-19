@@ -2,16 +2,16 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FeaturesModule } from './features/features.module';
-
 import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-  
   ],
   imports: [
     BrowserModule,
@@ -19,7 +19,8 @@ import { LayoutModule } from './layout/layout.module';
     AppRoutingModule,
     FormsModule,
     FeaturesModule,
-    LayoutModule
+    LayoutModule,
+    RouterModule
   ],
   providers: [
     provideHttpClient(withFetch())
@@ -27,4 +28,6 @@ import { LayoutModule } from './layout/layout.module';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
 

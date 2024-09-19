@@ -1,0 +1,76 @@
+/* Stili per il contenitore del login */
+.login-container {
+  width: 300px;
+  margin: 100px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Stili per il titolo */
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Stili per i gruppi di input */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Stili per il pulsante di invio */
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Stili per i pulsanti */
+.btn-secondary {
+  width: 100%;
+  padding: 10px;
+  background-color: #6c757d;
+  border: 1px solid #6c757d;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border: 1px solid #5a6268;
+}
+
+/* Stili per i messaggi di errore */
+.error-message {
+  color: red;
+  font-weight: bold;
+  border: 1px solid red;
+  padding: 10px;
+  margin: 20px 0;
+  background-color: #f7d1d1;
+}
