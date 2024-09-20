@@ -1,42 +1,38 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
-import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { User } from '../models/user.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  private encryptionKey: string = 'emily';
-  private readonly endpoint = 'users/login';
+export class UtilService {
+  private readonly encryptionKey = 'emily'; // Sostituisci con una chiave sicura
+  private readonly loginEndpoint = 'users/login'; // Endpoint per il login, aggiornalo se necessario
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) {}
 
-  // Metodo per verificare se localStorage è disponibile
-  private isBrowser(): boolean {
-    return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
-  }
-
+  // Metodo per crittografare i dati
   encrypt(data: string): string {
     return CryptoJS.AES.encrypt(data, this.encryptionKey).toString();
   }
 
+  // Metodo per decrittografare i dati
   private decrypt(data: string): string {
     const bytes = CryptoJS.AES.decrypt(data, this.encryptionKey);
     return bytes.toString(CryptoJS.enc.Utf8);
   }
 
-  login(login: { email: string; password: string }): Observable<any> {
-    const loginData = login;
+  // Metodo per effettuare il login
+  login(loginData: { email: string; password: string }): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
-    return this.http.post<any>(this.endpoint, loginData, { headers }).pipe(
+    return this.http.post<any>(this.loginEndpoint, loginData, { headers }).pipe(
       map(response => {
         if (response && response.token) {
           this.saveUserInLocalStorage(response);
@@ -46,7 +42,8 @@ export class AuthService {
     );
   }
 
-  getUser(): User | null {
+  // Metodo per ottenere l'utente memorizzato
+  getUser(): any | null {
     if (this.isBrowser()) {
       try {
         const encryptedUser = localStorage.getItem('user');
@@ -55,8 +52,8 @@ export class AuthService {
           const decryptedUser = this.decrypt(encryptedUser);
           try {
             const parsedUser = JSON.parse(decryptedUser);
-            if (this.isValidUser(parsedUser)?.id) {
-              return this.isValidUser(parsedUser);
+            if (this.isValidUser(parsedUser)) {
+              return parsedUser;
             } else {
               console.log('Parsed object does not match User type.');
               this.logout();
@@ -73,33 +70,21 @@ export class AuthService {
     return null;
   }
 
-  private isValidUser(obj: any): User | null {
-    if (obj) {
-      return {
-        id: obj.id,
-        version: obj.version,
-        email: obj.email,
-        first_name: obj.firstname,
-        last_name: obj.lastname,
-        role: ''
-      };
-    }
-    return null;
-  }
-
-  saveUserInLocalStorage(user: any) {
+  // Metodo per salvare l'utente in localStorage
+  private saveUserInLocalStorage(user: any) {
     if (this.isBrowser()) {
       const encryptedUser = this.encrypt(JSON.stringify(user));
       localStorage.setItem('user', encryptedUser);
     }
   }
 
+  // Metodo per verificare se il token è valido
   isTokenValid(): boolean {
     const token = this.getToken();
 
     if (token && token.length > 0) {
       try {
-        const decodedToken = jwtDecode<JwtPayload>(token);
+        const decodedToken = jwtDecode<any>(token);
         const currentTime = Math.floor(Date.now() / 1000);
 
         if (decodedToken.exp) {
@@ -122,6 +107,7 @@ export class AuthService {
     return false;
   }
 
+  // Metodo per ottenere il token
   getToken(): string | null {
     if (this.isBrowser()) {
       const encryptedUser = localStorage.getItem('user');
@@ -140,6 +126,7 @@ export class AuthService {
     return null;
   }
 
+  // Metodo per eseguire il logout
   logout() {
     if (this.isBrowser()) {
       try {
@@ -148,9 +135,22 @@ export class AuthService {
         console.error('Error removing user from LocalStorage:', error);
       }
     }
-    this.router.navigate(['/login']);
+    // Naviga alla pagina di login, assicurati di avere Router importato e configurato
+    // this.router.navigate(['/login']);
+  }
+
+  // Verifica se l'ambiente è un browser
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined';
+  }
+
+  // Verifica se un oggetto è valido (personalizza in base al tuo modello di User)
+  private isValidUser(obj: any): boolean {
+    return obj && obj.id && obj.email; // Aggiungi ulteriori verifiche in base al tuo modello di User
   }
 }
+
+
 
 
 

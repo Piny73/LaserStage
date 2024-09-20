@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Appuntamento } from '../../../core/models/appuntamento.model';
-import { AppuntamentoService } from '../../../core/services/appuntamento.service';
+import { AppuntamentoService } from '../../../core/services/api.service.ts';
 
 @Component({
   selector: 'app-appuntamenti-form',
