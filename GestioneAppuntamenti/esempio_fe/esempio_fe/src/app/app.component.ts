@@ -6,11 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title :string = '';
+  title: string = 'Officina Meccanica di GP Baudino';
+  isLoginVisible: boolean = false; // Stato del form di login
 
-  openChangeDialog(risp: string) {
-    console.log("ho ricevuto il msg:", risp);
-    }
+  openChangeDialog(event: string) {
+    console.log("ho ricevuto il msg:", event);
+  }
   
+  closeLogin() {
+    this.isLoginVisible = false; // Nascondi il form di login
+  }
 }
 

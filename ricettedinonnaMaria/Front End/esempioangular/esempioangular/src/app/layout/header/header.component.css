@@ -1,27 +1,29 @@
+/*header.component.css*/
 .app-header {
-  margin-top: 20px; /* Spazio sopra la header */
-  margin-bottom: 20px; /* Spazio sotto la header */
-  background-color: #d1a797; /* Salmone */
-  color: white; /* Testo bianco */
-  padding: 10px; /* Padding interno */
-  text-align: center; /* Allineamento al centro */
-  border: 5px solid rgb(118, 64, 64); /* Cornice bianca di 5 pixel */
-  border-radius: 10px; /* Angoli arrotondati della cornice */
-  width: 500px; /* Larghezza fissa */
-  margin-left: auto;
-  margin-right: auto; /* Centra l'elemento */
+  display: flex; /* Usa flexbox */
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Centra orizzontalmente */
+  height: 200px; /* Altezza dell'header */
+  background: linear-gradient(to right, #d1a797, #ff6a6a); /* Sfumatura */
+  border: 5px ridge #764c4c; /* Bordo */
+  border-radius: 10px; /* Angoli arrotondati */
+  padding: 10px; /* Padding */
 }
 
-  .header-container {
-    display: flex;                /* Utilizza il layout flexbox */
-    flex-direction: column;      /* Dispone gli elementi in colonna */
-    align-items: center;         /* Centra gli elementi orizzontalmente */
-    justify-content: center;      /* Centra gli elementi verticalmente */
-    height: 400px;               /* Imposta un'altezza per l'header */
+.logo-image {
+  height: 230px; /* Regola l'altezza del logo */
+  margin-right: 10px; /* Spazio tra logo e titolo */
 }
 
-.logo {
-    width: 400px; /* Larghezza del logo */
-    height: auto; /* Mantiene le proporzioni del logo */
-    margin-right: 15px; /* Margine a destra per distanziare il titolo */
+.tile-container {
+  font-family: 'Dancing Script', cursive; /* Font */
+  font-size: 70px; /* Dimensione del font */
+}
+
+
+.header-down {
+  background-image: url('/assets/images/LibroRicette.png'); /* URL dell'immagine */
+  background-repeat: no-repeat; /* Non ripete l'immagine */
+  background-size: contain; /* Adatta l'immagine all'interno dell'elemento */
+  background-position: left center; /* Posiziona l'immagine a sinistra, centrato verticalmente */
 }

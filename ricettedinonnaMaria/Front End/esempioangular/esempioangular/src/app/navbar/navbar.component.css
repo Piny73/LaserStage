@@ -1,85 +1,75 @@
+/* navbar.component.css */
 .navbar {
+  position: relative;
+  z-index: 1; /* Assicura che la navbar sia sopra l'immagine */
   display: flex;
-  justify-content: space-between; /* Spinge gli elementi ai lati opposti */
-  align-items: center; /* Allinea verticalmente */
-  background: linear-gradient(to right, #d1a797, #ff6a6a); /* Sfumature color salmone */
-  border: 5px solid rgb(118, 64, 64);
+  justify-content: space-between; /* Spaziatura tra il gruppo di sinistra e il pulsante di destra */
+  align-items: center;
+  background: linear-gradient(to right, #d1a797, #ff6a6a);
+  border: 5px ridge rgb(118, 64, 64);
   padding: 10px;
-  height: 60px;
+  height: 90px;
+  border-radius: 10px;
+  margin: 0;
+}
+
+.left-buttons {
+  display: flex; /* Crea un contenitore flessibile per i pulsanti a sinistra */
+  gap: 20px; /* Spaziatura uniforme tra i pulsanti */
 }
 
 .navbar-nav {
-  display: flex; /* Rende la lista dei pulsanti una riga flessibile */
-  align-items: center; /* Allinea verticalmente */
+  display: flex;
+  align-items: center;
   margin: 0;
   padding: 0;
-  list-style-type: none; /* Rimuove i puntini */
-}
-
-.navbar-nav.left {
-  margin-left: 0; /* Nessun margine a sinistra per allineare i pulsanti "Crea" a sinistra */
-}
-
-.navbar-nav.right {
-  margin-left: auto; /* Spinge il contenuto a destra */
+  list-style-type: none;
 }
 
 .nav-item {
-  display: inline-block; /* Allinea gli elementi orizzontalmente */
-  margin-right: 10px; /* Spazio tra i pulsanti */
-  position: relative; /* Per evitare che il form si sovrapponga al pulsante */
-}
-
-.nav-item:last-child {
-  margin-right: 0; /* Rimuove lo spazio extra dall'ultimo elemento */
+  margin-right: 20px; /* Margine tra i pulsanti di sinistra */
 }
 
 .btn {
-  padding: 10px 15px; /* Padding per i pulsanti */
+  padding: 20px 25px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 10px;
-  margin-right: 10px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3); /* Aggiunge ombra per effetto rialzato */
 }
 
 .btn-secondary {
-  margin-top: 10px;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Dancing Script', cursive;
   background-color: #ff6a6a;
   color: black;
   border: 2px solid rgb(118, 64, 64);
 }
+
 .btn-secondary:active {
-  background-color: #5a6268; /* Colore più scuro per feedback visivo */
-  transform: scale(0.98); /* Effetto di riduzione per il clic */
+  background-color: #5a6268;
+  transform: scale(0.98);
 }
 
 .form-container {
-  margin-top: 200px; /* Aggiunge uno spazio tra il pulsante e il form */
+  margin-top: 20px;
   padding: 15px;
   background-color: #d1a797;
   border: 2px solid rgb(118, 64, 64);
   border-radius: 8px;
-  position: relative; /* Mantiene il form in posizione relativa rispetto al contenitore */
-  display: block; /* Mantiene visibile il form quando toggleForm è attivo */
+  display: block;
 }
 
 .form-group input {
-  width: 100%; /* Assicura che il campo di input occupi tutto lo spazio disponibile */
+  width: 100%;
   padding: 8px;
-  box-sizing: border-box; /* Include padding e border nel calcolo della larghezza totale */
+  box-sizing: border-box;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px; /* Spazio tra l'etichetta e il campo di input */
+  margin-bottom: 5px;
 }
 
 .form-group {
-  margin-bottom: 15px; /* Spazio tra i campi del form */
+  margin-bottom: 15px;
 }
-
-
-
-  
