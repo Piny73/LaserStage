@@ -1,37 +1,39 @@
 .app-footer {
-  background: linear-gradient(to right, #d1a797, #ff6a6a); /* Sfumature color salmone */
-  color: white; /* Colore del testo */
-  text-align: center; /* Allinea il testo al centro */
-  padding: 20px; /* Spaziatura interna */
-  border: 5px ridge rgb(118, 64, 64); /* Cornice di 5 pixel */
-  border-radius: 10px; /* Angoli arrotondati della cornice */
+  background: linear-gradient(to right, #d1a797, #ff6a6a);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  border: 5px ridge rgb(118, 64, 64);
+  border-radius: 10px;
   margin: 0;
+  width: 100%; /* Imposta la larghezza a 100% per adattarsi a schermi larghi */
+  box-sizing: border-box; /* Include padding e bordi nella larghezza totale */
 }
 
 .footer-container {
-    display: flex;                      /* Utilizza il layout flexbox */
-    flex-direction: row;               /* Dispone gli elementi in riga */
-    align-items: center;               /* Centra gli elementi verticalmente */
-    justify-content: center;           /* Allinea gli elementi orizzontalmente al centro */
-    height: auto;                      /* Adatta l'altezza al contenuto */
-    gap: 20px;                         /* Spazio tra i loghi, aumenta se necessario */
+  display: flex;                      /* Utilizza il layout flexbox */
+  flex-direction: row;               /* Dispone gli elementi in riga */
+  align-items: center;               /* Centra gli elementi verticalmente */
+  justify-content: center;           /* Allinea gli elementi orizzontalmente al centro */
+  height: auto;                      /* Adatta l'altezza al contenuto */
+  gap: 10px;                         /* Riduci lo spazio tra i loghi per evitare overflow */
+  flex-wrap: nowrap;                 /* Mantiene gli elementi in una sola riga */
 }
 
 .logo {
-    width: 195px;                      /* Imposta una larghezza maggiore per i loghi */
-    height: auto;                     /* Mantiene le proporzioni del logo */
-    margin: 0;                         /* Rimuove eventuali margini */
+  width: 195px;
+  height: auto;
+  max-width: 100%;
 }
 
 .footer-title {
-    font-style: oblique;
-    font-family: 'Dancing Script', cursive;
-    font-size: 60px; /* Regola la dimensione del font */
-    font-weight: 400; /* Pacifico è già piuttosto decorativo, quindi il peso 400 va bene */
-    color: #333; /* Cambia il colore del testo se necessario */
+  font-style: oblique;
+  font-family: 'Dancing Script', cursive;
+  font-size: 60px;
+  font-weight: 400;
+  color: #333;
 }
 
-/* Stile per il messaggio di nessuna ricetta trovata */
 .no-recipes-message {
   margin-top: 40px;
   font-style: oblique;
@@ -40,21 +42,41 @@
 }
 
 .btn {
-   padding: 20px 25px; /* Padding del bottone */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3); /* Aggiunge ombra per effetto rialzato */
-  }
-  
-  .btn-secondary {
-    font-family: 'Dancing Script', cursive;
-    background-color: #ff6a6a;
-    color: black;
-    border: 2px solid rgb(118, 64, 64);
-  }
-/* Stile per i bottoni quando sono cliccati */
+  padding: 20px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+  font-family: 'Dancing Script', cursive;
+  background-color: #ff6a6a;
+  color: black;
+  border: 2px solid rgb(118, 64, 64);
+}
+
 .btn-secondary:active {
-    background-color: #5a6268; /* Colore più scuro per feedback visivo */
-    transform: scale(0.98); /* Effetto di riduzione per il clic */
-  }  
+  background-color: #5a6268;
+  transform: scale(0.98);
+}
+
+/* Media query per schermi piccoli */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column; /* Dispone i contenuti in colonna su schermi piccoli */
+    gap: 15px;
+  }
+
+  .logo {
+    width: 150px; /* Riduce le dimensioni del logo su schermi piccoli */
+  }
+
+  .footer-title {
+    font-size: 50px; /* Riduce la dimensione del titolo */
+  }
+
+  .btn {
+    padding: 15px 20px; /* Riduce il padding dei bottoni */
+  }
+}

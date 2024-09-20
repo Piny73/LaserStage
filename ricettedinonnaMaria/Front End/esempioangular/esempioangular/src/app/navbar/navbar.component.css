@@ -1,9 +1,8 @@
-/* navbar.component.css */
 .navbar {
   position: relative;
-  z-index: 1; /* Assicura che la navbar sia sopra l'immagine */
+  z-index: 1;
   display: flex;
-  justify-content: space-between; /* Spaziatura tra il gruppo di sinistra e il pulsante di destra */
+  justify-content: space-between;
   align-items: center;
   background: linear-gradient(to right, #d1a797, #ff6a6a);
   border: 5px ridge rgb(118, 64, 64);
@@ -11,11 +10,14 @@
   height: 90px;
   border-radius: 10px;
   margin: 0;
+  width: 100%; /* Occupa il 100% della larghezza */
+  box-sizing: border-box; /* Include il padding e il bordo nel calcolo della larghezza */
 }
 
 .left-buttons {
-  display: flex; /* Crea un contenitore flessibile per i pulsanti a sinistra */
-  gap: 20px; /* Spaziatura uniforme tra i pulsanti */
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .navbar-nav {
@@ -27,15 +29,15 @@
 }
 
 .nav-item {
-  margin-right: 20px; /* Margine tra i pulsanti di sinistra */
+  margin-right: 20px;
 }
 
 .btn {
-  padding: 20px 25px;
+  padding: 10px 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3); /* Aggiunge ombra per effetto rialzato */
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
 }
 
 .btn-secondary {
@@ -73,3 +75,22 @@
 .form-group {
   margin-bottom: 15px;
 }
+
+/* Media query per schermi piccoli */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-buttons {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .btn {
+    padding: 8px 12px;
+  }
+}
+
+
