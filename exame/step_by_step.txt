@@ -1,0 +1,12 @@
+ng new exame-fe --no-standalone
+cd /exame-fe
+npm install bootstrap --save
+npm install @fortawesome/fontawesome-free --save
+
+
+"styles": [
+   "src/styles.css",
+   "node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css",
+   "node_modules/bootstrap/dist/css/bootstrap.min.css"
+  ],
+"scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"],
