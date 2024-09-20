@@ -1,7 +1,5 @@
-//navbar.components.ts
 import { Component } from '@angular/core';
 import { Contact, Ricetta } from '../models/contact.model';  // Assicurati di importare il modello
-
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +16,11 @@ export class NavbarComponent {
   ingredienti: { nome: string; unitaDiMisura: string }[] = [];
   showRecipeForm = false;
   ricette: Ricetta[] = [];  // Definisci ricette come un array di oggetti Ricetta
+  searchQuery: string = ''; // Modello per la barra di ricerca
+  allRecipes = []; // Lista completa delle ricette
+  filteredRecipes = []; // Lista delle ricette filtrate
 
+  showSearchMessage = false; // Variabile per controllare se mostrare il messaggio
 
   toggleLogin() {
     this.showLogin = !this.showLogin;  // Alterna la visibilità del form di login
@@ -51,6 +53,7 @@ export class NavbarComponent {
   toggleRecipeForm() {
     this.showRecipeForm = !this.showRecipeForm;
   }
+
   // Metodo per mostrare il form
   toggleForm() {
     this.showForm = !this.showForm;  // Alterna tra true e false
@@ -59,5 +62,8 @@ export class NavbarComponent {
   toggleIngredientForm() {
     this.showIngredientForm = !this.showIngredientForm;
   }
-}
 
+  onSearch() {
+    this.showSearchMessage = true;  // Mostra il messaggio "barra ancora non abilitata"
+  }
+}

@@ -1,3 +1,4 @@
+/* Stile della navbar */
 .navbar {
   position: relative;
   z-index: 1;
@@ -7,7 +8,7 @@
   background: linear-gradient(to right, #d1a797, #ff6a6a);
   border: 5px ridge rgb(118, 64, 64);
   padding: 10px;
-  height: 90px;
+  height: 100px;
   border-radius: 10px;
   margin: 0;
   width: 100%; /* Occupa il 100% della larghezza */
@@ -76,6 +77,50 @@
   margin-bottom: 15px;
 }
 
+/* Stile della barra di ricerca */
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 300px;
+  background: linear-gradient(to right, #d1a797, #ff6a6a); /* Stesso sfondo della navbar */
+  border: 5px ridge rgb(118, 64, 64); /* Stesso bordo della navbar */
+  padding: 10px;
+  height: 50px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3); /* Stessa ombreggiatura dei pulsanti */
+}
+
+.search-container input {
+  padding: 10px; /* Stesso padding dei bottoni */
+  font-size: 16px;
+  border-radius: 5px;
+  border: 2px solid rgb(118, 64, 64); /* Stesso bordo dei bottoni */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Aggiungi un po' di ombreggiatura */
+}
+
+.search-container button {
+  padding: 10px 15px;
+  margin-left: 10px;
+  background-color: #ff6a6a;
+  color: black; /* Stesso colore di testo dei bottoni */
+  border: 2px solid rgb(118, 64, 64); /* Stesso bordo dei bottoni */
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3); /* Stessa ombreggiatura dei bottoni */
+  transition: background-color 0.3s, transform 0.3s; /* Aggiungi transizione per un effetto più fluido */
+}
+
+.search-container button:hover {
+  background-color: #ff5a5a;
+}
+
+.search-container button:active {
+  background-color: #5a6268;
+  transform: scale(0.98); /* Stesso effetto di click dei bottoni */
+}
+
 /* Media query per schermi piccoli */
 @media (max-width: 768px) {
   .navbar {
@@ -92,5 +137,3 @@
     padding: 8px 12px;
   }
 }
-
-
