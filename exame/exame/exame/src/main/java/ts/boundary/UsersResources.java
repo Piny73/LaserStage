@@ -4,6 +4,7 @@
  */
 package ts.boundary;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -32,6 +33,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import ts.entity.User;
 import ts.boundary.mapping.Credential;
+import ts.boundary.mapping.UserDTO;
 import ts.store.UserStore;
 
 
@@ -58,8 +60,16 @@ public class UsersResources {
         @APIResponse(responseCode = "404", description = "Elenco non trovato")
     })
     @RolesAllowed({"Admin","User"})
-    public List<User> all() {
-        return storeuser.all();
+    public List<UserDTO> all() {
+        List<UserDTO> usList = new ArrayList<>();
+        storeuser.all().forEach(e -> {
+           UserDTO us = new UserDTO();
+            us.id = e.getId();
+            us.name = e.getName();
+            us.email = e.getEmail();
+            us.pwd = "";
+        });
+        return usList;
     }
          
     
@@ -103,16 +113,17 @@ public class UsersResources {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @PermitAll
-    public JsonObject login (@Valid Credential credential){
+    public UserDTO login (@Valid Credential credential){
         
         User u = storeuser.login(credential).orElseThrow(() -> new NotAuthorizedException("User non Authorized",  
                                                                        Response.status(Response.Status.UNAUTHORIZED).build()));
-         
-        return  Json.createObjectBuilder()
-                .add("id", u.getId())
-                .add("name", u.getEmail())
-                .add("email", u.getEmail())
-                .build();
+        UserDTO us = new UserDTO();
+        us.id = u.getId();
+        us.name = u.getName();
+        us.email = u.getEmail();
+        us.pwd = "";
+        
+        return  us;
     }
     
     

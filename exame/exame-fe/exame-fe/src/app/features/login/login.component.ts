@@ -9,25 +9,29 @@ import { AuthService } from '../../core/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
 
-  loginForm: FormGroup;
+export class LoginComponent implements OnInit {
+
+  islogin:boolean = true;
+  loginForm!: FormGroup;
   errorMessage: string = '';
   @Output() onLogin = new EventEmitter<boolean>();
 
-  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) {
-        
+  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) {   
+  }
+  
+  ngOnInit(): void {
     this.loginForm = this.fb.group({
       usr: ['', Validators.required],
       pwd: ['', Validators.required]
     });
-
-    if(authService.getUser()){
+  
+    if(this.authService.getUser()){
       this.router.navigate(['/home']);
     }
-
+   
   }
-
+  
   
   onSubmit() {
     if (this.loginForm.valid) {
@@ -48,6 +52,9 @@ export class LoginComponent {
     }
   }
 
+  openRegistrazione(){
+    this.router.navigate(['/registrazione']);
+  }
   
 
   
