@@ -1,23 +1,2 @@
-/* app.component.css */
-/* Stile per il layout principale */
-.layout-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* L'altezza del layout riempie tutta la finestra */
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Stile per il contenuto centrale per spingere navbar e footer agli estremi */
-  .content-container {
-    flex-grow: 1; /* Fa crescere il contenuto per riempire lo spazio tra navbar e footer */
-    margin: 0;
-    padding: 0;
-  }
 
-  /* Rimuovi margini e padding aggiuntivi da navbar e footer */
-.navbar, .app-footer {
-    margin: 0;
-    padding: 0;
-  }
   

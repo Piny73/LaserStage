@@ -1,10 +1,5 @@
-<!-- header.component.html -->
 <header class="app-header">
-  <div class="header-container">
-    <!-- Mostra l'immagine se hideLogo è false -->
-    <!--<img *ngIf="!hideLeftImage" src="assets/images/LibroRicette.png" alt="Left Image" class="header-image left-image" />-->
-    <img *ngIf="!hideLogo" src="assets/images/LRDNMLogo.png" alt="Logo" class="header-image logo-image" />
-   <!--<img *ngIf="!hideRightImage" src="assets/images/LibroRicette.png" alt="Right Image" class="header-image right-image" />--> 
-  </div>
-    <h1 class="header-title">{{ title }}</h1>
+  <!-- Logo -->
+<img *ngIf="!hideLogo" src="assets/images/LRDNMLogo.png" alt="Logo" class="logo-image" />
+<div  class="tile-container">{{ title }}</div>
 </header>

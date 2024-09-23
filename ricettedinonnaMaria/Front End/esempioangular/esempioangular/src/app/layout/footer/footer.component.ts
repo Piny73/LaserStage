@@ -9,7 +9,7 @@ import { Ricetta } from '../../models/contact.model';
 })
 export class FooterComponent {
 // Definisci la proprietà title
-title: string = 'Categorie Ricette';
+title: string = '~Categorie Ricette~';
 
   @Input() ricette: Ricetta[] = []; // Input per ricevere le ricette dal componente padre
   selectedCategoryRecipes: Ricetta[] = [];

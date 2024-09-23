@@ -1,30 +1,49 @@
 .app-header {
-  height: 250px; /* Imposta l'altezza desiderata dell'header */
-  background: linear-gradient(to right, #d1a797, #ff6a6a); /* Sfumature color salmone */
-  border: 5px ridge rgb(118, 64, 64); /* Cornice colorata */
-  border-radius: 10px; /* Angoli arrotondati */
-  display: flex; /* Flexbox per centrare il contenuto */
-  justify-content: center; /* Centra il contenuto orizzontalmente */
-  align-items: center; /* Centra il contenuto verticalmente */
+  display: flex;
+  align-items: center; /* Centra verticalmente gli elementi */
+  justify-content: center; /* Centra tutto l'header orizzontalmente */
+  height: auto;
+  background: linear-gradient(to right, #d1a797, #ff6a6a);
+  border: 5px ridge #764c4c;
+  border-radius: 10px;
   padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  gap: 20px; /* Spazio tra logo e titolo */
+  flex-wrap: wrap; /* Permette di andare su più righe se necessario */
 }
 
-.header-container {
-  display: flex; /* Flexbox per gestire il logo e il titolo */
-  justify-content: center; /* Centra orizzontalmente il logo e il titolo */
-  align-items: center; /* Centra verticalmente il logo e il titolo */
+.logo-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 150px;
 }
 
-.header-image {
-  height: 250px; /* Aumenta l'altezza del logo per ingrandirlo */
-  width: auto; /* Mantiene le proporzioni dell'immagine */
-  margin-right: 20px; /* Spazio tra il logo e il titolo */
-}
-
-.header-title {
-  font-style: oblique;
+.tile-container {
   font-family: 'Dancing Script', cursive;
-  font-size: 60px; /* Dimensione del font */
-  font-weight: normal; /* Peso del font */
-  margin: 0; /* Rimuove i margini per il titolo */
+  font-size: 5vw;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo-image {
+    max-height: 100px;
+    margin-right: 0;
+  }
+
+  .tile-container {
+    font-size: 7vw;
+  }
+}
+
+.header-down {
+  background-image: url('/assets/images/LibroRicette.png'); /* URL dell'immagine */
+  background-repeat: no-repeat; /* Non ripete l'immagine */
+  background-size: contain; /* Adatta l'immagine all'interno dell'elemento */
+  background-position: left center; /* Posiziona l'immagine a sinistra, centrato verticalmente */
 }
