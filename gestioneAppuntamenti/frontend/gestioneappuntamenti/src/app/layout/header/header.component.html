@@ -1,22 +1,29 @@
 <header class="app-header">
-    <h1>{{ title || 'Agenda - Officina Meccanica di GP Baudino' }}</h1>
-    <button type="button" class="login-button" data-bs-toggle="modal" data-bs-target="#loginModal">
-        Login
-    </button>
+  <div class="header-left">
+      <img src="assets/logo.png" alt="Logo Officina" class="logo">
+      <h1>{{ title || 'Agenda - Officina Meccanica di GP Baudino' }}</h1>
+  </div>
+  <div class="header-right">
+      <button type="button" class="login-button" data-bs-toggle="modal" data-bs-target="#loginModal">
+          Login
+      </button>
+  </div>
 </header>
 
 <!-- Modal di login -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Login</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <app-login></app-login> <!-- Carica il form di login -->
-            </div>
-        </div>
-    </div>
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Login</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <app-login></app-login> <!-- Carica il form di login -->
+          </div>
+      </div>
+  </div>
 </div>
+
+  
 

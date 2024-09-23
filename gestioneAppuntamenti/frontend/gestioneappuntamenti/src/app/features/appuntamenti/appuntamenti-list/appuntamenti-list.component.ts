@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Appuntamento } from '../../../core/models/appuntamento.model';
-import { AppuntamentoService } from '../../../core/services/api.service.ts';
+import { AppuntamentoService } from '../../../core/services/appuntamento.services';
 
 @Component({
   selector: 'app-appuntamenti-list',
   templateUrl: './appuntamenti-list.component.html',
-  styleUrl: './appuntamenti-list.component.css'
+  styleUrls: ['./appuntamenti-list.component.css'] // Corretto "styleUrl" in "styleUrls"
 })
 export class AppuntamentiListComponent implements OnInit {
   appuntamenti: Appuntamento[] = [];
@@ -18,11 +18,17 @@ export class AppuntamentiListComponent implements OnInit {
 
   loadAppuntamenti(): void {
     this.appuntamentoService.getAppuntamenti().subscribe((data: Appuntamento[]) => {
+      // Non cambiare il tipo nel modello, ma puoi convertire le date solo per l'uso lato client
       this.appuntamenti = data.map(app => ({
         ...app,
-        data: new Date(app.data)  // Converti il campo data in un oggetto Date
+        dataOraInizio: new Date(app.dataOraInizio).toLocaleString(),  // Converte la stringa ISO in un formato leggibile
+        dataOraFine: new Date(app.dataOraFine).toLocaleString()       // Stessa conversione per dataOraFine
       }));
     });
   }
-  
 }
+
+  
+  
+
+

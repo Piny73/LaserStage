@@ -1,8 +1,17 @@
-<!-- src/app/app.component.html -->
 <app-header [title]="title"></app-header>
 
 <div class="content">
   <router-outlet></router-outlet>
 </div>
 
+<!-- Pulsante per aprire il modale -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal" (click)="title='Conferma'; bodyContent='Sei sicuro di voler procedere?'">
+  Apri Modale
+</button>
+
+<!-- Includi il tuo modale 
+<app-modal-basic [title]="title" [bodyContent]="bodyContent"></app-modal-basic>
+-->
 <app-footer></app-footer>
+
+

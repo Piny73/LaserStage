@@ -8,9 +8,24 @@
     </div>
 </section>
 
-<!-- Modal per informazioni generiche -->
-<app-modal-basic
-    title="Informazioni sull'Officina"
-    bodyContent="Scopri di più sulla nostra officina, i nostri servizi e la nostra esperienza. Contattaci per ulteriori dettagli."
-></app-modal-basic>
+<!-- Navigazione -->
+<nav>
+    <ul>
+        <li><a routerLink="/gestisci-clienti">Gestisci Clienti</a></li>
+        <li><a routerLink="/crea-appuntamento">Crea Appuntamento</a></li>
+        <li><a routerLink="/login">Login</a></li> <!-- Aggiungi un link per il login se necessario -->
+    </ul>
+</nav>
 
+<!-- Modal per informazioni generiche -->
+<app-modal-basic title="Informazioni sull'Officina"
+    bodyContent="Scopri di più sulla nostra officina, i nostri servizi e la nostra esperienza. Contattaci per ulteriori dettagli."></app-modal-basic>
+
+<!-- Sezione per visualizzare gli appuntamenti o i clienti -->
+<div *ngIf="erroreCaricamento" class="alert alert-danger">
+    {{ erroreCaricamento }}
+</div>
+<div>
+    <h2>Appuntamenti Totali: {{ appuntamentiTotali }}</h2>
+    <h2>Appuntamenti di Oggi: {{ appuntamentiOggi }}</h2>
+</div>

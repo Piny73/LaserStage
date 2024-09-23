@@ -46,6 +46,4 @@ export class UtilsService {
     }
   }
 
-
-
 }

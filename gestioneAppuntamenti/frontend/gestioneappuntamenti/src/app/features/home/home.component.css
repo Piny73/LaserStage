@@ -1,13 +1,13 @@
 .home-container {
   padding: 20px;
   margin: 0 auto;
-  max-width: 1200px; /* Aumenta la larghezza massima per una visualizzazione migliore su schermi più grandi */
+  max-width: 1200px; /* Larghezza massima */
 }
 
 .home-container h1 {
   font-size: 2rem;
   margin-bottom: 20px;
-  text-align: center; /* Centra il testo */
+  text-align: center;
 }
 
 .app-root {
@@ -34,15 +34,14 @@ main {
   height: 400px;
 }
 
-
 .hero-content {
-  background-color: rgba(0, 0, 0, 0.5); /* Aggiunge un effetto trasparente */
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 10px;
 }
 
 button {
-  background-color: #ff6f61; /* Colore di sfondo di default */
+  background-color: #007bff; /* Colore primario */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -52,15 +51,14 @@ button {
 }
 
 button:hover {
-  background-color: #ff3b2f; /* Colore di sfondo al passaggio del mouse */
+  background-color: #0056b3; /* Colore hover */
 }
-
 
 .services, .access, .testimonials {
   margin-top: 40px;
 }
+
 .testimonials {
-  margin-top: 40px;
   text-align: center;
 }
 
@@ -86,17 +84,6 @@ blockquote {
   margin-bottom: 10px;
 }
 
-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
 footer {
   background-color: #333;
   color: white;
@@ -108,10 +95,6 @@ footer ul {
   list-style: none;
   padding: 0;
   margin: 10px 0;
-}
-
-footer ul li {
-  margin: 5px 0;
 }
 
 footer a {

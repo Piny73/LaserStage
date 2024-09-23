@@ -1,34 +1,49 @@
-
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-
-
 import { AppRoutingModule } from './app-routing.module';
-
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
 import { AuthInterceptor } from './core/auth/auth.interceptor';
 import { CoreModule } from './core/core.module';
+import { UserService } from './core/services/user.sevice';
 import { FeaturesModule } from './features/features.module';
 import { LayoutModule } from './layout/layout.module';
+import { CreaAppuntamentoComponent } from './pages/crea-appuntamento/crea-appuntamento.component';
+import { GestioneAppuntamentiComponent } from './pages/gestione-appuntamenti/gestione-appuntamenti.component';
+import { DashboardComponent } from './pages/old-dashboard/dashboard.component';
+import { StatisticheComponent } from './pages/statistiche/statistiche.component';
+import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent,
+    CreaAppuntamentoComponent,
+    GestioneAppuntamentiComponent,
+    StatisticheComponent
   ],
   imports: [
     BrowserModule,
     CoreModule,
     LayoutModule,
-    AppRoutingModule,
     FeaturesModule,
-    HttpClientModule
+    AppRoutingModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    provideHttpClient(withInterceptorsFromDi(), withFetch()),
+    UserService // Aggiungi UserService qui
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
+
+

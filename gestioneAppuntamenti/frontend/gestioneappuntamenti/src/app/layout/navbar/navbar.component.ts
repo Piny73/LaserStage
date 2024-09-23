@@ -5,7 +5,7 @@ import { AuthService } from '../../core/auth/auth.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  //styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
   isCollapsed: boolean = false;
@@ -33,10 +33,6 @@ export class NavbarComponent {
   }
 
   isLogged(): boolean {
-    try {
-      return this.authService.isTokenValid();
-    } catch (error) {
-      return false;
-    }
+    return this.authService.isAuthenticated();
   }
 }

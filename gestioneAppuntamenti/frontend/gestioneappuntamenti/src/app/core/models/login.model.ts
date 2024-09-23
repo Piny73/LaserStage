@@ -1,5 +1,4 @@
-// login.model.ts
 export interface Login {
-  email: string;
-  password: string;
+  email: string;           // Email per il login
+  password: string;        // Password per il login
 }

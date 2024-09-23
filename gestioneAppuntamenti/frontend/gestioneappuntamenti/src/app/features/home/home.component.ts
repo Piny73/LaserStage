@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Appuntamento } from '../../core/models/appuntamento.model';
-import { AppuntamentoService } from '../../core/services/appuntamento.srvices';
-
+import { AppuntamentoService } from '../../core/services/appuntamento.services';
 
 @Component({
   selector: 'app-home',
@@ -48,11 +47,17 @@ export class HomeComponent implements OnInit {
     }).length;
   }
 
-  // Metodo per la navigazione alla pagina di contatto
-  navigateToContact(): void {
-    this.router.navigate(['/contact']);
+  // Metodo per la navigazione alla pagina di gestione clienti
+  navigateToManageClients(): void {
+    this.router.navigate(['/gestisci-clienti']);
+  }
+
+  // Metodo per la navigazione alla pagina di creazione appuntamento
+  navigateToCreateAppointment(): void {
+    this.router.navigate(['/crea-appuntamento']);
   }
 }
+
 
 
 

@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { ApiService } from './services/api.service';
-import { AppuntamentoService } from './services/appuntamento.srvices';
+import { AppuntamentoService } from './services/appuntamento.services';
 import { UtilService } from './services/util.service';
 
 

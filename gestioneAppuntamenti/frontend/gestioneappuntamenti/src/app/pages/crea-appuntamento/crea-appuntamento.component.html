@@ -1,0 +1,56 @@
+<div class="crea-appuntamento">
+    <!-- Pulsante X per chiudere il form, posizionato in alto a destra -->
+    <button type="button" class="btn btn-light close-button" (click)="closeForm()">X</button>
+    
+    <!-- Titolo del form -->
+    <h2>Crea Nuovo Appuntamento</h2>
+    
+    <!-- Form di creazione appuntamento -->
+    <form (ngSubmit)="onSubmit()">
+        <!-- Selezione data e ora di inizio -->
+        <div class="form-group">
+            <label for="dataOraInizio">Data e Ora Inizio</label>
+            <select id="dataOraInizio" class="form-control" [(ngModel)]="appuntamento.dataOraInizio" name="dataOraInizio" required>
+                <option *ngFor="let time of availableTimes" [value]="time">{{ time | date:'short' }}</option>
+            </select>
+        </div>
+        
+        <!-- Selezione data e ora di fine -->
+        <div class="form-group">
+            <label for="dataOraFine">Data e Ora Fine</label>
+            <select id="dataOraFine" class="form-control" [(ngModel)]="appuntamento.dataOraFine" name="dataOraFine" required>
+                <option *ngFor="let time of availableTimes" [value]="time">{{ time | date:'short' }}</option>
+            </select>
+        </div>
+        
+        <!-- Descrizione appuntamento -->
+        <div class="form-group">
+            <label for="descrizione">Descrizione</label>
+            <textarea id="descrizione" class="form-control" [(ngModel)]="appuntamento.descrizione" name="descrizione" rows="3"></textarea>
+        </div>
+        
+        <!-- Informazioni cliente -->
+        <div class="form-group">
+            <label for="clienteNome">Nome Cliente</label>
+            <input type="text" id="clienteNome" class="form-control" [(ngModel)]="appuntamento.cliente.nome" name="clienteNome" required>
+        </div>
+        <div class="form-group">
+            <label for="clienteCognome">Cognome Cliente</label>
+            <input type="text" id="clienteCognome" class="form-control" [(ngModel)]="appuntamento.cliente.cognome" name="clienteCognome" required>
+        </div>
+        
+        <!-- Informazioni vettura -->
+        <div class="form-group">
+            <label for="vetturaMarca">Marca Vettura</label>
+            <input type="text" id="vetturaMarca" class="form-control" [(ngModel)]="appuntamento.vettura.marca" name="vetturaMarca" required>
+        </div>
+        
+        <!-- Pulsanti per annullare e creare appuntamento -->
+        <div class="button-group">
+            <button type="submit" class="btn btn-primary">Crea Appuntamento</button>
+            <button type="button" class="btn btn-secondary ritorno" (click)="onReturn()">Indietro</button>
+        </div>
+    </form>
+</div>
+
+

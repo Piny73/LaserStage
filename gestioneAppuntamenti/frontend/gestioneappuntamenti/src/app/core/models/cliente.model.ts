@@ -1,9 +1,10 @@
 export interface Cliente {
-  id?: number;
-  nome: string;
-  cognome: string;
-  indirizzo: string;
-  telefono: string;
-  email: string;
+  id?: number;          // Opzionale, per identificare un cliente
+  nome: string;        // Nome del cliente
+  cognome: string;     // Cognome del cliente
+  indirizzo: string;   // Indirizzo del cliente
+  telefono: string;    // Numero di telefono del cliente
+  email: string;       // Email del cliente
 }
+
 

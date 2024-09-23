@@ -1,17 +1,24 @@
-// src/app/app-routing.module.ts
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './features/login/login.component';
-
-
+import { GestioneUtenteComponent } from './features/gestione-utente/gestione-utente.component';
+import { HomeComponent } from './features/home/home.component'; // Importa la HomeComponent
+import { CreaAppuntamentoComponent } from './pages/crea-appuntamento/crea-appuntamento.component';
+import { GestioneAppuntamentiComponent } from './pages/gestione-appuntamenti/gestione-appuntamenti.component';
+import { StatisticheComponent } from './pages/statistiche/statistiche.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent }, // Define a tela de login como inicial
-  // Outras rotas podem ser adicionadas aqui
+  { path: 'home', component: HomeComponent }, // Usa HomeComponent come dashboard
+  { path: 'crea-appuntamento', component: CreaAppuntamentoComponent },
+  { path: 'gestione-appuntamenti', component: GestioneAppuntamentiComponent },
+  { path: 'statistiche', component: StatisticheComponent },
+  { path: 'gestione-utente', component: GestioneUtenteComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Reindirizza alla HomeComponent
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
+
+

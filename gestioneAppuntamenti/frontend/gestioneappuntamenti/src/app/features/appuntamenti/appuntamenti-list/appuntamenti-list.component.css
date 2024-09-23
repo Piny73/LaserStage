@@ -1,0 +1,15 @@
+ul {
+    list-style-type: none; /* Rimuove i pallini */
+    padding: 0; /* Rimuove il padding */
+  }
+  
+  li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Aggiunge una linea di separazione */
+  }
+  
+  h2 {
+    text-align: center; /* Centra il titolo */
+    margin-bottom: 20px;
+  }
+  

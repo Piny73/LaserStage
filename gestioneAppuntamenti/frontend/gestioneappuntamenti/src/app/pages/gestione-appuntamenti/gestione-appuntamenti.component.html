@@ -1,0 +1,24 @@
+<h2>Gestione Appuntamenti</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Data Inizio</th>
+        <th>Data Fine</th>
+        <th>Cliente</th>
+        <th>Vettura</th>
+        <th>Stato</th>
+        <th>Azioni</th>
+    </tr>
+    <tr *ngFor="let app of appuntamenti">
+        <td>{{ app.id }}</td>
+        <td>{{ app.dataOraInizio | date:'short' }}</td>
+        <td>{{ app.dataOraFine | date:'short' }}</td>
+        <td>{{ app.cliente.nome }} {{ app.cliente.cognome }}</td>
+        <td>{{ app.vettura.marca }} {{ app.vettura.modello }}</td>
+        <td>{{ app.stato }}</td>
+        <td>
+            <button (click)="deleteAppuntamento(app.id)" *ngIf="app.id">Elimina</button>
+            <button [routerLink]="['/modifica-appuntamento', app.id]">Modifica</button>
+        </td>
+    </tr>
+</table>

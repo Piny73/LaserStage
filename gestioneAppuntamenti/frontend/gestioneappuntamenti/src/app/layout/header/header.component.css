@@ -9,6 +9,16 @@
     position: relative;
 }
 
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.app-header .logo {
+    height: 50px;
+    margin-right: 20px;
+}
+
 .header-left h1 {
     font-size: 1.8em;
     margin: 0;
@@ -47,3 +57,4 @@
 .modal-body {
     padding: 20px;
 }
+
