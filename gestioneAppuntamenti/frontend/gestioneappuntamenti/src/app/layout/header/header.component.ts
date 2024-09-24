@@ -1,8 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+// HeaderComponent
+import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoginComponent } from '../../features/login/login.component';
-
-
 
 @Component({
   selector: 'app-header',
@@ -12,6 +10,8 @@ import { LoginComponent } from '../../features/login/login.component';
 export class HeaderComponent {
   @Input() title: string = 'Agenda - Officina Meccanica di GP Baudino';
   @Output() ritorno = new EventEmitter<void>();
+  
+  @ViewChild('loginModal') loginModal!: TemplateRef<any>; // Aggiungi questa riga
 
   constructor(private modalService: NgbModal) { }
 
@@ -22,11 +22,16 @@ export class HeaderComponent {
 
   // Metodo per aprire il modale di login
   openLoginModal(): void {
-    const modalRef = this.modalService.open(LoginComponent, { ariaLabelledBy: 'loginModalLabel' });
-    modalRef.componentInstance.title = 'Login'; // Puoi anche impostare altre proprietà se necessario
+    this.modalService.open(this.loginModal, { ariaLabelledBy: 'loginModalLabel' }); // Usa il template
   }
 
+  onClose(): void {
+    console.log('Modal di login chiuso');
+    // Qui puoi anche chiudere il modale se necessario
+  }
 }
+
+
 
 
 

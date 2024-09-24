@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { Appuntamento } from '../models/appuntamento.model';
-import { Statistiche } from '../models/statistiche.model'; // Importa il modello Statistiche
+import { StatoAppuntoType } from '../models/stato-appunto.models';
+
 
 @Injectable({
     providedIn: 'root'
@@ -38,10 +40,13 @@ export class AppuntamentoService {
         return this.http.delete<void>(`${this.apiUrl}/${id}`);
     }
 
-    // Ottieni statistiche
-    getStatistiche(): Observable<Statistiche> {
-        return this.http.get<Statistiche>(this.statisticheUrl);
+      // Modifica lo stato di un appuntamento
+  modificaStatoAppuntamento(id: number, nuovoStato: StatoAppuntoType): void {
+    const appuntamento = this.appuntamenti.find(app => app.id === id);
+    if (appuntamento) {
+      appuntamento.stato = nuovoStato;
     }
+  }
 }
 
 

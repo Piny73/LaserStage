@@ -14,6 +14,7 @@
     <textarea [(ngModel)]="appuntamento.descrizione" name="descrizione" required></textarea>
   </div>
 
+  <h3>Cliente</h3>
   <div>
     <label for="clienteNome">Nome Cliente</label>
     <input type="text" [(ngModel)]="appuntamento.cliente.nome" name="clienteNome" required>
@@ -34,6 +35,7 @@
     <input type="email" [(ngModel)]="appuntamento.cliente.email" name="clienteEmail" required>
   </div>
 
+  <h3>Vettura</h3>
   <div>
     <label for="vetturaTarga">Targa Vettura</label>
     <input type="text" [(ngModel)]="appuntamento.vettura.targa" name="vetturaTarga" required>
@@ -61,4 +63,5 @@
 
   <button type="submit" [disabled]="!appuntamentoForm.valid">Aggiungi Appuntamento</button>
 </form>
+
 

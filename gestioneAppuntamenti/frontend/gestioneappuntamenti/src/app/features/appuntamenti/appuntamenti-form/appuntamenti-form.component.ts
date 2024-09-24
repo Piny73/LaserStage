@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-
 import { Appuntamento } from '../../../core/models/appuntamento.model';
 import { Cliente } from '../../../core/models/cliente.model';
 import { StatoAppuntoType } from '../../../core/models/stato-appunto.models';
 import { Vettura } from '../../../core/models/vettura.model';
-import { AppuntamentoService } from '../../../core/services/appuntamento.services';
-
+import { AppuntamentoService } from '../../../core/services/appuntamento.service';
 
 @Component({
   selector: 'app-appuntamenti-form',
@@ -41,16 +39,21 @@ export class AppuntamentiFormComponent {
   constructor(private appuntamentoService: AppuntamentoService) { }
 
   onSubmit() {
-    // Nessuna conversione necessaria, `dataOraInizio` e `dataOraFine` sono già stringhe ISO
-    this.appuntamentoService.creaAppuntamento(this.appuntamento).subscribe(response => {
-      console.log('Appuntamento aggiunto!', response);
-      this.resetForm();
+    this.appuntamentoService.creaAppuntamento(this.appuntamento).subscribe({
+      next: response => {
+        console.log('Appuntamento aggiunto!', response);
+        this.resetForm();
+      },
+      error: err => {
+        console.error('Errore nell\'aggiunta dell\'appuntamento:', err);
+        // Qui puoi gestire l'errore, ad esempio mostrando un messaggio all'utente
+      }
     });
   }
 
   resetForm() {
     this.appuntamento = {
-      dataOraInizio: new Date().toISOString(),  // Reset con nuove stringhe ISO
+      dataOraInizio: new Date().toISOString(), // Reset con nuove stringhe ISO
       dataOraFine: new Date().toISOString(),
       descrizione: '',
       stato: StatoAppuntoType.NUOVO,
@@ -75,6 +78,7 @@ export class AppuntamentiFormComponent {
     };
   }
 }
+
 
 
 

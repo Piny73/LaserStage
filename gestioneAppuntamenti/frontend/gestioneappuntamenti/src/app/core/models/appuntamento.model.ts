@@ -1,5 +1,6 @@
 import { Cliente } from './cliente.model';
-import { StatoAppuntoType } from './stato-appuntamento.model';
+import { StatoAppuntoType } from './stato-appunto.models';
+
 import { Vettura } from './vettura.model';
 
 export interface Appuntamento {

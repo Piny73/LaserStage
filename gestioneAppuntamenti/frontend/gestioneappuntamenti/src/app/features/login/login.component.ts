@@ -51,7 +51,7 @@ export class LoginComponent {
   }
 
   onClose(): void {
-    this.close.emit();
+    this.close.emit(); // Emit il evento di chiusura
   }
 }
 
