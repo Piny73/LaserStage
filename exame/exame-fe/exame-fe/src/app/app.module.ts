@@ -1,10 +1,12 @@
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LayoutModule } from "./layout/layout.module";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeaturesModule } from './features/features.module';
+import { LayoutModule } from "./layout/layout.module";
+
 
 @NgModule({
   declarations: [
@@ -16,11 +18,14 @@ import { FeaturesModule } from './features/features.module';
     LayoutModule,
     ReactiveFormsModule,
     FormsModule,
-    FeaturesModule
-],
+    FeaturesModule,
+    HttpClientModule // ho aggiunto HttpClientModule 
+  ],
   providers: [
+    provideHttpClient(withFetch()), // ho abilitato l'uso di fetch
     provideClientHydration()
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
