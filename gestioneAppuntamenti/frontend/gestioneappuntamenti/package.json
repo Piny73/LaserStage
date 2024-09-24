@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:febusiness": "node dist/febusiness/server/server.mjs"
+    "serve:ssr:gestioneappuntamenti": "node dist/gestioneappuntamenti/server/server.mjs"
   },
   "private": true,
   "dependencies": {
@@ -30,7 +30,7 @@
     "crypto-js": "^4.2.0",
     "font-awesome": "^4.7.0",
     "jwt-decode": "^4.0.0",
-    "mysql2": "^3.11.3",
+  
     "rxjs": "~7.8.0",
     "sequelize": "^6.37.3",
     "tslib": "^2.3.0",
@@ -51,6 +51,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "~5.5.2"
   }
 }

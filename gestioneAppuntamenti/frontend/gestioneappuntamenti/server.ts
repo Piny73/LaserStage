@@ -3,7 +3,7 @@ import { CommonEngine } from '@angular/ssr';
 import express from 'express';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import dbConnection from './database';
+//import dbConnection from './database';
 import AppServerModule from './src/main.server';
 
 
@@ -17,7 +17,7 @@ export function app(): express.Express {
   const commonEngine = new CommonEngine();
 
   // Usa la connessione al database
-  dbConnection;
+  //dbConnection;
 
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
