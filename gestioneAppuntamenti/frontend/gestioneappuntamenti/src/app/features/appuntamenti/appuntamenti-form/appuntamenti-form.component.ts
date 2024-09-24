@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 
-import { AppuntamentoService } from '../../../core/services/appuntamento.services';
-import { Cliente } from '../../../core/models/cliente.model'; 
-import { Vettura } from '../../../core/models/vettura.model';
 import { Appuntamento } from '../../../core/models/appuntamento.model';
-import { StatoAppuntoType } from '../../../core/models/stato-appuntamento.model';
+import { Cliente } from '../../../core/models/cliente.model';
+import { StatoAppuntoType } from '../../../core/models/stato-appunto.models';
+import { Vettura } from '../../../core/models/vettura.model';
+import { AppuntamentoService } from '../../../core/services/appuntamento.services';
+
 
 @Component({
   selector: 'app-appuntamenti-form',

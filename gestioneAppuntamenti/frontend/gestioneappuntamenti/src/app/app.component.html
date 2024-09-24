@@ -1,17 +1,21 @@
+<!-- Header con passaggio della proprietà title -->
 <app-header [title]="title"></app-header>
 
 <div class="content">
+  <!-- Outlet del router -->
   <router-outlet></router-outlet>
 </div>
 
 <!-- Pulsante per aprire il modale -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal" (click)="title='Conferma'; bodyContent='Sei sicuro di voler procedere?'">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal"
+        (click)="title='Conferma'; bodyContent='Sei sicuro di voler procedere?'">
   Apri Modale
 </button>
 
-<!-- Includi il tuo modale 
+<!-- Modale base -->
 <app-modal-basic [title]="title" [bodyContent]="bodyContent"></app-modal-basic>
--->
+
+<!-- Footer -->
 <app-footer></app-footer>
 
 

@@ -8,8 +8,8 @@ import { Statistiche } from '../models/statistiche.model'; // Importa il modello
     providedIn: 'root'
 })
 export class AppuntamentoService {
-    private apiUrl = 'http://localhost:3000/api/appunti'; // URL dell'API, aggiornalo se necessario
-    private statisticheUrl = 'http://localhost:3000/api/statistiche'; // URL per le statistiche, aggiorna se necessario
+    private apiUrl = 'http://localhost:8080/irina/api/appunti'; // URL base per gli appuntamenti
+    private statisticheUrl = 'http://localhost:8080/irina/api/statistiche'; // URL per le statistiche
 
     constructor(private http: HttpClient) { }
 
@@ -38,10 +38,10 @@ export class AppuntamentoService {
         return this.http.delete<void>(`${this.apiUrl}/${id}`);
     }
 
- // Ottieni statistiche
-getStatistiche(): Observable<Statistiche> {
-    return this.http.get<Statistiche>(this.statisticheUrl);
+    // Ottieni statistiche
+    getStatistiche(): Observable<Statistiche> {
+        return this.http.get<Statistiche>(this.statisticheUrl);
+    }
 }
 
-}
 

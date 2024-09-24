@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "febusiness": {
+    "gestioneappuntamenti": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/febusiness",
+            "outputPath": "dist/gestioneappuntamenti",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -47,20 +47,23 @@
             "prerender": true,
             "ssr": {
               "entry": "server.ts"
-            }
+            },
+            "allowedCommonJsDependencies": [
+        "crypto-js"
+      ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "2kb",
+                  "maximumError": "2.5kb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
                 }
               ],
               "outputHashing": "all"
@@ -77,10 +80,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "febusiness:build:production"
+              "buildTarget": "gestioneappuntamenti:build:production"
             },
             "development": {
-              "buildTarget": "febusiness:build:development"
+              "buildTarget": "gestioneappuntamenti:build:development"
             }
           },
           "defaultConfiguration": "development"

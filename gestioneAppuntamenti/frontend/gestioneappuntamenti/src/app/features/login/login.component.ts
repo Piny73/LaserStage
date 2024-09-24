@@ -49,6 +49,10 @@ export class LoginComponent {
       }
     });
   }
+
+  onClose(): void {
+    this.close.emit();
+  }
 }
 
 
