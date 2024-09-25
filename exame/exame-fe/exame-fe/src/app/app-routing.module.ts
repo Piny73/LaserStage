@@ -7,7 +7,7 @@ import { ActivityListComponent } from './features/activity-list/activity-list.co
 import { TimesheetListComponent } from './features/timesheet-list/timesheet-list.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent},
   { path: 'activity', component: ActivityListComponent},
   { path: 'timesheet', component: TimesheetListComponent},
