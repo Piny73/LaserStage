@@ -1,63 +1,64 @@
 <!-- Form Container -->
 <div class="form-container">
-    <div>
+  <div>
     <form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
-      <div  class="form-container">
-      <!-- Hidden Fields -->
-      <input type="hidden" formControlName="id">
-      <input type="hidden" formControlName="ownerid">
-  
-      <!-- Form Fields -->
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label for="description" class="form-label">Description</label>
-          <input type="text" id="description" formControlName="description" class="form-control" placeholder="Description">
-          <div *ngIf="activityForm.get('description')?.invalid && activityForm.get('desciption')?.touched" class="text-danger">
-            Description is required.
+      <div class="form-container">
+        <!-- Hidden Fields -->
+        <input type="hidden" formControlName="id">
+        <input type="hidden" formControlName="ownerid">
+
+        <!-- Form Fields -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" id="description" formControlName="description" class="form-control"
+              placeholder="Description">
+            <div *ngIf="activityForm.get('description')?.invalid && activityForm.get('desciption')?.touched"
+              class="text-danger">
+              Description is required.
+            </div>
           </div>
-        </div>
-        <div class="col-md-6">
+          <div class="col-md-6">
             <label for="owner" class="form-label">Owner</label>
-            <app-cb-user 
-              [selectedUser]="currentOwner" 
-              (selectedItemChange)="onOwnerSelected($event)">
+            <app-cb-user [selectedUser]="currentOwner" (selectedItemChange)="onOwnerSelected($event)">
             </app-cb-user>
           </div>
-      </div>
-  
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label for="dtstart" class="form-label">Start</label>
-          <input type="date" id="dtstart" formControlName="dtstart" class="form-control">
-          <div *ngIf="activityForm.get('dtstart')?.invalid && activityForm.get('dtstart')?.touched" class="text-danger">
-            Start date is required.
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="dtstart" class="form-label">Start</label>
+            <input type="date" id="dtstart" formControlName="dtstart" class="form-control">
+            <div *ngIf="activityForm.get('dtstart')?.invalid && activityForm.get('dtstart')?.touched"
+              class="text-danger">
+              Start date is required.
+            </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <label for="dtend" class="form-label">Ende</label>
-          <input type="date" id="dtend" formControlName="dtend" class="form-control">
-        </div>
-        <div class="d-flex align-items-center col-md-6">
+          <div class="col-md-6">
+            <label for="dtend" class="form-label">Ende</label>
+            <input type="date" id="dtend" formControlName="dtend" class="form-control">
+          </div>
+          <div class="d-flex align-items-center col-md-6">
             <div>
               <input type="checkbox" id="enable" formControlName="enable" class="form-check-input">
               <label for="enable" class="form-check-label ms-2">Enable</label>
             </div>
           </div>
-      </div>
-     </div>
-    </form>
-  </div>
-  
-      <!-- Buttons -->
-      <div class="row">
-        <div class="col-md-12 d-flex justify-content-end">
-          <button type="button" class="btn btn-secondary me-2" (click)="resetForm(activityForm)">Reset</button>
-          <button type="button" class="btn btn-danger me-2" (click)="openDeleteConfirmation()">Delete</button>
-          <button type="submit" class="btn btn-primary" [disabled]="activityForm.invalid">Save</button>
         </div>
       </div>
-  
-  
+    </form>
+  </div>
+
+  <!-- Buttons -->
+  <div class="row">
+    <div class="col-md-12 d-flex justify-content-end">
+      <button type="button" class="btn btn-secondary me-2" (click)="resetForm(activityForm)">Reset</button>
+      <button type="button" class="btn btn-danger me-2" (click)="openDeleteConfirmation()">Delete</button>
+      <button type="submit" class="btn btn-primary" [disabled]="activityForm.invalid">Save</button>
+    </div>
+  </div>
+
+
   <div id="save-confirmation" class="dialog-overlay" *ngIf="showSaveDialog">
     <div class="dialog-content text-center">
       <p class="mb-4">Do you want to save the changes?</p>
@@ -67,7 +68,7 @@
       </div>
     </div>
   </div>
-  
+
   <div id="delete-confirmation" class="dialog-overlay" *ngIf="showDeleteDialog">
     <div class="dialog-content text-center">
       <p class="mb-4">Do you want to delete this Employee?</p>
@@ -77,4 +78,3 @@
       </div>
     </div>
   </div>
-  
