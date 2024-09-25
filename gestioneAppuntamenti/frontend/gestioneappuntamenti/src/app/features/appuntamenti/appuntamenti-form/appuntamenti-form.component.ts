@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Appuntamento } from '../../../core/models/appuntamento.model';
 import { Cliente } from '../../../core/models/cliente.model';
 import { StatoAppuntoType } from '../../../core/models/stato-appunto.models';
@@ -10,8 +11,12 @@ import { AppuntamentoService } from '../../../core/services/appuntamento.service
   templateUrl: './appuntamenti-form.component.html',
   styleUrls: ['./appuntamenti-form.component.css']
 })
-export class AppuntamentiFormComponent {
-  appuntamento: Appuntamento = {
+export class AppuntamentiFormComponent implements OnInit {
+
+    appuntamentoForm! : FormGroup;
+    appuntamento!: Appuntamento;
+
+ /* appuntamento: Appuntamento = {
     dataOraInizio: new Date().toISOString(), // Inizializza come stringa ISO
     dataOraFine: new Date().toISOString(),   // Stessa cosa qui
     descrizione: '',
@@ -34,9 +39,30 @@ export class AppuntamentiFormComponent {
       gpl: false,
       elettrica: false
     } as Vettura
-  };
+  }; */
 
-  constructor(private appuntamentoService: AppuntamentoService) { }
+  constructor(private appuntamentoService: AppuntamentoService, private fb: FormBuilder) { }
+
+  ngOnInit(): void {
+
+    this.appuntamentoForm = this.fb.group({
+      id : [null], // Aggiungi l'ID come proprietà opzionale
+      dataOraInizio :["", Validators.required], // Assicurati che sia una stringa nel formato 'YYYY-MM-DDTHH:mm:ss'
+      dataOraFine: ["", Validators.required], // Assicurati che sia una stringa nel formato 'YYYY-MM-DDTHH:mm:ss'
+      descrizione: ["", Validators.required],
+      statoid: [null],
+      clientid: [null],
+      vetturaid : [null],
+    })
+
+    this.appuntamento = new Appuntamento();
+    
+    this.appuntamentoForm.patchValue({
+      ...this.appuntamento
+    });
+
+
+  }
 
   onSubmit() {
     this.appuntamentoService.creaAppuntamento(this.appuntamento).subscribe({

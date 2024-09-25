@@ -1,4 +1,4 @@
-<section class="hero">
+<!--section class="hero">
     <div class="hero-content">
         <h1>Benvenuti all'Officina Meccanica di GP Baudino</h1>
         <p>Esperienza e professionalità per la manutenzione della tua auto</p>
@@ -6,26 +6,10 @@
             Maggiori Info
         </button>
     </div>
-</section>
-
-<!-- Navigazione -->
-<nav>
-    <ul>
-        <li><a routerLink="/gestisci-clienti">Gestisci Clienti</a></li>
-        <li><a routerLink="/crea-appuntamento">Crea Appuntamento</a></li>
-        
-    </ul>
-</nav>
+</section-->
 
 <!-- Modal per informazioni generiche -->
-<app-modal-basic title="Informazioni sull'Officina"
-    bodyContent="Scopri di più sulla nostra officina, i nostri servizi e la nostra esperienza. Contattaci per ulteriori dettagli."></app-modal-basic>
+<!--app-modal-basic title="Informazioni sull'Officina"
+    bodyContent="Scopri di più sulla nostra officina, i nostri servizi e la nostra esperienza. Contattaci per ulteriori dettagli."></-app-modal-basic-->
 
 <!-- Sezione per visualizzare gli appuntamenti o i clienti -->
-<div *ngIf="erroreCaricamento" class="alert alert-danger">
-    {{ erroreCaricamento }}
-</div>
-<div>
-    <h2>Appuntamenti Totali: {{ appuntamentiTotali }}</h2>
-    <h2>Appuntamenti di Oggi: {{ appuntamentiOggi }}</h2>
-</div>

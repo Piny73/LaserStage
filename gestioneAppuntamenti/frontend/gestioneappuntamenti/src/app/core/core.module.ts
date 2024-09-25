@@ -6,18 +6,16 @@ import { ApiService } from './services/api.service';
 import { AppuntamentoService } from './services/appuntamento.service';
 import { UtilService } from './services/util.service';
 
-
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule  // Importa HttpClientModule per i servizi HTTP
+    HttpClientModule  // Importa HttpClientModule per le richieste HTTP
   ],
   providers: [
     AuthService,  // Servizio di autenticazione
     ApiService,   // Servizio API per le richieste HTTP
     UtilService,  // Servizio utilitario
-    AppuntamentoService // Registra il servizio
-
+    AppuntamentoService // Servizio per la gestione degli appuntamenti
   ]
 })
 export class CoreModule {
@@ -29,4 +27,5 @@ export class CoreModule {
     }
   }
 }
+
 

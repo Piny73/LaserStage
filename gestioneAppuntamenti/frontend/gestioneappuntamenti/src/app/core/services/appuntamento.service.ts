@@ -5,13 +5,14 @@ import { Observable } from 'rxjs';
 import { Appuntamento } from '../models/appuntamento.model';
 import { StatoAppuntoType } from '../models/stato-appunto.models';
 
-
 @Injectable({
     providedIn: 'root'
 })
 export class AppuntamentoService {
     private apiUrl = 'http://localhost:8080/irina/api/appunti'; // URL base per gli appuntamenti
     private statisticheUrl = 'http://localhost:8080/irina/api/statistiche'; // URL per le statistiche
+
+    private appuntamenti: Appuntamento[] = []; // Array per memorizzare gli appuntamenti
 
     constructor(private http: HttpClient) { }
 
@@ -40,13 +41,19 @@ export class AppuntamentoService {
         return this.http.delete<void>(`${this.apiUrl}/${id}`);
     }
 
-      // Modifica lo stato di un appuntamento
-  modificaStatoAppuntamento(id: number, nuovoStato: StatoAppuntoType): void {
-    const appuntamento = this.appuntamenti.find(app => app.id === id);
-    if (appuntamento) {
-      appuntamento.stato = nuovoStato;
+    // Modifica lo stato di un appuntamento
+    modificaStatoAppuntamento(id: number, nuovoStato: StatoAppuntoType): void {
+        const appuntamento = this.appuntamenti.find(app => app.id === id);
+        if (appuntamento) {
+            appuntamento.stato = nuovoStato;
+        }
     }
-  }
+
+    // Aggiungi un metodo per caricare gli appuntamenti in memoria
+    setAppuntamenti(appuntamenti: Appuntamento[]): void {
+        this.appuntamenti = appuntamenti;
+    }
 }
+
 
 

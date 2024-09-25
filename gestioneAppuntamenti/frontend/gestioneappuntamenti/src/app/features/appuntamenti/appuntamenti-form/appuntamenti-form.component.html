@@ -1,67 +1,26 @@
-<form (ngSubmit)="onSubmit()" #appuntamentoForm="ngForm">
-  <div>
-    <label for="dataOraInizio">Data e Ora Inizio</label>
-    <input type="datetime-local" [(ngModel)]="appuntamento.dataOraInizio" name="dataOraInizio" required>
-  </div>
-
-  <div>
-    <label for="dataOraFine">Data e Ora Fine</label>
-    <input type="datetime-local" [(ngModel)]="appuntamento.dataOraFine" name="dataOraFine" required>
-  </div>
-
-  <div>
-    <label for="descrizione">Descrizione</label>
-    <textarea [(ngModel)]="appuntamento.descrizione" name="descrizione" required></textarea>
-  </div>
-
-  <h3>Cliente</h3>
-  <div>
-    <label for="clienteNome">Nome Cliente</label>
-    <input type="text" [(ngModel)]="appuntamento.cliente.nome" name="clienteNome" required>
-  </div>
-
-  <div>
-    <label for="clienteCognome">Cognome Cliente</label>
-    <input type="text" [(ngModel)]="appuntamento.cliente.cognome" name="clienteCognome" required>
-  </div>
-
-  <div>
-    <label for="clienteTelefono">Telefono Cliente</label>
-    <input type="tel" [(ngModel)]="appuntamento.cliente.telefono" name="clienteTelefono" required>
-  </div>
-
-  <div>
-    <label for="clienteEmail">Email Cliente</label>
-    <input type="email" [(ngModel)]="appuntamento.cliente.email" name="clienteEmail" required>
-  </div>
-
-  <h3>Vettura</h3>
-  <div>
-    <label for="vetturaTarga">Targa Vettura</label>
-    <input type="text" [(ngModel)]="appuntamento.vettura.targa" name="vetturaTarga" required>
-  </div>
-
-  <div>
-    <label for="vetturaMarca">Marca Vettura</label>
-    <input type="text" [(ngModel)]="appuntamento.vettura.marca" name="vetturaMarca" required>
-  </div>
-
-  <div>
-    <label for="vetturaModello">Modello Vettura</label>
-    <input type="text" [(ngModel)]="appuntamento.vettura.modello" name="vetturaModello" required>
-  </div>
-
-  <div>
-    <label for="vetturaAnnoProduzione">Anno Produzione</label>
-    <input type="number" [(ngModel)]="appuntamento.vettura.annoProduzione" name="vetturaAnnoProduzione" required>
-  </div>
-
-  <div>
-    <label for="vetturaDisponibile">Disponibile</label>
-    <input type="checkbox" [(ngModel)]="appuntamento.vettura.disponibile" name="vetturaDisponibile">
-  </div>
-
-  <button type="submit" [disabled]="!appuntamentoForm.valid">Aggiungi Appuntamento</button>
-</form>
+<div class form-container>
+  <form  [formGroup] = "appuntamentoForm" (ngSubmit) = "onSubmit()">
+      <div>
+        <input type="hidden" formControlName = "id" >      
+        <input type="hidden" formControlName = "clientid" > 
+        <input type="hidden" formControlName = "vetturaid" >      
+      </div>
+    
+      <div class="mb-3">
+        <label for="descrizione" class="form-label">Descrizione</label>
+        <input type="text"  id ="descrizione" formControlName = "descrizione" class = "form-control" placeholder="Descrizione Appuntamento">
+      </div>
+      <div class="mb-3">
+        <label for="dataOraInizio" class="form-label">Data Ora Inizio</label>
+        <input type="text"  id ="dataOraInizio" formControlName = "dataOraInizio" class = "form-control" placeholder="Data Ora Inizio">
+      </div>
+      <div class="mb-3">
+        <label for="dataOraFine" class="form-label">Data Ora Fine</label>
+        <input type="text"  id ="dataOraFine" formControlName = "dataOraFine" class = "form-control" placeholder="Data Ora Fine">
+      </div>
+    
+    <button type="submit" class="btn btn-success">Salva Appuntamento</button>
+  </form>
+</div>
 
 

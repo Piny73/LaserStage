@@ -1,1 +1,46 @@
-<p>appuntamenti works!</p>
+<div class="container mt-4">
+    <h2>Gestione Appuntamenti</h2>
+
+    <!--button class="btn btn-primary mb-3" (click)="openModal()">Aggiungi Appuntamento</button-->
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Data Inizio</th>
+                <th>Data Fine</th>
+                <th>Descrizione</th>
+                <th>Cliente</th>
+                <th>Vettura</th>
+                <th>Stato</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let appuntamento of appuntamenti">
+                <td>{{ appuntamento.id }}</td>
+                <td>{{ appuntamento.dataOraInizio | date: 'short' }}</td>
+                <td>{{ appuntamento.dataOraFine | date: 'short' }}</td>
+                <td>{{ appuntamento.descrizione }}</td>
+                <!--td>{{ appuntamento.cliente.nome }} {{ appuntamento.cliente.cognome }}</td-->
+                <!--td>{{ appuntamento.vettura.modello }} ({{ appuntamento.vettura.targa }})</td-->
+                <!--td>{{ appuntamento.stato }}</td-->
+                <td>
+                    <!--button class="btn btn-info" (click)="editAppuntamento(appuntamento.id)">Modifica</button-->
+                    <!--button class="btn btn-danger" (click)="deleteAppuntamento(appuntamento.id)">Elimina</button-->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!--ng-template #modalTemplate let-modal>
+        <div class="modal-header">
+            <h5 class="modal-title">Aggiungi Appuntamento</h5>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+        </div>
+        <div class="modal-body">
+            <appuntamento-form [appuntamento]="selectedAppuntamento" (close)="modal.dismiss()"></appuntamento-form>
+        </div>
+    </ng-template-->
+</div>
+

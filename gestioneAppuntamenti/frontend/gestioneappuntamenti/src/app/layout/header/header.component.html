@@ -3,6 +3,7 @@
         <img src="assets/logo.png" alt="Logo Officina" class="logo">
         <h1>{{ title || 'Agenda - Officina Meccanica di GP Baudino' }}</h1>
     </div>
+    <app-navbar></app-navbar>
     <div class="header-right">
         <button type="button" class="login-button" (click)="openLoginModal()">
             Login
@@ -11,12 +12,12 @@
 </header>
 
 <!-- Modal di login -->
-<ng-template #loginModal let-modal>
+<!--ng-template #loginModal let-modal>
     <div class="modal-header">
         <h5 class="modal-title" id="loginModalLabel">Login</h5>
         <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-        <login (close)="onClose()"></login> <!-- Passa l'evento close -->
+        <login (close)="onClose()"></login> <!-- Passa l'evento close>
     </div>
-</ng-template>
+</ng-template-->

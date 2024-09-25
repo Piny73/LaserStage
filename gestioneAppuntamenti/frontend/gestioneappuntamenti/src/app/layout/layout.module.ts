@@ -1,23 +1,29 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Importa FormsModule
-import { AppuntamentiFormComponent } from '../features/appuntamenti/appuntamenti-form/appuntamenti-form.component';
+import { SharedModule } from '../shared/shared.module';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
-    AppuntamentiFormComponent,
-    
+    HeaderComponent,
+    FooterComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
-    FormsModule // Importa qui per il ngModel
+    SharedModule
   ],
   exports: [
-    AppuntamentiFormComponent // Esporta se necessario
+    HeaderComponent,
+    FooterComponent,
+    NavbarComponent    
   ]
 })
-export class AppuntamentiModule { }
+export class LayoutModule { }
+
 
 
 
