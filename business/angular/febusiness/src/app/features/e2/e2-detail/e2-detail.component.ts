@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserCompanyService } from '../../../core/services/user-company.service';
 import { Employee } from '../../../core/models/employee.model';
@@ -6,6 +6,7 @@ import { EmployeeService } from '../../../core/services/employee.service';
 import { Area } from '../../../core/models/area.model';
 import { AreaService } from '../../../core/services/area.service';
 import { UtilsService } from '../../../core/utils.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-e2-detail',
@@ -15,13 +16,14 @@ import { UtilsService } from '../../../core/utils.service';
 export class E2DetailComponent implements OnInit {
 
   employeeForm!: FormGroup;
+  private employee!: Employee;
   private employeeCopy!: Employee;
   currentArea!: number | null;
   currentManager!: number | null;
   showSaveDialog = false;
   showDeleteDialog = false; 
 
-  @Input("employee") employee!: Employee;
+  //@Input("employee") employee!: Employee;
   @Output("reload") reload = new EventEmitter<boolean>();
   
 
@@ -30,8 +32,12 @@ export class E2DetailComponent implements OnInit {
     private employeeService: EmployeeService, 
     private userCompanyService: UserCompanyService,
     private areaService : AreaService,
-    private utils : UtilsService
-  ) {}
+    private utils : UtilsService,
+    public dialogRef: MatDialogRef<E2DetailComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Employee
+  ) {
+      this.employee = data;
+  }
 
   ngOnInit(): void {
     this.employeeForm = this.fb.group({
@@ -111,7 +117,8 @@ export class E2DetailComponent implements OnInit {
             this.employeeService.setSelectedEmployee(_ep);
             //this.isUpdated = this.isUpdated+1;
             //console.log("isUpdate", this.isUpdated);
-            this.reload.emit(true);
+            //this.reload.emit(true);
+            this.sendResponse();
           },
           error: (error) => {
             console.error('Error updating Employee', error);
@@ -131,7 +138,8 @@ export class E2DetailComponent implements OnInit {
         next: () => {
           console.log('Create Employee Ok');
           this.employeeService.setSelectedEmployee(_ep);
-          this.reload.emit(true);
+          //this.reload.emit(true);
+          this.sendResponse();
         },
         error: (error: any) => {
           console.error('Error creating Employee', error);
@@ -158,7 +166,8 @@ export class E2DetailComponent implements OnInit {
           this.currentManager = null;
           this.employeeService.setSelectedEmployee(null);
           //this.isUpdated = this.isUpdated + 1;
-          this.reload.emit(true);
+          //this.reload.emit(true);
+          this.sendResponse();
         },
         error: (error) => {
           console.error('Error deleting Employee', error);
@@ -239,6 +248,10 @@ export class E2DetailComponent implements OnInit {
 
   cancelDelete() {
     this.showDeleteDialog = false;
+  }
+
+  sendResponse() {
+    this.dialogRef.close(this.employee);
   }
 
 }

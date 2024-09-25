@@ -26,7 +26,7 @@ export class RegistrazioneComponent implements OnInit {
     });
   }
   
-  onSubmit() {
+  onSubmit() { /*
     if (this.registrazioneForm.valid) {
       const user = this.registrazioneForm.value as User;
       this.userService.create(user).subscribe({
@@ -34,12 +34,12 @@ export class RegistrazioneComponent implements OnInit {
           console.log('Registrazione bem-sucedida', response);
           this.router.navigate(['/login']); // Redirecionar para a página de login após o registro
         },
-        error: (error) => {
+        error: (error: any) => {
           console.error('Error Registrazione', error);
           this.errorMessage = 'Erro ao criar usuário. Tente novamente.';
         }
       });
-    }
+    }*/
   }
 
   openLogin() {
