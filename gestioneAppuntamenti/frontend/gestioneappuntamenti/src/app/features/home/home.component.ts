@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Appuntamento } from '../../core/models/appuntamento.model';
 import { AppuntamentoService } from '../../core/services/appuntamento.service';
-
 
 @Component({
   selector: 'app-home',
@@ -14,10 +12,7 @@ export class HomeComponent implements OnInit {
   appuntamentiOggi: number = 0;
   erroreCaricamento: string | null = null;  // Variabile per gestire gli errori
 
-  constructor(
-    private appuntamentoService: AppuntamentoService,
-    private router: Router
-  ) {}
+  constructor(private appuntamentoService: AppuntamentoService) {}
 
   ngOnInit(): void {
     this.caricaAppuntamenti();
@@ -47,17 +42,8 @@ export class HomeComponent implements OnInit {
       return appData === oggi;
     }).length;
   }
-
-  // Metodo per la navigazione alla pagina di gestione clienti
-  navigateToManageClients(): void {
-    this.router.navigate(['/gestisci-clienti']);
-  }
-
-  // Metodo per la navigazione alla pagina di creazione appuntamento
-  navigateToCreateAppointment(): void {
-    this.router.navigate(['/crea-appuntamento']);
-  }
 }
+
 
 
 

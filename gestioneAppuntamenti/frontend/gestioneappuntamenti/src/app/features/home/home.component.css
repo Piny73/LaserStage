@@ -22,7 +22,7 @@ main {
 }
 
 .hero {
-  background-image: url('/assets/garage.jpg');
+  background-image: url('/assets/image.jpg/hero-bg.jpg'); /* Aggiungi l'immagine di sfondo qui */
   background-size: cover;
   background-position: center;
   padding: 100px 20px;
@@ -54,34 +54,24 @@ button:hover {
   background-color: #0056b3; /* Colore hover */
 }
 
-.services, .access, .testimonials {
+.stats {
   margin-top: 40px;
-}
-
-.testimonials {
   text-align: center;
 }
 
-.testimonial {
+.stat-item {
   background-color: #f9f9f9;
   padding: 20px;
-  margin: 20px 0;
+  margin: 10px auto; /* Centra l'elemento */
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 300px; /* Larghezza massima per le statistiche */
 }
 
-blockquote {
-  font-style: italic;
-  margin: 0 0 10px;
-}
-
-.services ul {
-  list-style: none;
-  padding: 0;
-}
-
-.services li {
-  margin-bottom: 10px;
+.modal-content {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 footer {
@@ -105,3 +95,12 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+
+.alert {
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f8d7da; /* Colore dello sfondo dell'errore */
+  color: #721c24; /* Colore del testo dell'errore */
+}
+

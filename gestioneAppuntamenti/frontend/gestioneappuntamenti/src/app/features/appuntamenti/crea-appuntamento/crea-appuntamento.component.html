@@ -1,0 +1,26 @@
+<div class="home-container">
+    <h1>Crea Appuntamento</h1>
+    <form [formGroup]="appuntamentoForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="clienteId" class="form-label">ID Cliente</label>
+            <input type="number" id="clienteId" class="form-control" formControlName="clienteId">
+        </div>
+        <div class="mb-3">
+            <label for="dataOraInizio" class="form-label">Data e Ora Inizio</label>
+            <input type="datetime-local" id="dataOraInizio" class="form-control" formControlName="dataOraInizio">
+        </div>
+        <div class="mb-3">
+            <label for="dataOraFine" class="form-label">Data e Ora Fine</label>
+            <input type="datetime-local" id="dataOraFine" class="form-control" formControlName="dataOraFine">
+        </div>
+        <div class="mb-3">
+            <label for="descrizione" class="form-label">Descrizione</label>
+            <textarea id="descrizione" class="form-control" formControlName="descrizione"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="vetturaId" class="form-label">ID Vettura</label>
+            <input type="number" id="vetturaId" class="form-control" formControlName="vetturaId">
+        </div>
+        <button type="submit" class="btn btn-primary">Crea Appuntamento</button>
+    </form>
+</div>

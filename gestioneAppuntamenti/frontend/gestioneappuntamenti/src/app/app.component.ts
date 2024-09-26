@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: string = 'Gestione Appuntamenti'; 
+  title: string = 'Officina Meccanica di GP Baudino'; 
   bodyContent: string = ''; // Contenuto del modale
 
   openModal(modalTitle: string, modalBody: string) {

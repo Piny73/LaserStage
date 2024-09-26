@@ -1,7 +1,7 @@
 <header class="app-header">
     <div class="header-left">
         <img src="assets/logo.png" alt="Logo Officina" class="logo">
-        <h1>{{ title || 'Agenda - Officina Meccanica di GP Baudino' }}</h1>
+        <h1>{{ title }}</h1>
     </div>
     <app-navbar></app-navbar>
     <div class="header-right">
@@ -11,13 +11,23 @@
     </div>
 </header>
 
-<!-- Modal di login -->
-<!--ng-template #loginModal let-modal>
+<!-- Modale di Login -->
+<ng-template #loginModal let-modal>
     <div class="modal-header">
-        <h5 class="modal-title" id="loginModalLabel">Login</h5>
-        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-label="Close"></button>
+        <h4 class="modal-title" id="loginModalLabel">Login</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <login (close)="onClose()"></login> <!-- Passa l'evento close>
+        <form>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="onClose()">Accedi</button>
+        </form>
     </div>
-</ng-template-->
+</ng-template>

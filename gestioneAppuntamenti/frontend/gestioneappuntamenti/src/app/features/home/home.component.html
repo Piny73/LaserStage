@@ -1,4 +1,4 @@
-<!--section class="hero">
+<section class="hero">
     <div class="hero-content">
         <h1>Benvenuti all'Officina Meccanica di GP Baudino</h1>
         <p>Esperienza e professionalità per la manutenzione della tua auto</p>
@@ -6,10 +6,40 @@
             Maggiori Info
         </button>
     </div>
-</section-->
+</section>
 
-<!-- Modal per informazioni generiche -->
-<!--app-modal-basic title="Informazioni sull'Officina"
-    bodyContent="Scopri di più sulla nostra officina, i nostri servizi e la nostra esperienza. Contattaci per ulteriori dettagli."></-app-modal-basic-->
+<section class="stats">
+    <h2>Statistiche Appuntamenti</h2>
+    <div class="stat-item">
+        <h3>Appuntamenti Totali:</h3>
+        <p>{{ appuntamentiTotali }}</p>
+    </div>
+    <div class="stat-item">
+        <h3>Appuntamenti di Oggi:</h3>
+        <p>{{ appuntamentiOggi }}</p>
+    </div>
+</section>
 
-<!-- Sezione per visualizzare gli appuntamenti o i clienti -->
+<!-- Modale di Info -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infoModalLabel">Informazioni Officina</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>La nostra officina offre una vasta gamma di servizi per la manutenzione e riparazione delle auto.
+                    Contattaci per maggiori informazioni sui nostri servizi e prezzi!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mostrare un messaggio di errore, se presente -->
+<div *ngIf="erroreCaricamento" class="alert alert-danger" role="alert">
+    {{ erroreCaricamento }}
+</div>

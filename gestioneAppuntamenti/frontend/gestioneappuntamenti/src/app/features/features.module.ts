@@ -8,13 +8,19 @@ import { AppuntamentiFormComponent } from './appuntamenti/appuntamenti-form/appu
 import { AppuntamentiComponent } from './appuntamenti/appuntamenti/appuntamenti.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { CreaAppuntamentoComponent } from './appuntamenti/crea-appuntamento/crea-appuntamento.component';
+import { StatisticheComponent } from './statistiche/statistiche.component';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   declarations: [
     AppuntamentiComponent,
     AppuntamentiFormComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    CreaAppuntamentoComponent,
+    StatisticheComponent,
+    ReportsComponent
   ],
   imports: [
     CommonModule,
