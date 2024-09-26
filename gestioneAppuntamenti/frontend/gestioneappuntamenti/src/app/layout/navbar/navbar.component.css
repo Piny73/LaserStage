@@ -1,21 +1,27 @@
-.dialog-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitrasparente */
+.navbar {
+  background-color: #2c3e50; /* Cambia il colore di sfondo */
+  padding: 1rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  z-index: 1050; /* Garantire che si trovi sopra il contenuto */
 }
 
-.dialog-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 400px;
-  width: 100%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.navbar-item {
+  color: #ecf0f1; /* Colore del testo */
+  margin: 0 15px;
+  text-decoration: none;
 }
+
+.navbar-item:hover {
+  text-decoration: underline; /* Effetto hover */
+}
+
+.navbar-brand {
+  font-size: 1.5rem; /* Dimensione del testo del brand */
+  color: #ecf0f1;
+}
+
+.navbar-menu {
+  display: flex;
+}
+

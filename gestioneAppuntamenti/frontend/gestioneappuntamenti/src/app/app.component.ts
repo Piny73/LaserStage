@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: string = 'Gestione Appuntamenti'; // Imposta il titolo che desideri
+  title: string = 'Gestione Appuntamenti'; 
   bodyContent: string = ''; // Contenuto del modale
 
   openModal(modalTitle: string, modalBody: string) {

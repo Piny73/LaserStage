@@ -2,9 +2,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { AuthService } from './auth/auth.service';
-import { ApiService } from './services/api.service';
+
+
+import { ApiService } from './api.service';
 import { AppuntamentoService } from './services/appuntamento.service';
-import { UtilService } from './services/util.service';
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import { UtilService } from './services/util.service';
   providers: [
     AuthService,  // Servizio di autenticazione
     ApiService,   // Servizio API per le richieste HTTP
-    UtilService,  // Servizio utilitario
+    
     AppuntamentoService // Servizio per la gestione degli appuntamenti
   ]
 })

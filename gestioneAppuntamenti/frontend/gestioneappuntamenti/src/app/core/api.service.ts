@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private baseUrl = 'http://localhost:8080/irina/api'; // URL base da sua API
+  public baseUrl = 'http://localhost:8080/irina/api'; // URL base da sua API
   private http = inject(HttpClient);
 
   constructor() { }
@@ -40,4 +40,6 @@ export class ApiService {
     return this.http.delete(url, { headers });
   }
 }
+    
+
 

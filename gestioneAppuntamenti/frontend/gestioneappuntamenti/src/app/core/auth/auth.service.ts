@@ -39,9 +39,18 @@ export class AuthService {
 
   // Metodo per verificare se l'utente è autenticato
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('authToken');
+    // Controlla se il token è presente nel localStorage
+    const token = localStorage.getItem('token'); // Modifica 'token' con la chiave appropriata
+    return !!token; // Restituisce true se il token esiste, altrimenti false
   }
 }
+
+
+
+
+
+
+
 
 
 
