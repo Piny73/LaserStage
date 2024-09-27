@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output, TemplateRef, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -10,22 +11,40 @@ export class HeaderComponent {
   @Input() title: string = 'Agenda - Officina Meccanica di GP Baudino';
   @Output() ritorno = new EventEmitter<void>();
   
-  @ViewChild('loginModal') loginModal!: TemplateRef<any>;
+  loginEmail: string = '';
+  loginPassword: string = '';
+  isLoggedIn: boolean = false; // Stato di login
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   onReturn(): void {
     this.ritorno.emit();
   }
 
-  openLoginModal(): void {
-    this.modalService.open(this.loginModal, { ariaLabelledBy: 'loginModalLabel' });
+  onSubmit(): void {
+    this.authService.login(this.loginEmail, this.loginPassword).subscribe({
+      next: (response) => {
+        if (response && response.token) {
+          this.isLoggedIn = true; // Aggiorna lo stato di login
+          this.router.navigate(['/home']); // Reindirizza dopo il login
+        } else {
+          console.error('Login fallito: risposta non valida', response);
+        }
+      },
+      error: (err) => {
+        console.error('Errore di login', err);
+      }
+    });
   }
 
-  onClose(): void {
-    console.log('Modal di login chiuso');
+  logout(): void {
+    this.authService.logout();
+    this.isLoggedIn = false; // Aggiorna lo stato di login
   }
 }
+
+
+
 
 
 

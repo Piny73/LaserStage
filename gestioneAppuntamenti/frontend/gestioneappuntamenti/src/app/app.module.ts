@@ -13,10 +13,14 @@ import { FeaturesModule } from './features/features.module';
 import { LayoutModule } from './layout/layout.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './core/auth/auth.interceptor';
+import { HeaderComponent } from './layout/header/header.component';
+import { LoginComponent } from './features/login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+   
+    
   ],
   imports: [
     BrowserModule,

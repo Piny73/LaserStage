@@ -18,23 +18,25 @@ export class AuthService {
   ) {}
 
   // Metodo per il login
-  login(email: string, password: string): Observable<void> {
+  login(email: string, password: string): Observable<any> { // Cambiato da void a any
     const loginData = { email, password };
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-
+  
     return this.apiService.post(this.loginEndpoint, loginData, headers).pipe(
       map(response => {
         if (response && response.token) {
-          if (isPlatformBrowser(this.platformId)) { // Verifica se sei nel browser
+          if (isPlatformBrowser(this.platformId)) {
             localStorage.setItem('authToken', response.token);
           }
+          return response; // Restituisce la risposta
         }
+        throw new Error('Token mancante nella risposta'); // Gestisci l'errore
       }),
       catchError(error => {
         console.error('Login failed', error);
-        throw error;
+        throw error; // Rilancia l'errore per la gestione
       })
     );
   }
