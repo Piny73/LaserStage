@@ -1,9 +1,41 @@
+<div>
+  <h1>{{ title }}</h1> <!-- Mostra il titolo dell'app -->
+  <app-navbar></app-navbar> <!-- Include il componente della navbar -->
+
+  <div class="container">
+    <router-outlet></router-outlet> <!-- Qui verranno caricati i componenti delle rotte -->
+  </div>
+
+  <!-- Modale -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="myModalLabel">{{ title }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{ bodyContent }}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 <!-- Header con passaggio della proprietà title -->
-<app-header [title]="title"></app-header>
+<!--app-header [title]="title"></app-header>
 <div class="content">
-  <!-- Outlet del router -->
+  <!-- Outlet del router >
   <router-outlet></router-outlet>
 </div>
-<app-footer></app-footer>
+<app-footer></app-footer-->
 
 

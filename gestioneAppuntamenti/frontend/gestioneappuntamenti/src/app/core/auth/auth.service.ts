@@ -1,7 +1,8 @@
 import { HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { ApiService } from '../api.service';
 
 @Injectable({
@@ -11,7 +12,10 @@ export class AuthService {
 
   private readonly loginEndpoint = 'auth/login'; // Endpoint per il login
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    @Inject(PLATFORM_ID) private platformId: Object // Inietta PLATFORM_ID
+  ) {}
 
   // Metodo per il login
   login(email: string, password: string): Observable<void> {
@@ -20,30 +24,38 @@ export class AuthService {
       'Content-Type': 'application/json'
     });
 
-    // Passa il loginEndpoint e i dati al metodo 'post' del ApiService
     return this.apiService.post(this.loginEndpoint, loginData, headers).pipe(
       map(response => {
-        // Memorizza il token di autenticazione se presente nella risposta
         if (response && response.token) {
-          localStorage.setItem('authToken', response.token);
+          if (isPlatformBrowser(this.platformId)) { // Verifica se sei nel browser
+            localStorage.setItem('authToken', response.token);
+          }
         }
+      }),
+      catchError(error => {
+        console.error('Login failed', error);
+        throw error;
       })
     );
   }
 
   // Metodo per il logout
   logout(): void {
-    // Rimuovi il token di autenticazione dal localStorage
-    localStorage.removeItem('authToken');
+    if (isPlatformBrowser(this.platformId)) { // Verifica se sei nel browser
+      localStorage.removeItem('authToken');
+    }
   }
 
   // Metodo per verificare se l'utente è autenticato
   isAuthenticated(): boolean {
-    // Controlla se il token è presente nel localStorage
-    const token = localStorage.getItem('token'); // Modifica 'token' con la chiave appropriata
-    return !!token; // Restituisce true se il token esiste, altrimenti false
+    if (isPlatformBrowser(this.platformId)) { // Verifica se sei nel browser
+      const token = localStorage.getItem('authToken');
+      return !!token;
+    }
+    return false; // Se sei lato server, l'utente non è considerato autenticato
   }
 }
+
 
 
 

@@ -1,7 +1,27 @@
 <h2>Lista Appuntamenti</h2>
-<ul>
-  <li *ngFor="let appuntamento of appuntamenti">
-    {{ appuntamento.data }} - {{ appuntamento.clienteNome }} - {{ appuntamento.vetturaModello }}
-  </li>
-</ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome Cliente</th>
+      <th>Cognome Cliente</th>
+      <th>Email Cliente</th>
+      <th>Data e Ora Inizio</th>
+      <th>Data e Ora Fine</th>
+      <th>Descrizione</th>
+      <th>Vettura</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let appuntamento of appuntamenti">
+      <td>{{ appuntamento.cliente?.nome }}</td>
+      <td>{{ appuntamento.cliente?.cognome }}</td>
+      <td>{{ appuntamento.cliente?.email }}</td>
+      <td>{{ appuntamento.dataOraInizio }}</td>
+      <td>{{ appuntamento.dataOraFine }}</td>
+      <td>{{ appuntamento.descrizione }}</td>
+      <td>{{ appuntamento.vettura?.marca }} {{ appuntamento.vettura?.modello }}</td>
+    </tr>
+  </tbody>
+</table>
+
 
