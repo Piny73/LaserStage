@@ -24,4 +24,8 @@ hs_err_pid*
 replay_pid*
 /bookspace/backend/bookspace/bookspace/target/
 /exame/exame/exame/target/
+<<<<<<< Updated upstream
 .DS_Store
+=======
+/exame/exame-fe/exame-fe/nbproject/private/
+>>>>>>> Stashed changes
