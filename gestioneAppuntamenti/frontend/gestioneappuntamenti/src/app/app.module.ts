@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,7 +27,8 @@ import { SharedModule } from './shared/shared.module';
     ReactiveFormsModule,
     NgbModule,
     RouterModule,
-    LayoutModule
+    LayoutModule,
+    HttpClientModule
   ],
   providers: [
     provideHttpClient(withFetch()),

@@ -5,7 +5,7 @@ import { AppuntamentoService } from '../../../core/services/appuntamento.service
 @Component({
   selector: 'app-appuntamenti-list',
   templateUrl: './appuntamenti-list.component.html',
-  styleUrls: ['./appuntamenti-list.component.css'] // Corretto "styleUrl" in "styleUrls"
+  styleUrls: ['./appuntamenti-list.component.css']
 })
 export class AppuntamentiListComponent implements OnInit {
   appuntamenti: Appuntamento[] = [];
@@ -26,6 +26,18 @@ export class AppuntamentiListComponent implements OnInit {
       }));
     });
   }
+  eliminaAppuntamento(id: number): void {
+    this.appuntamentoService.eliminaAppuntamento(id).subscribe({
+      next: () => {
+        // Rimuovi l'appuntamento dall'elenco locale
+        this.appuntamenti = this.appuntamenti.filter(app => app.id !== id);
+      },
+      error: (error) => {
+        console.error('Errore durante l\'eliminazione dell\'appuntamento:', error);
+      }
+    });
+  }
+
 }
 
   
