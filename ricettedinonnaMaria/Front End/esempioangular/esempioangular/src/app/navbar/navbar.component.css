@@ -81,6 +81,7 @@
 
 /* Stile della barra di ricerca */
 .search-container {
+  font-family: 'Dancing Script', cursive;
   display: flex;
   align-items: center;
   margin-left: auto;
@@ -97,12 +98,16 @@
 .search-container input {
   padding: 10px; /* Stesso padding dei bottoni */
   font-size: 16px;
+  font-family: 'Dancing Script', cursive; /* Aggiungi lo stesso font dei bottoni */
   border-radius: 5px;
   border: 2px solid rgb(118, 64, 64); /* Stesso bordo dei bottoni */
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Aggiungi un po' di ombreggiatura */
 }
 
 .search-container button {
+  font-family: 'Dancing Script', cursive;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra al testo */
+  -webkit-text-stroke: 1px black;
   padding: 10px 15px;
   margin-left: 10px;
   background-color:  rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
