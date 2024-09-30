@@ -3,31 +3,23 @@
         <img src="assets/logo.png" alt="Logo Officina" class="logo">
         <h1>{{ title }}</h1>
     </div>
-    <app-navbar></app-navbar>
+    
     <div class="header-right">
-        <button type="button" class="login-button" (click)="openLoginModal()">
-            Login
-        </button>
+        <div *ngIf="!isLoggedIn; else loggedInTemplate">
+            <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="login-form">
+                <input type="email" [(ngModel)]="loginEmail" name="email" placeholder="Email" required>
+                <input type="password" [(ngModel)]="loginPassword" name="password" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary">Accedi</button>
+            </form>
+        </div>
+        <ng-template #loggedInTemplate>
+            <button type="button" class="logout-button" (click)="logout()">
+                Logout
+            </button>
+        </ng-template>
     </div>
+    <app-navbar></app-navbar>
 </header>
 
-<!-- Modale di Login -->
-<ng-template #loginModal let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title" id="loginModalLabel">Login</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-    </div>
-    <div class="modal-body">
-        <form>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary" (click)="onClose()">Accedi</button>
-        </form>
-    </div>
-</ng-template>
+
+

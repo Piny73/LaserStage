@@ -15,7 +15,8 @@ export class Ricetta {
     public difficolta: string,
     public procedimento: string,
     public tempodiEsecuzione: String,
-    public tempodiCottura: String
+    public tempodiCottura: String,
+    public immagini: string[] = [] 
   ) {}
 }
 

@@ -1,3 +1,6 @@
-<app-header  [titolo]="bookspace"  (ritorno)="openChangeDialog($event)" >
-
+<app-header  [titolo]="bookspace" >
+<router-outlet> </router-outlet>
+<app-footer> </app-footer>
 </app-header>
+<app-navbar></app-navbar>
+<router-outlet></router-outlet>

@@ -16,58 +16,51 @@
   min-height: 100vh;
 }
 
-main {
-  flex: 1;
-  padding: 20px;
-}
-
-.hero {
-  background-image: url('/assets/image.jpg/hero-bg.jpg'); /* Aggiungi l'immagine di sfondo qui */
+.main-content {
+  
+  background-image: url('/assets/officina.jpg');
   background-size: cover;
   background-position: center;
-  padding: 100px 20px;
-  color: white;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 400px;
+  padding: 100px;
+  color: rgb(239, 234, 234);
 }
 
 .hero-content {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 10px;
-}
-
-button {
-  background-color: #007bff; /* Colore primario */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3; /* Colore hover */
-}
-
-.stats {
-  margin-top: 40px;
+  background-color: rgba(53, 51, 51, 0.7); /* Sfondo semi-trasparente */
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(201, 199, 199, 0.5);
   text-align: center;
 }
-
-.stat-item {
-  background-color: #f9f9f9;
-  padding: 20px;
-  margin: 10px auto; /* Centra l'elemento */
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 300px; /* Larghezza massima per le statistiche */
+.hero {
+  height: 400px; /* Mantieni l'altezza per la sezione hero */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Per posizionare correttamente il contenuto */
 }
 
+/* Sezione Servizi */
+.services {
+  padding: 40px;
+  text-align: center;
+  margin-top: 20px; /* Evita sovrapposizioni */
+}
+
+.service-item {
+  background-color: rgba(255, 255, 255, 0.9); /* Sfondo bianco semi-trasparente */
+  padding: 20px;
+  margin: 10px auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+}
+
+.service-item h3 {
+  margin-top: 0;
+}
+
+/* Modale */
 .modal-content {
   background-color: #fff;
   border-radius: 10px;
@@ -104,3 +97,17 @@ footer a:hover {
   color: #721c24; /* Colore del testo dell'errore */
 }
 
+button {
+  background-color: #007bff; /* Colore primario */
+  color: white;
+  border: none;
+  padding: 12px 25px; /* Aumentare il padding per un pulsante più grande */
+  cursor: pointer;
+  border-radius: 8px; /* Angoli arrotondati */
+  transition: background-color 0.3s ease, transform 0.2s; /* Aggiungere un'animazione */
+}
+
+button:hover {
+  background-color: #0056b3; /* Colore hover */
+  transform: scale(1.05); /* Leggero ingrandimento al passaggio del mouse */
+}

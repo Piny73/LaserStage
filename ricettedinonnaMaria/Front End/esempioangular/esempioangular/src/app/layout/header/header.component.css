@@ -1,49 +1,29 @@
 .app-header {
-  display: flex;
-  align-items: center; /* Centra verticalmente gli elementi */
-  justify-content: center; /* Centra tutto l'header orizzontalmente */
-  height: auto;
-  background: linear-gradient(to right, #d1a797, #ff6a6a);
+  background-image: url('/assets/images/BGHeader.png') !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 400px;
   border: 5px ridge #764c4c;
   border-radius: 10px;
-  padding: 10px;
-  box-sizing: border-box;
-  width: 100%;
-  gap: 20px; /* Spazio tra logo e titolo */
-  flex-wrap: wrap; /* Permette di andare su più righe se necessario */
-}
-
-.logo-image {
-  max-width: 100%;
-  height: auto;
-  max-height: 150px;
+  padding: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .tile-container {
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-family: 'Dancing Script', cursive;
   font-size: 5vw;
+  color: black;
   text-align: center;
-}
-
-@media (max-width: 768px) {
-  .app-header {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .logo-image {
-    max-height: 100px;
-    margin-right: 0;
-  }
-
-  .tile-container {
-    font-size: 7vw;
-  }
-}
-
-.header-down {
-  background-image: url('/assets/images/LibroRicette.png'); /* URL dell'immagine */
-  background-repeat: no-repeat; /* Non ripete l'immagine */
-  background-size: contain; /* Adatta l'immagine all'interno dell'elemento */
-  background-position: left center; /* Posiziona l'immagine a sinistra, centrato verticalmente */
+  white-space: nowrap;
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+  padding: 10px 20px;
+  border-radius: 10px; /* Arrotonda i bordi per un effetto morbido */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra al testo */
+  -webkit-text-stroke: 1px black;
 }

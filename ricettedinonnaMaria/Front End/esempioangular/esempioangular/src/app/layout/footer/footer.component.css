@@ -1,5 +1,5 @@
 .app-footer {
-  background: linear-gradient(to right, #d1a797, #ff6a6a);
+  background: linear-gradient(to right, #d1a797, #ffa86a);
   color: white;
   text-align: center;
   padding: 20px;
@@ -51,9 +51,11 @@
 
 .btn-secondary {
   font-family: 'Dancing Script', cursive;
-  background-color: #ff6a6a;
+  background-color:  rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
   color: black;
   border: 2px solid rgb(118, 64, 64);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra al testo */
+  -webkit-text-stroke: 0.5px black;
 }
 
 .btn-secondary:active {

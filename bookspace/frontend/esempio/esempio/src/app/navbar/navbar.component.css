@@ -1,0 +1,88 @@
+.navbar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    background: linear-gradient(to right, #26bbfc, #26bbfc); 
+    padding: 10px;
+    height: 60px;
+    border: 3px solid #000000;
+  }
+  
+  .navbar-nav {
+    display: flex; 
+    align-items: right;
+    margin: 0;
+    padding: 0;
+    list-style-type: none; 
+  }
+  
+  .navbar-nav.left {
+    margin-left: 0; 
+  }
+  
+  .navbar-nav.right {
+    margin-left: auto; .sofadi-one-regular {
+      font-family: "Sofadi One", system-ui;
+      font-weight: 400;
+      font-style: normal;
+    }
+    
+  }
+  
+  .nav-item {
+    display: inline-block;.sofadi-one-regular {
+      font-family: "Sofadi One", system-ui;
+      font-weight: 400;
+      font-style: normal;
+    }
+    
+    margin-right: 10px; .sofadi-one-regular {
+      font-family: "Sofadi One", system-ui;
+      font-weight: 400;
+      font-style: normal;
+    }
+    
+  }
+  
+  .nav-item:last-child {
+    margin-right: 0; .sofadi-one-regular {
+      font-family: "Sofadi One", system-ui;
+      font-weight: 400;
+      font-style: normal;
+    }
+    
+  }
+  
+  .btn {
+    background-color: #feb42c;
+    padding: 10px 15px; .sofadi-one-regular {
+      font-family: "Sofadi One", system-ui;
+      font-weight: 400;
+      font-style: normal;
+    }
+    
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 3px solid rgb(0, 0, 0);  
+  }
+  
+  .btn-secondary {
+    background-color: #feb42c;
+    color: black;
+    border: 3px solid rgb(0, 0, 0);
+  }
+  .btn-secondary:active {
+    background-color: #5a6268; .sofadi-one-regular {
+      font-family: "Sofadi One", system-ui;
+      font-weight: 400;
+      font-style: normal;
+    }
+    
+    transform: scale(0.98); .sofadi-one-regular {
+      font-family: "Sofadi One", system-ui;
+      font-weight: 400;
+      font-style: normal;
+    }
+    
+  }

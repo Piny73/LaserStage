@@ -1,19 +1,7 @@
 <h2>Lista Appuntamenti</h2>
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Data Inizio</th> <!-- Modificato per riflettere il campo corretto -->
-    <th>Cliente</th>
-    <th>Azioni</th>
-  </tr>
-  <tr *ngFor="let appuntamento of appuntamenti">
-    <td>{{ appuntamento.id }}</td>
-    <td>{{ appuntamento.dataOraInizio }}</td> <!-- Utilizza dataOraInizio -->
-    <td>{{ appuntamento.cliente?.nome }} {{ appuntamento.cliente?.cognome }}</td> <!-- Assicurati di usare le proprietà corrette -->
-    <td>
-      <button (click)="eliminaAppuntamento(appuntamento.id ?? 0)">Elimina</button>
-    </td>
-  </tr>
-</table>
-
+<ul>
+  <li *ngFor="let appuntamento of appuntamenti">
+    {{ appuntamento.data }} - {{ appuntamento.clienteNome }} - {{ appuntamento.vetturaModello }}
+  </li>
+</ul>
 

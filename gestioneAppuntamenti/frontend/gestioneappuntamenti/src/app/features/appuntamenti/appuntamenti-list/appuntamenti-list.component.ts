@@ -10,7 +10,7 @@ import { AppuntamentoService } from '../../../core/services/appuntamento.service
 export class AppuntamentiListComponent implements OnInit {
   appuntamenti: Appuntamento[] = [];
 
-  constructor(private appuntamentoService: AppuntamentoService) { }
+  constructor(private appuntamentoService: AppuntamentoService) {}
 
   ngOnInit(): void {
     this.loadAppuntamenti();
@@ -18,11 +18,10 @@ export class AppuntamentiListComponent implements OnInit {
 
   loadAppuntamenti(): void {
     this.appuntamentoService.getAppuntamenti().subscribe((data: Appuntamento[]) => {
-      // Non cambiare il tipo nel modello, ma puoi convertire le date solo per l'uso lato client
       this.appuntamenti = data.map(app => ({
         ...app,
-        dataOraInizio: new Date(app.dataOraInizio).toLocaleString(),  // Converte la stringa ISO in un formato leggibile
-        dataOraFine: new Date(app.dataOraFine).toLocaleString()       // Stessa conversione per dataOraFine
+        dataOraInizio: new Date(app.dataOraInizio).toLocaleString(),  
+        dataOraFine: new Date(app.dataOraFine).toLocaleString()       
       }));
     });
   }
@@ -39,6 +38,7 @@ export class AppuntamentiListComponent implements OnInit {
   }
 
 }
+
 
   
   

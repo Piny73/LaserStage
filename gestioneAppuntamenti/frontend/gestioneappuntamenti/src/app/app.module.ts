@@ -7,15 +7,20 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthInterceptor } from './core/auth/auth.interceptor';
+
 import { CoreModule } from './core/core.module';
 import { FeaturesModule } from './features/features.module';
 import { LayoutModule } from './layout/layout.module';
 import { SharedModule } from './shared/shared.module';
+import { AuthInterceptor } from './core/auth/auth.interceptor';
+import { HeaderComponent } from './layout/header/header.component';
+import { LoginComponent } from './features/login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+   
+    
   ],
   imports: [
     BrowserModule,

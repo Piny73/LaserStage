@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { NavbarComponent } from './navbar/navbar.component';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   exports: [
     HeaderComponent,

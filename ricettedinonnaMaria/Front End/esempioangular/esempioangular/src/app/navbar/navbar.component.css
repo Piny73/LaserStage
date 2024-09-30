@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to right, #d1a797, #ff6a6a);
+  background: linear-gradient(to right, #d1a797, #ffa86a);
   border: 5px ridge rgb(118, 64, 64);
   padding: 10px;
   height: 100px;
@@ -43,9 +43,11 @@
 
 .btn-secondary {
   font-family: 'Dancing Script', cursive;
-  background-color: #ff6a6a;
+  background-color:  rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
   color: black;
   border: 2px solid rgb(118, 64, 64);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra al testo */
+  -webkit-text-stroke: 0.5px black;
 }
 
 .btn-secondary:active {
@@ -83,7 +85,7 @@
   align-items: center;
   margin-left: auto;
   margin-right: 300px;
-  background: linear-gradient(to right, #d1a797, #ff6a6a); /* Stesso sfondo della navbar */
+  background-color:  rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
   border: 5px ridge rgb(118, 64, 64); /* Stesso bordo della navbar */
   padding: 10px;
   height: 50px;
@@ -103,7 +105,7 @@
 .search-container button {
   padding: 10px 15px;
   margin-left: 10px;
-  background-color: #ff6a6a;
+  background-color:  rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
   color: black; /* Stesso colore di testo dei bottoni */
   border: 2px solid rgb(118, 64, 64); /* Stesso bordo dei bottoni */
   border-radius: 5px;
@@ -113,7 +115,7 @@
 }
 
 .search-container button:hover {
-  background-color: #ff5a5a;
+  background-color:  rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
 }
 
 .search-container button:active {

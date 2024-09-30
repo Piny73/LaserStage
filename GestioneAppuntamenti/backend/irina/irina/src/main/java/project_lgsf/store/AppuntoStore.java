@@ -11,89 +11,62 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import project_lgsf.entity.Appunto;
-import javax.persistence.EntityNotFoundException;
+
 import javax.persistence.PersistenceContext;
 
-/**
- *
- * @author Stage
- */
 @RequestScoped
 @Transactional(Transactional.TxType.REQUIRED)
-public class AppuntoStore extends BaseStore<Appunto>  {
-    
-    public List<Appunto> all() {
+public class AppuntoStore extends BaseStore<Appunto> {
 
-        return em.createQuery("select e from Appunto e where e.canceled = false",Appunto.class)
-                .getResultList();
-
-    }
- @PersistenceContext(unitName = "pu")
+    @PersistenceContext(unitName = "pu")
     private EntityManager em;
 
     public EntityManager getEm() {
         return em;
     }
-     public Optional<Appunto> find(Long id){
-        
-        Appunto found = em.find(Appunto.class, id);
-       
-        return found == null ? Optional.empty() : Optional.of(found);
-        
+
+    public List<Appunto> all() {
+        return em.createQuery("select e from Appunto e where e.canceled = false", Appunto.class)
+                .getResultList();
     }
-     
-     
-         public Optional<Appunto> findAppuntobyTarga(String targa) {
-        try{
-            
+
+    public Optional<Appunto> find(Long id) {
+        Appunto found = em.find(Appunto.class, id);
+        return found == null ? Optional.empty() : Optional.of(found);
+    }
+
+    public Optional<Appunto> findAppuntobyTarga(String targa) {
+        try {
             return Optional.of(
                     em.createQuery("select e from Appunto e where e.vettura.targa = :targa and e.canceled = false", Appunto.class)
                     .setParameter("targa", targa)
                     .getSingleResult()
-                    );
-            
+            );
         } catch (NoResultException ex) {
-            
-            return Optional.empty();                    
-            
+            return Optional.empty();
         }
-            
     }
-         
-     
-     public Optional<Appunto> findAppuntobyCliente(String cliente) {
-        try{
-            
+
+    public Optional<Appunto> findAppuntobyCliente(String cliente) {
+        try {
             return Optional.of(
                     em.createQuery("select e from Appunto e where e.cliente.nome = :cliente and e.canceled = false", Appunto.class)
                     .setParameter("cliente", cliente)
                     .getSingleResult()
-                    );
-            
+            );
         } catch (NoResultException ex) {
-            
-            return Optional.empty();                    
-            
+            return Optional.empty();
         }
-            
     }
-     /*
-      public Optional<Appunto> findAppuntobyAppunto(String appunto) {
-        try{
-            
-            return Optional.of(
-                    em.createQuery("select e from Appunto e where e.created :appunto and e.dataOraInizio = false", Appunto.class)
-                    .setParameter("appunto", appunto)
-                    .getSingleResult()
-                    );
-            
-        } catch (NoResultException ex) {
-            
-            return Optional.empty();                    
-            
-        }
-            
-    }
-*/
-}
 
+    public Appunto save(Appunto entity) {
+        em.persist(entity);
+        return entity;
+    }
+
+    public Appunto update(Appunto entity) {
+        return em.merge(entity);
+    }
+
+
+}

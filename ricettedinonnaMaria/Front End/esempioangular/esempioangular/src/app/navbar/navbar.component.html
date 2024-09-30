@@ -76,7 +76,7 @@
 
   <!-- Form di creazione ricetta -->
   <div *ngIf="showRecipeForm" class="form-container">
-    <form (ngSubmit)="createRecipe(categoriaRicettaInput.value, nomeRicettaInput.value, difficoltaInput.value, procedimentoInput.value, tempoEsecuzioneInput.value, tempoCotturaInput.value)">
+    <form (ngSubmit)="createRecipe(categoriaRicettaInput.value, nomeRicettaInput.value, difficoltaInput.value, procedimentoInput.value, tempoEsecuzioneInput.value, tempoCotturaInput.value, immagini)">
       <div class="form-group">
         <label for="categoria">Categoria:</label>
         <select id="categoria" #categoriaRicettaInput required>
@@ -111,6 +111,18 @@
         <label for="tempoCottura">Tempo di Cottura (in minuti)</label>
         <input type="number" id="tempoCottura" #tempoCotturaInput required />
       </div>
+      <!-- Campo per il caricamento delle immagini -->
+    <div class="form-group">
+      <label for="immagini">Seleziona fino a 3 immagini:</label>
+      <input type="file" id="immagini" (change)="onFileSelected($event)" multiple accept="image/*" />
+    </div>
+    <!-- Anteprima delle immagini selezionate -->
+    <div *ngIf="immagini.length > 0">
+      <h4>Anteprima immagini:</h4>
+      <div *ngFor="let img of immagini">
+        <img [src]="img" alt="Anteprima immagine" width="100" />
+      </div>
+    </div>
       <button type="submit" class="btn btn-secondary">Crea Ricetta</button>
       <button type="button" class="btn btn-secondary" (click)="toggleRecipeForm()">Annulla</button>
     </form>

@@ -16,6 +16,7 @@ export class NavbarComponent {
   ingredienti: { nome: string; unitaDiMisura: string }[] = [];
   showRecipeForm = false;
   ricette: Ricetta[] = [];  // Definisci ricette come un array di oggetti Ricetta
+  immagini: string[] = [];  // Array per le immagini selezionate
   searchQuery: string = ''; // Modello per la barra di ricerca
   allRecipes = []; // Lista completa delle ricette
   filteredRecipes = []; // Lista delle ricette filtrate
@@ -39,17 +40,43 @@ export class NavbarComponent {
     this.toggleIngredientForm(); // Nasconde il form dopo la creazione dell'ingrediente
   }
 
-  createRecipe(categoria: string, nome: string, difficolta: string, procedimento: string, tempodiEsecuzione: string, tempodiCottura: string) {
-    // Creazione di un nuovo oggetto Ricetta con tutti i campi (compresa categoria e difficoltà)
-    const nuovaRicetta = new Ricetta(categoria, nome, difficolta, procedimento, tempodiEsecuzione, tempodiCottura);
+  createRecipe(categoria: string, nome: string, difficolta: string, procedimento: string, tempodiEsecuzione: string, tempodiCottura: string, immagini: string[]) {
+    // Creazione di un nuovo oggetto Ricetta con tutti i campi, incluse le immagini
+    const nuovaRicetta = new Ricetta(categoria, nome, difficolta, procedimento, tempodiEsecuzione, tempodiCottura, this.immagini);
     // Log per debugging
     console.log('Ricetta creata:', nuovaRicetta);
     // Aggiunge la nuova ricetta all'array delle ricette
     this.ricette.push(nuovaRicetta);
     // Chiude il form dopo la creazione
+    console.log('Ricetta creata:', nuovaRicetta);
+    // Resetta l'array delle immagini per la prossima ricetta
+    this.immagini = [];
     this.toggleRecipeForm();
+}
+
+// Metodo per gestire le immagini selezionate
+onFileSelected(event: any) {
+  const files: FileList = event.target.files;
+
+  // Limita il numero di immagini a un massimo di 3
+  if (files.length > 3) {
+    alert("Puoi selezionare un massimo di 3 immagini.");
+    return;
   }
 
+  // Svuota l'array delle immagini precedenti
+  this.immagini = [];
+
+  // Cicla sui file selezionati e leggi ogni immagine
+  for (let i = 0; i < files.length; i++) {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.immagini.push(e.target.result);  // Memorizza il file come base64
+    };
+    reader.readAsDataURL(files[i]);
+  }
+}
+    // Metodo per chiudere/aprire il form (se hai già un'implementazione)
   toggleRecipeForm() {
     this.showRecipeForm = !this.showRecipeForm;
   }

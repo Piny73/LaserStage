@@ -3,13 +3,13 @@ import { StatoAppuntoType } from './stato-appunto.model';
 import { Vettura } from './vettura.model';
 
 export class Appuntamento {
-  id?: number; //
+  id?: number; 
   dataOraInizio!: string;
   dataOraFine!: string;
   descrizione!: string;
   statoid?: number;
   stato?: StatoAppuntoType;
-  clientid?: number
+  clientid?: number;
   cliente?: Cliente;
   vetturaid?: number;
   vettura?: Vettura;
@@ -17,8 +17,6 @@ export class Appuntamento {
   constructor(init?: Partial<Appuntamento>) {
     Object.assign(this, init);
   }
-
-
 }
 
 

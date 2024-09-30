@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
@@ -10,22 +10,25 @@ import { AuthService } from '../../core/auth/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  loginForm: FormGroup;
+export class LoginComponent implements OnInit {
+
+  islogin:boolean = true;
+  loginForm!: FormGroup;
   errorMessage: string = '';
   icon = faSignInAlt;
   @Output() close = new EventEmitter<void>(); // Evento per chiudere il form
   isLoading: boolean = false; // Stato di caricamento
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {
+  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) {   
+  }
+
+  ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+    
+  
   }
 
   onSubmit(): void {

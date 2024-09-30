@@ -1,35 +1,33 @@
-// src/app/core/auth/auth.interceptor.ts
-import { isPlatformBrowser } from '@angular/common';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let token: string | null = null;
+    if (isPlatformBrowser(this.platformId)) { // Verifica se sei nel browser
+      const authToken = localStorage.getItem('authToken');
 
-    if (isPlatformBrowser(this.platformId)) {
-      token = localStorage.getItem('authToken');
+      if (authToken) {
+        const clonedReq = req.clone({
+          headers: req.headers.set('Authorization', `Bearer ${authToken}`)
+        });
+        return next.handle(clonedReq);
+      }
     }
-
-    if (token) {
-      const cloned = req.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      return next.handle(cloned);
-    } else {
-      return next.handle(req);
-    }
+    
+    // Se sei lato server o non c'è nessun token, continua senza modificare la richiesta
+    return next.handle(req);
   }
 }
+
+
+
+
 
 
 
