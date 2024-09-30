@@ -1,0 +1,22 @@
+.form-container {
+    border: 1px solid #a9a9a9; /* Light gray border */
+    padding: 15px;
+    border-radius: 5px; /* Optional: adds rounded corners */
+    background-color: #ffffff; /* Optional: sets background color */
+  }
+  
+.table-container {
+  border: 1px solid #a9a9a9; /* Light gray border */
+  border-radius: 5px; /* Optional: adds rounded corners */
+  background-color: #ffffff; /* Optional: sets background color */
+  padding: 15px;
+}
+
+/* Optional: To enhance spacing and look */
+.table-container .table {
+  margin-bottom: 0; 
+}
+
+.table th, .table td {
+  text-align: left; 
+}

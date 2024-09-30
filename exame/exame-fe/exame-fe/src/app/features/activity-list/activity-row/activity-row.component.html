@@ -1,0 +1,7 @@
+<td>
+  <input type="radio" name="Select" [value]="activity.id" [checked]="_selected" (change)="openChangeDialog($event)" />
+</td>
+<td>{{ activity.description }}</td>
+<td>{{ activity.ownerid ? activity.owner.name : "" }}</td>
+<td>{{ activity.dtstart ? activity.dtstart : "" }}</td>
+<td>{{ activity.dtend ? activity.dtend : "" }}</td>

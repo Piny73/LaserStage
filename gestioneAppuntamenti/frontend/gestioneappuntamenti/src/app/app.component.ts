@@ -1,4 +1,3 @@
-// src/app/app.component.ts
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Business Managment';
+  title: string = 'Officina Meccanica di GP Baudino'; 
+  bodyContent: string = ''; // Contenuto del modale
+
+  openModal(modalTitle: string, modalBody: string) {
+    this.title = modalTitle; // Aggiorna il titolo del modale
+    this.bodyContent = modalBody; // Aggiorna il contenuto del modale
+  }
 }
+
+

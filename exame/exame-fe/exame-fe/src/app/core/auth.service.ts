@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
-import { map, Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
-import { User } from './models/user.model';
+import { Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { ApiService } from './api.service';
 import { Login } from './models/login.model';
+import { User } from './models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class AuthService {
 
   login(login: Login): Observable<any> {
     const loginData = login;
-    const headers = new HttpHeaders({ 
+    const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
@@ -31,13 +31,13 @@ export class AuthService {
   }
 
   getUser(): User | null {
-    try{ 
+    try {
       const localUser = localStorage.getItem('user');
 
       if (localUser) {
         try {
           if (this.isValidUser(localUser)?.id) {
-             return this.isValidUser(localUser);
+            return this.isValidUser(localUser);
           } else {
             console.log('Error localstorage');
             this.logout();
@@ -56,14 +56,14 @@ export class AuthService {
 
   private isValidUser(obj: any): User | null {
     const _user = new User();
-    
-    if(obj){
+
+    if (obj) {
       _user.id = obj.id;
       _user.name = obj.name;
       _user.email = obj.email;
     }
 
-     return _user;
+    return _user;
   }
 
   saveUserInLocalStorage(user: string) {
@@ -71,7 +71,7 @@ export class AuthService {
   }
 
   logout() {
-    try{
+    try {
       localStorage.removeItem('user');
     } catch (error) {
       console.error('Localstore Delete:', error);

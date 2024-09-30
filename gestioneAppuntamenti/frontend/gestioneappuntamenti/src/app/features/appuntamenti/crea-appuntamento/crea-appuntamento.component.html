@@ -1,0 +1,39 @@
+<div class="home-container">
+    <h1>Crea Appuntamento</h1>
+    <button (click)="closeForm()" class="btn btn-danger" style="float: right;">X</button> <!-- Pulsante X per chiudere il form -->
+    <form [formGroup]="appuntamentoForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" id="nome" class="form-control" formControlName="nome">
+        </div>
+        <div class="mb-3">
+            <label for="cognome" class="form-label">Cognome</label>
+            <input type="text" id="cognome" class="form-control" formControlName="cognome">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" class="form-control" formControlName="email">
+        </div>
+        <div class="mb-3">
+            <label for="dataOraInizio" class="form-label">Data e Ora Inizio</label>
+            <input type="datetime-local" id="dataOraInizio" class="form-control" formControlName="dataOraInizio">
+        </div>
+        <div class="mb-3">
+            <label for="dataOraFine" class="form-label">Data e Ora Fine</label>
+            <input type="datetime-local" id="dataOraFine" class="form-control" formControlName="dataOraFine">
+        </div>
+        <div class="mb-3">
+            <label for="descrizione" class="form-label">Descrizione</label>
+            <textarea id="descrizione" class="form-control" formControlName="descrizione"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="vettura" class="form-label">Nome Vettura</label>
+            <input type="text" id="vettura" class="form-control" formControlName="vettura">
+        </div>
+        <button type="submit" class="btn btn-primary">Crea Appuntamento</button>
+    </form>
+</div>
+
+
+
+

@@ -4,6 +4,9 @@ import { catchError, map, startWith } from 'rxjs/operators';
 import { Employee } from '../../../core/models/employee.model';
 import { EmployeeService } from '../../../core/services/employee.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from '@angular/material/dialog';
+import { E2DetailComponent } from '../e2-detail/e2-detail.component';
+
 
 interface EmployeeData {
   loading: boolean;
@@ -28,7 +31,7 @@ export class E2ListComponent implements OnInit, OnDestroy, OnChanges {
   selectedEmployee!: Employee;
   private subscription!: Subscription;
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(private employeeService: EmployeeService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.load();
@@ -95,6 +98,29 @@ export class E2ListComponent implements OnInit, OnDestroy, OnChanges {
 
   openDetail(content: TemplateRef<any>) {
 		this.modalService.open(content, { size: 'xl' });
+	}
+
+  openDetail2() {
+		
+    const dialogRef = this.dialog.open(E2DetailComponent, {
+      width: '80%', // Largura da modal
+      maxWidth: '1000px',
+      height: 'auto', // Altura automática
+      maxHeight: '90vh', // Altura máxima para evitar que ocupe toda a tela
+      data: this.selectedEmployee,
+      panelClass: 'custom-modal'
+    });
+    
+    // Desabilita a rolagem da página de fundo
+    document.body.style.overflow = 'hidden';   
+
+    dialogRef.afterClosed().subscribe(result => {
+      document.body.style.overflow = 'auto';
+      if (result) {
+        this.selectedEmployee = result;
+      }
+    });
+
 	}
 
   reload(load : boolean){

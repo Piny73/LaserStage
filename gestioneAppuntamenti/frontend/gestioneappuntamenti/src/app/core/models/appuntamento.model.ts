@@ -1,24 +1,29 @@
 import { Cliente } from './cliente.model';
+import { StatoAppuntoType } from './stato-appunto.model';
 import { Vettura } from './vettura.model';
 
-export interface Appuntamento {
-  id?: number;
-  dataOraInizio: string; // ISO date format (YYYY-MM-DDTHH:MM:SS)
-  dataOraFine: string; // ISO date format (YYYY-MM-DDTHH:MM:SS)
-  descrizione: string;
-  stato: StatoAppuntoType;
-  cliente: Cliente;
-  vettura: Vettura;
+export class Appuntamento {
+  id?: number; 
+  dataOraInizio!: string;
+  dataOraFine!: string;
+  descrizione!: string;
+  statoid?: number;
+  stato?: StatoAppuntoType;
+  clientid?: number;
+  cliente?: Cliente;
+  vetturaid?: number;
+  vettura?: Vettura;
+
+  constructor(init?: Partial<Appuntamento>) {
+    Object.assign(this, init);
+  }
 }
 
-export enum StatoAppuntoType {
-  NUOVO = 'NUOVO',
-  IN_CORSO = 'IN_CORSO',
-  COMPLETATO = 'COMPLETATO',
-  ANNULLATO = 'ANNULLATO'
-}
 
 
 
 
-  
+
+
+
+

@@ -1,0 +1,37 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .aluno-nome {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  
+  .menu-opcoes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .menu-item {
+    font-size: 1.5rem;
+    text-decoration: none;
+    margin: 1rem 0;
+    padding: 1rem 2rem;
+    color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .menu-item:hover {
+    background-color: #007bff;
+    color: black;
+  }
+  

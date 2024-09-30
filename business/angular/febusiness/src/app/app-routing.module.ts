@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'company', component: CompanyComponent, canActivate: [RoteGuardService]},
   { path: 'businessplan', component: BusinessPlanComponent, canActivate: [RoteGuardService]},
   { path: 'area', component: AreaComponent, canActivate: [RoteGuardService]},
-  { path: 'employee', component: EmployeeListComponent, canActivate: [RoteGuardService]},
+  { path: 'employee', component: E2ListComponent, canActivate: [RoteGuardService]},
   // ...
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];  

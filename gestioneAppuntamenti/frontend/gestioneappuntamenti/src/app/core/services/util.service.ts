@@ -1,3 +1,20 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
@@ -150,23 +167,23 @@ export class UtilService {
   }
 }
 
-
+*/
 
 
 
   
 
-/*
+
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:4200'; // URL del tuo backend
+  private apiUrl = 'http://localhost:8080/irina/api/openapi-ui/index.html'; // URL del tuo backend
   private token: string | null = null;
 
   constructor(private http: HttpClient, private router: Router) {
@@ -206,6 +223,6 @@ export class AuthService {
   }
 }
 
-    */
+    
 
 

@@ -45,10 +45,10 @@
           Nenhum employee encontrado.
         </div>
       </ng-container>
-      <button type="button" class="btn btn-secondary me-2" (click)="openDetail(content)">Detail</button>
+      <button type="button" class="btn btn-secondary me-2" (click)="openDetail2()">Detail</button>
     </div>
 
-    <ng-template #content let-modal>
+    <!--ng-template #content let-modal>
       <div class="modal-header">
         <h4 class="modal-title">Employee Detail</h4>
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
@@ -59,8 +59,8 @@
           (reload) = "reload($event)">
         </app-e2-detail>
       </div>
-      <!--div class="modal-footer">
+      <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
-      </div-->
-    </ng-template>
+      </div>
+    </ng-template-->
   </div>
