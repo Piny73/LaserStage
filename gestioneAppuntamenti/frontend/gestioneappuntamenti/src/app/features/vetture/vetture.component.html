@@ -1,40 +1,41 @@
 <h2>Lista Vetture</h2>
-<form [formGroup]="vetturaForm" (ngSubmit)="aggiungiVettura()">
-  <label for="targa">Targa:</label>
-  <input id="targa" formControlName="targa" required>
-
-  <label for="marca">Marca:</label>
-  <input id="marca" formControlName="marca" required>
-
-  <label for="modello">Modello:</label>
-  <input id="modello" formControlName="modello">
-
-  <label for="annoProduzione">Anno di Produzione:</label>
-  <input id="annoProduzione" type="number" formControlName="annoProduzione">
-
-  <label for="disponibile">Disponibile:</label>
-  <input id="disponibile" type="checkbox" formControlName="disponibile">
-
-  <button type="submit">Aggiungi Vettura</button>
-</form>
-
-<table>
-  <tr>
-    <th>Targa</th>
-    <th>Marca</th>
-    <th>Modello</th>
-    <th>Anno Produzione</th>
-    <th>Disponibile</th>
-    <th>Azioni</th>
-  </tr>
-  <tr *ngFor="let vettura of vetture">
-    <td>{{ vettura.targa }}</td>
-    <td>{{ vettura.marca }}</td>
-    <td>{{ vettura.modello }}</td>
-    <td>{{ vettura.annoProduzione }}</td>
-    <td>{{ vettura.disponibile ? 'Sì' : 'No' }}</td>
-    <td>
-      <button (click)="eliminaVettura(vettura.targa)">Elimina</button>
-    </td>
-  </tr>
-</table>
+<form [formGroup]="vettureForm" (ngSubmit)="aggiungiVettura()">
+    <label for="targa">Targa:</label>
+    <input id="targa" formControlName="targa" required>
+  
+    <label for="marca">Marca:</label>
+    <input id="marca" formControlName="marca" required>
+  
+    <label for="modello">Modello:</label>
+    <input id="modello" formControlName="modello">
+  
+    <label for="annoProduzione">Anno di Produzione:</label>
+    <input id="annoProduzione" type="number" formControlName="annoProduzione">
+  
+    <label for="disponibile">Disponibile:</label>
+    <input id="disponibile" type="checkbox" formControlName="disponibile">
+  
+    <button type="submit">Aggiungi Vettura</button>
+  </form>
+  
+  <h3>Lista Vetture</h3>
+  <table>
+    <tr>
+      <th>Targa</th>
+      <th>Marca</th>
+      <th>Modello</th>
+      <th>Anno di Produzione</th>
+      <th>Disponibile</th>
+      <th>Azioni</th>
+    </tr>
+    <tr *ngFor="let vettura of vetture">
+      <td>{{ vettura.targa }}</td>
+      <td>{{ vettura.marca }}</td>
+      <td>{{ vettura.modello }}</td>
+      <td>{{ vettura.annoProduzione }}</td>
+      <td>{{ vettura.disponibile ? 'Sì' : 'No' }}</td>
+      <td>
+        <button (click)="eliminaVettura(vettura.targa)">Elimina</button>
+      </td>
+    </tr>
+  </table>

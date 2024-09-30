@@ -10,7 +10,7 @@ import { AppuntamentoService } from '../../../core/services/appuntamento.service
 export class AppuntamentiListComponent implements OnInit {
   appuntamenti: Appuntamento[] = [];
 
-  constructor(private appuntamentoService: AppuntamentoService) {}
+  constructor(private appuntamentoService: AppuntamentoService) { }
 
   ngOnInit(): void {
     this.loadAppuntamenti();
@@ -20,8 +20,8 @@ export class AppuntamentiListComponent implements OnInit {
     this.appuntamentoService.getAppuntamenti().subscribe((data: Appuntamento[]) => {
       this.appuntamenti = data.map(app => ({
         ...app,
-        dataOraInizio: new Date(app.dataOraInizio).toLocaleString(),  
-        dataOraFine: new Date(app.dataOraFine).toLocaleString()       
+        dataOraInizio: new Date(app.dataOraInizio).toLocaleString(),
+        dataOraFine: new Date(app.dataOraFine).toLocaleString()
       }));
     });
   }
@@ -40,7 +40,7 @@ export class AppuntamentiListComponent implements OnInit {
 }
 
 
-  
-  
+
+
 
 
