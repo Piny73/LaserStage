@@ -31,12 +31,13 @@
   }
   
   button {
+    font-family: 'Dancing Script', cursive;
     width: 100%;
     padding: 10px;
     background-color:  rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra al testo */
     -webkit-text-stroke: 0.5px black;
-    color: white;
+    color: black;
     border: 1px ridge #764c4c; /* Bordo */
     border-radius: 4px;
     cursor: pointer;
