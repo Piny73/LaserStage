@@ -1,0 +1,32 @@
+<h2>Clienti</h2>
+<button (click)="apriModificaCliente()">Aggiungi Nuovo Cliente</button>
+
+<table>
+    <thead>
+        <tr>
+           
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Indirizzo</th>
+            <th>Telefono</th>
+            <th>Email</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let cliente of clienti">
+         
+            <td>{{ cliente.nome }}</td>
+            <td>{{ cliente.cognome }}</td>
+            <td>{{ cliente.indirizzo }}</td>
+            <td>{{ cliente.telefono }}</td>
+            <td>{{ cliente.email }}</td>
+            <td>
+                <button (click)="eliminaCliente(cliente.id)">Elimina</button>
+                <button (click)="modificaCliente(cliente)">Modifica</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<app-modifica-cliente *ngIf="clienteSelezionato" [cliente]="clienteSelezionato" (chiudi)="clienteSelezionato = null"></app-modifica-cliente>

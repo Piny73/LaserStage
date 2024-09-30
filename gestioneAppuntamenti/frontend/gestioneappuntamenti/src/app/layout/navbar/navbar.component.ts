@@ -36,5 +36,9 @@ export class NavbarComponent implements OnInit {
   cancelLogout() {
     this.showDialog = false;
   }
+
+  isLogged(): boolean {
+    return this.authService.isAuthenticated();
+  }
 }
 

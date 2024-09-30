@@ -9,7 +9,7 @@ import { StatoAppuntoType } from '../models/stato-appunto.model';
     providedIn: 'root'
 })
 export class AppuntamentoService {
-    private readonly endpoint = 'appuntamenti';
+    private readonly endpoint = 'appunti';  //nel backend ho appunti e non appunatamenti
     private appuntamentoList: Appuntamento[] = [];
     private selectedAppuntamento: Appuntamento = new Appuntamento();
 

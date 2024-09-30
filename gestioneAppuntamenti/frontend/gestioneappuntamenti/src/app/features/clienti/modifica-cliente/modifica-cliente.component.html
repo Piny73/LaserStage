@@ -1,0 +1,49 @@
+<div class="form-container">
+
+    <h2 *ngIf="clienteId">Modifica Cliente</h2>
+    <h2 *ngIf="!clienteId">Aggiungi Nuovo Cliente</h2>
+    <button class="close-button" (click)="onCancel()" aria-label="Chiudi">
+        <fa-icon [icon]="['fas', 'times']"></fa-icon> <!-- Icona di chiusura -->
+    </button>
+    <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input id="nome" formControlName="nome" type="text" class="form-control" />
+            <div *ngIf="clienteForm.get('nome')?.invalid && clienteForm.get('nome')?.touched" class="error">
+                Nome è obbligatorio.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="cognome">Cognome:</label>
+            <input id="cognome" formControlName="cognome" type="text" class="form-control" />
+            <div *ngIf="clienteForm.get('cognome')?.invalid && clienteForm.get('cognome')?.touched" class="error">
+                Cognome è obbligatorio.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="indirizzo">Indirizzo:</label>
+            <input id="indirizzo" formControlName="indirizzo" type="text" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="telefono">Telefono:</label>
+            <input id="telefono" formControlName="telefono" type="text" class="form-control" />
+            <div *ngIf="clienteForm.get('telefono')?.invalid && clienteForm.get('telefono')?.touched" class="error">
+                Telefono è obbligatorio e deve contenere solo numeri.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input id="email" formControlName="email" type="email" class="form-control" />
+            <div *ngIf="clienteForm.get('email')?.invalid && clienteForm.get('email')?.touched" class="error">
+                Email è obbligatoria e deve essere valida.
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="clienteForm.invalid">Salva</button>
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">Annulla</button>
+    </form>
+</div>

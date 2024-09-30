@@ -10,33 +10,45 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
+        
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Appuntamenti
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/appuntamenti">Gestisci Appuntamenti</a></li>
-            <li><a class="dropdown-item" href="/nuovo-appuntamento">Crea Appuntamento</a></li>
+            <li><a class="dropdown-item" href="/nuovo-appuntamento">Crea Appuntamento</a></li>  
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/clienti">Clienti</a>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Clienti
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/clienti">Gestisci Clienti</a></li>
+            
+          </ul>
         </li>
+        
         <li class="nav-item">
           <a class="nav-link" href="/vetture">Vetture</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="/statistiche">Statistiche</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="/reports">Reports</a>
         </li>
-        <!--li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>  <!-- Link alla pagina di login >
-        </li-->
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>  <!-- Link alla pagina di login -->
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="#" (click)="openLogoutDialog($event)">Logout</a>
         </li>
+
       </ul>
     </div>
   </div>
