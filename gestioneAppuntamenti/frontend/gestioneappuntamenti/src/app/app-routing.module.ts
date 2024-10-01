@@ -10,19 +10,19 @@ import { HomeComponent } from './features/home/home.component';
 import { LoginComponent } from './features/login/login.component';
 import { ReportsComponent } from './features/reports/reports.component';
 import { StatisticheComponent } from './features/statistiche/statistiche.component';
+import { VetturaComponent } from './features/vetture/vetture.component';
 
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'appuntamenti', component: AppuntamentiComponent },
   { path: 'appuntamenti', component: AppuntamentiListComponent },
-  { path: 'clienti', component: ClientiComponent },
-
-  { path: 'clienti/modifica/:id', component: ModificaClienteComponent },
-
   { path: 'nuovo-appuntamento', component: CreaAppuntamentoComponent },
+  { path: 'clienti', component: ClientiComponent },
+  { path: 'clienti/modifica/:id', component: ModificaClienteComponent },
   { path: 'statistiche', component: StatisticheComponent },
   { path: 'reports', component: ReportsComponent },
+  { path: 'vetture', component: VetturaComponent },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
@@ -32,7 +32,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
 
 
 

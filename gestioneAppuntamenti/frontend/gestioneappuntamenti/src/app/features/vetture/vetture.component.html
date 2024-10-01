@@ -1,41 +1,58 @@
-<h2>Lista Vetture</h2>
-<form [formGroup]="vettureForm" (ngSubmit)="aggiungiVettura()">
-    <label for="targa">Targa:</label>
-    <input id="targa" formControlName="targa" required>
-  
-    <label for="marca">Marca:</label>
-    <input id="marca" formControlName="marca" required>
-  
-    <label for="modello">Modello:</label>
-    <input id="modello" formControlName="modello">
-  
-    <label for="annoProduzione">Anno di Produzione:</label>
-    <input id="annoProduzione" type="number" formControlName="annoProduzione">
-  
-    <label for="disponibile">Disponibile:</label>
-    <input id="disponibile" type="checkbox" formControlName="disponibile">
-  
-    <button type="submit">Aggiungi Vettura</button>
-  </form>
-  
-  <h3>Lista Vetture</h3>
-  <table>
-    <tr>
-      <th>Targa</th>
-      <th>Marca</th>
-      <th>Modello</th>
-      <th>Anno di Produzione</th>
-      <th>Disponibile</th>
-      <th>Azioni</th>
-    </tr>
-    <tr *ngFor="let vettura of vetture">
-      <td>{{ vettura.targa }}</td>
-      <td>{{ vettura.marca }}</td>
-      <td>{{ vettura.modello }}</td>
-      <td>{{ vettura.annoProduzione }}</td>
-      <td>{{ vettura.disponibile ? 'Sì' : 'No' }}</td>
-      <td>
-        <button (click)="eliminaVettura(vettura.targa)">Elimina</button>
-      </td>
-    </tr>
-  </table>
+<form [formGroup]="vetturaForm" (ngSubmit)="salvaVettura()" class="form-horizontal">
+  <div class="form-group">
+    <label for="targa" class="col-sm-2 control-label">Targa</label>
+    <div class="col-sm-10">
+      <input id="targa" formControlName="targa" class="form-control" placeholder="Inserisci la targa">
+      <div *ngIf="vetturaForm.get('targa')?.touched && vetturaForm.get('targa')?.invalid" class="text-danger">
+        <small *ngIf="vetturaForm.get('targa')?.errors?.['required']">La targa è obbligatoria.</small>
+        <small *ngIf="vetturaForm.get('targa')?.errors?.['minlength']">La targa deve avere almeno 5 caratteri.</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="marca" class="col-sm-2 control-label">Marca</label>
+    <div class="col-sm-10">
+      <input id="marca" formControlName="marca" class="form-control" placeholder="Inserisci la marca">
+      <div *ngIf="vetturaForm.get('marca')?.touched && vetturaForm.get('marca')?.invalid" class="text-danger">
+        <small *ngIf="vetturaForm.get('marca')?.errors?.['required']">La marca è obbligatoria.</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="modello" class="col-sm-2 control-label">Modello</label>
+    <div class="col-sm-10">
+      <input id="modello" formControlName="modello" class="form-control" placeholder="Inserisci il modello">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="annoProduzione" class="col-sm-2 control-label">Anno di Produzione</label>
+    <div class="col-sm-10">
+      <input id="annoProduzione" type="number" formControlName="annoProduzione" class="form-control" placeholder="Anno di produzione">
+      <div *ngIf="vetturaForm.get('annoProduzione')?.touched && vetturaForm.get('annoProduzione')?.invalid" class="text-danger">
+        <small *ngIf="vetturaForm.get('annoProduzione')?.errors?.['required']">L'anno di produzione è obbligatorio.</small>
+        <small *ngIf="vetturaForm.get('annoProduzione')?.errors?.['annoInvalido']">L'anno non può essere futuro.</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-10 col-sm-offset-2">
+      <label>
+        <input type="checkbox" formControlName="disponibile"> Disponibile
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary" [disabled]="vetturaForm.invalid">
+        {{ modifica ? 'Salva Modifiche' : 'Aggiungi Vettura' }}
+      </button>
+    </div>
+  </div>
+</form>
+
+

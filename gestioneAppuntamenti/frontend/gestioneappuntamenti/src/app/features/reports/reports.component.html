@@ -1,1 +1,46 @@
-<p>reports works!</p>
+<div class="reports">
+    <h2>Report Vetture</h2>
+
+    <div>
+        <h3>Filtra Vetture</h3>
+        <label for="marca">Marca:</label>
+        <input type="text" id="marca" [(ngModel)]="filtroMarca" (input)="filtraVetture()" />
+
+        <label for="disponibilita">Disponibilità:</label>
+        <select id="disponibilita" [(ngModel)]="filtroDisponibilita" (change)="filtraVetture()">
+            <option value="">Tutte</option>
+            <option value="true">Disponibile</option>
+            <option value="false">Non Disponibile</option>
+        </select>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Targa</th>
+                <th>Marca</th>
+                <th>Modello</th>
+                <th>Anno Produzione</th>
+                <th>Disponibile</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let vettura of vetture">
+                <td>{{ vettura.targa }}</td>
+                <td>{{ vettura.marca }}</td>
+                <td>{{ vettura.modello }}</td>
+                <td>{{ vettura.annoProduzione }}</td>
+                <td>{{ vettura.disponibile ? 'Sì' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <h3>Disponibilità Vetture</h3>
+        <div style="display: block;">
+            <canvas baseChart [datasets]="[{ data: doughnutChartData, label: 'Vetture' }]"
+                [labels]="doughnutChartLabels" [chartType]="doughnutChartType">
+            </canvas>
+        </div>
+    </div>
+</div>
