@@ -26,24 +26,7 @@
     </div>
   </div>
 
-  <!-- Spingere il pulsante "Login" a destra -->
-  <div class="navbar-nav right">
-    <div class="nav-item">
-      <button class="btn btn-secondary" (click)="toggleLogin()">Login</button>
-    </div>
-  </div>
-</nav>
 
-<!-- Modale per il form di login -->
-<div *ngIf="showLogin" id="loginModal" class="modal">
-  <div class="modal-content">
-    <span class="close" (click)="toggleLogin()">&times;</span>
-    <!-- Manteniamo il componente di login -->
-    <div class="login-container">
-      <app-login></app-login>
-    </div>
-  </div>
-</div>
 
 <!-- Modale per creare un nuovo ingrediente -->
 <div *ngIf="showIngredientForm" id="ingredientModal" class="modal">

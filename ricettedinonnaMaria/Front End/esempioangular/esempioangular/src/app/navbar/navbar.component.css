@@ -27,6 +27,7 @@
   margin: 0;
   padding: 0;
   list-style-type: none;
+  flex-grow: 1; /* Consente al contenuto centrale di riempire lo spazio rimanente */
 }
 
 .nav-item {
@@ -55,38 +56,13 @@
   transform: scale(0.98);
 }
 
-.form-container {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #d1a797;
-  border: 2px solid rgb(118, 64, 64);
-  border-radius: 8px;
-  display: block;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
 /* Stile della barra di ricerca */
 .search-container {
   font-family: 'Dancing Script', cursive;
   display: flex;
   align-items: center;
-  margin-left: auto;
-  margin-right: 300px;
-  background-color:  rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+  margin-left: auto; /* Spinge la barra di ricerca all'estrema destra */
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
   border: 5px ridge rgb(118, 64, 64); /* Stesso bordo della navbar */
   padding: 10px;
   height: 50px;
@@ -110,7 +86,7 @@
   -webkit-text-stroke: 1px black;
   padding: 10px 15px;
   margin-left: 10px;
-  background-color:  rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
   color: black; /* Stesso colore di testo dei bottoni */
   border: 2px solid rgb(118, 64, 64); /* Stesso bordo dei bottoni */
   border-radius: 5px;
@@ -120,7 +96,7 @@
 }
 
 .search-container button:hover {
-  background-color:  rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
 }
 
 .search-container button:active {
@@ -128,23 +104,57 @@
   transform: scale(0.98); /* Stesso effetto di click dei bottoni */
 }
 
-/* Media query per schermi piccoli */
+/* Media Queries per tablet */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    height: auto;
+    flex-direction: column; /* Dispone gli elementi della navbar in colonna */
+    height: auto; /* L'altezza si adatta ai contenuti */
   }
 
-  .left-buttons {
+  .left-buttons, .navbar-nav {
     justify-content: center;
-    gap: 15px;
+    flex-wrap: wrap; /* Gli elementi della navbar si adattano su più righe se necessario */
   }
 
-  .btn {
-    padding: 8px 12px;
+  .search-container {
+    margin: 20px 0; /* Centra la barra di ricerca */
+    width: 90%; /* Riduce la larghezza della barra di ricerca */
   }
 }
- /* Sfondo del modale che copre l'intera finestra */
+
+/* Media Queries per smartphone */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px; /* Riduce il padding generale */
+    height: auto; /* L'altezza si adatta ai contenuti */
+  }
+
+  .left-buttons, .navbar-nav {
+    flex-direction: column; /* Dispone gli elementi in verticale */
+    align-items: center; /* Allinea gli elementi al centro */
+    width: 100%;
+  }
+
+  .nav-item {
+    margin-right: 0; /* Rimuove il margine destro per centratura */
+    margin-bottom: 10px; /* Aggiunge spazio tra gli elementi */
+  }
+
+  .search-container {
+    margin: 15px 0;
+    width: 100%; /* La barra di ricerca prende tutta la larghezza disponibile */
+  }
+
+  .search-container input {
+    width: 100%; /* L'input della barra di ricerca si espande a tutta larghezza */
+  }
+
+  .search-container button {
+    width: 100%; /* Il pulsante della barra di ricerca si espande a tutta larghezza */
+    margin-left: 0; /* Rimuove il margine sinistro */
+  }
+}
+/* Sfondo del modale che copre l'intera finestra */
 .modal {
   display: flex;
   position: fixed;
@@ -176,7 +186,7 @@
 
 /* Pulsante di chiusura del modale */
 .close {
-  color: black;;
+  color: black;
   position: absolute;
   top: 10px;
   right: 10px;
@@ -190,4 +200,25 @@
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* Distanziamento tra i campi del form nel modale */
+.modal-content .form-group {
+  margin-bottom: 15px; /* Distanza tra i campi */
+}
+
+/* Aggiunge padding ai campi di input, textarea e select per migliorare la leggibilità */
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+  padding: 10px;
+  width: 100%; /* Facoltativo: rende i campi full-width */
+  box-sizing: border-box; /* Include padding e bordi nella larghezza totale */
+}
+
+/* Distanza verticale tra i label e i campi di input */
+.modal-content label {
+  margin-bottom: 5px;
+  display: block;
+  font-weight: bold; /* Facoltativo: migliora la leggibilità */
 }
