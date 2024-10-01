@@ -1,48 +1,56 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
 .app-footer {
-  background: linear-gradient(to right, #d1a797, #ffa86a);
+  background: url('/assets/images/Tavolo.png'), linear-gradient(to right, #d1a797, #ffa86a); /* Combina l'immagine e il gradiente */
+  background-size: 100% 110%; /* Imposta la dimensione dell'immagine al 50% della larghezza */
+  background-position: center;
+  background-repeat: no-repeat;
   color: white;
   text-align: center;
-  padding: 0.2px;
+  padding: -16px; /* Spazio interno aumentato */
   border: 5px ridge rgb(118, 64, 64);
   border-radius: 10px;
   margin: 0;
-  width: 100%; /* Imposta la larghezza a 100% per adattarsi a schermi larghi */
-  box-sizing: border-box; /* Include padding e bordi nella larghezza totale */
+  width: 100%; /* Imposta la larghezza al 100% */
+  box-sizing: border-box; /* Include padding e bordi nella larghezza */
+  min-height: 200px; /* Altezza minima maggiore */
+  display: flex;
+  flex-direction: column; /* Disposizione verticale degli elementi */
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra orizzontalmente */
 }
 
+/* Contenitore per il titolo */
+.footer-title {
+  font-style: oblique;
+  font-family: 'Dancing Script', cursive;
+  font-size: 70px;
+  font-weight: 100;
+  color: #333;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra al testo */
+  -webkit-text-stroke: 1px black;
+  margin-bottom: 30px; /* Spazio sotto il titolo */
+  margin-top: -10px; /* Riduce lo spazio sopra il titolo per spostarlo più in alto */
+}
+
+/* Contenitore per loghi e pulsanti */
 .footer-container {
-  display: flex;                      /* Utilizza il layout flexbox */
-  flex-direction: row;               /* Dispone gli elementi in riga */
+  display: flex;                      /* Dispone gli elementi in riga */
+  flex-direction: row;               /* Disposizione orizzontale */
   align-items: center;               /* Centra gli elementi verticalmente */
   justify-content: center;           /* Allinea gli elementi orizzontalmente al centro */
-  height: 250px;                      /* Adatta l'altezza al contenuto */
-  gap: 10px;                         /* Riduci lo spazio tra i loghi per evitare overflow */
-  flex-wrap: nowrap;                 /* Mantiene gli elementi in una sola riga */
+  gap: 20px;                         /* Spazio tra loghi e pulsanti */
 }
 
 .logo {
-  width: 195px;
+  width: 200px;
   height: auto;
   max-width: 100%;
 }
 
-.footer-title {
-  font-style: oblique;
-  font-family: 'Dancing Script', cursive;
-  font-size: 60px;
-  font-weight: 100px;
-  color: #333;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra al testo */
-  -webkit-text-stroke: 1px black;
-}
-
-.no-recipes-message {
-  margin-top: 40px;
-  font-style: oblique;
-  font-family: 'Dancing Script', cursive;
-  color: rgb(251, 249, 249);
-}
-
+/* Pulsanti */
 .btn {
   padding: 20px 25px;
   border: none;
@@ -53,7 +61,7 @@
 
 .btn-secondary {
   font-family: 'Dancing Script', cursive;
-  background-color:  rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
   color: black;
   border: 2px solid rgb(118, 64, 64);
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra al testo */
@@ -64,11 +72,11 @@
   background-color: #5a6268;
   transform: scale(0.98);
 }
+
 /* Media Queries per schermi medi (tablet) */
 @media (max-width: 768px) {
   .footer-container {
-    flex-direction: column; /* Dispone gli elementi in colonna su tablet */
-    height: auto; /* L'altezza si adatta automaticamente */
+    flex-direction: column; /* Dispone loghi e pulsanti in colonna su tablet */
     gap: 15px; /* Aumenta leggermente lo spazio tra gli elementi */
   }
 
@@ -88,8 +96,7 @@
 /* Media Queries per schermi piccoli (smartphone) */
 @media (max-width: 480px) {
   .footer-container {
-    flex-direction: column; /* Dispone gli elementi in colonna */
-    height: auto; /* L'altezza si adatta automaticamente */
+    flex-direction: column; /* Dispone loghi e pulsanti in colonna su schermi piccoli */
     gap: 10px; /* Spaziatura minore tra gli elementi */
   }
 
@@ -105,3 +112,4 @@
     padding: 10px 15px; /* Riduce ancora di più il padding del pulsante */
   }
 }
+
