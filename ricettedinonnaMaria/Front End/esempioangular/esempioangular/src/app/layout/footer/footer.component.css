@@ -32,6 +32,8 @@
   font-size: 60px;
   font-weight: 400;
   color: #333;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra al testo */
+  -webkit-text-stroke: 1px black;
 }
 
 .no-recipes-message {
