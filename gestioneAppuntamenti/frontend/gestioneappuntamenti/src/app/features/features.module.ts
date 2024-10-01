@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ReportsComponent } from './reports/reports.component';
 import { StatisticheComponent } from './statistiche/statistiche.component';
+import { VetturaComponent } from './vetture/vetture.component';
 
 @NgModule({
   declarations: [
@@ -28,10 +29,11 @@ import { StatisticheComponent } from './statistiche/statistiche.component';
     StatisticheComponent,
     
     ReportsComponent,
-    
+    VetturaComponent,
     
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { StatisticheComponent } from './statistiche/statistiche.component';
     ReactiveFormsModule,
     FontAwesomeModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    
   ],
   exports: [
     HomeComponent,
