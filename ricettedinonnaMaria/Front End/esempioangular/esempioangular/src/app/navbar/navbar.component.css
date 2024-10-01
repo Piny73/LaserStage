@@ -7,8 +7,8 @@
   align-items: center;
   background: linear-gradient(to right, #d1a797, #ffa86a);
   border: 5px ridge rgb(118, 64, 64);
-  padding: 10px;
-  height: 100px;
+  padding: 5px;
+  height: 70px;
   border-radius: 10px;
   margin: 0;
   width: 100%; /* Occupa il 100% della larghezza */
@@ -143,4 +143,51 @@
   .btn {
     padding: 8px 12px;
   }
+}
+ /* Sfondo del modale che copre l'intera finestra */
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);  /* Sfondo semi-trasparente */
+  align-items: center;      /* Centra verticalmente */
+  justify-content: center;  /* Centra orizzontalmente */
+  padding: 20px;            /* Aggiunge un po' di spazio interno ai bordi */
+  overflow: auto;           /* Aggiunge uno scroll se il contenuto eccede */
+}
+
+/* Contenuto del modale */
+.modal-content {
+  background-color: #d1a797;  /* Colore di sfondo */
+  padding: 20px;              /* Spazio interno */
+  border: 1px solid #888;      /* Bordo */
+  border-radius: 5px;          /* Angoli arrotondati */
+  width: auto;                 /* La larghezza si adatta automaticamente al contenuto */
+  max-width: 90%;              /* Limite massimo di larghezza al 90% dello schermo */
+  max-height: 90%;             /* Limite massimo di altezza al 90% dello schermo */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  /* Ombreggiatura */
+  position: relative;          /* Necessario per il posizionamento della chiusura */
+  overflow-y: auto;            /* Scroll verticale se il contenuto eccede l'altezza */
+}
+
+/* Pulsante di chiusura del modale */
+.close {
+  color: black;;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }

@@ -2,7 +2,7 @@
   background: linear-gradient(to right, #d1a797, #ffa86a);
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 0.2px;
   border: 5px ridge rgb(118, 64, 64);
   border-radius: 10px;
   margin: 0;
@@ -71,15 +71,9 @@
     flex-direction: column; /* Dispone i contenuti in colonna su schermi piccoli */
     gap: 15px;
   }
-
   .logo {
     width: 150px; /* Riduce le dimensioni del logo su schermi piccoli */
   }
-
-  .footer-title {
-    font-size: 50px; /* Riduce la dimensione del titolo */
-  }
-
   .btn {
     padding: 15px 20px; /* Riduce il padding dei bottoni */
   }

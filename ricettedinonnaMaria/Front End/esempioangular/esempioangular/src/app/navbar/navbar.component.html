@@ -21,7 +21,9 @@
     <input type="text" [(ngModel)]="searchQuery" placeholder="Cerca ricette..." />
     <button (click)="onSearch()">Cerca</button>
     <!-- Messaggio di ricerca non abilitata -->
-  <div *ngIf="showSearchMessage" style="margin-top: 5px; text-align: center; color: rgb(254, 253, 253);">   Nessuna ricetta trovata</div>
+    <div *ngIf="showSearchMessage" style="margin-top: 5px; text-align: center; color: rgb(254, 253, 253);">
+      Nessuna ricetta trovata
+    </div>
   </div>
 
   <!-- Spingere il pulsante "Login" a destra -->
@@ -32,15 +34,23 @@
   </div>
 </nav>
 
-<!-- Condizione per mostrare il form di login -->
-<div *ngIf="showLogin" class="login-container">
-  <app-login></app-login>
+<!-- Modale per il form di login -->
+<div *ngIf="showLogin" id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="toggleLogin()">&times;</span>
+    <!-- Manteniamo il componente di login -->
+    <div class="login-container">
+      <app-login></app-login>
+    </div>
+  </div>
 </div>
 
-<!-- Contenitore dei form, che compaiono tra la navbar e il footer -->
-<div class="content">
-  <!-- Form di creazione ingrediente -->
-  <div *ngIf="showIngredientForm" class="form-container">
+<!-- Modale per creare un nuovo ingrediente -->
+<div *ngIf="showIngredientForm" id="ingredientModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="toggleIngredientForm()">&times;</span>
+    <h2>Nuovo Ingrediente</h2>
+    <!-- Form per creare un nuovo ingrediente -->
     <form (ngSubmit)="createIngredient(nomeIngredienteInput.value, unitaDiMisuraInput.value)">
       <div class="form-group">
         <label for="nomeIngrediente">Nome Ingrediente</label>
@@ -54,28 +64,14 @@
       <button type="button" class="btn btn-secondary" (click)="toggleIngredientForm()">Annulla</button>
     </form>
   </div>
+</div>
 
-  <!-- Tabella per mostrare gli ingredienti creati -->
-  <div *ngIf="ingredienti.length > 0">
-    <h2>Elenco degli Ingredienti</h2>
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Nome Ingrediente</th>
-          <th>Unità di Misura</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ingrediente of ingredienti">
-          <td>{{ ingrediente.nome }}</td>
-          <td>{{ ingrediente.unitaDiMisura }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Form di creazione ricetta -->
-  <div *ngIf="showRecipeForm" class="form-container">
+<!-- Modale per creare una nuova ricetta -->
+<div *ngIf="showRecipeForm" id="recipeModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="toggleRecipeForm()">&times;</span>
+    <h2>Nuova Ricetta</h2>
+    <!-- Form per creare una nuova ricetta -->
     <form (ngSubmit)="createRecipe(categoriaRicettaInput.value, nomeRicettaInput.value, difficoltaInput.value, procedimentoInput.value, tempoEsecuzioneInput.value, tempoCotturaInput.value, immagini)">
       <div class="form-group">
         <label for="categoria">Categoria:</label>
@@ -112,49 +108,29 @@
         <input type="number" id="tempoCottura" #tempoCotturaInput required />
       </div>
       <!-- Campo per il caricamento delle immagini -->
-    <div class="form-group">
-      <label for="immagini">Seleziona fino a 3 immagini:</label>
-      <input type="file" id="immagini" (change)="onFileSelected($event)" multiple accept="image/*" />
-    </div>
-    <!-- Anteprima delle immagini selezionate -->
-    <div *ngIf="immagini.length > 0">
-      <h4>Anteprima immagini:</h4>
-      <div *ngFor="let img of immagini">
-        <img [src]="img" alt="Anteprima immagine" width="100" />
+      <div class="form-group">
+        <label for="immagini">Seleziona fino a 3 immagini:</label>
+        <input type="file" id="immagini" (change)="onFileSelected($event)" multiple accept="image/*" />
       </div>
-    </div>
+      <!-- Anteprima delle immagini selezionate -->
+      <div *ngIf="immagini.length > 0">
+        <h4>Anteprima immagini:</h4>
+        <div *ngFor="let img of immagini">
+          <img [src]="img" alt="Anteprima immagine" width="100" />
+        </div>
+      </div>
       <button type="submit" class="btn btn-secondary">Crea Ricetta</button>
       <button type="button" class="btn btn-secondary" (click)="toggleRecipeForm()">Annulla</button>
     </form>
   </div>
+</div>
 
-  <!-- Tabella per mostrare le ricette create -->
-  <div *ngIf="ricette.length > 0">
-    <h2>Elenco delle Ricette</h2>
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Categoria</th>
-          <th>Nome</th>
-          <th>Difficoltà</th>
-          <th>Tempo di Esecuzione (min)</th>
-          <th>Tempo di Cottura (min)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ricetta of ricette">
-          <td>{{ ricetta.categoria }}</td>
-          <td>{{ ricetta.nome }}</td>
-          <td>{{ ricetta.difficolta }}</td>
-          <td>{{ ricetta.tempodiEsecuzione }}</td>
-          <td>{{ ricetta.tempodiCottura }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Form di creazione conoscente -->
-  <div *ngIf="showForm" class="form-container">
+<!-- Modale per creare un nuovo conoscente -->
+<div *ngIf="showForm" id="contactModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="toggleForm()">&times;</span>
+    <h2>Nuovo Conoscente</h2>
+    <!-- Form per creare un nuovo conoscente -->
     <form (ngSubmit)="createContact(nomeInput.value, cognomeInput.value, emailInput.value)">
       <div class="form-group">
         <label for="nome">Nome</label>
@@ -168,29 +144,8 @@
         <label for="email">Email</label>
         <input type="email" id="email" #emailInput required />
       </div>
-      <button type="submit" class="btn btn-secondary">Crea Contatto</button>
+      <button type="submit" class="btn btn-secondary">Crea Conoscente</button>
       <button type="button" class="btn btn-secondary" (click)="toggleForm()">Annulla</button>
     </form>
-  </div>
-
-  <!-- Tabella per mostrare i contatti creati -->
-  <div *ngIf="contacts.length > 0">
-    <h2>Elenco dei Contatti</h2>
-    <table border="1">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Cognome</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let contact of contacts">
-          <td>{{ contact.nome }}</td>
-          <td>{{ contact.cognome }}</td>
-          <td>{{ contact.email }}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>

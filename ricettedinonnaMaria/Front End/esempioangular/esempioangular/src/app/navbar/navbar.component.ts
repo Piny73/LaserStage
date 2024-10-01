@@ -9,7 +9,6 @@ import { Contact, Ricetta } from '../models/contact.model';  // Assicurati di im
 export class NavbarComponent {
 
   title = '';  // Definisci la proprietà title
-  showLogin = false;
   contacts: Contact[] = []; // Array per contenere i contatti creati
   showForm: boolean = false;  // Variabile per gestire la visibilità del form
   showIngredientForm: boolean = false;
@@ -20,8 +19,8 @@ export class NavbarComponent {
   searchQuery: string = ''; // Modello per la barra di ricerca
   allRecipes = []; // Lista completa delle ricette
   filteredRecipes = []; // Lista delle ricette filtrate
-
   showSearchMessage = false; // Variabile per controllare se mostrare il messaggio
+  showLogin: boolean = false;  // Variabile per controllare la visibilità del modale
 
   toggleLogin() {
     this.showLogin = !this.showLogin;  // Alterna la visibilità del form di login
