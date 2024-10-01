@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router'; // Importa RouterModule
+import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { SharedModule } from '../shared/shared.module';
 import { AppuntamentiFormComponent } from './appuntamenti/appuntamenti-form/appuntamenti-form.component';
+import { AppuntamentiListComponent } from './appuntamenti/appuntamenti-list/appuntamenti-list.component';
 import { AppuntamentiComponent } from './appuntamenti/appuntamenti/appuntamenti.component';
 import { CreaAppuntamentoComponent } from './appuntamenti/crea-appuntamento/crea-appuntamento.component';
 import { ClientiComponent } from './clienti/clienti/clienti.component';
-
-import { AppuntamentiListComponent } from './appuntamenti/appuntamenti-list/appuntamenti-list.component';
 import { ModificaClienteComponent } from './clienti/modifica-cliente/modifica-cliente.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -25,15 +25,11 @@ import { VetturaComponent } from './vetture/vetture.component';
     CreaAppuntamentoComponent,
     ClientiComponent,
     ModificaClienteComponent,
-
     StatisticheComponent,
-    
     ReportsComponent,
     VetturaComponent,
-    
     HomeComponent,
-    LoginComponent,
-    
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +38,7 @@ import { VetturaComponent } from './vetture/vetture.component';
     FontAwesomeModule,
     RouterModule,
     SharedModule,
-    
+    NgxChartsModule,
   ],
   exports: [
     HomeComponent,
@@ -50,6 +46,8 @@ import { VetturaComponent } from './vetture/vetture.component';
   ]
 })
 export class FeaturesModule { }
+
+
 
 
 

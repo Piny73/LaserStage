@@ -35,6 +35,7 @@ import { SharedModule } from './shared/shared.module';
     NgbModule,
     RouterModule,
     LayoutModule,
+    NgbModule,
   
     HttpClientModule
    

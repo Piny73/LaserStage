@@ -11,24 +11,20 @@ import { AuthService } from '../../core/auth/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  islogin:boolean = true;
+  islogin: boolean = true;
   loginForm!: FormGroup;
   errorMessage: string = '';
   icon = faSignInAlt;
   @Output() close = new EventEmitter<void>(); // Evento per chiudere il form
   isLoading: boolean = false; // Stato di caricamento
 
-  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) {   
-  }
+  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-    
-  
   }
 
   onSubmit(): void {
@@ -47,6 +43,7 @@ export class LoginComponent implements OnInit {
       next: (response) => {
         if (response) {
           this.router.navigate(['/home']);
+          this.onClose(); // Chiudi il modale se il login ha successo
         }
         this.isLoading = false; // Ferma il caricamento
       }
@@ -54,9 +51,10 @@ export class LoginComponent implements OnInit {
   }
 
   onClose(): void {
-    this.close.emit(); // Emit il evento di chiusura
+    this.close.emit(); // Emetti l'evento di chiusura
   }
 }
+
 
 
 

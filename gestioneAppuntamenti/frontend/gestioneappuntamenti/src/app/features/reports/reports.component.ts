@@ -8,14 +8,13 @@ import { VetturaService } from '../../core/services/vettura.service';
   styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent implements OnInit {
-  vetture: Vettura[] = [];
-  filtroMarca: string = '';
-  filtroDisponibilita: string = '';
-
-  // Configurazione del grafico
-  public doughnutChartLabels: string[] = ['Disponibile', 'Non Disponibile'];
-  public doughnutChartData: number[] = [0, 0];
-  public doughnutChartType: string = 'doughnut';
+  public filtroMarca: string = '';
+  public filtroDisponibilita: string = '';
+  public vetture: Vettura[] = []; // Assicurati di avere un array di vetture
+  public doughnutChartData: any[] = []; // Dati per il grafico, formato corretto
+  public colorScheme: any = {
+    domain: ['#5AA454', '#E44D25'] // Colori per il grafico
+  };
 
   constructor(private vetturaService: VetturaService) {}
 
@@ -39,7 +38,11 @@ export class ReportsComponent implements OnInit {
     const disponibili = this.vetture.filter(v => v.disponibile).length;
     const nonDisponibili = this.vetture.length - disponibili;
 
-    this.doughnutChartData = [disponibili, nonDisponibili];
+    // Forma i dati per il grafico
+    this.doughnutChartData = [
+      { name: 'Disponibili', value: disponibili },
+      { name: 'Non Disponibili', value: nonDisponibili }
+    ];
   }
 
   filtraVetture(): void {
@@ -50,6 +53,17 @@ export class ReportsComponent implements OnInit {
           const matchesDisponibilita = this.filtroDisponibilita ? 
             (vettura.disponibile === (this.filtroDisponibilita === 'true')) : true;
 
-          return matchesMarca && matchesDi
+          return matchesMarca && matchesDisponibilita;
+        });
+        this.calcolaStatistiche(); // Ricalcola le statistiche dopo il filtro
+      },
+      error: (error) => {
+        console.error('Errore nel filtraggio delle vetture:', error);
+      }
+    });
+  }
+}
+
+
 
 
