@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../core/auth/auth.service';
+import { LoginComponent } from '../../features/login/login.component';
 
 @Component({
   selector: 'app-header',
@@ -8,40 +9,32 @@ import { AuthService } from '../../core/auth/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  @Input() title: string = 'Agenda - Officina Meccanica di GP Baudino';
-  @Output() ritorno = new EventEmitter<void>();
-  
-  loginEmail: string = '';
-  loginPassword: string = '';
-  isLoggedIn: boolean = false; // Stato di login
+  title = 'Officina Meccanica di GP Baudino';
+  isLoggedIn: boolean = false; // Cambia in base alla tua logica di autenticazione
 
-  constructor(private authService: AuthService, private router: Router) {}
-
-  onReturn(): void {
-    this.ritorno.emit();
+  constructor(private authService: AuthService, private modalService: NgbModal) {
+    this.isLoggedIn = this.authService.isAuthenticated(); // Controlla se l'utente è autenticato
   }
 
-  onSubmit(): void {
-    this.authService.login(this.loginEmail, this.loginPassword).subscribe({
-      next: (response) => {
-        if (response && response.token) {
-          this.isLoggedIn = true; // Aggiorna lo stato di login
-          this.router.navigate(['/home']); // Reindirizza dopo il login
-        } else {
-          console.error('Login fallito: risposta non valida', response);
-        }
-      },
-      error: (err) => {
-        console.error('Errore di login', err);
+  openLoginModal() {
+    const modalRef = this.modalService.open(LoginComponent); // Assicurati di avere un componente di login
+    modalRef.result.then((result) => {
+      if (result) { // Se il login ha avuto successo, aggiorna lo stato
+        this.isLoggedIn = true;
       }
+    }, (reason) => {
+      // Gestisci la chiusura del modale
     });
   }
 
-  logout(): void {
+  logout() {
     this.authService.logout();
-    this.isLoggedIn = false; // Aggiorna lo stato di login
+    this.isLoggedIn = false; // Aggiorna lo stato dell'utente
   }
 }
+
+
+
 
 
 

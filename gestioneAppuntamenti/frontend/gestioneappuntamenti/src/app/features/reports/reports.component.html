@@ -37,10 +37,20 @@
 
     <div>
         <h3>Disponibilità Vetture</h3>
-        <div style="display: block;">
-            <canvas baseChart [datasets]="[{ data: doughnutChartData, label: 'Vetture' }]"
-                [labels]="doughnutChartLabels" [chartType]="doughnutChartType">
-            </canvas>
-        </div>
+        <ngx-charts-pie-chart>
+            [view]="[700, 400]"  <!-- Dimensione del grafico -->
+            [scheme]="colorScheme"
+            [results]="doughnutChartData" <!-- Assicurati che sia un array di oggetti con nome e valore -->
+            [gradient]="false"
+            [legend]="true"
+            [explodeSlices]="false"
+            [labels]="true"
+            [doughnut]="true"  <!-- Imposta a true per un grafico a torta -->
+            [animations]="true">
+        </ngx-charts-pie-chart>
     </div>
 </div>
+
+
+
+

@@ -1,31 +1,42 @@
 <div>
   <h1>{{ title }}</h1> <!-- Mostra il titolo dell'app -->
+  
+  <app-header></app-header> <!-- Aggiungi il componente header qui -->
+  
   <app-navbar></app-navbar> <!-- Include il componente della navbar -->
 
   <div class="container">
     <router-outlet></router-outlet> <!-- Qui verranno caricati i componenti delle rotte -->
   </div>
 
-  <!-- Modale -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <!-- Modale di login -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="myModalLabel">{{ title }}</h5>
+          <h5 class="modal-title" id="loginModalLabel">Login</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          {{ bodyContent }}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+          <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" class="form-control" [(ngModel)]="loginEmail" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" class="form-control" [(ngModel)]="loginPassword" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Accedi</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 
 
 
