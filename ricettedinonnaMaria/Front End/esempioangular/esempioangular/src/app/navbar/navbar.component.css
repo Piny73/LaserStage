@@ -121,6 +121,26 @@
     width: 90%; /* Riduce la larghezza della barra di ricerca */
   }
 }
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  background-color: #f0e4d7; /* Colore di sfondo personalizzato */
+  color: black; /* Colore del testo */
+  border: 2px solid rgb(118, 64, 64); /* Bordo per i campi */
+  border-radius: 5px; /* Bordo arrotondato */
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Leggera ombra */
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none; /* Rimuove il bordo predefinito quando il campo è attivo */
+  background-color: #ffe5d1; /* Cambia il colore di sfondo quando è attivo */
+  border-color: #764c4c; /* Cambia il colore del bordo quando è attivo */
+}
 
 /* Media Queries per smartphone */
 @media (max-width: 480px) {
