@@ -25,12 +25,9 @@ import { VetturaComponent } from './vetture/vetture.component';
     CreaAppuntamentoComponent,
     ClientiComponent,
     ModificaClienteComponent,
-
     StatisticheComponent,
-    
     ReportsComponent,
     VetturaComponent,
-    
     HomeComponent,
     LoginComponent,
     
