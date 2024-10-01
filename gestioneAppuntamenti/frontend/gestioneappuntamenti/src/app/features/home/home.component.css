@@ -17,12 +17,20 @@
 }
 
 .main-content {
-  
   background-image: url('/assets/officina.jpg');
-  background-size: cover;
-  background-position: center;
-  padding: 100px;
-  color: rgb(239, 234, 234);
+  background-size: cover; /* Copre l'intera area senza distorsioni */
+  background-position: center; /* Centra l'immagine */
+  background-repeat: no-repeat; /* Non ripete l'immagine */
+  padding: 100px; /* Padding interno per il contenuto */
+  color: rgb(239, 234, 234); /* Colore del testo */
+}
+
+.hero {
+  height: 400px; /* Mantieni l'altezza per la sezione hero */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Per posizionare correttamente il contenuto */
 }
 
 .hero-content {
@@ -31,13 +39,6 @@
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(201, 199, 199, 0.5);
   text-align: center;
-}
-.hero {
-  height: 400px; /* Mantieni l'altezza per la sezione hero */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative; /* Per posizionare correttamente il contenuto */
 }
 
 /* Sezione Servizi */
@@ -53,11 +54,42 @@
   margin: 10px auto;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 300px;
+  max-width: 300px; /* Larghezza massima per gli elementi di servizio */
+  position: relative; /* Necessario per il posizionamento assoluto del testo */
+  overflow: hidden; /* Nascondi eventuali parti che fuoriescono */
 }
 
-.service-item h3 {
-  margin-top: 0;
+.service-item h3,
+.service-item p {
+  position: relative; /* Posizionamento relativo */
+  z-index: 1; /* Assicura che il testo sia sopra l'immagine */
+  color: #000; /* Colore del testo */
+}
+
+.service-item.manutenzione {
+  background-image: url('/assets/manutenzione.jpg');
+  background-size: cover; /* Copre l'intera area */
+  background-position: center; /* Centra l'immagine */
+}
+
+.service-item.riparazione {
+  background-image: url('/assets/riparazioni.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.service-item.controlli {
+  background-image: url('/assets/controlli.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Aggiungi questo stile per migliorare la leggibilità del testo */
+.service-item h3,
+.service-item p {
+  background-color: rgba(255, 255, 255, 0.7); /* Sfondo semi-trasparente per il testo */
+  padding: 10px;
+  border-radius: 5px; /* Angoli arrotondati per il testo */
 }
 
 /* Modale */
@@ -67,6 +99,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Stile del footer */
 footer {
   background-color: #333;
   color: white;
@@ -89,6 +122,7 @@ footer a:hover {
   text-decoration: underline;
 }
 
+/* Stile per messaggi di errore */
 .alert {
   margin: 20px 0;
   padding: 15px;
@@ -97,6 +131,7 @@ footer a:hover {
   color: #721c24; /* Colore del testo dell'errore */
 }
 
+/* Stile dei pulsanti */
 button {
   background-color: #007bff; /* Colore primario */
   color: white;
@@ -111,3 +146,41 @@ button:hover {
   background-color: #0056b3; /* Colore hover */
   transform: scale(1.05); /* Leggero ingrandimento al passaggio del mouse */
 }
+
+/* Media Queries per la Responsività */
+@media (max-width: 768px) {
+  .hero {
+    height: 300px; /* Altezza ridotta per schermi più piccoli */
+  }
+
+  .main-content {
+    padding: 50px; /* Riduzione del padding */
+  }
+
+  .service-item {
+    max-width: 90%; /* Larghezza massima per schermi più piccoli */
+    margin: 10px 0; /* Spazio verticale tra i servizi */
+  }
+
+  .services {
+    padding: 20px; /* Riduzione del padding */
+  }
+
+  .hero-content {
+    padding: 20px; /* Aumenta il padding per migliorare la leggibilità */
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container h1 {
+    font-size: 1.5rem; /* Dimensione del testo ridotta per smartphone */
+  }
+
+  button {
+    padding: 10px 20px; /* Riduzione del padding per i pulsanti */
+  }
+}
+
+
+
+

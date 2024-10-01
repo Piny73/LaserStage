@@ -42,36 +42,15 @@
         <li class="nav-item">
           <a class="nav-link" href="/reports">Reports</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>  <!-- Link alla pagina di login -->
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" (click)="openLogoutDialog($event)">Logout</a>
-        </li>
+        
+       
 
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- Modale di conferma per il logout -->
-<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true" *ngIf="showDialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="logoutModalLabel">Conferma Logout</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="cancelLogout()"></button>
-      </div>
-      <div class="modal-body">
-        Sei sicuro di voler effettuare il logout?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelLogout()">Annulla</button>
-        <button type="button" class="btn btn-danger" (click)="confirmLogout()">Logout</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 
 
