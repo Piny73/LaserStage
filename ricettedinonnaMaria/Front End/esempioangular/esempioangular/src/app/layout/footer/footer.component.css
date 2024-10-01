@@ -2,7 +2,7 @@
   background: linear-gradient(to right, #d1a797, #ffa86a);
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 0.2px;
   border: 5px ridge rgb(118, 64, 64);
   border-radius: 10px;
   margin: 0;
@@ -15,7 +15,7 @@
   flex-direction: row;               /* Dispone gli elementi in riga */
   align-items: center;               /* Centra gli elementi verticalmente */
   justify-content: center;           /* Allinea gli elementi orizzontalmente al centro */
-  height: auto;                      /* Adatta l'altezza al contenuto */
+  height: 250px;                      /* Adatta l'altezza al contenuto */
   gap: 10px;                         /* Riduci lo spazio tra i loghi per evitare overflow */
   flex-wrap: nowrap;                 /* Mantiene gli elementi in una sola riga */
 }
@@ -30,7 +30,7 @@
   font-style: oblique;
   font-family: 'Dancing Script', cursive;
   font-size: 60px;
-  font-weight: 400;
+  font-weight: 100px;
   color: #333;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra al testo */
   -webkit-text-stroke: 1px black;
@@ -64,23 +64,44 @@
   background-color: #5a6268;
   transform: scale(0.98);
 }
-
-/* Media query per schermi piccoli */
+/* Media Queries per schermi medi (tablet) */
 @media (max-width: 768px) {
   .footer-container {
-    flex-direction: column; /* Dispone i contenuti in colonna su schermi piccoli */
-    gap: 15px;
-  }
-
-  .logo {
-    width: 150px; /* Riduce le dimensioni del logo su schermi piccoli */
+    flex-direction: column; /* Dispone gli elementi in colonna su tablet */
+    height: auto; /* L'altezza si adatta automaticamente */
+    gap: 15px; /* Aumenta leggermente lo spazio tra gli elementi */
   }
 
   .footer-title {
     font-size: 50px; /* Riduce la dimensione del titolo */
   }
 
+  .logo {
+    width: 150px; /* Riduce la dimensione del logo su schermi più piccoli */
+  }
+
   .btn {
-    padding: 15px 20px; /* Riduce il padding dei bottoni */
+    padding: 15px 20px; /* Riduce il padding del pulsante */
+  }
+}
+
+/* Media Queries per schermi piccoli (smartphone) */
+@media (max-width: 480px) {
+  .footer-container {
+    flex-direction: column; /* Dispone gli elementi in colonna */
+    height: auto; /* L'altezza si adatta automaticamente */
+    gap: 10px; /* Spaziatura minore tra gli elementi */
+  }
+
+  .footer-title {
+    font-size: 40px; /* Riduce ulteriormente la dimensione del titolo */
+  }
+
+  .logo {
+    width: 120px; /* Riduce ulteriormente la dimensione del logo */
+  }
+
+  .btn {
+    padding: 10px 15px; /* Riduce ancora di più il padding del pulsante */
   }
 }
