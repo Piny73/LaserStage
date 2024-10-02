@@ -14,7 +14,48 @@
     <div class="nav-item">
       <button class="btn btn-secondary" (click)="toggleForm()">Nuovo Conoscente</button>
     </div>
+
+       <!-- Pulsante per creare una tabella con l'elenco di tutte le ricette visualizzabili -->
+       <div class="nav-item">
+        <button class="btn btn-secondary" (click)="toggleElencoRicette()">Elenco di tutte le Ricette</button>
+      </div>
+
+      <!-- Modale per visualizzare l'elenco delle ricette -->
+<div *ngIf="showAllRecipes" id="recipeListModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="toggleElencoRicette()">&times;</span>
+    <h2>Elenco di tutte le Ricette</h2>
+
+    <!-- Tabella delle ricette -->
+    <table class="ricette-table">
+      <thead>
+        <tr>
+          <th>Categoria</th>
+          <th>Nome</th>
+          <th>Procedimento</th>
+          <th>Tempo di Esecuzione</th>
+          <th>Tempo di Cottura</th>
+          <th>Seleziona</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ricetta of ricette">
+          <td>{{ ricetta.categoria }}</td>
+          <td>{{ ricetta.nome }}</td>
+          <td>{{ ricetta.procedimento }}</td>
+          <td>{{ ricetta.tempodiEsecuzione }}</td>
+          <td>{{ ricetta.tempodiCottura }}</td>
+          <td>
+            <button (click)="showRecipes(ricetta)">Visualizza</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>
+  </div>
+
+   
 
   <!-- Barra di ricerca -->
   <div class="search-container">

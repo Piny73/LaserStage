@@ -242,3 +242,33 @@ select:focus {
   display: block;
   font-weight: bold; /* Facoltativo: migliora la leggibilità */
 }
+
+.ricette-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.ricette-table th,
+.ricette-table td {
+  border: 1px ridge rgb(118, 64, 64);
+  padding: 8px;
+  text-align: left;
+}
+
+.ricette-table th {
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+  color: black;
+}
+
+.ricette-table td button {
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.ricette-table td button:hover {
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+}

@@ -3,8 +3,8 @@ html, body {
   padding: 0;
 }
 .app-footer {
-  background: url('/assets/images/Tavolo.png'), linear-gradient(to right, #d1a797, #ffa86a); /* Combina l'immagine e il gradiente */
-  background-size: 100% 110%; /* Imposta la dimensione dell'immagine al 50% della larghezza */
+  background: url('/assets/images/Tagliere.png'), linear-gradient(to right, #d1a797, #ffa86a); /* Combina l'immagine e il gradiente */
+  background-size: 100% 200%; /* Imposta la dimensione dell'immagine al 50% della larghezza */
   background-position: center;
   background-repeat: no-repeat;
   color: white;
@@ -45,9 +45,10 @@ html, body {
 }
 
 .logo {
-  width: 200px;
+  width: 700px;
   height: auto;
   max-width: 100%;
+  margin-top: -40px;
 }
 
 /* Pulsanti */
