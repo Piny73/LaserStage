@@ -12,7 +12,8 @@ export class NavbarComponent {
   contacts: Contact[] = []; // Array per contenere i contatti creati
   showForm: boolean = false;  // Variabile per gestire la visibilità del form
   showIngredientForm: boolean = false;
-  ingredienti: { nome: string; unitaDiMisura: string }[] = [];
+  showIngredientModal: boolean = false; // Modal per scegliere gli ingredienti
+  quantita: number = 0;  // Quantità per ciascun ingrediente selezionato
   showRecipeForm = false;
   ricette: Ricetta[] = [];  // Definisci ricette come un array di oggetti Ricetta
   immagini: string[] = [];  // Array per le immagini selezionate
@@ -20,6 +21,31 @@ export class NavbarComponent {
   showSearchMessage = false; // Variabile per controllare se mostrare il messaggio
   showLogin: boolean = false;  // Variabile per controllare la visibilità del modale
   showAllRecipes: boolean = false;  // Variabile booleana per mostrare l'elenco delle ricette
+
+  // Lista di ingredienti disponibili
+  ingredientiSelezionabili: { nome: string; unitaDiMisura: string }[] = [
+    { nome: 'Farina', unitaDiMisura: 'gr' },
+    { nome: 'Zucchero', unitaDiMisura: 'gr' },
+    { nome: 'Burro', unitaDiMisura: 'gr' },
+    { nome: 'Latte', unitaDiMisura: 'ml' },
+    { nome: 'Uova', unitaDiMisura: 'pezzi' },
+    { nome: 'Carne', unitaDiMisura: 'gr' },
+    { nome: 'Formaggio', unitaDiMisura: 'gr' },
+    { nome: 'Acciughe', unitaDiMisura: 'pezzi' },
+    { nome: 'Aceto', unitaDiMisura: 'ml' },
+    { nome: 'Acqua', unitaDiMisura: 'ml' },
+    { nome: 'Marmellata', unitaDiMisura: 'gr' },
+    { nome: 'Legumi', unitaDiMisura: 'gr' },
+    { nome: 'Dado', unitaDiMisura: 'pezzi' },
+    { nome: 'Concentrato di pomodoro', unitaDiMisura: 'gr' },
+    { nome: 'Vino', unitaDiMisura: 'ml' }
+  ];
+
+  // Array per memorizzare gli ingredienti selezionati
+  ingredientiSelezionati: { nome: string; unitaDiMisura: string; quantita: number }[] = [];
+
+  // Array per memorizzare gli ingredienti aggiunti alla ricetta
+  ingredientiAggiunti: { nome: string; quantita: number; unitaDiMisura: string }[] = [];
 
   toggleLogin() {
     this.showLogin = !this.showLogin;  // Alterna la visibilità del form di login
@@ -32,20 +58,89 @@ export class NavbarComponent {
     this.showForm = false; // Nascondi il form dopo la creazione del contatto
   }
 
-  // Creazione del nuovo ingrediente
-  createIngredient(nome: string, unitaDiMisura: string) {
-    this.ingredienti.push({ nome, unitaDiMisura });
-    this.toggleIngredientForm(); // Nasconde il form dopo la creazione dell'ingrediente
-  }
+  // Metodo per creare una ricetta
+  createRecipe(
+    categoria: string, 
+    nome: string, 
+    difficolta: string, 
+    procedimento: string, 
+    tempoDiEsecuzione: string, 
+    tempoDiCottura: string, 
+    immagini: string[]
+  ) {
+    if (this.ingredientiAggiunti.length === 0) {
+      alert('Seleziona almeno un ingrediente e specifica la quantità.');
+      return;
+    }
 
-  createRecipe(categoria: string, nome: string, difficolta: string, procedimento: string, tempodiEsecuzione: string, tempodiCottura: string, immagini: string[]) {
-    const nuovaRicetta = new Ricetta(categoria, nome, difficolta, procedimento, tempodiEsecuzione, tempodiCottura, this.immagini);
+    // Creazione della nuova ricetta
+    const nuovaRicetta = new Ricetta(
+      categoria, 
+      nome, 
+      this.ingredientiAggiunti.map(ing => ({ nome: ing.nome, unitaDiMisura: ing.unitaDiMisura })),  // Solo nome e unità di misura
+      this.ingredientiAggiunti.map(ing => ({ quantita: ing.quantita })),  // Solo quantità
+      difficolta, 
+      procedimento, 
+      tempoDiEsecuzione, 
+      tempoDiCottura, 
+      immagini
+    );
+
+    // Stampa la ricetta creata per debug
     console.log('Ricetta creata:', nuovaRicetta);
+
+    // Aggiungi la nuova ricetta all'elenco delle ricette
     this.ricette.push(nuovaRicetta);
-    this.immagini = [];  // Resetta l'array delle immagini per la prossima ricetta
-    this.toggleRecipeForm();
+
+    // Resetta i campi dopo la creazione
+    this.immagini = [];
+    this.ingredientiAggiunti = [];
+    this.toggleRecipeForm();  // Chiudi il form della ricetta
   }
 
+  // Metodo per selezionare/deselezionare un ingrediente e gestire la quantità
+  toggleIngrediente(ingrediente: { nome: string; unitaDiMisura: string }, event: any) {
+    const isChecked = event.target.checked;
+
+    if (isChecked) {
+      this.ingredientiSelezionati.push({ ...ingrediente, quantita: 0 });  // Aggiungi l'ingrediente con quantità iniziale di 0
+    } else {
+      const index = this.ingredientiSelezionati.findIndex(ing => ing.nome === ingrediente.nome);
+      if (index > -1) {
+        this.ingredientiSelezionati.splice(index, 1);  // Rimuovi l'ingrediente deselezionato
+      }
+    }
+  }
+
+  // Verifica se l'ingrediente è selezionato
+  isIngredienteSelezionato(ingrediente: { nome: string; unitaDiMisura: string }): boolean {
+    return this.ingredientiSelezionati.some(ing => ing.nome === ingrediente.nome);
+  }
+
+  // Funzione per aprire/chiudere il modal di selezione degli ingredienti
+  toggleIngredientModal() {
+    this.showIngredientModal = !this.showIngredientModal;
+  }
+
+  // Funzione per aggiungere gli ingredienti selezionati alla ricetta
+  aggiungiIngredientiAllaRicetta() {
+    this.ingredientiSelezionati.forEach(ingrediente => {
+      const quantita = ingrediente.quantita;
+      if (quantita > 0) {
+        this.ingredientiAggiunti.push({
+          nome: ingrediente.nome,
+          quantita: quantita,
+          unitaDiMisura: ingrediente.unitaDiMisura
+        });
+      }
+    });
+
+    // Resetta la selezione degli ingredienti
+    this.ingredientiSelezionati = [];
+    this.toggleIngredientModal();  // Chiudi il modal dopo aver aggiunto gli ingredienti
+  }
+
+  // Gestione delle immagini selezionate
   onFileSelected(event: any) {
     const files: FileList = event.target.files;
 
@@ -65,12 +160,17 @@ export class NavbarComponent {
     }
   }
 
+  // Alterna la visibilità del form di creazione ricetta
   toggleRecipeForm() {
     this.showRecipeForm = !this.showRecipeForm;
   }
 
   toggleForm() {
     this.showForm = !this.showForm;
+  }
+
+  addIngredient() {
+    throw new Error('Method not implemented.');
   }
 
   toggleIngredientForm() {
@@ -81,12 +181,14 @@ export class NavbarComponent {
     this.showAllRecipes = !this.showAllRecipes;
   }
 
-
+  // Mostra una ricetta specifica
   showRecipes(ricetta: Ricetta) {
     console.log('Ricetta selezionata:', ricetta);
-    }
+  }
 
+  // Funzione per la ricerca delle ricette
   onSearch() {
     this.showSearchMessage = true;  // Mostra il messaggio "barra ancora non abilitata"
   }
 }
+
