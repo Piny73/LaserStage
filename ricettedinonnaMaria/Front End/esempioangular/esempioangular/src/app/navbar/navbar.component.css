@@ -245,8 +245,11 @@ select:focus {
 
 .ricette-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate; /* Imposta separate per consentire il border-radius */
+  border-spacing: 0; /* Rimuove lo spazio tra le celle */
   margin-top: 20px;
+  border-radius: 10px; /* Arrotonda i bordi esterni della tabella */
+  overflow: hidden; /* Assicura che i bordi arrotondati funzionino */
 }
 
 .ricette-table th,
@@ -261,14 +264,33 @@ select:focus {
   color: black;
 }
 
+/* Arrotonda gli angoli in alto a sinistra e a destra */
+.ricette-table th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.ricette-table th:last-child {
+  border-top-right-radius: 10px;
+}
+
+/* Arrotonda gli angoli in basso a sinistra e a destra */
+.ricette-table td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+.ricette-table td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
 .ricette-table td button {
   background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
-  color: white;
-  border: none;
+  border-radius: 10px;
   padding: 5px 10px;
   cursor: pointer;
 }
 
 .ricette-table td button:hover {
   background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+  border-radius: 10px;
 }
+
