@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Agenda</a>
+    <a class="navbar-brand" href="/">Officina Baudino</a>
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,7 +11,8 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
-        
+
+        <!-- Dropdown per Appuntamenti -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Appuntamenti
@@ -21,34 +23,51 @@
           </ul>
         </li>
 
+        <!-- Dropdown per Clienti -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Clienti
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/clienti">Gestisci Clienti</a></li>
-            
+            <li><a class="dropdown-item" href="/inserisci-clienti">Inserisci clienti</a></li>
+            <li><a class="dropdown-item" href="/ricerca-clienti">Ricerca clienti</a></li>
           </ul>
         </li>
-        
+
+<!--Con routerLink non funziona
+<ul class="navbar-nav">
+  <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Clienti
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/inserisci-cliente">Inserisci cliente</a>
+          <a class="dropdown-item" routerLink="/gestisci-clienti">Gestisci clienti</a>
+          <a class="dropdown-item" routerLink="/ricerca-clienti">Ricerca clienti</a>
+      </div>
+  </li>
+</ul>
+-->
+        <!-- Vetture -->
         <li class="nav-item">
           <a class="nav-link" href="/vetture">Vetture</a>
         </li>
 
+        <!-- Statistiche -->
         <li class="nav-item">
           <a class="nav-link" href="/statistiche">Statistiche</a>
         </li>
 
+        <!-- Reports -->
         <li class="nav-item">
           <a class="nav-link" href="/reports">Reports</a>
         </li>
-        
-       
-
       </ul>
     </div>
   </div>
 </nav>
+
 
 
 

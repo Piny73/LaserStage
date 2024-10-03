@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,9 +20,9 @@ import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-  
-   
-    
+
+
+
   ],
   imports: [
     BrowserModule,
@@ -35,17 +35,17 @@ import { SharedModule } from './shared/shared.module';
     NgbModule,
     RouterModule,
     LayoutModule,
-    NgbModule,
-  
     HttpClientModule
-   
-    
+
+
   ],
   providers: [
-    provideHttpClient(withFetch()),
+    // Puoi mantenere solo una delle due righe
+    // provideHttpClient(withFetch()), // Se desideri utilizzare withFetch
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     provideAnimationsAsync()
-  ],
+],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

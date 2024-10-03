@@ -10,7 +10,10 @@ import { AppuntamentiListComponent } from './appuntamenti/appuntamenti-list/appu
 import { AppuntamentiComponent } from './appuntamenti/appuntamenti/appuntamenti.component';
 import { CreaAppuntamentoComponent } from './appuntamenti/crea-appuntamento/crea-appuntamento.component';
 import { ClientiComponent } from './clienti/clienti/clienti.component';
+import { GestioneClientiComponent } from './clienti/gestione-clienti/gestione-clienti.component';
+import { InserisciClienteComponent } from './clienti/inserisci-cliente/inserisci-cliente.component';
 import { ModificaClienteComponent } from './clienti/modifica-cliente/modifica-cliente.component';
+import { RicercaClientiComponent } from './clienti/ricerca-clienti/ricerca-clienti.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ReportsComponent } from './reports/reports.component';
@@ -29,7 +32,11 @@ import { VetturaComponent } from './vetture/vetture.component';
     ReportsComponent,
     VetturaComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+
+    RicercaClientiComponent,
+    GestioneClientiComponent,
+    InserisciClienteComponent
   ],
   imports: [
     CommonModule,

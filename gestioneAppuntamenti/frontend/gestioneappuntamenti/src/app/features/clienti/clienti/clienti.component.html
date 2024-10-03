@@ -1,10 +1,13 @@
 <h2>Clienti</h2>
-<button (click)="apriModificaCliente()">Aggiungi Nuovo Cliente</button>
+
+<div>
+    <button (click)="apriModificaCliente()" [attr.aria-label]="'Aggiungi un nuovo cliente'">Aggiungi Nuovo Cliente</button>
+    <input type="text" [(ngModel)]="searchTerm" (input)="cercaClienti()" placeholder="Cerca clienti..." [attr.aria-label]="'Cerca clienti'">
+</div>
 
 <table>
     <thead>
         <tr>
-           
             <th>Nome</th>
             <th>Cognome</th>
             <th>Indirizzo</th>
@@ -14,19 +17,21 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let cliente of clienti">
-         
+        <tr *ngFor="let cliente of clientiFiltrati">
             <td>{{ cliente.nome }}</td>
             <td>{{ cliente.cognome }}</td>
             <td>{{ cliente.indirizzo }}</td>
-            <td>{{ cliente.telefono }}</td>
-            <td>{{ cliente.email }}</td>
+            <td>{{ cliente.contatto?.telefono }}</td>  <!-- Accesso a telefono tramite contatto -->
+            <td>{{ cliente.contatto?.email }}</td>     <!-- Accesso a email tramite contatto -->
             <td>
-                <button (click)="eliminaCliente(cliente.id)">Elimina</button>
-                <button (click)="modificaCliente(cliente)">Modifica</button>
+                <button (click)="eliminaCliente(cliente.id)" [attr.aria-label]="'Elimina cliente ' + cliente.nome">Elimina</button>
+                <button (click)="modificaCliente(cliente)" [attr.aria-label]="'Modifica cliente ' + cliente.nome">Modifica</button>
             </td>
         </tr>
     </tbody>
 </table>
 
 <app-modifica-cliente *ngIf="clienteSelezionato" [cliente]="clienteSelezionato" (chiudi)="clienteSelezionato = null"></app-modifica-cliente>
+
+
+

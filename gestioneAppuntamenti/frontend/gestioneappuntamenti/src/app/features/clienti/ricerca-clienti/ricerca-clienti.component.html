@@ -1,0 +1,13 @@
+<div class="search-container">
+    <h2>Ricerca Clienti</h2>
+    <input [(ngModel)]="searchQuery" type="text" placeholder="Cerca per nome o cognome" />
+    <button (click)="onSearch()">Cerca</button>
+
+    <ul>
+        <li *ngFor="let cliente of clienti">
+            {{ cliente.nome }} {{ cliente.cognome }} 
+            <a [routerLink]="['/clienti/modifica', cliente.id]">Modifica</a>
+        </li>
+    </ul>
+</div>
+
