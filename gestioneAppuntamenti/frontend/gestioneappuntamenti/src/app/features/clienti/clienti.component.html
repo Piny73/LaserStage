@@ -1,0 +1,57 @@
+<div>
+    <h2>Gestione Clienti</h2>
+  
+    <button class="btn btn-primary mb-3" (click)="addCliente()">Aggiungi Cliente</button>
+  
+    <div *ngIf="selectedCliente">
+      <h3>{{ selectedCliente.email ? 'Modifica Cliente' : 'Nuovo Cliente' }}</h3>
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" class="form-control" [(ngModel)]="selectedCliente.nome" name="nome" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="cognome">Cognome:</label>
+          <input type="text" id="cognome" class="form-control" [(ngModel)]="selectedCliente.cognome" name="cognome" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="indirizzo">Indirizzo:</label>
+          <input type="text" id="indirizzo" class="form-control" [(ngModel)]="selectedCliente.indirizzo" name="indirizzo">
+        </div>
+  
+        <div class="form-group">
+          <label for="telefono">Telefono:</label>
+          <input type="number" id="telefono" class="form-control" [(ngModel)]="selectedCliente.telefono" name="telefono" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" class="form-control" [(ngModel)]="selectedCliente.email" name="email" required>
+        </div>
+  
+        <button type="submit" class="btn btn-success">Salva</button>
+        <button type="button" class="btn btn-secondary" (click)="selectedCliente = null">Annulla</button>
+      </form>
+    </div>
+  
+    <h3>Lista Clienti</h3>
+    <ul class="list-group">
+      <li *ngFor="let cliente of clienti" class="list-group-item d-flex justify-content-between align-items-center">
+        {{ cliente.nome }} {{ cliente.cognome }} - {{ cliente.email }}
+        <div>
+          <button class="btn btn-danger" (click)="deleteCliente(cliente.email)">Elimina</button>
+          <button class="btn btn-warning" (click)="selectCliente(cliente)">Modifica</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  
+  
+  
+
+  
+   
+  
+  
