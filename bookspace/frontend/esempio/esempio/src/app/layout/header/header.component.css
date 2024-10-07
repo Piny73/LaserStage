@@ -1,8 +1,10 @@
 header {
-  background-image: url('/esempio/src/assets/immagini/copialibri.jpg'); /* Percorso dell'immagine */
+  background-image: url('/esempio/src/assets/immagini/imm_libri.jpg'); ;
   background-size: cover; /* Adatta l'immagine per coprire tutto l'header */
   background-position: center; /* Centra l'immagine */
   background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
+  height: 100vh; /* L'altezza dell'header sarà pari all'altezza dello schermo */
+
   height: 400px; /* Altezza dell'header, puoi aumentarla per ingrandire l'immagine */
   color: rgb(0, 0, 0); /* Colore del testo, per rendere visibile il testo sull'immagine */
   text-align: center;
@@ -19,7 +21,6 @@ header h1 {
   margin: 0;
   font-size: 3rem;
 }
-
 
 
 h1 {
