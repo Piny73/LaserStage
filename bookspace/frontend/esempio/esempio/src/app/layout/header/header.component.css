@@ -13,7 +13,6 @@ header {
   max-width: 2000px; /* Imposta una larghezza massima per l'header */
   
   /* Aggiungi un ingrandimento ulteriore */
-  background-size: 200%; /* Ingrandisce l'immagine del 150% */
   object-fit: cover; /* L'immagine riempie il contenitore senza deformarsi */
 }
 
@@ -101,7 +100,7 @@ h1 {
   .navbar {
     flex-direction: column; /* Dispone gli elementi in colonna */
     height: auto;
-    padding: 15px;
+    padding-top: 30px; /* Aggiungi spazio sopra la navbar */
   }
 
   .navbar-nav {
