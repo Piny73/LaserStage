@@ -42,3 +42,34 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+/* Responsive design per tablet e smartphone */
+
+/* Tablet (max-width: 768px) */
+@media (max-width: 768px) {
+  .login-container {
+    width: 80%; /* Riduce la larghezza al 80% dello schermo per tablet */
+    margin: 50px auto; /* Riduce il margine superiore per adattarsi meglio */
+  }
+
+  input, button {
+    padding: 12px; /* Aumenta leggermente il padding per una migliore usabilità su schermi tattili */
+  }
+}
+
+/* Smartphone (max-width: 480px) */
+@media (max-width: 480px) {
+  .login-container {
+    width: 90%; /* Riduce ulteriormente la larghezza per smartphone */
+    margin: 30px auto; /* Riduce il margine per adattarsi agli schermi piccoli */
+    padding: 15px; /* Riduce il padding del contenitore per fare spazio */
+  }
+
+  h2 {
+    font-size: 18px; /* Riduce la dimensione del testo per i titoli */
+  }
+
+  input, button {
+    padding: 10px; /* Riduce il padding per una migliore disposizione */
+  }
+}
