@@ -17,8 +17,12 @@ import { RicercaClientiComponent } from './clienti/ricerca-clienti/ricerca-clien
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ReportsComponent } from './reports/reports.component';
+<<<<<<< Updated upstream
 import { StatisticheComponent } from './statistiche/statistiche.component';
 import { VetturaComponent } from './vetture/vetture.component';
+=======
+import { ClientiComponent } from './clienti/clienti.component';
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
@@ -33,10 +37,17 @@ import { VetturaComponent } from './vetture/vetture.component';
     VetturaComponent,
     HomeComponent,
     LoginComponent,
+<<<<<<< Updated upstream
 
     RicercaClientiComponent,
     GestioneClientiComponent,
     InserisciClienteComponent
+=======
+    CreaAppuntamentoComponent,
+    StatisticheComponent,
+    ReportsComponent,
+    ClientiComponent
+>>>>>>> Stashed changes
   ],
   imports: [
     CommonModule,
