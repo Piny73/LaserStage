@@ -2,3 +2,18 @@ h1 {
     margin: 0 auto;
     text-align: center;
 }
+header h1 {
+    font-size: 2.5rem; /* Dimensione del testo */
+    font-weight: bold; /* Grassetto per maggiore impatto */
+    color: #1e90ff; /* Colore blu */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Ombra per effetto rilievo */
+    letter-spacing: 1px; /* Spaziatura tra le lettere per rendere il testo più leggibile */
+  }
+  
+  /* Aggiungi padding o margine per separare il titolo dagli altri elementi */
+  header {
+    padding: 20px;
+    background-color: #f0f8ff; /* Colore di sfondo chiaro */
+    text-align: center; /* Allineamento centrale del testo */
+  }
+  
