@@ -12,7 +12,7 @@
   <groupId>timesheet</groupId>
       
   
-  <artifactId>exame-service</artifactId>
+  <artifactId>timesheet-service</artifactId>
       
   
   <version>1</version>
@@ -24,10 +24,10 @@
   <modules>
           
     
-    <module>exame</module>
+    <module>timesheet</module>
           
     
-    <module>exame-st</module>
+    <module>timesheet-st</module>
       
   </modules>
   

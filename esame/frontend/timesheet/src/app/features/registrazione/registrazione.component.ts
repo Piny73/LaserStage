@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from '../../core/models/user.model';
 import { UserService } from '../../core/services/user.service';
 
 @Component({
@@ -21,7 +20,7 @@ export class RegistrazioneComponent implements OnInit {
   ngOnInit(): void {
     this.registrazioneForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]], // Validação de e-mail adicionada
+      email: ['', [Validators.required, Validators.email]], // Validazione dell'email aggiunta
       pwd: ['', Validators.required]
     });
   }
@@ -31,18 +30,19 @@ export class RegistrazioneComponent implements OnInit {
       const user = this.registrazioneForm.value as User;
       this.userService.create(user).subscribe({
         next: (response) => {
-          console.log('Registrazione bem-sucedida', response);
-          this.router.navigate(['/login']); // Redirecionar para a página de login após o registro
+          console.log('Registrazione avvenuta con successo', response);
+          this.router.navigate(['/login']); // Reindirizza alla pagina di login dopo la registrazione
         },
         error: (error: any) => {
-          console.error('Error Registrazione', error);
-          this.errorMessage = 'Erro ao criar usuário. Tente novamente.';
+          console.error('Errore nella registrazione', error);
+          this.errorMessage = 'Errore nella creazione dell\'utente. Riprova.';
         }
       });
-    }*/
+    } */
   }
 
   openLogin() {
-    this.router.navigate(['/login']); // Redirecionar para a página de login
+    this.router.navigate(['/login']); // Reindirizza alla pagina di login
   }
 }
+

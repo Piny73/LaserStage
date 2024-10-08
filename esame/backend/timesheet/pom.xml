@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>exame-service</artifactId>
+        <artifactId>timesheet-service</artifactId>
         <groupId>timesheet</groupId>
         <version>1</version>
     </parent>
     <groupId>timesheet</groupId>
-    <artifactId>exame</artifactId>
+    <artifactId>esame</artifactId>
     <version>1</version>
     <packaging>war</packaging>
     <dependencies>
@@ -76,7 +76,7 @@
                 <version>2.22.2</version>
             </plugin>
         </plugins>        
-        <finalName>exame</finalName>
+        <finalName>esame</finalName>
     </build>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
