@@ -6,6 +6,9 @@ import { TimesheetService } from '../../core/services/timesheet.service';
 import { switchMap } from 'rxjs';
 import { User } from '../../core/models/user.model';
 import { UserService } from '../../core/services/user.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; // Importazione NgbModal
+import { ActivityFormComponent } from '../activity-list/activity-form/activity-form.component';
+
 
 @Component({
   selector: 'app-home',
@@ -22,17 +25,21 @@ export class HomeComponent {
   constructor(
     public activityService: ActivityService,
     private timeSheetService: TimesheetService,
-    private userService : UserService
+    private userService: UserService,
+    private modalService: NgbModal // Servizio per gestire il modal
   ) {}
 
   ngOnInit() {
-    this.isLoading = true;
+    this.loadData();
+  }
 
+  loadData() {
+    this.isLoading = true;
     this.activityService.fill()
       .pipe(
         switchMap(activities => {
           this.activityData.data = activities;
-          return this.timeSheetService.fill();;
+          return this.timeSheetService.fill();
         }),
         switchMap((timesheet) => {
           this.timeSheetData.data = timesheet;
@@ -50,4 +57,35 @@ export class HomeComponent {
         }
       });
   }
+
+  // Funzione per aprire il modal per la creazione o modifica di un'attività
+  openActivityModal(activity?: Activity) {
+    const modalRef = this.modalService.open(ActivityFormComponent, { size: 'lg' });
+  
+    if (activity) {
+      modalRef.componentInstance.activity = { ...activity }; // Clona l'attività per evitare modifiche in-place
+    } else {
+      modalRef.componentInstance.activity = new Activity(); // Inizializza una nuova attività vuota
+    }
+  
+    // Subscrivi al risultato del form, ricarica l'elenco delle attività se un'attività viene creata o aggiornata
+    modalRef.componentInstance.reload.subscribe((shouldReload: boolean) => {
+      if (shouldReload) {
+        this.loadData(); // Ricarica i dati se richiesto
+      }
+    });
+  
+    modalRef.result.then(
+      () => {
+        // Modal chiuso, ricarica le attività se necessario
+        this.loadData();
+      },
+      (reason) => {
+        console.log('Modal chiuso senza salvataggio:', reason);
+      }
+    );
+  }
 }
+
+
+

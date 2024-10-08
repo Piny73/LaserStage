@@ -3,11 +3,12 @@ import { Activity } from '../../../core/models/activity.model';
 import { ActivityService } from '../../../core/services/activity.service';
 import { UtilsService } from '../../../core/utils.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'; // Importa NgbActiveModal
 
 @Component({
   selector: 'app-activity-form',
   templateUrl: './activity-form.component.html',
-  styleUrl: './activity-form.component.css'
+  styleUrls: ['./activity-form.component.css']
 })
 export class ActivityFormComponent implements OnInit {
 
@@ -17,13 +18,14 @@ export class ActivityFormComponent implements OnInit {
   showSaveDialog = false;
   showDeleteDialog = false;
 
-  @Input("activity") activity!: Activity;
-  @Output("reload") reload = new EventEmitter<boolean>(); 
+  @Input() activity!: Activity; // Riceve l'attività da modificare (o una nuova da creare)
+  @Output() reload = new EventEmitter<boolean>(); // Evento per ricaricare la lista
 
   constructor(
     private fb: FormBuilder, 
     private activityService: ActivityService, 
-    private utils : UtilsService
+    private utils: UtilsService,
+    public activeModal: NgbActiveModal // NgbActiveModal per chiudere il modal
   ) {}
 
   ngOnInit(): void {
@@ -36,12 +38,14 @@ export class ActivityFormComponent implements OnInit {
       enable: ['']
     });
 
-    if(this.activity){
+    if (this.activity) {
+      // Se esiste un'attività, la copia e formatta le date
       this.currentOwner = this.activity.ownerid;
-      this.activity.dtstart = this.activity.dtstart != null ? this.utils.formatDate(this.activity.dtstart, true) : null;
-      this.activity.dtend = this.activity.dtend != null ? this.utils.formatDate(this.activity.dtend, true) : null;
+      this.activity.dtstart = this.activity.dtstart ? this.utils.formatDate(this.activity.dtstart, true) : null;
+      this.activity.dtend = this.activity.dtend ? this.utils.formatDate(this.activity.dtend, true) : null;
       this.activityCopy = { ...this.activity };
 
+      // Aggiorna il form con i valori dell'attività esistente
       this.activityForm.patchValue({
         ...this.activity
       });
@@ -50,125 +54,114 @@ export class ActivityFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.activityForm.valid) {
-      this.activity = this.activityForm.value;
-      this.openSaveConfirmation();
+      this.activity = this.activityForm.value; // Assegna i valori dal form all'attività
+      this.confirmSave(); // Chiede conferma per il salvataggio
     } else {
-      console.log('Form is invalid');
-      this.activityForm.markAllAsTouched(); // Marca todos os campos como "tocados" para exibir as mensagens de erro
+      console.log('Form non valido');
+      this.activityForm.markAllAsTouched(); // Mostra i messaggi di errore
     }
   }
 
+  // Funzione di salvataggio
   save() {
-    console.log("This.activity: ", this.activity)
-    const _ac = { ...this.activity };
+    const _ac = { ...this.activityForm.value }; // Clona i valori del form
 
-    _ac.owner = null;
-
-    _ac.dtstart = this.activity.dtstart != null ? this.utils.formatDate(this.activity.dtstart, true) : null;
-    _ac.dtend = this.activity.dtend != null ? this.utils.formatDate(this.activity.dtend, true) : null;
+    // Formatta le date
+    _ac.dtstart = this.utils.formatDate(_ac.dtstart, true);
+    _ac.dtend = this.utils.formatDate(_ac.dtend, true);
 
     if (_ac.id) {
-      if (_ac.id !== 0) {
-        console.log("Updating...");
-
-        this.activityService.update(_ac).subscribe({
-          next: () => {
-            console.log('Update Ok');
-            this.reload.emit(true);
-          },
-          error: (error) => {
-            console.error('Error updating', error);
-            alert('Error updating.');
-          }
-        });
-
-      } else {
-        console.log("Update without ID");
-      }
-    } else {
-      console.log("Creating : ", _ac);
-
-      this.activityService.save(_ac).subscribe({
+      // Se l'attività ha un ID, aggiorna
+      this.activityService.update(_ac).subscribe({
         next: () => {
-          console.log('Create Ok');
-          this.reload.emit(true);
+          console.log('Aggiornamento completato con successo');
+          this.reload.emit(true); // Ricarica la lista
+          this.activeModal.close(); // Chiudi il modal
         },
-        error: (error: any) => {
-          console.error('Error creating', error);
-          alert('Error');
+        error: (error) => {
+          console.error('Errore durante l\'aggiornamento', error);
+          alert('Errore durante l\'aggiornamento.');
         }
       });
-    }   
+    } else {
+      // Se non ha un ID, crea una nuova attività
+      this.activityService.save(_ac).subscribe({
+        next: () => {
+          console.log('Creazione completata con successo');
+          this.reload.emit(true); // Ricarica la lista
+          this.activeModal.close(); // Chiudi il modal
+        },
+        error: (error: any) => {
+          console.error('Errore durante la creazione', error);
+          alert('Errore durante la creazione.');
+        }
+      });
+    }
   }
 
+  // Funzione per cancellare l'attività
   deleteObject() {
-    const _ac = { ...this.activity };
-  
+    const _ac = { ...this.activity }; // Clona l'attività
+
     if (_ac.id && _ac.id !== 0) {
       this.activityService.delete(_ac).subscribe({
         next: () => {
-          this.activity = new Activity();
-          this.activityCopy = new Activity();
+          console.log('Eliminazione completata con successo');
+          this.activity = new Activity(); // Resetta l'attività
+          this.activityCopy = new Activity(); // Resetta la copia
           this.currentOwner = null;
-          this.reload.emit(true);
+          this.reload.emit(true); // Ricarica la lista
         },
         error: (error: any) => {
-          console.error('Error deleting', error);
-          alert('Error deleting.');
+          console.error('Errore durante l\'eliminazione', error);
+          alert('Errore durante l\'eliminazione.');
         }
       });
-  
     } else {
-      console.warn("Attempted to delete with invalid ID:", _ac.id);
+      console.warn('Tentativo di eliminazione con ID non valido:', _ac.id);
     }
   }
-  
-  resetForm(form: FormGroup): void {
-    this.activity = { ...this.activityCopy };
-    this.activityForm.reset(this.activity);
-  }
 
-  newObject(form: FormGroup): void {
-    this.activity = new Activity();
-    this.currentOwner = null;
-    form.patchValue(this.activity);
-  }
-
-  onOwnerSelected(_idowner: number): void {
-    this.currentOwner = _idowner;
-    this.activityForm.patchValue({
-      ...this.activity
-    });
-  }
-
-  openSaveConfirmation() {
-    this.showSaveDialog = true;
-  }
-
-  openDeleteConfirmation() {
-    this.showDeleteDialog = true;
-  }
-
+  // Conferma il salvataggio
   confirmSave() {
     this.showSaveDialog = false;
-    this.save(); 
+    this.save(); // Chiama la funzione di salvataggio
   }
 
+  // Conferma l'eliminazione
+  confirmDelete() {
+    this.showDeleteDialog = false;
+    this.deleteObject(); // Chiama la funzione di eliminazione
+  }
+
+  // Annulla il salvataggio
   cancelSave() {
     this.showSaveDialog = false;
   }
 
-  confirmDelete() {
-    this.showDeleteDialog = false;
-    this.deleteObject();
-    this.currentOwner = null;
-    this.activity = new Activity();
-    this.activityForm.patchValue({
-      ...this.activity
-    });
-  }
-
+  // Annulla l'eliminazione
   cancelDelete() {
     this.showDeleteDialog = false;
+  }
+
+  // Reset del form
+  resetForm(form: FormGroup): void {
+    this.activity = { ...this.activityCopy };
+    this.activityForm.reset(this.activity); // Reset del form con i dati originali
+  }
+
+  // Nuova attività
+  newObject(form: FormGroup): void {
+    this.activity = new Activity();
+    this.currentOwner = null;
+    form.patchValue(this.activity); // Inizializza il form con una nuova attività
+  }
+  onOwnerSelected(event: any) {
+    // Gestisci qui la logica di selezione del proprietario
+    console.log('Proprietario selezionato:', event);
+  }
+  openDeleteConfirmation() {
+    // Logica per aprire la finestra di conferma eliminazione
+    console.log('Conferma di eliminazione aperta');
   }
 }
