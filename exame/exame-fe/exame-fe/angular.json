@@ -34,7 +34,8 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "/assets"
               }
             ],
             "styles": [
@@ -100,15 +101,16 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              {
+                  {
                 "glob": "**/*",
                 "input": "public"
-              }
-            ],
+                  }
+                     ],
             "styles": [
               "src/styles.css"
             ],
             "scripts": []
+
           }
         }
       }
