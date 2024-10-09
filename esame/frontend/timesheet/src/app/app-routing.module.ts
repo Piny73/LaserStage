@@ -5,12 +5,15 @@ import { HomeComponent } from './features/home/home.component';
 import { RegistrazioneComponent } from './features/registrazione/registrazione.component';
 import { TimesheetListComponent } from './features/timesheet-list/timesheet-list.component';
 
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent},
   { path: 'activity', component: ActivityListComponent},
   { path: 'timesheet', component: TimesheetListComponent},
   { path: 'registrazione', component: RegistrazioneComponent},
+  
+
   { path: '**', redirectTo: '', pathMatch: 'full' }
   ]
 

@@ -1,1 +1,22 @@
-<p>timesheet-list works!</p>
+<div class="timesheet-list">
+    <h1>Elenco Timesheet</h1>
+
+    <button (click)="onNewTimesheet()">Nuovo Timesheet</button>
+
+    <ul>
+        <li *ngFor="let timesheet of timesheets">
+            {{ timesheet.detail }}
+            <button (click)="onEditTimesheet(timesheet.id)">Modifica</button>
+            <button (click)="onDeleteTimesheet(timesheet.id)">Elimina</button>
+        </li>
+    </ul>
+
+    <div *ngIf="selectedTimesheet">
+        <h2>{{ selectedTimesheet.id ? 'Modifica' : 'Crea' }} Timesheet</h2>
+        <form (ngSubmit)="onSaveTimesheet(selectedTimesheet)">
+            <input [(ngModel)]="selectedTimesheet.detail" name="detail" placeholder="Dettagli" required>
+            <button type="submit">Salva</button>
+            <button type="button" (click)="selectedTimesheet = null">Annulla</button>
+        </form>
+    </div>
+</div>

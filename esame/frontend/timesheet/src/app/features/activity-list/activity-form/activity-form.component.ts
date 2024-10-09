@@ -43,7 +43,7 @@ export class ActivityFormComponent implements OnInit {
       this.currentOwner = this.activity.ownerid;
       this.activity.dtstart = this.activity.dtstart ? this.utils.formatDate(this.activity.dtstart, true) : null;
       this.activity.dtend = this.activity.dtend ? this.utils.formatDate(this.activity.dtend, true) : null;
-      this.activityCopy = { ...this.activity };
+      this.activityCopy = new Activity({ ...this.activity }); // Crea una nuova istanza di Activity
 
       // Aggiorna il form con i valori dell'attività esistente
       this.activityForm.patchValue({
@@ -54,7 +54,7 @@ export class ActivityFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.activityForm.valid) {
-      this.activity = this.activityForm.value; // Assegna i valori dal form all'attività
+      this.activity = new Activity(this.activityForm.value); // Assegna i valori dal form all'attività
       this.confirmSave(); // Chiede conferma per il salvataggio
     } else {
       console.log('Form non valido');
@@ -64,7 +64,7 @@ export class ActivityFormComponent implements OnInit {
 
   // Funzione di salvataggio
   save() {
-    const _ac = { ...this.activityForm.value }; // Clona i valori del form
+    const _ac = new Activity(this.activityForm.value); // Clona i valori del form come un'istanza di Activity
 
     // Formatta le date
     _ac.dtstart = this.utils.formatDate(_ac.dtstart, true);
@@ -101,7 +101,7 @@ export class ActivityFormComponent implements OnInit {
 
   // Funzione per cancellare l'attività
   deleteObject() {
-    const _ac = { ...this.activity }; // Clona l'attività
+    const _ac = new Activity(this.activity); // Crea un'istanza di Activity
 
     if (_ac.id && _ac.id !== 0) {
       this.activityService.delete(_ac).subscribe({
@@ -146,20 +146,22 @@ export class ActivityFormComponent implements OnInit {
 
   // Reset del form
   resetForm(form: FormGroup): void {
-    this.activity = { ...this.activityCopy };
+    this.activity = new Activity(this.activityCopy); // Crea una nuova istanza di Activity
     this.activityForm.reset(this.activity); // Reset del form con i dati originali
   }
 
   // Nuova attività
   newObject(form: FormGroup): void {
-    this.activity = new Activity();
+    this.activity = new Activity(); // Crea una nuova attività
     this.currentOwner = null;
     form.patchValue(this.activity); // Inizializza il form con una nuova attività
   }
+  
   onOwnerSelected(event: any) {
     // Gestisci qui la logica di selezione del proprietario
     console.log('Proprietario selezionato:', event);
   }
+
   openDeleteConfirmation() {
     // Logica per aprire la finestra di conferma eliminazione
     console.log('Conferma di eliminazione aperta');

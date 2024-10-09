@@ -7,7 +7,7 @@ import { UserService } from '../../../core/services/user.service';
 @Component({
   selector: 'tr[app-activity-row]',
   templateUrl: './activity-row.component.html',
-  styleUrl: './activity-row.component.css'
+  styleUrls: ['./activity-row.component.css']
 })
 export class ActivityRowComponent implements OnInit {
 
@@ -19,15 +19,7 @@ export class ActivityRowComponent implements OnInit {
   _copyActivitySelected!: Activity;
   showDialog: boolean = false;
 
-  constructor(private activityService: ActivityService, private userService: UserService) {
-  }
-
-  /* ngOnInit(): void {
-      if (this.activity && this.activity.ownerid) {
-        this.activity.owner = this.userService.findById(this.activity.ownerid) as User;
-      }
-    }
-  */
+  constructor(private activityService: ActivityService, private userService: UserService) {}
 
   ngOnInit(): void {
     if (this.activity && this.activity.ownerid) {
@@ -48,9 +40,8 @@ export class ActivityRowComponent implements OnInit {
 
   initializeSelection() {
     if (this.activitySelected) {
-      this._copyActivitySelected = { ...this.activitySelected };
+      this._copyActivitySelected = new Activity(this.activitySelected); // Crea una nuova istanza di Activity
       this._selected = this.activity.id === this.activitySelected.id;
-
     }
   }
 
@@ -59,10 +50,9 @@ export class ActivityRowComponent implements OnInit {
     if (this.activity) {
       this._selected = true;
       this.onSelectActivity.emit(this.activity);
-    }
-    else {
+    } else {
       console.warn('Activity is not defined.');
     }
   }
-
 }
+
