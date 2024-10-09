@@ -59,7 +59,8 @@ public class UsersResources {
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Elenco non trovato")
     })
-    @RolesAllowed({"Admin","User"})
+    @RolesAllowed({"User"})
+    //@PermitAll
     public List<UserDTO> all() {
         List<UserDTO> usList = new ArrayList<>();
         storeuser.all().forEach(e -> {
@@ -68,6 +69,7 @@ public class UsersResources {
             us.name = e.getName();
             us.email = e.getEmail();
             us.pwd = "";
+           usList.add(us); // Aggiungi l'oggetto UserDTO alla lista
         });
         return usList;
     }
@@ -117,6 +119,8 @@ public class UsersResources {
         
         User u = storeuser.login(credential).orElseThrow(() -> new NotAuthorizedException("User non Authorized",  
                                                                        Response.status(Response.Status.UNAUTHORIZED).build()));
+         // Loggare i ruoli dell'utente
+    System.out.println("Ruoli dell'utente: " + u.getRoles()); // Assicurati che il tuo User abbia il metodo getRoles()
         UserDTO us = new UserDTO();
         us.id = u.getId();
         us.name = u.getName();
@@ -137,6 +141,7 @@ public class UsersResources {
 
     })
     @Produces(MediaType.APPLICATION_JSON)
+    @PermitAll
     @RolesAllowed("Admin")
     public Response delete(@PathParam("id") Long id) {
         User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
@@ -154,7 +159,8 @@ public class UsersResources {
         @APIResponse(responseCode = "404", description = "Aggiornamento falito")
             
     })
-    @RolesAllowed("Admin")
+    @PermitAll
+    //@RolesAllowed("Admin")
     public User update(@Valid User entity) {
         User found = storeuser.find(entity.getId()).orElseThrow(() -> new NotFoundException("user non trovato. id=" + entity.getId()));
         return storeuser.update(entity);

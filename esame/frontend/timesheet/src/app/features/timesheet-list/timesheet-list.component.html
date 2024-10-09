@@ -11,7 +11,7 @@
         </li>
     </ul>
 
-    <div *ngIf="selectedTimesheet">
+    <div *ngIf="selectedTimesheet !== null">
         <h2>{{ selectedTimesheet.id ? 'Modifica' : 'Crea' }} Timesheet</h2>
         <form (ngSubmit)="onSaveTimesheet(selectedTimesheet)">
             <input [(ngModel)]="selectedTimesheet.detail" name="detail" placeholder="Dettagli" required>
@@ -19,4 +19,9 @@
             <button type="button" (click)="selectedTimesheet = null">Annulla</button>
         </form>
     </div>
+
+    <div *ngIf="loading">Caricamento in corso...</div>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
 </div>
+

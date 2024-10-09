@@ -1,5 +1,5 @@
-import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private baseUrl = 'http://localhost:8080/exame/api'; // URL base API
+  private baseUrl = 'http://localhost:8080/esame/api'; // URL base API
   private http = inject(HttpClient);
 
   constructor() { }
@@ -15,8 +15,8 @@ export class ApiService {
   // Método POST genérico
   post(endpoint: string, data: any, headers?: HttpHeaders): Observable<any> {
     const url = `${this.baseUrl}/${endpoint}`;
-    //console.log("API POST Path: ",  url);
-    //console.log("API POST Data: ", data)
+    console.log("API POST Path: ",  url);
+    console.log("API POST Data: ", data)
     return this.http.post(url, data, { headers });
   }
 

@@ -9,7 +9,7 @@ import { User } from '../models/user.model';
 })
 export class UserService {
 
-  private readonly endpoint = 'user';
+  private readonly endpoint = 'users';
   private userList: User[] = [];
 
   constructor(
@@ -17,20 +17,22 @@ export class UserService {
   ) { }
 
   save(_user: User): Observable<User> {
-
     const _endpoint = this.endpoint;
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
     return this.apiService.post(_endpoint, _user, headers).pipe(
-      map(response => response)
+      map(response => {
+        // Salva l'utente anche in localStorage
+        this.saveUserToLocalStorage(response);
+        return response;
+      })
     );
   }
 
   update(_user: User): Observable<User> {
-    const _endpoint = `${this.endpoint}/area`;
+    const _endpoint = `${this.endpoint}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
@@ -82,9 +84,23 @@ export class UserService {
     });
 
     return this.apiService.post(this.endpoint, _user, headers).pipe(
-      map(response => response)
+      map(response => {
+        this.saveUserToLocalStorage(response); // Salva l'utente anche in localStorage
+        return response;
+      })
     );
   }
 
+  // Nuovo metodo per salvare l'utente in localStorage
+  private saveUserToLocalStorage(user: User) {
+    const users = JSON.parse(localStorage.getItem('users') || '[]'); // Ottieni la lista esistente o crea un nuovo array
+    users.push(user); // Aggiungi il nuovo utente
+    localStorage.setItem('users', JSON.stringify(users)); // Salva di nuovo in localStorage
+  }
 
+  // Nuovo metodo per ottenere gli utenti da localStorage
+  getUsersFromLocalStorage(): User[] {
+    return JSON.parse(localStorage.getItem('users') || '[]');
+  }
 }
+

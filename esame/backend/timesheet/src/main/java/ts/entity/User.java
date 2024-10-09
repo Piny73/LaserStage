@@ -4,7 +4,9 @@
  */
 package ts.entity;
 
+import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -50,6 +52,15 @@ public class User extends  BaseEntity{
         this.pwd = pwd;
     }
     
-    
+    @ElementCollection
+    private Set<String> roles;
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
+    }
     
 }

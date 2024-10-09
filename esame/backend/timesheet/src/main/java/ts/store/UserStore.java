@@ -16,12 +16,13 @@ import ts.entity.User;
 @Transactional(Transactional.TxType.REQUIRED)
 public class UserStore extends BaseStore<User> {
 
-    public List<User> all() {
+   public List<User> all() {
+    List<User> users = getEm().createQuery("select e from User e where e.canceled = false", User.class)
+            .getResultList();
+    System.out.println("Utenti trovati: " + users.size()); // Stampa il numero di utenti trovati
+    return users;
+}
 
-        return getEm().createQuery("select e from User e where e.canceled = false", User.class)
-                .getResultList();
-
-    }
 
     public Optional<User> find(Long id) {
 

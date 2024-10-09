@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       //const { username, password } = this.loginForm.value;
       const login: Login = this.loginForm.value as Login; // Ottieni i dati del login
-      //console.log('Dati', login);
+      console.log('Dati:', login);
       this.authService.login(login).subscribe({
         next: (response) => {
           console.log('Login riuscito', response); // Messaggio di login riuscito
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
         error: (error) => {
           console.error('Errore nel login', error); // Messaggio di errore
           this.errorMessage = 'Login fallito. Controlla le tue credenziali.'; // Messaggio di errore per l'utente
-          this.router.navigate(['/home']); // Naviga alla home
+          //this.router.navigate(['/home']); // Naviga alla home
         }
       });
     }
