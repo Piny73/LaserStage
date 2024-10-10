@@ -45,6 +45,7 @@
   }
   
   .btn-primary {
+    cursor: pointer;
     background-color: #1e90ff;
     border-color: #1e90ff;
   }

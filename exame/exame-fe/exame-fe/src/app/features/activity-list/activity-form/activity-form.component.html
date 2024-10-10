@@ -42,19 +42,20 @@
             </div>
           </div>
         </div>
+
+        <!-- Buttons -->
+        <div class="row">
+          <div class="col-md-12 d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary me-2" (click)="resetForm()">Pulisci</button>
+            <button type="button" class="btn btn-danger me-2" (click)="openDeleteConfirmation()">Cancella</button>
+            <button type="submit" class="btn btn-primary" (click)="save()">Salva</button>
+          </div>
+        </div>
       </div>
     </form>
   </div>
 
-  <!-- Buttons -->
-  <div class="row">
-    <div class="col-md-12 d-flex justify-content-end">
-      <button type="button" class="btn btn-secondary me-2" (click)="resetForm(activityForm)">Pulisci</button>
-      <button type="button" class="btn btn-danger me-2" (click)="openDeleteConfirmation()">Cancella</button>
-      <button type="submit" class="btn btn-primary" [disabled]="activityForm.invalid">Salva</button>
-    </div>
-  </div>
-
+  <!-- Save Confirmation -->
   <div id="save-confirmation" class="dialog-overlay" *ngIf="showSaveDialog">
     <div class="dialog-content text-center">
       <p class="mb-4">Vuoi salvare i cambiamenti?</p>
@@ -65,6 +66,7 @@
     </div>
   </div>
 
+  <!-- Delete Confirmation -->
   <div id="delete-confirmation" class="dialog-overlay" *ngIf="showDeleteDialog">
     <div class="dialog-content text-center">
       <p class="mb-4">Vuoi eliminare questo dipendente?</p>
@@ -75,3 +77,5 @@
     </div>
   </div>
 </div>
+
+
