@@ -4,6 +4,8 @@ import { ActivityService } from '../../../core/services/activity.service';
 import { UtilsService } from '../../../core/utils.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'; // Importa NgbActiveModal
+import { format } from 'date-fns';
+
 
 @Component({
   selector: 'app-activity-form',
@@ -63,54 +65,62 @@ export class ActivityFormComponent implements OnInit {
   }
 
   // Funzione di salvataggio
-  save() {
-    const _ac = { ...this.activityForm.value }; // Clona i valori del form
+// Funzione di salvataggio
+save() {
+  // Formatta le date prima di inviarle al backend
+  // Usa il formato ISO 8601 per le date
+const formattedDateStart = new Date(this.activityForm.value.dtstart).toISOString();
+const formattedDateEnd = new Date(this.activityForm.value.dtend).toISOString();
 
-    // Formatta le date
-    _ac.dtstart = this.utils.formatDate(_ac.dtstart, true);
-    _ac.dtend = this.utils.formatDate(_ac.dtend, true);
+  // Crea una copia dell'oggetto attività con le date formattate
+  const _ac = {
+    ...this.activityForm.value,
+    dtstart: formattedDateStart,
+    dtend: formattedDateEnd
+  };
 
-    if (_ac.id) {
-      // Se l'attività ha un ID, aggiorna
-      this.activityService.update(_ac).subscribe({
-        next: () => {
-          console.log('Aggiornamento completato con successo');
-          this.reload.emit(true); // Ricarica la lista
-          this.activeModal.close(); // Chiudi il modal
-        },
-        error: (error) => {
-          console.error('Errore durante l\'aggiornamento', error);
-          alert('Errore durante l\'aggiornamento.');
-        }
-      });
-    } else {
-      // Se non ha un ID, crea una nuova attività
-      this.activityService.save(_ac).subscribe({
-        next: () => {
-          console.log('Creazione completata con successo');
-          this.reload.emit(true); // Ricarica la lista
-          this.activeModal.close(); // Chiudi il modal
-        },
-        error: (error: any) => {
-          console.error('Errore durante la creazione', error);
-          alert('Errore durante la creazione.');
-        }
-      });
-    }
+  if (_ac.id) {
+    // Se l'attività ha un ID, aggiorna
+    this.activityService.update(_ac).subscribe({
+      next: () => {
+        console.log('Aggiornamento completato con successo');
+        this.reload.emit(true); // Ricarica la lista
+        this.activeModal.close(); // Chiudi il modal
+      },
+      error: (error) => {
+        console.error('Errore durante l\'aggiornamento', error);
+        alert('Errore durante l\'aggiornamento.');
+      }
+    });
+  } else {
+    // Se non ha un ID, crea una nuova attività
+    this.activityService.save(_ac).subscribe({
+      next: () => {
+        console.log('Creazione completata con successo');
+        this.reload.emit(true); // Ricarica la lista
+        this.activeModal.close(); // Chiudi il modal
+      },
+      error: (error: any) => {
+        console.error('Errore durante la creazione', error);
+        alert('Errore durante la creazione.');
+      }
+    });
   }
+}
 
   // Funzione per cancellare l'attività
   deleteObject() {
     const _ac = { ...this.activity }; // Clona l'attività
 
     if (_ac.id && _ac.id !== 0) {
-      this.activityService.delete(_ac).subscribe({
+      this.activityService.delete(_ac.id).subscribe({ // Passa solo l'ID al metodo delete
         next: () => {
           console.log('Eliminazione completata con successo');
           this.activity = new Activity(); // Resetta l'attività
           this.activityCopy = new Activity(); // Resetta la copia
           this.currentOwner = null;
           this.reload.emit(true); // Ricarica la lista
+          this.activeModal.close(); // Chiudi il modal
         },
         error: (error: any) => {
           console.error('Errore durante l\'eliminazione', error);
@@ -156,10 +166,12 @@ export class ActivityFormComponent implements OnInit {
     this.currentOwner = null;
     form.patchValue(this.activity); // Inizializza il form con una nuova attività
   }
+
   onOwnerSelected(event: any) {
     // Gestisci qui la logica di selezione del proprietario
     console.log('Proprietario selezionato:', event);
   }
+
   openDeleteConfirmation() {
     // Logica per aprire la finestra di conferma eliminazione
     console.log('Conferma di eliminazione aperta');

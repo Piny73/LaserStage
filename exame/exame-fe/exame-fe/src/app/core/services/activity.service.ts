@@ -2,72 +2,75 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Activity } from '../models/activity.model';
 import { HttpHeaders } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActivityService {
 
-  private readonly endpoint = 'activity';
-  private activityList: Activity[] = [];
+  private readonly endpoint = 'activity'; // Assicurati che questo corrisponda all'endpoint del BE
+  activityList: Activity[] = []; // Inizializzazione come array vuoto
+
 
   constructor(
     private apiService: ApiService
   ) { }
   
-  save(_activity: Activity): Observable<Activity> {
-    
-    const _endpoint = this.endpoint;
-    
+  // Metodo per salvare una nuova attività
+  save(activity: Activity): Observable<Activity> {
     const headers = new HttpHeaders({ 
       'Content-Type': 'application/json'
     });
 
-    return this.apiService.post<Activity>(_endpoint, _activity, headers).pipe(
-      map(response => response) // Il mapping può essere opzionale
+    // Invia la richiesta POST al backend
+    return this.apiService.post<Activity>(this.endpoint, activity, headers).pipe(
+      map(response => response) // Questo mapping può essere opzionale, ma aiuta a trasformare la risposta se necessario
     );
   }
 
-  update(_activity: Activity): Observable<Activity> {
-    const _endpoint = this.endpoint;
+  // Metodo per aggiornare un'attività esistente
+  update(activity: Activity): Observable<Activity> {
     const headers = new HttpHeaders({ 
       'Content-Type': 'application/json'
     });
 
-    return this.apiService.post<Activity>(_endpoint, _activity, headers).pipe(
-      map(response => response) // Il mapping può essere opzionale
+    // Invia la richiesta PUT al backend con l'ID dell'attività
+    return this.apiService.put<Activity>(`${this.endpoint}/${activity.id}`, activity, headers).pipe(
+      map(response => response)
     );
   }
 
-  delete(_activity: Activity): Observable<void> {
-    const _endpoint = `${this.endpoint}/${_activity.id}`;
-  
-    return this.apiService.delete(_endpoint).pipe(
+  // Metodo per eliminare un'attività
+  delete(activityId: number): Observable<void> {
+    // L'endpoint include l'ID dell'attività da eliminare
+    return this.apiService.delete<void>(`${this.endpoint}/${activityId}`).pipe(
       map(() => {})
     );
   }
 
+  // Metodo per ottenere la lista di tutte le attività dal backend
   fill(): Observable<Activity[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
-    const _endpoint = this.endpoint;
-
-    return this.apiService.get<Activity[]>(_endpoint, headers).pipe(
+    // Ottiene tutte le attività dall'endpoint
+    return this.apiService.get<Activity[]>(this.endpoint, headers).pipe(
       map((response: Activity[]) => {
-        // Eventuale logica per trasformare i dati
         return response;
       })
     );
   }
 
+  // Metodo per ottenere la lista delle attività memorizzata localmente
   getActivityList(): Activity[] {
     return this.activityList;
   }
 
+  // Metodo per trovare un'attività per ID dalla lista locale
   findById(id: number): Activity | undefined {
-    return this.activityList.find(ac => ac.id == id);
+    return this.activityList.find(ac => ac.id === id);
   }
 }

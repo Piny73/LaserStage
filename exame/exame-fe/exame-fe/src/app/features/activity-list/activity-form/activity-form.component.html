@@ -11,10 +11,8 @@
         <div class="row mb-3">
           <div class="col-md-6">
             <label for="description" class="form-label">Descrizione</label>
-            <input type="text" id="description" formControlName="description" class="form-control"
-              placeholder="Descrizione">
-            <div *ngIf="activityForm.get('description')?.invalid && activityForm.get('desciption')?.touched"
-              class="text-danger">
+            <input type="text" id="description" formControlName="description" class="form-control" placeholder="Descrizione">
+            <div *ngIf="activityForm.get('description')?.invalid && activityForm.get('description')?.touched" class="text-danger">
               Descrizione obbligatoria.
             </div>
           </div>
@@ -29,8 +27,7 @@
           <div class="col-md-6">
             <label for="dtstart" class="form-label">Data Inizio</label>
             <input type="date" id="dtstart" formControlName="dtstart" class="form-control">
-            <div *ngIf="activityForm.get('dtstart')?.invalid && activityForm.get('dtstart')?.touched"
-              class="text-danger">
+            <div *ngIf="activityForm.get('dtstart')?.invalid && activityForm.get('dtstart')?.touched" class="text-danger">
               Data Inizio obbligatoria.
             </div>
           </div>
@@ -58,7 +55,6 @@
     </div>
   </div>
 
-
   <div id="save-confirmation" class="dialog-overlay" *ngIf="showSaveDialog">
     <div class="dialog-content text-center">
       <p class="mb-4">Vuoi salvare i cambiamenti?</p>
@@ -78,3 +74,4 @@
       </div>
     </div>
   </div>
+</div>

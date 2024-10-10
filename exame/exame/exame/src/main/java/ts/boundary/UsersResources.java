@@ -59,7 +59,7 @@ public class UsersResources {
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Elenco non trovato")
     })
-    @RolesAllowed({"Admin","User"})
+    @PermitAll
     public List<UserDTO> all() {
     List<UserDTO> usList = new ArrayList<>();
     storeuser.all().forEach(e -> {
