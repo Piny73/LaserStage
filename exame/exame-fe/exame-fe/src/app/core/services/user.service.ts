@@ -9,7 +9,7 @@ import { User } from '../models/user.model';
 })
 export class UserService {
 
-  private readonly endpoint = 'user';
+  private readonly endpoint = 'users';
   private userList: User[] = [];
 
   constructor(
@@ -30,7 +30,7 @@ export class UserService {
   }
 
   update(_user: User): Observable<User> {
-    const _endpoint = `${this.endpoint}/area`;
+    const _endpoint = `${this.endpoint}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
@@ -61,7 +61,7 @@ export class UserService {
           });
           return this.userList;
         } else {
-          console.error('Resposta da API não é um array');
+          console.error('Resposta da API non é un array');
           return [];
         }
       })

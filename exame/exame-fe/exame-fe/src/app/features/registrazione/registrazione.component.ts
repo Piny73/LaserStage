@@ -26,7 +26,7 @@ export class RegistrazioneComponent implements OnInit {
     });
   }
   
-  onSubmit() { /*
+  onSubmit() { 
     if (this.registrazioneForm.valid) {
       const user = this.registrazioneForm.value as User;
       this.userService.create(user).subscribe({
@@ -39,7 +39,7 @@ export class RegistrazioneComponent implements OnInit {
           this.errorMessage = 'Erro ao criar usuário. Tente novamente.';
         }
       });
-    }*/
+    }
   }
 
   openLogin() {

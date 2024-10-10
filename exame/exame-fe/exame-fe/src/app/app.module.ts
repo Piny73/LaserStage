@@ -4,15 +4,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FeaturesModule } from './features/features.module'; // Modulo delle feature (contiene i componenti specifici come HomeComponent)
+import { FeaturesModule } from './features/features.module'; 
 import { LayoutModule } from './layout/layout.module';
-
-// IMPORTA NgbModalModule (da ng-bootstrap)
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { TimesheetFormComponent } from './features/timesheet-list/timesheet-form/timesheet-form.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TimesheetFormComponent
   ],
   imports: [
     BrowserModule,

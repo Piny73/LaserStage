@@ -4,9 +4,10 @@ import { ActivityListComponent } from './features/activity-list/activity-list.co
 import { HomeComponent } from './features/home/home.component';
 import { RegistrazioneComponent } from './features/registrazione/registrazione.component';
 import { TimesheetListComponent } from './features/timesheet-list/timesheet-list.component';
+import { LoginComponent } from './features/login/login.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: LoginComponent },
   { path: 'home', component: HomeComponent},
   { path: 'activity', component: ActivityListComponent},
   { path: 'timesheet', component: TimesheetListComponent},

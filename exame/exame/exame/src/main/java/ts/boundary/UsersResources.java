@@ -61,16 +61,18 @@ public class UsersResources {
     })
     @RolesAllowed({"Admin","User"})
     public List<UserDTO> all() {
-        List<UserDTO> usList = new ArrayList<>();
-        storeuser.all().forEach(e -> {
-           UserDTO us = new UserDTO();
-            us.id = e.getId();
-            us.name = e.getName();
-            us.email = e.getEmail();
-            us.pwd = "";
-        });
-        return usList;
-    }
+    List<UserDTO> usList = new ArrayList<>();
+    storeuser.all().forEach(e -> {
+        UserDTO us = new UserDTO();
+        us.id = e.getId();
+        us.name = e.getName();
+        us.email = e.getEmail();
+        us.pwd = ""; // Lascia vuota la password per sicurezza
+        us.roleUser = e.getRoleUser(); // Mappa il ruolo dell'utente
+        usList.add(us); // Aggiungi l'oggetto UserDTO alla lista
+    });
+    return usList;
+}
          
     
     @POST

@@ -14,5 +14,13 @@ export class TimeSheet {
   constructor(init?: Partial<TimeSheet>) {
     Object.assign(this, init);
   }
-  
+}
+
+export interface TimeSheetDTO {
+  id: number;
+  activityid: number;
+  userid: number;
+  dtstart: string | null; // Modificato per accettare stringa o null
+  dtend: string | null;   // Modificato per accettare stringa o null
+  detail: string;
 }

@@ -13,9 +13,9 @@
     
     
     <data-source>
-        <name>java:global/jdbc/timesheet</name>
+        <name>java:global/jdbc/exame</name>
         <class-name>com.mysql.cj.jdbc.MysqlConnectionPoolDataSource</class-name>
-        <url>jdbc:mysql://localhost:3306/timesheet?useSSL=false</url>
+        <url>jdbc:mysql://localhost:3306/exame?useSSL=false</url>
         <user>timesheet</user>
         <password>timesheet</password>
     </data-source>
