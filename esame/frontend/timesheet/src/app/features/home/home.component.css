@@ -1,4 +1,9 @@
 .home-container {
+  background-image: url('/assets/images/sfondohome.png'); /* Sostituisci con il percorso corretto dell'immagine */
+  background-size: cover; /* Adatta l'immagine per coprire l'intera area */
+  background-position: center; /* Centra l'immagine */
+  background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
+  padding: 20px; /* Aggiungi del padding per creare spazio intorno al contenuto, se necessario */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,11 +12,21 @@
     background-color: #f0f0f0;
   }
   
-  .aluno-nome {
+  .alunno-nome {
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 2rem;
     margin-bottom: 2rem;
-    color: #eceaea;
-  }
+    color: #FFA500; /* Colore arancio-giallo per il testo */
+    text-shadow: 
+        1px 1px 0 navy, /* Ombra in basso a destra */
+        -1px -1px 0 navy, /* Ombra in alto a sinistra */
+        -1px 1px 0 navy, /* Ombra in basso a sinistra */
+        1px -1px 0 navy; /* Ombra in alto a destra */
+    background-color: #d5e9fc; /* Colore di sfondo chiaro */
+    border: ridge navy;
+    border-radius: 5px;
+    padding: 20px;
+}
   
   .menu-opcoes {
     display: flex;
@@ -24,8 +39,9 @@
     text-decoration: none;
     margin: 1rem 0;
     padding: 1rem 2rem;
-    color: #007bff;
-    border: 2px solid #007bff;
+    background-color: #d5e9fc; /* Colore di sfondo chiaro */
+    color: navy;
+    border: ridge navy;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
   }
@@ -35,3 +51,46 @@
     color: black;
   }
   
+  /* Stile per il modal (inizialmente nascosto) */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px;
+    border-radius: 10px;
+  }
+
+  /* Stile per il bottone di chiusura */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* Stile per i campi editabili nel modal */
+  .modal input, .modal textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+  }

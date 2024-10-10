@@ -1,33 +1,35 @@
-/* Stili di base per il header */
-.app-header {
-    background-color: #007BFF; /* Colore di sfondo blu */
-    color: white; /* Colore del testo bianco */
-    display: flex; /* Flexbox per layout orizzontale */
-    justify-content: space-between; /* Spazia gli elementi */
-    align-items: center; /* Allinea verticalmente al centro */
-    padding: 10px 20px; /* Padding interno */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+h1 {
+    margin: 0 auto;
+    text-align: center;
 }
 
-/* Stile del titolo */
-.app-header h1 {
-    font-size: 1.5rem; /* Dimensione del font */
-    margin: 0; /* Rimuove margini */
+header {
+    justify-content: space-between; /* Posiziona le icone ai due lati e il testo al centro */
+    align-items: center; /* Allinea verticalmente il contenuto */
+    padding: 20px;
+    background-color: #d5e9fc; /* Colore di sfondo chiaro */
+    border-radius: 5px;
+    border: ridge navy;
+    display: flex;   
 }
 
-/* Stile dei pulsanti */
-.app-header button {
-    background-color: transparent; /* Sfondo trasparente */
-    border: 2px solid white; /* Bordo bianco */
-    color: white; /* Colore del testo */
-    padding: 8px 16px; /* Padding interno */
-    border-radius: 4px; /* Angoli arrotondati */
-    cursor: pointer; /* Cursore a mano */
-    transition: background-color 0.3s, color 0.3s; /* Transizione per effetti hover */
+/* Stile per il titolo */
+header h1 {
+    text-shadow: 
+        1px 1px 0 navy, /* Ombra in basso a destra */
+        -1px -1px 0 navy, /* Ombra in alto a sinistra */
+        -1px 1px 0 navy, /* Ombra in basso a sinistra */
+        1px -1px 0 navy; /* Ombra in alto a destra */
+    font-size: 2.5rem; /* Dimensione del testo */
+    font-weight: bold; /* Grassetto per maggiore impatto */
+    color: #1e90ff; /* Colore blu */
+    letter-spacing: 1px; /* Spaziatura tra le lettere per rendere il testo più leggibile */
+    flex: 1; /* Spinge il titolo al centro */
+    text-align: center; /* Allinea il testo al centro */
 }
 
-/* Effetto hover per i pulsanti */
-.app-header button:hover {
-    background-color: white; /* Sfondo bianco al passaggio del mouse */
-    color: #007BFF; /* Colore del testo blu */
+/* Stile per le icone */
+.header-icon {
+    width: 50px; /* Dimensione icona */
+    height: auto; /* Mantieni le proporzioni */
 }

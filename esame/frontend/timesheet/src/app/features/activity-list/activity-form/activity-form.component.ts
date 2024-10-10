@@ -22,11 +22,11 @@ export class ActivityFormComponent implements OnInit {
   @Output() reload = new EventEmitter<boolean>(); // Evento per ricaricare la lista
 
   constructor(
-    private fb: FormBuilder, 
-    private activityService: ActivityService, 
+    private fb: FormBuilder,
+    private activityService: ActivityService,
     private utils: UtilsService,
     public activeModal: NgbActiveModal // NgbActiveModal per chiudere il modal
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.activityForm = this.fb.group({
@@ -54,13 +54,14 @@ export class ActivityFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.activityForm.valid) {
-      this.activity = new Activity(this.activityForm.value); // Assegna i valori dal form all'attività
-      this.confirmSave(); // Chiede conferma per il salvataggio
+        this.activity = new Activity(this.activityForm.value); // Assegna i valori dal form all'attività
+        this.confirmSave(); // Chiede conferma per il salvataggio
     } else {
-      console.log('Form non valido');
-      this.activityForm.markAllAsTouched(); // Mostra i messaggi di errore
+        console.log('Form non valido');
+        this.activityForm.markAllAsTouched(); // Mostra i messaggi di errore
     }
-  }
+}
+
 
   // Funzione di salvataggio
   save() {
@@ -69,6 +70,8 @@ export class ActivityFormComponent implements OnInit {
     // Formatta le date
     _ac.dtstart = this.utils.formatDate(_ac.dtstart, true);
     _ac.dtend = this.utils.formatDate(_ac.dtend, true);
+
+    console.log('Dati dell\'attività da inviare:', _ac); // Log per il debug
 
     if (_ac.id) {
       // Se l'attività ha un ID, aggiorna
@@ -156,14 +159,17 @@ export class ActivityFormComponent implements OnInit {
     this.currentOwner = null;
     form.patchValue(this.activity); // Inizializza il form con una nuova attività
   }
-  
-  onOwnerSelected(event: any) {
-    // Gestisci qui la logica di selezione del proprietario
-    console.log('Proprietario selezionato:', event);
-  }
+  onOwnerSelected(selectedId: number) {
+    this.currentOwner = selectedId;
+    this.activityForm.patchValue({ ownerid: selectedId }); // Aggiorna il modulo con il proprietario selezionato
+    console.log('Proprietario selezionato:', selectedId);
+}
+
+
 
   openDeleteConfirmation() {
     // Logica per aprire la finestra di conferma eliminazione
     console.log('Conferma di eliminazione aperta');
   }
 }
+

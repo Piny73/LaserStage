@@ -5,27 +5,46 @@ import { UserService } from '../../core/services/user.service';
 @Component({
   selector: 'app-cb-user',
   templateUrl: './cb-user.component.html',
-  styleUrl: './cb-user.component.css'
+  styleUrls: ['./cb-user.component.css']
 })
 export class CbUserComponent implements OnInit {
 
-  @Input("selectedUser") selectedItem: number | null = null;
-  @Output("selectedItemChange") selectedItemChange: EventEmitter<number> = new EventEmitter<number>();
+  @Input() selectedItem: number | null = null;
+  @Output() selectedItemChange: EventEmitter<number> = new EventEmitter<number>();
+  
   userList: User[] = [];
+  isLoading: boolean = true;
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userList = this.userService.getUserList();
+    this.loadUsers();
   }
 
-  onSelected(event: any) {
-    if (event.target.value) {
-      const selectedId = event.target.value;
-      this.selectedItem = this.userList.find(us => us.id === parseInt(selectedId, 10))?.id || 0;
+  // Carica gli utenti dal servizio
+  loadUsers(): void {
+    this.isLoading = true;
+    this.userService.fill().subscribe({
+      next: (users: User[]) => {
+        this.userList = users;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Errore nel caricamento degli utenti:', error);
+        this.isLoading = false;
+      }
+    });
+  }
+
+  // Gestione della selezione utente
+  onSelected(event: any): void {
+    const selectedValue = event.target.value;
+
+    if (selectedValue) {
+      const selectedId = parseInt(selectedValue, 10);
+      this.selectedItem = this.userList.find(user => user.id === selectedId)?.id ?? -1;
       this.selectedItemChange.emit(this.selectedItem);
-    }
-    else {
+    } else {
       this.selectedItem = -1;
       this.selectedItemChange.emit(this.selectedItem);
     }

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { SharedModule } from '../shared/shared.module';
 import { ActivityFormComponent } from './activity-list/activity-form/activity-form.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
@@ -24,7 +25,9 @@ import { TimesheetRowComponent } from './timesheet-list/timesheet-row/timesheet-
     TimesheetListComponent,
     TimesheetRowComponent,
     TimesheetFormComponent,
-    RegistrazioneComponent
+    RegistrazioneComponent,
+
+
 
   ],
   imports: [

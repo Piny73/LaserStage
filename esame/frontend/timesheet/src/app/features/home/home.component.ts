@@ -42,28 +42,32 @@ export class HomeComponent {
   }
 
   loadData() {
-    this.isLoading = true;
-    this.activityService.fill()
-      .pipe(
-        switchMap(activities => {
-          this.activityData.data = activities;
-          return this.timeSheetService.fill();
-        }),
-        switchMap((timesheet) => {
-          this.timeSheetData.data = timesheet;
-          return this.userService.fill();
-        })
-      )
-      .subscribe({
-        next: (user) => {
-          this.userData.data = user;
-          this.isLoading = false;
-        },
-        error: (err) => {
-          console.error('Error Load Data', err);
-          this.isLoading = false;
-        }
-      });
+    try {
+      this.isLoading = true;
+      this.activityService.fill()
+        .pipe(
+          switchMap(activities => {
+            this.activityData.data = activities;
+            return this.timeSheetService.fill();
+          }),
+          switchMap((timesheet) => {
+            this.timeSheetData.data = timesheet;
+            return this.userService.fill();
+          })
+        )
+        .subscribe({
+          next: (user) => {
+            this.userData.data = user;
+            this.isLoading = false;
+          },
+          error: (err) => {
+            console.error('Error Load Data', err);
+            this.isLoading = false;
+          }
+        });
+      }catch {
+        console.log ("carigamento generale non riuscito");
+      }
   }
   // Metodo per il logout
   logout() {

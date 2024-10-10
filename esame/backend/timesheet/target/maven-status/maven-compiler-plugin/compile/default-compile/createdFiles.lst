@@ -1,3 +1,4 @@
+ts\boundary\mapping\LocalDateTimeAdapter.class
 ts\boundary\mapping\UserDTO.class
 ts\store\TimeSheetStore.class
 ts\boundary\UsersResources.class

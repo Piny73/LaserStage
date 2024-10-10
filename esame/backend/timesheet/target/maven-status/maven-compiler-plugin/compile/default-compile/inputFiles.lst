@@ -3,6 +3,7 @@ C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\boundary\mappi
 C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\services\JAXRSConfiguration.java
 C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\services\CorsResponseFilter.java
 C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\boundary\mapping\Credential.java
+C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\boundary\mapping\LocalDateTimeAdapter.java
 C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\entity\Activity.java
 C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\entity\BaseEntity.java
 C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\store\ActivityStore.java
