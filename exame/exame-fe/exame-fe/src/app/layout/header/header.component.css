@@ -8,16 +8,21 @@ header {
     align-items: center; /* Allinea verticalmente il contenuto */
     padding: 20px;
     background-color: #d5e9fc; /* Colore di sfondo chiaro */
+    border-radius: 5px;
     border: ridge navy;
     display: flex;   
 }
 
 /* Stile per il titolo */
 header h1 {
+    text-shadow: 
+        1px 1px 0 navy, /* Ombra in basso a destra */
+        -1px -1px 0 navy, /* Ombra in alto a sinistra */
+        -1px 1px 0 navy, /* Ombra in basso a sinistra */
+        1px -1px 0 navy; /* Ombra in alto a destra */
     font-size: 2.5rem; /* Dimensione del testo */
     font-weight: bold; /* Grassetto per maggiore impatto */
     color: #1e90ff; /* Colore blu */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Ombra per effetto rilievo */
     letter-spacing: 1px; /* Spaziatura tra le lettere per rendere il testo più leggibile */
     flex: 1; /* Spinge il titolo al centro */
     text-align: center; /* Allinea il testo al centro */

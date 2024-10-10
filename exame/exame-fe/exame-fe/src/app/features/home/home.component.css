@@ -18,10 +18,14 @@
     margin-bottom: 2rem;
     color: #FFA500; /* Colore arancio-giallo per il testo */
     text-shadow: 
-        1px 1px 0 navy, /* Ombra nera in basso a destra */
-        -1px -1px 0 navy, /* Ombra nera in alto a sinistra */
-        -1px 1px 0 navy, /* Ombra nera in basso a sinistra */
-        1px -1px 0 navy; /* Ombra nera in alto a destra */
+        1px 1px 0 navy, /* Ombra in basso a destra */
+        -1px -1px 0 navy, /* Ombra in alto a sinistra */
+        -1px 1px 0 navy, /* Ombra in basso a sinistra */
+        1px -1px 0 navy; /* Ombra in alto a destra */
+    background-color: #d5e9fc; /* Colore di sfondo chiaro */
+    border: ridge navy;
+    border-radius: 5px;
+    padding: 20px;
 }
   
   .menu-opcoes {
@@ -35,8 +39,9 @@
     text-decoration: none;
     margin: 1rem 0;
     padding: 1rem 2rem;
-    color: #007bff;
-    border: 2px solid #007bff;
+    background-color: #d5e9fc; /* Colore di sfondo chiaro */
+    color: navy;
+    border: ridge navy;
     border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
   }
