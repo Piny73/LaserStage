@@ -4,11 +4,12 @@ h1 {
 }
 
 header {
-    display: flex;
     justify-content: space-between; /* Posiziona le icone ai due lati e il testo al centro */
     align-items: center; /* Allinea verticalmente il contenuto */
     padding: 20px;
-    background-color: #f0f8ff; /* Colore di sfondo chiaro */
+    background-color: #d5e9fc; /* Colore di sfondo chiaro */
+    border: ridge navy;
+    display: flex;   
 }
 
 /* Stile per il titolo */

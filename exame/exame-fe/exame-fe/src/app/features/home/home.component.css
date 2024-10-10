@@ -1,4 +1,9 @@
 .home-container {
+  background-image: url('/assets/images/TimesheetSfondoHome.png'); /* Sostituisci con il percorso corretto dell'immagine */
+  background-size: cover; /* Adatta l'immagine per coprire l'intera area */
+  background-position: center; /* Centra l'immagine */
+  background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
+  padding: 20px; /* Aggiungi del padding per creare spazio intorno al contenuto, se necessario */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,10 +13,16 @@
   }
   
   .alunno-nome {
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 2rem;
     margin-bottom: 2rem;
-    color: #333;
-  }
+    color: #FFA500; /* Colore arancio-giallo per il testo */
+    text-shadow: 
+        1px 1px 0 navy, /* Ombra nera in basso a destra */
+        -1px -1px 0 navy, /* Ombra nera in alto a sinistra */
+        -1px 1px 0 navy, /* Ombra nera in basso a sinistra */
+        1px -1px 0 navy; /* Ombra nera in alto a destra */
+}
   
   .menu-opcoes {
     display: flex;

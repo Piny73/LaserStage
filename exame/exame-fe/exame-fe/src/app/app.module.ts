@@ -4,15 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FeaturesModule } from './features/features.module'; 
+import { FeaturesModule } from './features/features.module'; // Importa FeaturesModule
 import { LayoutModule } from './layout/layout.module';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { TimesheetFormComponent } from './features/timesheet-list/timesheet-form/timesheet-form.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    TimesheetFormComponent
+    AppComponent
+    // Rimosso TimesheetFormComponent da qui
   ],
   imports: [
     BrowserModule,
@@ -20,16 +19,17 @@ import { TimesheetFormComponent } from './features/timesheet-list/timesheet-form
     LayoutModule,
     ReactiveFormsModule,
     FormsModule,
-    FeaturesModule, // Modulo con i componenti specifici dell'applicazione
-    HttpClientModule, // Aggiunto HttpClientModule 
-    NgbModalModule // Aggiungi NgbModalModule qui per abilitare i modali di ng-bootstrap
+    FeaturesModule, // Importa correttamente il modulo delle funzionalità
+    HttpClientModule,
+    NgbModalModule
   ],
   providers: [
-    provideHttpClient(withFetch()), // Abilita l'uso di fetch
+    provideHttpClient(withFetch()),
     provideClientHydration()
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
 
 

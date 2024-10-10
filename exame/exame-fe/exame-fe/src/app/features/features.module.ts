@@ -24,14 +24,14 @@ import { TimesheetFormComponent } from './timesheet-list/timesheet-form/timeshee
     ActivityFormComponent,
     TimesheetListComponent,
     TimesheetRowComponent,
-    TimesheetFormComponent,
+    TimesheetFormComponent, // Dichiarazione qui
     RegistrazioneComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
-    NgbModule // Aggiungi NgbModule se utilizzi componenti di ng-bootstrap
+    NgbModule
   ],
   exports: [
     LoginComponent,
@@ -41,9 +41,10 @@ import { TimesheetFormComponent } from './timesheet-list/timesheet-form/timeshee
     ActivityFormComponent,
     TimesheetListComponent,
     TimesheetRowComponent,
-    TimesheetFormComponent,
+    TimesheetFormComponent, // Esportazione qui
     RegistrazioneComponent
   ]
 })
 export class FeaturesModule { }
+
 
