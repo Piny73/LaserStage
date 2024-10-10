@@ -24,9 +24,9 @@ export class ActivityService {
       'Content-Type': 'application/json'
     });
 
-    return this.apiService.post(_endpoint, _activity, headers).pipe(
-      map(response => response)
-    ); 
+    return this.apiService.post<Activity>(_endpoint, _activity, headers).pipe(
+      map(response => response) // Il mapping può essere opzionale
+    );
   }
 
   update(_activity: Activity): Observable<Activity> {
@@ -35,9 +35,9 @@ export class ActivityService {
       'Content-Type': 'application/json'
     });
 
-    return this.apiService.put(_endpoint, _activity, headers).pipe(
-      map(response => response)
-    ); 
+    return this.apiService.post<Activity>(_endpoint, _activity, headers).pipe(
+      map(response => response) // Il mapping può essere opzionale
+    );
   }
 
   delete(_activity: Activity): Observable<void> {
@@ -55,26 +55,10 @@ export class ActivityService {
 
     const _endpoint = this.endpoint;
 
-    return this.apiService.get(_endpoint, headers).pipe(
-      map((response: any[]) => {
-        if (Array.isArray(response)) {
-          this.activityList = response.map((data: any) => {
-            const ac = new Activity({
-              id: data.id,
-              description: data.description,
-              dtstart: data.dtstart,
-              dtend: data.dtend,
-              ownerid: data.ownerid,
-              enable:data.enable
-            });
-            return ac;
-          });
-
-          return this.activityList;
-        } else {
-          console.error('Resposta da API não é um array');
-          return [];
-        }
+    return this.apiService.get<Activity[]>(_endpoint, headers).pipe(
+      map((response: Activity[]) => {
+        // Eventuale logica per trasformare i dati
+        return response;
       })
     );
   }

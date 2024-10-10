@@ -32,17 +32,15 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
 
 /**
- * See http://www.w3.org/TR/cors/
- *
- * @author airhacks.com
+ * Filtro per gestire le richieste CORS.
  */
 @Provider
 public class CorsResponseFilter implements ContainerResponseFilter {
 
     public static final String ALLOWED_METHODS = "GET, POST, PUT, DELETE, PATCH, OPTIONS, HEAD";
-    public final static int MAX_AGE = 42 * 60 * 60;
-    public final static String DEFAULT_ALLOWED_HEADERS = "*" ;//origin,accept,content-type";
-    public final static String DEFAULT_EXPOSED_HEADERS = "location,info";
+    public static final int MAX_AGE = 42 * 60 * 60; // 42 ore
+    public static final String DEFAULT_ALLOWED_HEADERS = "Origin, Accept, Content-Type, Authorization, X-Requested-With";
+    public static final String DEFAULT_EXPOSED_HEADERS = "Location, Info";
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
@@ -53,31 +51,48 @@ public class CorsResponseFilter implements ContainerResponseFilter {
         headers.add("Access-Control-Allow-Credentials", "true");
         headers.add("Access-Control-Allow-Methods", ALLOWED_METHODS);
         headers.add("Access-Control-Max-Age", MAX_AGE);
-        headers.add("x-responded-by", "cors-response-filter");
+        headers.add("X-Responded-By", "cors-response-filter");
     }
 
-    String getRequestedAllowedHeaders(ContainerRequestContext responseContext) {
-        List<String> headers = responseContext.getHeaders().get("Access-Control-Allow-Headers");
+    /**
+     * Ottiene gli header consentiti per la richiesta.
+     *
+     * @param requestContext contesto della richiesta
+     * @return una stringa con gli header consentiti
+     */
+    private String getRequestedAllowedHeaders(ContainerRequestContext requestContext) {
+        List<String> headers = requestContext.getHeaders().get("Access-Control-Request-Headers");
         return createHeaderList(headers, DEFAULT_ALLOWED_HEADERS);
     }
 
-    String getRequestedExposedHeaders(ContainerRequestContext responseContext) {
-        List<String> headers = responseContext.getHeaders().get("Access-Control-Expose-Headers");
+    /**
+     * Ottiene gli header esposti nella risposta.
+     *
+     * @param requestContext contesto della richiesta
+     * @return una stringa con gli header esposti
+     */
+    private String getRequestedExposedHeaders(ContainerRequestContext requestContext) {
+        List<String> headers = requestContext.getHeaders().get("Access-Control-Expose-Headers");
         return createHeaderList(headers, DEFAULT_EXPOSED_HEADERS);
     }
 
-    String createHeaderList(List<String> headers, String defaultHeaders) {
+    /**
+     * Crea una lista di header sotto forma di stringa.
+     *
+     * @param headers lista di header
+     * @param defaultHeaders header di default da includere
+     * @return stringa con gli header concatenati
+     */
+    private String createHeaderList(List<String> headers, String defaultHeaders) {
         if (headers == null || headers.isEmpty()) {
             return defaultHeaders;
         }
         StringBuilder retVal = new StringBuilder();
         for (int i = 0; i < headers.size(); i++) {
-            String header = (String) headers.get(i);
-            retVal.append(header);
+            retVal.append(headers.get(i));
             retVal.append(',');
         }
         retVal.append(defaultHeaders);
         return retVal.toString();
     }
-
 }

@@ -1,6 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ApiService } from '../api.service';
 import { User } from '../models/user.model';
 
@@ -16,75 +17,93 @@ export class UserService {
     private apiService: ApiService
   ) { }
 
+  // Metodo per salvare un nuovo utente
   save(_user: User): Observable<User> {
-
-    const _endpoint = this.endpoint;
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
-    return this.apiService.post(_endpoint, _user, headers).pipe(
+    return this.apiService.post<User>(this.endpoint, _user, headers).pipe(
       map(response => response)
     );
   }
 
+  // Metodo per aggiornare un utente esistente
   update(_user: User): Observable<User> {
-    const _endpoint = `${this.endpoint}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
-    return this.apiService.put(_endpoint, _user, headers).pipe(
+    return this.apiService.put<User>(this.endpoint, _user, headers).pipe(
       map(response => response)
     );
   }
 
+  // Metodo per ottenere la lista di tutti gli utenti dal backend
   fill(): Observable<User[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
-    const _endpoint = this.endpoint;
-
-    return this.apiService.get(_endpoint, headers).pipe(
-      map((response: any[]) => {
+    return this.apiService.get<User[]>(this.endpoint, headers).pipe(
+      map((response: User[]) => {
         if (Array.isArray(response)) {
-          this.userList = response.map((data: any) => {
-            const ac = new User({
+          this.userList = response.map((data: User) => {
+            return new User({
               id: data.id,
-              name: data.description,
-              email: data.dtstart,
-              pwd: ""
+              name: data.name,
+              email: data.email,
+              pwd: "" // La password non viene mappata per motivi di sicurezza
             });
-            return ac;
           });
           return this.userList;
         } else {
-          console.error('Resposta da API non é un array');
+          console.error('La risposta dell\'API non è un array');
           return [];
         }
       })
     );
   }
 
+  // Metodo per ottenere la lista di utenti memorizzata localmente
   getUserList(): User[] {
     return this.userList;
   }
 
+  // Metodo per trovare un utente per ID dalla lista locale
   findById(id: number): User | undefined {
-    return this.userList.find(u => u.id == id);
+    return this.userList.find(u => u.id === id);
   }
 
+  // Metodo per creare un nuovo utente
   create(_user: User): Observable<User> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
-    return this.apiService.post(this.endpoint, _user, headers).pipe(
+    return this.apiService.post<User>(this.endpoint, _user, headers).pipe(
       map(response => response)
     );
   }
 
+  // Metodo per ottenere tutti gli utenti direttamente dal backend (senza cache locale)
+  getAllUsers(): Observable<User[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
 
+    return this.apiService.get<User[]>(this.endpoint, headers).pipe(
+      map((response: User[]) => {
+        return response.map((data: User) => {
+          return new User({
+            id: data.id,
+            name: data.name,
+            email: data.email,
+            pwd: "" // La password non viene mappata per motivi di sicurezza
+          });
+        });
+      })
+    );
+  }
 }
+

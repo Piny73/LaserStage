@@ -22,8 +22,10 @@ export class AuthService {
 
     return this.apiService.post(this.endpoint, loginData, headers).pipe(
       map(response => {
-        if (response) {
+        if (typeof response === 'string') {
           this.saveUserInLocalStorage(response);
+        } else {
+          console.error('Errore: il valore di response non è una stringa', response);
         }
         return response;
       })

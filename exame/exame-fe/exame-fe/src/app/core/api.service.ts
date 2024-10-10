@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,32 +13,52 @@ export class ApiService {
 
   constructor() { }
 
-  // Método POST genérico
-  post(endpoint: string, data: any, headers?: HttpHeaders): Observable<any> {
+  // Metodo POST generico
+  post<T>(endpoint: string, data: any, headers?: HttpHeaders): Observable<T> {
     const url = `${this.baseUrl}/${endpoint}`;
-    //console.log("API POST Path: ",  url);
-    //console.log("API POST Data: ", data)
-    return this.http.post(url, data, { headers });
+    return this.http.post<T>(url, data, { headers }).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  // Método GET genérico
-  get(endpoint: string, headers?: HttpHeaders): Observable<any> {
+  // Metodo GET generico
+  get<T>(endpoint: string, headers?: HttpHeaders): Observable<T> {
     const url = `${this.baseUrl}/${endpoint}`;
-    return this.http.get(url, { headers });
+    return this.http.get<T>(url, { headers }).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  // Método PUT genérico
-  put(endpoint: string, data: any, headers?: HttpHeaders): Observable<any> {
+  // Metodo PUT generico
+  put<T>(endpoint: string, data: any, headers?: HttpHeaders): Observable<T> {
     const url = `${this.baseUrl}/${endpoint}`;
-    console.log("API PUT Path: ",  url);
-    console.log("API PUT Data: ", data);
-    return this.http.put(url, data, { headers });
+    return this.http.put<T>(url, data, { headers }).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  // Método DELETE genérico
-  delete(endpoint: string,  headers?: HttpHeaders): Observable<any> {
+  // Metodo DELETE generico
+  delete<T>(endpoint: string, headers?: HttpHeaders): Observable<T> {
     const url = `${this.baseUrl}/${endpoint}`;
-    return this.http.delete(url, { headers });
+    return this.http.delete<T>(url, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Gestione degli errori
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    let errorMessage = 'Errore sconosciuto!';
+
+    // Controllo se siamo in un ambiente client-side
+    if (typeof window !== 'undefined' && error.error instanceof ErrorEvent) {
+      // Errore lato client
+      errorMessage = `Errore: ${error.error.message}`;
+    } else {
+      // Errore lato server
+      errorMessage = `Codice errore: ${error.status}\nMessaggio: ${error.message}`;
+    }
+
+    console.error(errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
 }
-
