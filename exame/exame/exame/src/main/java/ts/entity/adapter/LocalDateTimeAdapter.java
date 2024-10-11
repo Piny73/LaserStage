@@ -1,5 +1,5 @@
 // Percorso suggerito: src/main/java/ts/boundary/mapping/LocalDateTimeAdapter.java
-package ts.boundary.mapping;
+package ts.entity.adapter;
 
 import javax.json.bind.adapter.JsonbAdapter;
 import java.time.LocalDateTime;

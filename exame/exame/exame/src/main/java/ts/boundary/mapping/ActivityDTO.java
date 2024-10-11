@@ -1,5 +1,6 @@
 package ts.boundary.mapping;
 
+import ts.entity.adapter.LocalDateTimeAdapter;
 import java.time.LocalDateTime;
 import javax.json.bind.annotation.JsonbTypeAdapter;
 import javax.validation.constraints.NotBlank;
