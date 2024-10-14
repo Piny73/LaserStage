@@ -1,4 +1,38 @@
+
+/* Stili di base per il header */
+.app-header {
+    background-color: #007BFF; /* Colore di sfondo blu */
+    color: white; /* Colore del testo bianco */
+    display: flex; /* Flexbox per layout orizzontale */
+    justify-content: space-between; /* Spazia gli elementi */
+    align-items: center; /* Allinea verticalmente al centro */
+    padding: 10px 20px; /* Padding interno */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+}
+
+/* Stile del titolo */
+.app-header h1 {
+    font-size: 1.5rem; /* Dimensione del font */
+    margin: 0; /* Rimuove margini */
+}
+
+/* Stile dei pulsanti */
+.app-header button {
+    background-color: transparent; /* Sfondo trasparente */
+    border: 2px solid white; /* Bordo bianco */
+    color: white; /* Colore del testo */
+    padding: 8px 16px; /* Padding interno */
+    border-radius: 4px; /* Angoli arrotondati */
+    cursor: pointer; /* Cursore a mano */
+    transition: background-color 0.3s, color 0.3s; /* Transizione per effetti hover */
+}
+
+/* Effetto hover per i pulsanti */
+.app-header button:hover {
+    background-color: white; /* Sfondo bianco al passaggio del mouse */
+    color: #007BFF; /* Colore del testo blu */
+
 h1 {
     margin: 0 auto;
-    text-align: center;
+
 }

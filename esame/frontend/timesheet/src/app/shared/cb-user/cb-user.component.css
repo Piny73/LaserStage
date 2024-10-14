@@ -1,0 +1,53 @@
+/* Assicurati che il div con w-100 occupi il 100% della larghezza */
+.w-100 {
+    width: 100%;
+}
+
+/* Stile per il campo select */
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333; /* Cambiato il colore del testo in un grigio scuro per maggiore visibilità */
+    background-color: white;
+    background-clip: padding-box;
+    border: 1px solid #dde9f5;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* Aggiungi un'ombra al campo select quando è attivo */
+.form-control:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(100, 114, 194, 0.25);
+}
+
+
+/* Stile per le opzioni */
+option {
+    padding: 10px;
+    color: #e2eefa;
+}
+
+/* Disabilita le opzioni non selezionabili */
+option[disabled] {
+    color: #5b5aa1;
+}
+
+/* Stile per l'opzione selezionata */
+option[selected] {
+    font-weight: bold;
+    background-color: #f8f9fa;
+}
+
+/* Stile responsive per schermi più piccoli */
+@media (max-width: 576px) {
+    .form-control {
+        font-size: 0.875rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
