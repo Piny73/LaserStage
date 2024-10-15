@@ -7,6 +7,10 @@ import { User } from '../../core/models/user.model';
 import { ActivityService } from '../../core/services/activity.service';
 import { TimesheetService } from '../../core/services/timesheet.service';
 import { UserService } from '../../core/services/user.service';
+
+
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; // Importazione NgbModal
+
 import { ActivityFormComponent } from '../activity-list/activity-form/activity-form.component';
 
 
@@ -86,3 +90,6 @@ export class HomeComponent {
     );
   }
 }
+
+
+

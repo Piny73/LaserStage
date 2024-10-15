@@ -1,3 +1,4 @@
+
 /* Stili di base per il header */
 .app-header {
     background-color: #007BFF; /* Colore di sfondo blu */
@@ -30,4 +31,8 @@
 .app-header button:hover {
     background-color: white; /* Sfondo bianco al passaggio del mouse */
     color: #007BFF; /* Colore del testo blu */
+
+h1 {
+    margin: 0 auto;
+
 }

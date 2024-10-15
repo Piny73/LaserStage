@@ -1,18 +1,18 @@
 import { HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { Login } from './models/login.model';
 import { User } from './models/user.model';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private readonly endpoint = 'users/login'; // Endpoint di login
 
-  private readonly endpoint = 'users/login'; //endpoint di login
-
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, @Inject(PLATFORM_ID) private platformId: Object) {}
 
   login(login: Login): Observable<any> {
     const loginData = login;
@@ -31,26 +31,24 @@ export class AuthService {
   }
 
   getUser(): User | null {
-    try {
+    if (isPlatformBrowser(this.platformId)) {
       const localUser = localStorage.getItem('user');
 
       if (localUser) {
         try {
-          if (this.isValidUser(localUser)?.id) {
-            return this.isValidUser(localUser);
+          const user = JSON.parse(localUser);
+          if (this.isValidUser(user)?.id) {
+            return this.isValidUser(user);
           } else {
-            console.log('Error localstorage');
+            console.log('Error in localStorage data');
             this.logout();
           }
         } catch (e) {
-          console.error('Erro localstorage:', e);
+          console.error('Error reading from localStorage:', e);
           this.logout();
         }
       }
-    } catch {
-      console.warn('Erro localStore:');
     }
-
     return null;
   }
 
@@ -66,16 +64,16 @@ export class AuthService {
     return _user;
   }
 
-  saveUserInLocalStorage(user: string) {
-    localStorage.setItem('user', user);
-  }
-
-  logout() {
-    try {
-      localStorage.removeItem('user');
-    } catch (error) {
-      console.error('Localstore Delete:', error);
+  private saveUserInLocalStorage(user: User) {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('user', JSON.stringify(user)); // Salva l'oggetto come stringa JSON
     }
   }
 
+  logout() {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('user');
+    }
+  }
 }
+

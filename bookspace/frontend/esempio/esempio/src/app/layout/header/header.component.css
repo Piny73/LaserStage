@@ -1,12 +1,156 @@
 header {
-  background-color: #26bbfc;
-  color: rgb(255, 255, 255);
+  background-image: url('/esempio/src/assets/immagini/imm_libri.jpg'); ;
+  background-size: cover; /* Adatta l'immagine per coprire tutto l'header */
+  background-position: center; /* Centra l'immagine */
+  background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
+  height: 100vh; /* L'altezza dell'header sarà pari all'altezza dello schermo */
+
+  height: 400px; /* Altezza dell'header, puoi aumentarla per ingrandire l'immagine */
+  color: rgb(0, 0, 0); /* Colore del testo, per rendere visibile il testo sull'immagine */
   text-align: center;
-  padding: 30px;
+  padding: 20px;
+  width: 100%; /* Assicura che l'header occupi tutta la larghezza */
+  max-width: 2000px; /* Imposta una larghezza massima per l'header */
   
-  }
+  /* Aggiungi un ingrandimento ulteriore */
+  object-fit: cover; /* L'immagine riempie il contenitore senza deformarsi */
+}
+
+header h1 {
+  margin: 0;
+  font-size: 3rem;
+}
+
 
 h1 {
   margin: 0;
-  
 }
+
+
+/*navbar*/
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  height: 60px;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: right;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;  
+  gap: 10px; /* Aggiunge uno spazio di 20px tra ogni link */
+
+}
+
+.navbar-nav.left {
+  margin-left: 1335px;
+  margin-right: 20px; 
+}
+
+.navbar-nav.right {
+  margin-left: auto;
+}
+
+.nav-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.nav-item:last-child {
+  margin-right: 0;
+}
+
+/*navbar spazio ecc*/
+.navbar-nav a {
+  margin-right: 10px; /* Aggiunge uno spazio di 20px tra i link */
+  text-decoration: none; /* Rimuove la sottolineatura */
+  color: rgb(0, 0, 0); /* Imposta il colore del testo */
+}
+
+.navbar-nav a:last-child {
+  margin-right: 0; /* Rimuove il margine destro dall'ultimo link */
+}
+
+.navbar-nav a:hover {
+  color: #8B4513; /* Cambia colore al passaggio del mouse */
+}
+
+
+/*bottoni*/
+.btn {
+  background-color: #f29f64;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font-family: 'Libre Baskerville', serif;
+
+}
+
+
+
+/* Stili responsivi per tablet e smartphone */
+
+/* Tablet (max-width: 768px) */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* Dispone gli elementi in colonna */
+    height: auto;
+    padding-top: 30px; /* Aggiungi spazio sopra la navbar */
+  }
+
+  .navbar-nav {
+    flex-direction: column; /* Dispone gli elementi del menu in colonna */
+    align-items: center;
+  }
+
+  .nav-item {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .nav-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .btn {
+    width: 100%; /* I pulsanti occupano l'intera larghezza */
+    margin-bottom: 10px;
+  }
+}
+
+/* Smartphone (max-width: 480px) */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-item {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .nav-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .btn {
+    width: 100%; /* I pulsanti occupano l'intera larghezza dello schermo */
+    margin-bottom: 10px;
+    font-size: 14px; /* Riduce leggermente la dimensione del testo nei pulsanti */
+  }
+
+  .btn-secondary {
+    font-size: 14px;
+  }
+}
+
