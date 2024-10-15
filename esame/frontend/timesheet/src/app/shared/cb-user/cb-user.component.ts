@@ -5,44 +5,25 @@ import { UserService } from '../../core/services/user.service';
 @Component({
   selector: 'app-cb-user',
   templateUrl: './cb-user.component.html',
-  styleUrls: ['./cb-user.component.css']
+  styleUrls: ['./cb-user.component.css']  // Corretto styleUrls
 })
 export class CbUserComponent implements OnInit {
 
-  @Input() selectedItem: number | null = null;
-  @Output() selectedItemChange: EventEmitter<number> = new EventEmitter<number>();
-  
-  userList: User[] = [];
-  isLoading: boolean = true;
+  @Input("selectedUser") selectedItem: number | null = null;
+  @Output("selectedItemChange") selectedItemChange: EventEmitter<number> = new EventEmitter<number>();         
+  userList: User[] = [];   
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.loadUsers();
+    this.userList = this.userService.getUserList();
   }
 
-  // Carica gli utenti dal servizio
-  loadUsers(): void {
-    this.isLoading = true;
-    this.userService.fill().subscribe({
-      next: (users: User[]) => {
-        this.userList = users;
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Errore nel caricamento degli utenti:', error);
-        this.isLoading = false;
-      }
-    });
-  }
-
-  // Gestione della selezione utente
-  onSelected(event: any): void {
-    const selectedValue = event.target.value;
-
-    if (selectedValue) {
-      const selectedId = parseInt(selectedValue, 10);
-      this.selectedItem = this.userList.find(user => user.id === selectedId)?.id ?? -1;
+  onSelected(event: Event): void {
+    const target = event.target as HTMLSelectElement;  // Cast per garantire che l'evento provenga da un elemento select
+    if (target && target.value) {
+      const selectedId = target.value;
+      this.selectedItem = this.userList.find(us => us.id === parseInt(selectedId, 10))?.id || 0;
       this.selectedItemChange.emit(this.selectedItem);
     } else {
       this.selectedItem = -1;
@@ -50,3 +31,4 @@ export class CbUserComponent implements OnInit {
     }
   }
 }
+

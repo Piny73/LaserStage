@@ -1,27 +1,51 @@
 <div class="timesheet-list">
     <h1>Elenco Timesheet</h1>
 
-    <button (click)="onNewTimesheet()">Nuovo Timesheet</button>
+    <button (click)="addNewTimesheet()">Nuovo Timesheet</button>
 
-    <ul>
-        <li *ngFor="let timesheet of timesheets">
-            {{ timesheet.detail }}
-            <button (click)="onEditTimesheet(timesheet.id)">Modifica</button>
-            <button (click)="onDeleteTimesheet(timesheet.id)">Elimina</button>
-        </li>
-    </ul>
-
-    <div *ngIf="selectedTimesheet !== null">
-        <h2>{{ selectedTimesheet.id ? 'Modifica' : 'Crea' }} Timesheet</h2>
-        <form (ngSubmit)="onSaveTimesheet(selectedTimesheet)">
-            <input [(ngModel)]="selectedTimesheet.detail" name="detail" placeholder="Dettagli" required>
-            <button type="submit">Salva</button>
-            <button type="button" (click)="selectedTimesheet = null">Annulla</button>
-        </form>
+    <div *ngIf="timesheets.length > 0; else noTimesheets">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Attività</th>
+                    <th>Utente</th>
+                    <th>Data Inizio</th>
+                    <th>Data Fine</th>
+                    <th>Dettaglio</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let timesheet of timesheets">
+                    <td>{{ timesheet.id }}</td>
+                    <td>{{ timesheet.activityid }}</td>
+                    <td>{{ timesheet.userid }}</td>
+                    <td>{{ timesheet.dtstart | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ timesheet.dtend | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ timesheet.detail }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary me-2" (click)="editTimesheet(timesheet)">Modifica</button>
+                        <button class="btn btn-sm btn-danger" (click)="confirmDelete(timesheet)">Elimina</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <div *ngIf="loading">Caricamento in corso...</div>
-    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-    <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
-</div>
+    <!-- Template for no timesheets -->
+    <ng-template #noTimesheets>
+        <p class="text-center">Nessun timesheet trovato.</p>
+    </ng-template>
 
+    <!-- Delete Confirmation Dialog -->
+    <div id="delete-confirmation" class="dialog-overlay" *ngIf="showDeleteDialog">
+        <div class="dialog-content text-center">
+            <p class="mb-4">Sei sicuro di voler eliminare questo timesheet?</p>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-danger me-2" (click)="deleteTimesheet()">Si</button>
+                <button class="btn btn-secondary" (click)="cancelDelete()">No</button>
+            </div>
+        </div>
+    </div>
+</div>

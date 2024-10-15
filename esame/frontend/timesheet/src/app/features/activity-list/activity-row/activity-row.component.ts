@@ -40,7 +40,13 @@ export class ActivityRowComponent implements OnInit {
 
   initializeSelection() {
     if (this.activitySelected) {
-      this._copyActivitySelected = new Activity(this.activitySelected); // Crea una nuova istanza di Activity
+      // Creazione di una copia dell'attività selezionata
+      this._copyActivitySelected = Object.assign({}, this.activitySelected);
+      
+      // Assicurati di usare il metodo corretto
+      this._copyActivitySelected.getShortDescription = this.activitySelected.getShortDescription.bind(this.activitySelected);
+      this._copyActivitySelected.isOngoing = this.activitySelected.isOngoing.bind(this.activitySelected);
+      
       this._selected = this.activity.id === this.activitySelected.id;
     }
   }
@@ -55,4 +61,7 @@ export class ActivityRowComponent implements OnInit {
     }
   }
 }
+
+
+
 

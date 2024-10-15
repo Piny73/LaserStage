@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'; // Importa NgbActiveModal
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Activity } from '../../../core/models/activity.model';
 import { ActivityService } from '../../../core/services/activity.service';
 import { UtilsService } from '../../../core/utils.service';
@@ -11,109 +11,115 @@ import { UtilsService } from '../../../core/utils.service';
   styleUrls: ['./activity-form.component.css']
 })
 export class ActivityFormComponent implements OnInit {
-
+  
   activityForm!: FormGroup;
-  private activityCopy!: Activity;
   currentOwner!: number | null;
   showSaveDialog = false;
   showDeleteDialog = false;
 
-  @Input() activity!: Activity; // Riceve l'attività da modificare (o una nuova da creare)
+  @Input() activity!: Activity; // Riceve l'attività da modificare o una nuova da creare
   @Output() reload = new EventEmitter<boolean>(); // Evento per ricaricare la lista
 
   constructor(
     private fb: FormBuilder,
     private activityService: ActivityService,
     private utils: UtilsService,
-    public activeModal: NgbActiveModal // NgbActiveModal per chiudere il modal
-  ) { }
+    public activeModal: NgbActiveModal
+  ) {}
 
   ngOnInit(): void {
-    this.activityForm = this.fb.group({
-      id: [null],
-      ownerid: [null],
-      description: ['', Validators.required],
-      dtstart: ['', Validators.required],
-      dtend: [''],
-      enable: ['']
-    });
+    this.initializeForm();
 
     if (this.activity) {
-      // Se esiste un'attività, la copia e formatta le date
-      this.currentOwner = this.activity.ownerid;
-      this.activity.dtstart = this.activity.dtstart ? this.utils.formatDate(this.activity.dtstart, true) : null;
-      this.activity.dtend = this.activity.dtend ? this.utils.formatDate(this.activity.dtend, true) : null;
-      this.activityCopy = new Activity({ ...this.activity }); // Crea una nuova istanza di Activity
-
-      // Aggiorna il form con i valori dell'attività esistente
-      this.activityForm.patchValue({
-        ...this.activity
-      });
+      this.populateFormWithActivityData();
     }
   }
 
+  private initializeForm(): void {
+    this.activityForm = this.fb.group({
+      id: [0], // Imposta l'ID a 0 per default (nuova attività)
+      description: ['', Validators.required], // Campo descrizione obbligatorio
+      ownerid: [0, Validators.required], // Campo proprietario obbligatorio
+      dtstart: ['', Validators.required], // Campo data di inizio obbligatorio
+      dtend: [''], // Campo data di fine opzionale
+      enable: [false] // Impostazione predefinita a false
+    });
+  }
+
+  private populateFormWithActivityData(): void {
+    this.currentOwner = this.activity.ownerid;
+    this.activity.dtstart = this.activity.dtstart ? this.utils.formatDate(this.activity.dtstart, true) : null;
+    this.activity.dtend = this.activity.dtend ? this.utils.formatDate(this.activity.dtend, true) : null;
+
+    this.activityForm.patchValue({
+      ...this.activity
+    });
+  }
+
+  // Gestisce l'invio del form
   onSubmit(): void {
     if (this.activityForm.valid) {
-        this.activity = new Activity(this.activityForm.value); // Assegna i valori dal form all'attività
-        this.confirmSave(); // Chiede conferma per il salvataggio
+      this.showSaveDialog = true; // Mostra la finestra di conferma salvataggio
     } else {
-        console.log('Form non valido');
-        this.activityForm.markAllAsTouched(); // Mostra i messaggi di errore
-    }
-}
-
-
-  // Funzione di salvataggio
-  save() {
-    const _ac = new Activity(this.activityForm.value); // Clona i valori del form come un'istanza di Activity
-
-    // Formatta le date
-    _ac.dtstart = this.utils.formatDate(_ac.dtstart, true);
-    _ac.dtend = this.utils.formatDate(_ac.dtend, true);
-
-    console.log('Dati dell\'attività da inviare:', _ac); // Log per il debug
-
-    if (_ac.id) {
-      // Se l'attività ha un ID, aggiorna
-      this.activityService.update(_ac).subscribe({
-        next: () => {
-          console.log('Aggiornamento completato con successo');
-          this.reload.emit(true); // Ricarica la lista
-          this.activeModal.close(); // Chiudi il modal
-        },
-        error: (error) => {
-          console.error('Errore durante l\'aggiornamento', error);
-          alert('Errore durante l\'aggiornamento.');
-        }
-      });
-    } else {
-      // Se non ha un ID, crea una nuova attività
-      this.activityService.save(_ac).subscribe({
-        next: () => {
-          console.log('Creazione completata con successo');
-          this.reload.emit(true); // Ricarica la lista
-          this.activeModal.close(); // Chiudi il modal
-        },
-        error: (error: any) => {
-          console.error('Errore durante la creazione', error);
-          alert('Errore durante la creazione.');
-        }
-      });
+      console.log('Form non valido');
+      this.activityForm.markAllAsTouched(); // Mostra i messaggi di errore
     }
   }
 
-  // Funzione per cancellare l'attività
-  deleteObject() {
-    const _ac = new Activity(this.activity); // Crea un'istanza di Activity
+  confirmSave(): void {
+    const formattedDateStart = this.activityForm.value.dtstart ? new Date(this.activityForm.value.dtstart).toISOString() : null;
+    const formattedDateEnd = this.activityForm.value.dtend ? new Date(this.activityForm.value.dtend).toISOString() : null;
 
-    if (_ac.id && _ac.id !== 0) {
-      this.activityService.delete(_ac).subscribe({
+    const activityData = {
+      ...this.activityForm.value,
+      dtstart: formattedDateStart,
+      dtend: formattedDateEnd
+    };
+
+    if (activityData.id && activityData.id !== 0) {
+      this.updateActivity(activityData);
+    } else {
+      this.createActivity(activityData);
+    }
+    this.showSaveDialog = false; // Chiudi la finestra di conferma
+  }
+
+  private updateActivity(activityData: any): void {
+    this.activityService.update(activityData).subscribe({
+      next: () => {
+        console.log('Aggiornamento completato con successo');
+        this.reload.emit(true); // Ricarica la lista
+        this.activeModal.close(); // Chiudi il modal
+      },
+      error: (error) => {
+        console.error('Errore durante l\'aggiornamento', error);
+        alert('Errore durante l\'aggiornamento.');
+      }
+    });
+  }
+
+  private createActivity(activityData: any): void {
+    this.activityService.save(activityData).subscribe({
+      next: () => {
+        console.log('Creazione completata con successo');
+        this.reload.emit(true); // Ricarica la lista
+        this.activeModal.close(); // Chiudi il modal
+      },
+      error: (error: any) => {
+        console.error('Errore durante la creazione', error);
+        alert('Errore durante la creazione.');
+      }
+    });
+  }
+
+  deleteObject(): void {
+    if (this.activity.id && this.activity.id !== 0) {
+      this.activityService.delete(this.activity.id).subscribe({
         next: () => {
           console.log('Eliminazione completata con successo');
-          this.activity = new Activity(); // Resetta l'attività
-          this.activityCopy = new Activity(); // Resetta la copia
-          this.currentOwner = null;
+          this.resetActivityData();
           this.reload.emit(true); // Ricarica la lista
+          this.activeModal.close(); // Chiudi il modal
         },
         error: (error: any) => {
           console.error('Errore durante l\'eliminazione', error);
@@ -121,55 +127,53 @@ export class ActivityFormComponent implements OnInit {
         }
       });
     } else {
-      console.warn('Tentativo di eliminazione con ID non valido:', _ac.id);
+      console.warn('Tentativo di eliminazione con ID non valido:', this.activity.id);
     }
   }
 
-  // Conferma il salvataggio
-  confirmSave() {
-    this.showSaveDialog = false;
-    this.save(); // Chiama la funzione di salvataggio
+  private resetActivityData(): void {
+    this.activity = new Activity({});
+    this.currentOwner = null;
   }
 
-  // Conferma l'eliminazione
-  confirmDelete() {
+  confirmDelete(): void {
     this.showDeleteDialog = false;
     this.deleteObject(); // Chiama la funzione di eliminazione
   }
 
-  // Annulla il salvataggio
-  cancelSave() {
+  cancelSave(): void {
     this.showSaveDialog = false;
   }
 
-  // Annulla l'eliminazione
-  cancelDelete() {
+  cancelDelete(): void {
     this.showDeleteDialog = false;
   }
 
-  // Reset del form
-  resetForm(form: FormGroup): void {
-    this.activity = new Activity(this.activityCopy); // Crea una nuova istanza di Activity
-    this.activityForm.reset(this.activity); // Reset del form con i dati originali
+  resetForm(form?: FormGroup): void {
+    if (form) {
+      form.reset(this.activity); // Usa il form passato come argomento
+    } else {
+      this.activityForm.reset(this.activity); // Usa il form del componente
+    }
   }
 
-  // Nuova attività
-  newObject(form: FormGroup): void {
-    this.activity = new Activity(); // Crea una nuova attività
+  newObject(): void {
+    this.activity = new Activity({});
     this.currentOwner = null;
-    form.patchValue(this.activity); // Inizializza il form con una nuova attività
+    this.activityForm.patchValue(this.activity); // Inizializza il form con una nuova attività
   }
-  onOwnerSelected(selectedId: number) {
-    this.currentOwner = selectedId;
-    this.activityForm.patchValue({ ownerid: selectedId }); // Aggiorna il modulo con il proprietario selezionato
-    console.log('Proprietario selezionato:', selectedId);
-}
 
+  onOwnerSelected(event: number): void {
+    console.log('Proprietario selezionato:', event);
+    this.currentOwner = event; // Aggiorna currentOwner con l'ID dell'utente selezionato
+    this.activityForm.patchValue({ ownerid: this.currentOwner }); // Imposta l'ownerid nel form
+  }
 
-
-  openDeleteConfirmation() {
-    // Logica per aprire la finestra di conferma eliminazione
+  openDeleteConfirmation(): void {
     console.log('Conferma di eliminazione aperta');
+    this.showDeleteDialog = true; // Mostra la finestra di conferma eliminazione
   }
 }
+
+
 

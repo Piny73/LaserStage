@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 import { ActivityFormComponent } from './activity-list/activity-form/activity-form.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
@@ -34,6 +35,7 @@ import { TimesheetRowComponent } from './timesheet-list/timesheet-row/timesheet-
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
     SharedModule
   ]
 })

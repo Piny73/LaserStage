@@ -1,18 +1,18 @@
 import { HttpHeaders } from '@angular/common/http';
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { Login } from './models/login.model';
 import { User } from './models/user.model';
-import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly endpoint = 'users/login'; // Endpoint di login
 
-  constructor(private apiService: ApiService, @Inject(PLATFORM_ID) private platformId: Object) {}
+  private readonly endpoint = 'users/login'; //endpoint di login
+
+  constructor(private apiService: ApiService) { }
 
   login(login: Login): Observable<any> {
     const loginData = login;
@@ -22,8 +22,10 @@ export class AuthService {
 
     return this.apiService.post(this.endpoint, loginData, headers).pipe(
       map(response => {
-        if (response) {
+        if (typeof response === 'string') {
           this.saveUserInLocalStorage(response);
+        } else {
+          console.error('Errore: il valore di response non è una stringa', response);
         }
         return response;
       })
@@ -31,24 +33,26 @@ export class AuthService {
   }
 
   getUser(): User | null {
-    if (isPlatformBrowser(this.platformId)) {
+    try {
       const localUser = localStorage.getItem('user');
 
       if (localUser) {
         try {
-          const user = JSON.parse(localUser);
-          if (this.isValidUser(user)?.id) {
-            return this.isValidUser(user);
+          if (this.isValidUser(localUser)?.id) {
+            return this.isValidUser(localUser);
           } else {
-            console.log('Error in localStorage data');
+            console.log('Error localstorage');
             this.logout();
           }
         } catch (e) {
-          console.error('Error reading from localStorage:', e);
+          console.error('Erro localstorage:', e);
           this.logout();
         }
       }
+    } catch {
+      console.warn('Erro localStore:');
     }
+
     return null;
   }
 
@@ -64,16 +68,17 @@ export class AuthService {
     return _user;
   }
 
-  private saveUserInLocalStorage(user: User) {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('user', JSON.stringify(user)); // Salva l'oggetto come stringa JSON
-    }
+  saveUserInLocalStorage(user: string) {
+    localStorage.setItem('user', user);
   }
 
   logout() {
-    if (isPlatformBrowser(this.platformId)) {
+    try {
       localStorage.removeItem('user');
+    } catch (error) {
+      console.error('Localstore Delete:', error);
     }
   }
+
 }
 

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; // Importazione NgbModal
 import { switchMap } from 'rxjs';
-import { AuthService } from '../../core/auth.service';
 import { Activity } from '../../core/models/activity.model';
 import { TimeSheet } from '../../core/models/timesheet.model';
 import { User } from '../../core/models/user.model';
@@ -10,8 +8,7 @@ import { ActivityService } from '../../core/services/activity.service';
 import { TimesheetService } from '../../core/services/timesheet.service';
 import { UserService } from '../../core/services/user.service';
 import { ActivityFormComponent } from '../activity-list/activity-form/activity-form.component';
-
-
+import { TimesheetFormComponent } from '../timesheet-list/timesheet-form/timesheet-form.component';
 
 @Component({
   selector: 'app-home',
@@ -19,8 +16,8 @@ import { ActivityFormComponent } from '../activity-list/activity-form/activity-f
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
   isLoading: boolean = true;
+  isModalOpen: boolean = false; // Aggiungi questa proprietà
   activityData: { data: Activity[] } = { data: [] };
   timeSheetData: { data: TimeSheet[] } = { data: [] };
   userData: { data: User[] } = { data: [] };
@@ -29,59 +26,43 @@ export class HomeComponent {
     public activityService: ActivityService,
     private timeSheetService: TimesheetService,
     private userService: UserService,
-    private modalService: NgbModal, // Servizio per gestire il modal
-    private authService: AuthService, // Aggiungi il servizio Auth
-    private router: Router // Aggiungi il router
-  ) { }
-
-  isLoggedIn: boolean = false;
+    private modalService: NgbModal // Servizio per gestire il modal
+  ) {}
 
   ngOnInit() {
-    this.isLoggedIn = !!this.authService.getUser(); // Verifica se l'utente è loggato
     this.loadData();
   }
 
   loadData() {
-    try {
-      this.isLoading = true;
-      this.activityService.fill()
-        .pipe(
-          switchMap(activities => {
-            this.activityData.data = activities;
-            return this.timeSheetService.fill();
-          }),
-          switchMap((timesheet) => {
-            this.timeSheetData.data = timesheet;
-            return this.userService.fill();
-          })
-        )
-        .subscribe({
-          next: (user) => {
-            this.userData.data = user;
-            this.isLoading = false;
-          },
-          error: (err) => {
-            console.error('Error Load Data', err);
-            this.isLoading = false;
-          }
-        });
-      }catch {
-        console.log ("carigamento generale non riuscito");
-      }
+    this.isLoading = true;
+    this.activityService.fill()
+      .pipe(
+        switchMap(activities => {
+          this.activityData.data = activities;
+          return this.userService.fill();
+        })
+      )
+      .subscribe({
+        next: (user) => {
+          this.userData.data = user;
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error('Error Load Data', err);
+          this.isLoading = false;
+        }
+      });
   }
-  // Metodo per il logout
-  logout() {
-    this.authService.logout(); // Chiama il logout dal servizio di autenticazione
-    this.router.navigate(['/']); // Reindirizza al login
-  }
+
   // Funzione per aprire il modal per la creazione o modifica di un'attività
   openActivityModal(activity?: Activity) {
+    this.isModalOpen = true; // Imposta lo stato del modal come aperto
     const modalRef = this.modalService.open(ActivityFormComponent, { size: 'lg' });
 
     if (activity) {
       modalRef.componentInstance.activity = { ...activity }; // Clona l'attività per evitare modifiche in-place
     } else {
-      modalRef.componentInstance.activity = new Activity(); // Inizializza una nuova attività vuota
+      modalRef.componentInstance.activity = new Activity({}); // Passa un oggetto vuoto al costruttore
     }
 
     // Subscrivi al risultato del form, ricarica l'elenco delle attività se un'attività viene creata o aggiornata
@@ -93,12 +74,46 @@ export class HomeComponent {
 
     modalRef.result.then(
       () => {
-        // Modal chiuso, ricarica le attività se necessario
+        this.isModalOpen = false; // Imposta lo stato del modal come chiuso
         this.loadData();
       },
       (reason) => {
+        this.isModalOpen = false; // Imposta lo stato del modal come chiuso
+        console.log('Modal chiuso senza salvataggio:', reason);
+      }
+    );
+  }
+
+  // Funzione per aprire il modal per la creazione o modifica di un timesheet
+  openTimesheetModal(timesheet?: TimeSheet) {
+    this.isModalOpen = true; // Imposta lo stato del modal come aperto
+    const modalRef = this.modalService.open(TimesheetFormComponent, { size: 'lg' });
+
+    if (timesheet) {
+      modalRef.componentInstance.timesheet = { ...timesheet }; // Clona il timesheet per evitare modifiche in-place
+    } else {
+      modalRef.componentInstance.timesheet = new TimeSheet(); // Inizializza un nuovo timesheet vuoto
+    }
+
+    // Subscrivi al risultato del form, ricarica l'elenco dei timesheet se uno viene creato o aggiornato
+    modalRef.componentInstance.reload.subscribe((shouldReload: boolean) => {
+      if (shouldReload) {
+        this.loadData(); // Ricarica i dati se richiesto
+      }
+    });
+
+    modalRef.result.then(
+      () => {
+        this.isModalOpen = false; // Imposta lo stato del modal come chiuso
+        this.loadData();
+      },
+      (reason) => {
+        this.isModalOpen = false; // Imposta lo stato del modal come chiuso
         console.log('Modal chiuso senza salvataggio:', reason);
       }
     );
   }
 }
+
+
+

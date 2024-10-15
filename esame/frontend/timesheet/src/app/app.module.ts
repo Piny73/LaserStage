@@ -17,14 +17,14 @@ import { LayoutModule } from "./layout/layout.module";
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
+    FeaturesModule,
     ReactiveFormsModule,
     FormsModule,
-    FeaturesModule,
     HttpClientModule,
     NgbModalModule
   ],
   providers: [
-    provideHttpClient(withFetch()), // ho abilitato l'uso di fetch
+    provideHttpClient(withFetch()), // Abilita l'uso di fetch
     provideClientHydration()
   ],
   bootstrap: [AppComponent]

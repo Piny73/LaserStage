@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { TimeSheet } from '../../core/models/timesheet.model';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'; // Importa il Router
+import { finalize } from 'rxjs/operators';
+import { TimeSheetDTO } from '../../core/models/timesheet.model';
 import { TimesheetService } from '../../core/services/timesheet.service';
 
 @Component({
@@ -7,14 +9,14 @@ import { TimesheetService } from '../../core/services/timesheet.service';
   templateUrl: './timesheet-list.component.html',
   styleUrls: ['./timesheet-list.component.css']
 })
-export class TimesheetListComponent {
-  timesheets: TimeSheet[] = [];
-  selectedTimesheet: TimeSheet | null = null;
-  loading: boolean = false;
-  errorMessage: string | null = null;
-  successMessage: string | null = null;
+export class TimesheetListComponent implements OnInit {
+  timesheets: TimeSheetDTO[] = [];
+  showDeleteDialog = false;
+  timesheetToDelete: TimeSheetDTO | null = null;
+  loading = false; // Indicatore di caricamento
+  errorMessage = ''; // Messaggio di errore
 
-  constructor(private timesheetService: TimesheetService) {}
+  constructor(private timesheetService: TimesheetService, private router: Router) {} // Aggiungi Router nel costruttore
 
   ngOnInit(): void {
     this.loadTimesheets();
@@ -22,64 +24,58 @@ export class TimesheetListComponent {
 
   loadTimesheets(): void {
     this.loading = true;
-    this.timesheetService.getAllTimesheets().subscribe({
-      next: (data: TimeSheet[]) => {
+    this.errorMessage = '';
+    this.timesheetService.getTimesheets().pipe(
+      finalize(() => this.loading = false) // Disabilita l'indicatore di caricamento alla fine della richiesta
+    ).subscribe(
+      (data: TimeSheetDTO[]) => {
         this.timesheets = data;
-        this.loading = false;
       },
-      error: err => {
-        this.errorMessage = 'Errore nel caricamento dei timesheets';
-        console.error(err);
-        this.loading = false;
+      (error: any) => { // Tipizza il parametro 'error' come 'any' o usa un tipo più specifico
+        this.errorMessage = 'Errore durante il caricamento dei timesheet.';
+        console.error(this.errorMessage, error);
       }
-    });
+    );
   }
 
-  onEditTimesheet(id: number): void {
-    this.selectedTimesheet = this.timesheets.find(ts => ts.id === id) || null;
+  addNewTimesheet(): void {
+    // Naviga al modulo per aggiungere un nuovo timesheet
+    this.router.navigate(['/timesheet/add']); // Sostituisci con il percorso corretto per il modulo di aggiunta
   }
 
-  onSaveTimesheet(timesheet: TimeSheet): void {
-    if (this.selectedTimesheet) {
-      this.timesheetService.updateTimesheet(this.selectedTimesheet.id, timesheet).subscribe({
-        next: () => {
+  editTimesheet(timesheet: TimeSheetDTO): void {
+    // Naviga al modulo per modificare il timesheet
+    this.router.navigate(['/timesheet/edit', timesheet.id]); // Sostituisci con il percorso corretto per il modulo di modifica
+  }
+
+  confirmDelete(timesheet: TimeSheetDTO): void {
+    this.timesheetToDelete = timesheet;
+    this.showDeleteDialog = true;
+  }
+
+  deleteTimesheet(): void {
+    if (this.timesheetToDelete) {
+      this.loading = true;
+      this.errorMessage = '';
+      this.timesheetService.deleteTimesheet(this.timesheetToDelete.id).pipe(
+        finalize(() => this.loading = false)
+      ).subscribe(
+        () => {
           this.loadTimesheets();
-          this.successMessage = 'Timesheet aggiornato con successo!';
+          this.cancelDelete();
         },
-        error: err => {
-          this.errorMessage = 'Errore nell\'aggiornamento del timesheet';
-          console.error(err);
+        (error: any) => { // Tipizza il parametro 'error' come 'any' o usa un tipo più specifico
+          this.errorMessage = 'Errore durante l\'eliminazione del timesheet.';
+          console.error(this.errorMessage, error);
         }
-      });
-    } else {
-      this.timesheetService.createTimesheet(timesheet).subscribe({
-        next: () => {
-          this.loadTimesheets();
-          this.successMessage = 'Nuovo timesheet creato con successo!';
-        },
-        error: err => {
-          this.errorMessage = 'Errore nella creazione del timesheet';
-          console.error(err);
-        }
-      });
+      );
     }
-    this.selectedTimesheet = null; // Reset del form
   }
 
-  onDeleteTimesheet(id: number): void {
-    this.timesheetService.deleteTimesheet(id).subscribe({
-      next: () => {
-        this.loadTimesheets();
-        this.successMessage = 'Timesheet eliminato con successo!';
-      },
-      error: err => {
-        this.errorMessage = 'Errore nell\'eliminazione del timesheet';
-        console.error(err);
-      }
-    });
-  }
-
-  onNewTimesheet(): void {
-    this.selectedTimesheet = null; // Resetta il timesheet selezionato per creare un nuovo timesheet
+  cancelDelete(): void {
+    this.timesheetToDelete = null;
+    this.showDeleteDialog = false;
   }
 }
+
+

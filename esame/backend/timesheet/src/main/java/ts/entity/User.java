@@ -51,16 +51,6 @@ public class User extends  BaseEntity{
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
-    
-    @ElementCollection
-    private Set<String> roles;
-
-    public Set<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<String> roles) {
-        this.roles = roles;
-    }
+  
     
 }
