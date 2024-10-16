@@ -4,9 +4,7 @@
  */
 package ts.entity;
 
-import java.util.Set;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -14,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "user")
-public class User extends  BaseEntity{
+public class User extends BaseEntity {
     
     @NotBlank
     @Column(nullable = false)
@@ -27,7 +25,8 @@ public class User extends  BaseEntity{
     
     @Column(nullable = false)    
     private String pwd;
-
+    
+    // Getters e Setters
     public String getName() {
         return name;
     }
@@ -51,6 +50,4 @@ public class User extends  BaseEntity{
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
-  
-    
 }

@@ -14,13 +14,12 @@ import ts.entity.TimeSheet;
 @Transactional(Transactional.TxType.REQUIRED)
 public class TimeSheetStore extends BaseStore<TimeSheet> {
 
-    public List<TimeSheet> all(Long id) {
+public List<TimeSheet> all(Long id) {
+    return getEm().createQuery("select e from TimeSheet e where e.user.id = :id and e.canceled = false", TimeSheet.class)
+            .setParameter("id", id)
+            .getResultList();
+}
 
-        return getEm().createQuery("select e from TimeSheet e where e.user.id = :id and = false", TimeSheet.class)
-                .setParameter("id", id)
-                .getResultList();
-
-    }
 
     public Optional<TimeSheet> find(Long id) {
 

@@ -6,8 +6,10 @@ package ts.boundary.mapping;
 
 import java.time.LocalDateTime;
 import javax.json.bind.annotation.JsonbDateFormat;
+import javax.json.bind.annotation.JsonbTypeAdapter;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import ts.entity.adapter.LocalDateTimeAdapter;
 
 
 public class TimeSheetDTO {
@@ -21,11 +23,11 @@ public class TimeSheetDTO {
     public Long userid;
     
     @NotNull
-    @JsonbDateFormat("dd/MM/yyyy HH:mm:ss")
+    @JsonbTypeAdapter(LocalDateTimeAdapter.class)
     public LocalDateTime dtstart;
     
     @NotNull
-    @JsonbDateFormat("dd/MM/yyyy HH:mm:ss")
+    @JsonbTypeAdapter(LocalDateTimeAdapter.class)
     public LocalDateTime dtend;
 
     @NotBlank
@@ -37,3 +39,6 @@ public class TimeSheetDTO {
     }
        
 }
+
+
+

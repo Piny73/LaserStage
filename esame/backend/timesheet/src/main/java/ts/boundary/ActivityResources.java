@@ -4,6 +4,7 @@
  */
 package ts.boundary;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.security.PermitAll;
@@ -32,25 +33,23 @@ import ts.entity.Activity;
 import ts.store.ActivityStore;
 import ts.store.UserStore;
 
-
 @Path("activity")
 @Tag(name = "Activity Management", description = "Activity Business Logic")
 @PermitAll
 public class ActivityResources {
-    
+
     @Inject
     private UserStore storeuser;
 
     @Inject
     private ActivityStore storeactivity;
-    
+
     @Context
     ResourceContext rc;
-    
+
     @Context
     UriInfo uriInfo;
-        
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(description = "Restituisce l'elenco di Attività")
@@ -63,21 +62,20 @@ public class ActivityResources {
         List<ActivityDTO> acList = new ArrayList<>();
         storeactivity.all().forEach(e -> {
             ActivityDTO ac = new ActivityDTO();
-            
+
             ac.id = e.getId();
             ac.description = e.getDescription();
             ac.ownerid = e.getOwner().getId();
             ac.dtstart = e.getDtstart();
             ac.dtend = e.getDtend();
             ac.enable = e.isEnable();
-        
+
             acList.add(ac);
-            
+
         });
         return acList;
     }
 
-    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -88,23 +86,21 @@ public class ActivityResources {
     })
     @PermitAll
     public Response createActivity(@Valid ActivityDTO entity) {
-        
+
         Activity ac = new Activity();
         ac.setOwner(storeuser.find(entity.ownerid).orElseThrow(() -> new NotFoundException("user not found. id=" + entity.ownerid)));
-        ac.setDescription(entity.description);
         ac.setDescription(entity.description);
         ac.setDtstart(entity.dtstart);
         ac.setDtend(entity.dtend);
         ac.setEnable(entity.enable);
-        
+
         ac = storeactivity.save(ac);
         entity.id = ac.getId();
         return Response.status(Response.Status.CREATED)
                 .entity(entity)
                 .build();
     }
- 
-      
+
     @DELETE
     @Path("{id}")
     @Operation(description = "Cancel Activity tramite l'ID")
@@ -121,7 +117,7 @@ public class ActivityResources {
         return Response.status(Response.Status.OK)
                 .build();
     }
-    
+
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -129,7 +125,7 @@ public class ActivityResources {
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Utente aggirnato con successo"),
         @APIResponse(responseCode = "404", description = "Aggiornamento falito")
-            
+
     })
     public Response updateActivity(@Valid ActivityDTO entity) {
         Activity found = storeactivity.find(entity.id).orElseThrow(() -> new NotFoundException("TimeSheet not founded. id=" + entity.id));
@@ -137,9 +133,39 @@ public class ActivityResources {
         found.setDtstart(entity.dtstart);
         found.setDtend(entity.dtend);
         found.setDescription(entity.description);
-        
+
         return Response.status(Response.Status.OK)
                 .build();
     }
-    
+
+    @POST
+    @Path("/activities/date")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(description = "Create a new activity with start and end dates")
+    @APIResponses({
+        @APIResponse(responseCode = "201", description = "Activity created successfully"),
+        @APIResponse(responseCode = "404", description = "User not found")
+    })
+    @PermitAll
+    public List<ActivityDTO> ActivitybyDate(LocalDate date) {
+
+        List<ActivityDTO> acList = new ArrayList<>();
+        storeactivity.allbydate(date).forEach(e -> {
+            ActivityDTO ac = new ActivityDTO();
+
+            ac.id = e.getId();
+            ac.description = e.getDescription();
+            ac.ownerid = e.getOwner().getId();
+            ac.dtstart = e.getDtstart();
+            ac.dtend = e.getDtend();
+            ac.enable = e.isEnable();
+
+            acList.add(ac);
+
+        });
+        
+        return acList;
+    }
+
 }

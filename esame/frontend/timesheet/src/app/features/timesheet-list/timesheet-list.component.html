@@ -1,8 +1,7 @@
-<div class="timesheet-list">
-    <h1>Elenco Timesheet</h1>
+<!-- Timesheet List -->
+<div class="timesheet-list-container">
 
-    <button (click)="addNewTimesheet()">Nuovo Timesheet</button>
-
+    <!-- Se ci sono timesheets, mostra la tabella -->
     <div *ngIf="timesheets.length > 0; else noTimesheets">
         <table class="table table-striped">
             <thead>
@@ -19,11 +18,11 @@
             <tbody>
                 <tr *ngFor="let timesheet of timesheets">
                     <td>{{ timesheet.id }}</td>
-                    <td>{{ timesheet.activityid }}</td>
-                    <td>{{ timesheet.userid }}</td>
-                    <td>{{ timesheet.dtstart | date: 'dd/MM/yyyy' }}</td>
-                    <td>{{ timesheet.dtend | date: 'dd/MM/yyyy' }}</td>
-                    <td>{{ timesheet.detail }}</td>
+                    <td>{{ timesheet.activityid }}</td> <!-- ID Attività -->
+                    <td>{{ timesheet.userid }}</td> <!-- ID Utente -->
+                    <td>{{ timesheet.dtstart | date: 'dd/MM/yyyy' }}</td> <!-- Data Inizio -->
+                    <td>{{ timesheet.dtend | date: 'dd/MM/yyyy' }}</td> <!-- Data Fine -->
+                    <td>{{ timesheet.detail }}</td> <!-- Dettaglio -->
                     <td>
                         <button class="btn btn-sm btn-primary me-2" (click)="editTimesheet(timesheet)">Modifica</button>
                         <button class="btn btn-sm btn-danger" (click)="confirmDelete(timesheet)">Elimina</button>
@@ -33,17 +32,17 @@
         </table>
     </div>
 
-    <!-- Template for no timesheets -->
+    <!-- Template per nessun timesheet -->
     <ng-template #noTimesheets>
         <p class="text-center">Nessun timesheet trovato.</p>
     </ng-template>
 
-    <!-- Delete Confirmation Dialog -->
+    <!-- Dialogo di conferma eliminazione -->
     <div id="delete-confirmation" class="dialog-overlay" *ngIf="showDeleteDialog">
         <div class="dialog-content text-center">
             <p class="mb-4">Sei sicuro di voler eliminare questo timesheet?</p>
             <div class="d-flex justify-content-center">
-                <button class="btn btn-danger me-2" (click)="deleteTimesheet()">Si</button>
+                <button class="btn btn-danger me-2" (click)="deleteTimesheet()">Sì</button>
                 <button class="btn btn-secondary" (click)="cancelDelete()">No</button>
             </div>
         </div>

@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import ts.entity.adapter.UserTypeAdapter;
+import ts.entity.adapter.LocalDateTimeAdapter;
 
 @Entity
 @Table(name = "activity")
@@ -25,10 +26,12 @@ public class Activity  extends  BaseEntity{
     
     @NotNull
     @Column(nullable = false)
+    @JsonbTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime dtstart;
     
     @NotNull
     @Column(nullable = false)
+    @JsonbTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime dtend;
     
     @JsonbTypeAdapter(UserTypeAdapter.class)

@@ -1,34 +1,15 @@
-import { User } from "./user.model";
+import { User } from './user.model';
 
 export class Activity {
-    id!: number;
-    description!: string;
-    dtstart!: string | null;
-    dtend!: string | null;
-    ownerid!: number;
-    enable!: boolean;
-    owner!: User | null;
+  id!: number; // Identificatore dell'attività
+  description!: string; // Descrizione dell'attività
+  dtstart!: string | null; // Data di inizio, può essere null
+  dtend!: string | null; // Data di fine, può essere null
+  ownerid!: number; // ID del proprietario dell'attività
+  enable!: boolean; // Stato dell'attività (attiva o disabilitata)
+  owner!: User | null; // Riferimento all'utente proprietario, può essere null
 
-    constructor(init?: Partial<Activity>) {
-        Object.assign(this, init);
-    }
-
-    // Metodo per ottenere una descrizione breve dell'attività
-    getShortDescription(): string {
-        return this.description.length > 20
-            ? `${this.description.substring(0, 20)}...`
-            : this.description;
-    }
-
-    // Metodo per verificare se l'attività è attualmente in corso
-    isOngoing(): boolean {
-        const now = new Date(); // Ottieni la data attuale
-        // Controlla se dtstart e dtend sono validi e restituisci un booleano
-        if (this.dtstart && this.dtend) {
-            const start = new Date(this.dtstart);
-            const end = new Date(this.dtend);
-            return now > start && now < end; // Restituisce true se l'attività è in corso
-        }
-        return false; // Se dtstart o dtend non sono validi, restituisci false
-    }
+  constructor(init?: Partial<Activity>) {
+    Object.assign(this, init);
+  }
 }

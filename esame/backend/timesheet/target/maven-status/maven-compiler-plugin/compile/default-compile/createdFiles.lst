@@ -1,4 +1,3 @@
-ts\boundary\mapping\LocalDateTimeAdapter.class
 ts\boundary\mapping\UserDTO.class
 ts\store\TimeSheetStore.class
 ts\boundary\UsersResources.class
@@ -15,6 +14,7 @@ ts\entity\TimeSheet.class
 ts\services\OptionRequestFilter.class
 ts\services\JAXRSConfiguration.class
 ts\services\CorsResponseFilter.class
+ts\entity\adapter\LocalDateTimeAdapter.class
 ts\store\ActivityStore.class
 ts\boundary\ActivityResources.class
 ts\entity\Activity.class

@@ -4,12 +4,8 @@
  */
 package ts.boundary.mapping;
 
-import java.time.LocalDateTime;
-import javax.json.bind.annotation.JsonbDateFormat;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 
 public class UserDTO {
     
@@ -23,11 +19,12 @@ public class UserDTO {
     public String email;
     
     public String pwd;
+    
+    @NotBlank
+    public String roleUser; // Aggiunto il campo roleUser per rappresentare il ruolo dell'utente
 
     @Override
     public String toString() {
-        return "UserDTO{" + "id=" + id + ", name=" + name + ", email=" + email + ", pwd=" + pwd + '}';
+        return "UserDTO{" + "id=" + id + ", name=" + name + ", email=" + email + ", pwd=" + pwd + ", roleUser=" + roleUser + '}';
     }
-    
-       
 }

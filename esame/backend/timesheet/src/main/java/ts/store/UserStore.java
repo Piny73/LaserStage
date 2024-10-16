@@ -16,55 +16,67 @@ import ts.entity.User;
 @Transactional(Transactional.TxType.REQUIRED)
 public class UserStore extends BaseStore<User> {
 
-   public List<User> all() {
-    List<User> users = getEm().createQuery("select e from User e where e.canceled = false", User.class)
+    /**
+     * Restituisce l'elenco degli utenti non cancellati.
+     * 
+     * @return Lista di utenti attivi.
+     */
+    public List<User> all() {
+        List<User> users = getEm()
+            .createQuery("select e from User e where e.canceled = false", User.class)
             .getResultList();
-    System.out.println("Utenti trovati: " + users.size()); // Stampa il numero di utenti trovati
-    return users;
-}
 
+        System.out.println("Utenti trovati: " + users.size()); // Stampa il numero di utenti trovati
+        return users;
+    }
 
+    /**
+     * Trova un utente per ID.
+     * 
+     * @param id ID dell'utente da cercare.
+     * @return Un Optional contenente l'utente trovato, o vuoto se non trovato.
+     */
     public Optional<User> find(Long id) {
-
         User found = getEm().find(User.class, id);
-
-        return found == null ? Optional.empty() : Optional.of(found);
-
+        return Optional.ofNullable(found); // Restituisce Optional.empty() se found è null
     }
 
-    public Optional<User> findUserbyLogin(String login) {
+    /**
+     * Trova un utente in base all'email di login.
+     * 
+     * @param login Email dell'utente da cercare.
+     * @return Un Optional contenente l'utente trovato, o vuoto se non trovato.
+     */
+    public Optional<User> findUserByLogin(String login) {
         try {
-
             return Optional.of(
-                    getEm().createQuery("select e from User e where e.email = :login and e.canceled = false", User.class)
-                            .setParameter("login", login)
-                            .getSingleResult()
+                getEm().createQuery("select e from User e where e.email = :login and e.canceled = false", User.class)
+                    .setParameter("login", login)
+                    .getSingleResult()
             );
-
         } catch (NoResultException ex) {
-
             return Optional.empty();
-
         }
-
     }
 
+    /**
+     * Effettua il login di un utente utilizzando le credenziali.
+     * 
+     * @param credential Oggetto contenente le credenziali dell'utente.
+     * @return Un Optional contenente l'utente trovato, o vuoto se non trovato.
+     */
     public Optional<User> login(Credential credential) {
         try {
-
             return Optional.of(
-                    getEm().createQuery("select e from User e where e.email = :usr and e.pwd = :pwd and e.canceled = false", User.class)
-                            .setParameter("usr", credential.usr)
-                            .setParameter("pwd", credential.pwd)
-                            .getSingleResult()
+                getEm().createQuery("select e from User e where e.email = :usr and e.pwd = :pwd and e.canceled = false", User.class)
+                    .setParameter("usr", credential.usr)
+                    .setParameter("pwd", credential.pwd)
+                    .getSingleResult()
             );
-
         } catch (NoResultException ex) {
-
             return Optional.empty();
-
         }
-
     }
 
+    
 }

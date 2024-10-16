@@ -1,29 +1,62 @@
+/* Form container styling */
 .form-container {
-  border: 1px solid #a9a9a9;
-  /* Light gray border */
+  border: 1px solid #a9a9a9; /* Light gray border */
   padding: 15px;
-  border-radius: 5px;
-  /* Optional: adds rounded corners */
-  background-color: #ffffff;
-  /* Optional: sets background color */
+  border-radius: 5px; /* Optional: adds rounded corners */
+  background-color: #ffffff; /* Optional: sets background color */
+  margin-bottom: 20px; /* Adds space below the form */
 }
 
+/* Table container styling */
 .table-container {
-  border: 1px solid #a9a9a9;
-  /* Light gray border */
-  border-radius: 5px;
-  /* Optional: adds rounded corners */
-  background-color: #ffffff;
-  /* Optional: sets background color */
+  border: 1px solid #a9a9a9; /* Light gray border */
+  border-radius: 5px; /* Optional: adds rounded corners */
+  background-color: #ffffff; /* Optional: sets background color */
   padding: 15px;
+  overflow-x: auto; /* Adds horizontal scrolling for small screens */
 }
 
 /* Optional: To enhance spacing and look */
 .table-container .table {
-  margin-bottom: 0;
+  margin-bottom: 0; 
 }
 
-.table th,
-.table td {
-  text-align: left;
+.table th, .table td {
+  text-align: left; 
+  padding: 10px; /* Adds padding to improve readability */
+  vertical-align: middle; /* Align text vertically in the middle */
+}
+
+/* Add hover effect for table rows */
+.table tbody tr:hover {
+  background-color: #f2f2f2; /* Light gray background on hover */
+  cursor: pointer;
+}
+
+/* Style for selected row (if needed) */
+.table tbody tr.selected {
+  background-color: #d9edf7; /* Light blue background for selected row */
+}
+
+/* Responsive: Ensure table adapts to smaller screens */
+@media (max-width: 768px) {
+  .table-container {
+    overflow-x: auto; /* Enables horizontal scrolling on small screens */
+  }
+
+  .table th, .table td {
+    white-space: nowrap; /* Prevent text wrapping in table cells */
+  }
+}
+
+/* Optional: Style for table headers */
+.table thead th {
+  background-color: #f8f9fa; /* Light background for headers */
+  font-weight: bold; /* Make headers bold */
+  border-bottom: 2px solid #dee2e6; /* Slightly darker border under headers */
+}
+
+/* Style table with small text */
+.table.table-sm th, .table.table-sm td {
+  padding: 8px; /* Smaller padding for compact tables */
 }

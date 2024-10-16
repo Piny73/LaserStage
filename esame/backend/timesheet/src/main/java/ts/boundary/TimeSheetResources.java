@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ts.boundary;
 
 import java.util.ArrayList;
@@ -38,28 +34,26 @@ import ts.store.ActivityStore;
 import ts.store.TimeSheetStore;
 import ts.store.UserStore;
 
-
 @Path("timesheet")
 @Tag(name = "TimeSheet Management", description = "TimeSheet Business Logic")
 @PermitAll
 public class TimeSheetResources {
-    
+
     @Inject
     private UserStore storeuser;
 
     @Inject
     private ActivityStore storeactivity;
-    
+
     @Inject
     private TimeSheetStore storets;
 
     @Context
     ResourceContext rc;
-    
+
     @Context
     UriInfo uriInfo;
-        
-   
+
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -71,88 +65,87 @@ public class TimeSheetResources {
     @PermitAll
     public List<TimeSheetDTO> all(@PathParam("id") Long id, @DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
         User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("user not found. id=" + id));
-        
+
         List<TimeSheetDTO> tsList = new ArrayList<>();
-        
+
         storets.all(id).forEach(e -> {
             TimeSheetDTO ts = new TimeSheetDTO();
             ts.id = e.getId();
             ts.activityid = e.getActivity().getId();
             ts.userid = e.getUser().getId();
-            ts.dtstart = e.getDtstart();
-            ts.dtend = e.getDtend();
+            ts.dtstart = e.getDtstart(); // Assicurati che e.getDtstart() restituisca ZonedDateTime
+            ts.dtend = e.getDtend(); // Assicurati che e.getDtend() restituisca ZonedDateTime
             ts.detail = e.getDetail();
-            
             tsList.add(ts);
-        
         });
-        
+
         return tsList;
     }
 
-       
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "New TimeSheet")
+    @Operation(description = "Crea un nuovo TimeSheet")
     @APIResponses({
-        @APIResponse(responseCode = "201", description = "Success"),
-        @APIResponse(responseCode = "404", description = "Failed")
+        @APIResponse(responseCode = "201", description = "TimeSheet creato con successo"),
+        @APIResponse(responseCode = "404", description = "Operazione fallita")
     })
     @PermitAll
     public Response createTimeSheet(@Valid TimeSheetDTO entity) {
-        
         TimeSheet ts = new TimeSheet();
-        ts.setActivity(storeactivity.find(entity.activityid).orElseThrow(() -> new NotFoundException("activity not founded. id=" + entity.activityid)));
+        ts.setActivity(storeactivity.find(entity.activityid).orElseThrow(() -> new NotFoundException("activity not found. id=" + entity.activityid)));
         ts.setUser(storeuser.find(entity.userid).orElseThrow(() -> new NotFoundException("user not found. id=" + entity.userid)));
         ts.setDetail(entity.detail);
-        ts.setDtstart(entity.dtstart);
-        ts.setDtend(entity.dtend);
-        
+        ts.setDtstart(entity.dtstart); // Assicurati che dtstart sia di tipo ZonedDateTime
+        ts.setDtend(entity.dtend); // Assicurati che dtend sia di tipo ZonedDateTime
+
         ts = storets.save(ts);
         entity.id = ts.getId();
         return Response.status(Response.Status.CREATED)
                 .entity(entity)
                 .build();
     }
-    
-    
+
     @DELETE
     @Path("{id}")
-    @Operation(description = "Cancel TimeSheed tramite l'ID")
+    @Operation(description = "Annulla TimeSheet tramite l'ID")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Success"),
-        @APIResponse(responseCode = "404", description = "Failed")
+        @APIResponse(responseCode = "200", description = "TimeSheet cancellato con successo"),
+        @APIResponse(responseCode = "404", description = "TimeSheet non trovato")
     })
     @Produces(MediaType.APPLICATION_JSON)
     @PermitAll
     public Response deleteTimeSheet(@PathParam("id") Long id) {
         TimeSheet found = storets.find(id).orElseThrow(() -> new NotFoundException("TimeSheet non trovato. id=" + id));
-       found.setCanceled(true);
+        found.setCanceled(true); // Imposta il flag "canceled" a true
         storets.remove(found);
         return Response.status(Response.Status.OK)
                 .build();
     }
-    
-    
+
     @PUT
+    @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Update TimeSheet")
+    @Operation(description = "Aggiorna TimeSheet")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente aggirnato con successo"),
-        @APIResponse(responseCode = "404", description = "Aggiornamento falito")
-            
+        @APIResponse(responseCode = "200", description = "TimeSheet aggiornato con successo"),
+        @APIResponse(responseCode = "404", description = "Aggiornamento fallito")
     })
-    public Response updateTimeSheet(@Valid TimeSheetDTO entity) {
-        TimeSheet found = storets.find(entity.id).orElseThrow(() -> new NotFoundException("TimeSheet not founded. id=" + entity.id));
+    @PermitAll
+    public Response updateTimeSheet(@PathParam("id") Long id, @Valid TimeSheetDTO entity) {
+        TimeSheet found = storets.find(id).orElseThrow(() -> new NotFoundException("TimeSheet non trovato. id=" + id));
+
+        // Aggiorna i dettagli del TimeSheet
         found.setUser(storeuser.find(entity.userid).orElseThrow(() -> new NotFoundException("user not found. id=" + entity.userid)));
-        found.setDtstart(entity.dtstart);
-        found.setDtend(entity.dtend);
+        found.setActivity(storeactivity.find(entity.activityid).orElseThrow(() -> new NotFoundException("activity not found. id=" + entity.activityid)));
         found.setDetail(entity.detail);
+        found.setDtstart(entity.dtstart); // Assicurati che dtstart sia di tipo ZonedDateTime
+        found.setDtend(entity.dtend); // Assicurati che dtend sia di tipo ZonedDateTime
+
+        storets.update(found);
         
-        return Response.status(Response.Status.OK)
-                .build();
+        // Restituisci il TimeSheet aggiornato
+        return Response.ok(entity).build();
     }
-    
 }

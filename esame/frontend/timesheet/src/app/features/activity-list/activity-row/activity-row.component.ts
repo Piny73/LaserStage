@@ -7,7 +7,7 @@ import { UserService } from '../../../core/services/user.service';
 @Component({
   selector: 'tr[app-activity-row]',
   templateUrl: './activity-row.component.html',
-  styleUrls: ['./activity-row.component.css']
+  styleUrl: './activity-row.component.css'
 })
 export class ActivityRowComponent implements OnInit {
 
@@ -19,7 +19,15 @@ export class ActivityRowComponent implements OnInit {
   _copyActivitySelected!: Activity;
   showDialog: boolean = false;
 
-  constructor(private activityService: ActivityService, private userService: UserService) {}
+  constructor(private activityService: ActivityService, private userService: UserService) {
+  }
+
+  /* ngOnInit(): void {
+      if (this.activity && this.activity.ownerid) {
+        this.activity.owner = this.userService.findById(this.activity.ownerid) as User;
+      }
+    }
+  */
 
   ngOnInit(): void {
     if (this.activity && this.activity.ownerid) {
@@ -40,14 +48,9 @@ export class ActivityRowComponent implements OnInit {
 
   initializeSelection() {
     if (this.activitySelected) {
-      // Creazione di una copia dell'attività selezionata
-      this._copyActivitySelected = Object.assign({}, this.activitySelected);
-      
-      // Assicurati di usare il metodo corretto
-      this._copyActivitySelected.getShortDescription = this.activitySelected.getShortDescription.bind(this.activitySelected);
-      this._copyActivitySelected.isOngoing = this.activitySelected.isOngoing.bind(this.activitySelected);
-      
+      this._copyActivitySelected = { ...this.activitySelected };
       this._selected = this.activity.id === this.activitySelected.id;
+
     }
   }
 
@@ -56,12 +59,13 @@ export class ActivityRowComponent implements OnInit {
     if (this.activity) {
       this._selected = true;
       this.onSelectActivity.emit(this.activity);
-    } else {
+    }
+    else {
       console.warn('Activity is not defined.');
     }
   }
-}
 
+}
 
 
 

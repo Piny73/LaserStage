@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ts.boundary;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -39,16 +36,16 @@ import ts.store.UserStore;
 @Tag(name = "Gestione Users", description = "Permette di gestire gli utenti di bkmapp")
 @PermitAll
 public class UsersResources {
-
+    
     @Inject
     private UserStore storeuser;
-
+    
     @Context
     ResourceContext rc;
-
+    
     @Context
     UriInfo uriInfo;
-
+        
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(description = "Restituisce l'elenco di tutti gli utenti")
@@ -64,7 +61,7 @@ public class UsersResources {
             us.id = e.getId();
             us.name = e.getName();
             us.email = e.getEmail();
-            us.pwd = ""; // Non restituire la password
+            us.pwd = ""; // Lascia vuota la password per sicurezza
             usList.add(us); // Aggiungi l'oggetto UserDTO alla lista
         });
         return usList;
@@ -80,22 +77,25 @@ public class UsersResources {
     })
     @PermitAll
     public Response create(@Valid User entity) {
-
-        if (storeuser.findUserbyLogin(entity.getEmail()).isPresent()) {
+        // Verifica se l'utente esiste già con l'email fornita
+        if (storeuser.findUserByLogin(entity.getEmail()).isPresent()) {
             return Response.status(Response.Status.PRECONDITION_FAILED).build();
         }
 
+        // Verifica che la password abbia almeno 4 caratteri
         if (entity.getPwd().length() < 4) {
             return Response.status(Response.Status.PRECONDITION_FAILED).build();
         }
 
+        // Salva l'utente nel database
         User saved = storeuser.save(entity);
 
+        // Ritorna la risposta di successo con lo stato 201
         return Response.status(Response.Status.CREATED)
                 .entity(saved)
                 .build();
     }
-
+    
     @POST
     @Path("login")
     @Operation(description = "Permette fare login e restituisce il token valido")
@@ -107,19 +107,20 @@ public class UsersResources {
     @Produces(MediaType.APPLICATION_JSON)
     @PermitAll
     public UserDTO login(@Valid Credential credential) {
-
-        User u = storeuser.login(credential).orElseThrow(() -> new NotAuthorizedException("User non Authorized",
-                Response.status(Response.Status.UNAUTHORIZED).build()));
-        
+        // Login e verifica delle credenziali
+        User u = storeuser.login(credential)
+            .orElseThrow(() -> new NotAuthorizedException("User non Authorized",  
+                                                          Response.status(Response.Status.UNAUTHORIZED).build()));
+        // Creazione del DTO per restituire i dati
         UserDTO us = new UserDTO();
         us.id = u.getId();
         us.name = u.getName();
         us.email = u.getEmail();
-        us.pwd = ""; // Non restituire la password
-        
+        us.pwd = ""; // Non restituiamo mai la password
+
         return us;
     }
-
+    
     @DELETE
     @Path("{id}")
     @Operation(description = "Elimina una risorsa Utente tramite l'ID")
@@ -128,14 +129,15 @@ public class UsersResources {
         @APIResponse(responseCode = "404", description = "Utente non trovato")
     })
     @Produces(MediaType.APPLICATION_JSON)
-    @PermitAll
+    @RolesAllowed("Admin")
     public Response delete(@PathParam("id") Long id) {
+        // Trova l'utente da eliminare
         User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
+        // Rimuovi l'utente
         storeuser.remove(found);
-        return Response.status(Response.Status.OK)
-                .build();
+        return Response.status(Response.Status.OK).build();
     }
-
+    
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -144,10 +146,11 @@ public class UsersResources {
         @APIResponse(responseCode = "200", description = "Utente aggiornato con successo"),
         @APIResponse(responseCode = "404", description = "Aggiornamento fallito")
     })
-    @PermitAll
+    @RolesAllowed("Admin")
     public User update(@Valid User entity) {
+        // Trova l'utente da aggiornare
         User found = storeuser.find(entity.getId()).orElseThrow(() -> new NotFoundException("user non trovato. id=" + entity.getId()));
+        // Aggiorna l'utente
         return storeuser.update(entity);
     }
-
 }
