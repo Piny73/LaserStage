@@ -1,8 +1,54 @@
-<!-- src/app/app.component.html -->
-<app-header [title]="title"></app-header>
+<div>
+  <h1>{{ title }}</h1> <!-- Mostra il titolo dell'app -->
+  
+  <app-header></app-header> <!-- Aggiungi il componente header qui -->
+  
+  <app-navbar></app-navbar> <!-- Include il componente della navbar -->
 
-<div class="content">
-  <router-outlet></router-outlet>
+  <div class="container">
+    <router-outlet></router-outlet> <!-- Qui verranno caricati i componenti delle rotte -->
+  </div>
+
+  <!-- Modale di login -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Login</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" class="form-control" [(ngModel)]="loginEmail" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" class="form-control" [(ngModel)]="loginPassword" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Accedi</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <app-footer [title]="title"></app-footer> <!-- Aggiungi il componente footer qui -->
 </div>
 
-<app-footer></app-footer>
+
+
+
+<!-- Header con passaggio della proprietà title -->
+<!--app-header [title]="title"></app-header>
+<div class="content">
+  <!-- Outlet del router >
+  <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer-->
+
+

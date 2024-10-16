@@ -12,7 +12,7 @@ export class UtilsService {
     
     if (!_date || _date.trim() === '') {
       console.error("data null:", _date);
-      return null;  
+      return null;
     }
 
     let day: string, month: string, year: string;

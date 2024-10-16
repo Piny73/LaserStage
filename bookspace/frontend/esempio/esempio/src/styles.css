@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+/* Applica il font globalmente a tutto il corpo del documento */
+body {
+    font-family: 'Libre Baskerville', serif;
+  }
+  
+  h1, h2, h3, p {
+    font-family: 'Libre Baskerville', serif;
+  } 
+ 

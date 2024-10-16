@@ -1,0 +1,296 @@
+/* Stile della navbar */
+.navbar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #d1a797, #ffa86a);
+  border: 5px ridge rgb(118, 64, 64);
+  padding: 5px;
+  height: 70px;
+  border-radius: 10px;
+  margin: 0;
+  width: 100%; /* Occupa il 100% della larghezza */
+  box-sizing: border-box; /* Include il padding e il bordo nel calcolo della larghezza */
+}
+
+.left-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  flex-grow: 1; /* Consente al contenuto centrale di riempire lo spazio rimanente */
+}
+
+.nav-item {
+  margin-right: 20px;
+}
+
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+  font-family: 'Dancing Script', cursive;
+  background-color:  rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+  color: black;
+  border: 2px solid rgb(118, 64, 64);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra al testo */
+  -webkit-text-stroke: 0.5px black;
+}
+
+.btn-secondary:active {
+  background-color: #5a6268;
+  transform: scale(0.98);
+}
+
+/* Stile della barra di ricerca */
+.search-container {
+  font-family: 'Dancing Script', cursive;
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Spinge la barra di ricerca all'estrema destra */
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+  border: 5px ridge rgb(118, 64, 64); /* Stesso bordo della navbar */
+  padding: 10px;
+  height: 50px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3); /* Stessa ombreggiatura dei pulsanti */
+}
+
+.search-container input {
+  padding: 10px; /* Stesso padding dei bottoni */
+  font-size: 16px;
+  font-family: 'Dancing Script', cursive; /* Aggiungi lo stesso font dei bottoni */
+  border-radius: 5px;
+  border: 2px solid rgb(118, 64, 64); /* Stesso bordo dei bottoni */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Aggiungi un po' di ombreggiatura */
+}
+
+.search-container button {
+  font-family: 'Dancing Script', cursive;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Aggiungi un'ombra al testo */
+  -webkit-text-stroke: 1px black;
+  padding: 10px 15px;
+  margin-left: 10px;
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+  color: black; /* Stesso colore di testo dei bottoni */
+  border: 2px solid rgb(118, 64, 64); /* Stesso bordo dei bottoni */
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3); /* Stessa ombreggiatura dei bottoni */
+  transition: background-color 0.3s, transform 0.3s; /* Aggiungi transizione per un effetto più fluido */
+}
+
+.search-container button:hover {
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+}
+
+.search-container button:active {
+  background-color: #5a6268;
+  transform: scale(0.98); /* Stesso effetto di click dei bottoni */
+}
+
+/* Media Queries per tablet */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* Dispone gli elementi della navbar in colonna */
+    height: auto; /* L'altezza si adatta ai contenuti */
+  }
+
+  .left-buttons, .navbar-nav {
+    justify-content: center;
+    flex-wrap: wrap; /* Gli elementi della navbar si adattano su più righe se necessario */
+  }
+
+  .search-container {
+    margin: 20px 0; /* Centra la barra di ricerca */
+    width: 90%; /* Riduce la larghezza della barra di ricerca */
+  }
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  background-color: #f0e4d7; /* Colore di sfondo personalizzato */
+  color: black; /* Colore del testo */
+  border: 2px solid rgb(118, 64, 64); /* Bordo per i campi */
+  border-radius: 5px; /* Bordo arrotondato */
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Leggera ombra */
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none; /* Rimuove il bordo predefinito quando il campo è attivo */
+  background-color: #ffe5d1; /* Cambia il colore di sfondo quando è attivo */
+  border-color: #764c4c; /* Cambia il colore del bordo quando è attivo */
+}
+
+/* Media Queries per smartphone */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px; /* Riduce il padding generale */
+    height: auto; /* L'altezza si adatta ai contenuti */
+  }
+
+  .left-buttons, .navbar-nav {
+    flex-direction: column; /* Dispone gli elementi in verticale */
+    align-items: center; /* Allinea gli elementi al centro */
+    width: 100%;
+  }
+
+  .nav-item {
+    margin-right: 0; /* Rimuove il margine destro per centratura */
+    margin-bottom: 10px; /* Aggiunge spazio tra gli elementi */
+  }
+
+  .search-container {
+    margin: 15px 0;
+    width: 100%; /* La barra di ricerca prende tutta la larghezza disponibile */
+  }
+
+  .search-container input {
+    width: 100%; /* L'input della barra di ricerca si espande a tutta larghezza */
+  }
+
+  .search-container button {
+    width: 100%; /* Il pulsante della barra di ricerca si espande a tutta larghezza */
+    margin-left: 0; /* Rimuove il margine sinistro */
+  }
+}
+/* Sfondo del modale che copre l'intera finestra */
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);  /* Sfondo semi-trasparente */
+  align-items: center;      /* Centra verticalmente */
+  justify-content: center;  /* Centra orizzontalmente */
+  padding: 20px;            /* Aggiunge un po' di spazio interno ai bordi */
+  overflow: auto;           /* Aggiunge uno scroll se il contenuto eccede */
+}
+
+/* Contenuto del modale */
+.modal-content {
+  background-color: #d1a797;  /* Colore di sfondo */
+  padding: 20px;              /* Spazio interno */
+  border: 1px solid #888;      /* Bordo */
+  border-radius: 5px;          /* Angoli arrotondati */
+  width: auto;                 /* La larghezza si adatta automaticamente al contenuto */
+  max-width: 90%;              /* Limite massimo di larghezza al 90% dello schermo */
+  max-height: 90%;             /* Limite massimo di altezza al 90% dello schermo */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  /* Ombreggiatura */
+  position: relative;          /* Necessario per il posizionamento della chiusura */
+  overflow-y: auto;            /* Scroll verticale se il contenuto eccede l'altezza */
+}
+
+/* Pulsante di chiusura del modale */
+.close {
+  color: black;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Distanziamento tra i campi del form nel modale */
+.modal-content .form-group {
+  margin-bottom: 15px; /* Distanza tra i campi */
+}
+
+/* Aggiunge padding ai campi di input, textarea e select per migliorare la leggibilità */
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+  padding: 10px;
+  width: 100%; /* Facoltativo: rende i campi full-width */
+  box-sizing: border-box; /* Include padding e bordi nella larghezza totale */
+}
+
+/* Distanza verticale tra i label e i campi di input */
+.modal-content label {
+  margin-bottom: 5px;
+  display: block;
+  font-weight: bold; /* Facoltativo: migliora la leggibilità */
+}
+
+.ricette-table {
+  width: 100%;
+  border-collapse: separate; /* Imposta separate per consentire il border-radius */
+  border-spacing: 0; /* Rimuove lo spazio tra le celle */
+  margin-top: 20px;
+  border-radius: 10px; /* Arrotonda i bordi esterni della tabella */
+  overflow: hidden; /* Assicura che i bordi arrotondati funzionino */
+}
+
+.ricette-table th,
+.ricette-table td {
+  border: 1px ridge rgb(118, 64, 64);
+  padding: 8px;
+  text-align: left;
+}
+
+.ricette-table th {
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+  color: black;
+}
+
+/* Arrotonda gli angoli in alto a sinistra e a destra */
+.ricette-table th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.ricette-table th:last-child {
+  border-top-right-radius: 10px;
+}
+
+/* Arrotonda gli angoli in basso a sinistra e a destra */
+.ricette-table td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+.ricette-table td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.ricette-table td button {
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.ricette-table td button:hover {
+  background-color: rgba(255, 255, 255, 0.3); /* Sfondo bianco semi-trasparente */
+  border-radius: 10px;
+}
+

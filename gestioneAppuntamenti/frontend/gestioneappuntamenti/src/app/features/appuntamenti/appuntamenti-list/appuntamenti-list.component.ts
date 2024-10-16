@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Appuntamento } from '../../../core/models/appuntamento.model';
-import { AppuntamentoService } from '../../../core/services/api.service.ts';
+import { AppuntamentoService } from '../../../core/services/appuntamento.service';
 
 @Component({
   selector: 'app-appuntamenti-list',
   templateUrl: './appuntamenti-list.component.html',
-  styleUrl: './appuntamenti-list.component.css'
+  styleUrls: ['./appuntamenti-list.component.css']
 })
 export class AppuntamentiListComponent implements OnInit {
   appuntamenti: Appuntamento[] = [];
@@ -20,9 +20,27 @@ export class AppuntamentiListComponent implements OnInit {
     this.appuntamentoService.getAppuntamenti().subscribe((data: Appuntamento[]) => {
       this.appuntamenti = data.map(app => ({
         ...app,
-        data: new Date(app.data)  // Converti il campo data in un oggetto Date
+        dataOraInizio: new Date(app.dataOraInizio).toLocaleString(),
+        dataOraFine: new Date(app.dataOraFine).toLocaleString()
       }));
     });
   }
-  
+  eliminaAppuntamento(id: number): void {
+    this.appuntamentoService.eliminaAppuntamento(id).subscribe({
+      next: () => {
+        // Rimuovi l'appuntamento dall'elenco locale
+        this.appuntamenti = this.appuntamenti.filter(app => app.id !== id);
+      },
+      error: (error) => {
+        console.error('Errore durante l\'eliminazione dell\'appuntamento:', error);
+      }
+    });
+  }
+
 }
+
+
+
+
+
+

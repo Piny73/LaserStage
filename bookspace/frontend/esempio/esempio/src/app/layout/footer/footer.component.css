@@ -1,10 +1,29 @@
 .app-footer {
-    background: linear-gradient(to right, #b58270, #ff6a6a); 
-    color: white; 
+    background: linear-gradient(to right, #ffffff, #e24c01);
+    color: white;
     text-align: center;
-    padding: 20px; 
-    position: relative; 
-    bottom: 0; 
-    width: 100%; 
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
     font-family: Arial, sans-serif;
-}
+  }
+  
+  /* Responsive design per tablet e smartphone */
+  
+  /* Tablet (max-width: 768px) */
+  @media (max-width: 768px) {
+    .app-footer {
+      padding: 15px; /* Riduce il padding per tablet */
+      font-size: 14px; /* Riduce leggermente la dimensione del testo */
+    }
+  }
+  
+  /* Smartphone (max-width: 480px) */
+  @media (max-width: 480px) {
+    .app-footer {
+      padding: 10px; /* Ancora meno padding per smartphone */
+      font-size: 12px; /* Riduce ulteriormente la dimensione del testo per smartphone */
+    }
+  }
+  

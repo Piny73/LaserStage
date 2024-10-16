@@ -71,8 +71,7 @@ export class ActivityListComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   selectActivity(ac: Activity) {
-    const acCopy = { ...ac };
-    this.selectedActivity = { ...ac};
+    this.onSelectActivity.emit(ac); // Emissione dell'evento quando un'attività viene selezionata
   }
 
   openDetail(content: TemplateRef<any>) {

@@ -1,19 +1,27 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { emit } from 'process';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
- @Input ("titolo") title?: string ;
- @Output ("ritorno") title2 = new EventEmitter<string>();
+  title = '';  // Titolo visualizzato nell'header
+  showLogin = false;  // Variabile che controlla se il form di login è visibile o no
+  email: string = '';  // Variabile per contenere l'email
+  password: string = '';  // Variabile per contenere la password
 
- onclick(){
+  // Funzione per mostrare o nascondere il form di login
+  toggleLogin() {
+    this.showLogin = !this.showLogin;
+  }
 
-  console.log ("entrato nel metodo onclick")
-this.title2?.emit("avanti")
- }
+  // Funzione per gestire l'invio del form
+  onSubmit() {
+    console.log('Email:', this.email);
+    console.log('Password:', this.password);
 
+    // Aggiungi qui la logica per autenticare l'utente, come chiamare un'API
+  }
+  @Input() titolo: string = ''; 
 }

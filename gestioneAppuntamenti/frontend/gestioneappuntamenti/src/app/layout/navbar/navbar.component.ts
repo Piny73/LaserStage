@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
 
@@ -7,11 +7,16 @@ import { AuthService } from '../../core/auth/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   isCollapsed: boolean = false;
   showDialog: boolean = false;
+  isAuthenticated: boolean = false; // Aggiunta proprietà per gestire lo stato di autenticazione
 
   constructor(private authService: AuthService, private router: Router) { }
+
+  ngOnInit(): void {
+    this.isAuthenticated = this.authService.isAuthenticated(); // Verifica lo stato di autenticazione al caricamento
+  }
 
   toggleMenu() {
     this.isCollapsed = !this.isCollapsed;
@@ -33,10 +38,7 @@ export class NavbarComponent {
   }
 
   isLogged(): boolean {
-    try {
-      return this.authService.isTokenValid();
-    } catch (error) {
-      return false;
-    }
+    return this.authService.isAuthenticated();
   }
 }
+

@@ -7,6 +7,7 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff; /* Aggiunto per un contrasto migliore */
 }
 
 /* Stili per il titolo */
@@ -27,7 +28,7 @@
 
 .form-group input {
   width: 100%;
-  padding: 8px;
+  padding: 10px; /* Maggiore padding per una maggiore accessibilità */
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
@@ -43,6 +44,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s; /* Aggiunto per una transizione più fluida */
 }
 
 .btn-primary:hover {
@@ -59,6 +61,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s; /* Aggiunto per una transizione più fluida */
 }
 
 .btn-secondary:hover {
@@ -74,4 +77,7 @@
   padding: 10px;
   margin: 20px 0;
   background-color: #f7d1d1;
+  border-radius: 4px; /* Aggiunto per un aspetto più coerente */
 }
+
+

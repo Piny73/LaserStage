@@ -1,0 +1,81 @@
+/* Stile navbar */
+.navbar {
+  background-color: rgba(30, 30, 30, 0.85); /* Sfondo scuro semi-trasparente */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Ombra per un effetto 3D */
+  padding: 10px 20px; /* Padding per una migliore spaziatura */
+}
+
+/* Stile per il logo */
+.navbar-brand {
+  color: #ff8c00; /* Colore arancione per il logo */
+  font-weight: bold;
+  font-size: 1.5rem; /* Dimensione del font per il logo */
+  transition: color 0.3s ease; /* Transizione per il colore al passaggio del mouse */
+}
+
+.navbar-brand:hover {
+  color: #ffa500; /* Colore del logo al passaggio del mouse */
+}
+
+/* Colore dei link */
+.navbar-nav .nav-link {
+  color: #ffffff; /* Colore bianco per i link */
+  padding: 10px 15px; /* Padding per una migliore spaziatura */
+  transition: color 0.3s ease; /* Transizione per il colore al passaggio del mouse */
+}
+
+.navbar-nav .nav-link.active, 
+.navbar-nav .nav-link:hover {
+  color: #ff8c00; /* Colore arancione per il link attivo o al passaggio del mouse */
+}
+
+/* Stile per il pulsante toggler */
+.navbar-toggler {
+  border-color: #ff8c00; /* Colore arancione per il pulsante toggler */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28 255, 140, 0, 1 %29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Stile per il dropdown */
+.navbar-nav .dropdown-menu {
+  background-color: rgba(50, 50, 50, 0.9); /* Sfondo scuro semi-trasparente per il dropdown */
+}
+
+.navbar-nav .dropdown-item {
+  color: #fff; /* Testo bianco per le voci del dropdown */
+}
+
+.navbar-nav .dropdown-item:hover {
+  background-color: #ff8c00; /* Sfondo arancione al passaggio del mouse */
+  color: #fff; /* Testo bianco al passaggio del mouse */
+}
+
+/* Stile per il dialog di conferma logout */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+
+
+

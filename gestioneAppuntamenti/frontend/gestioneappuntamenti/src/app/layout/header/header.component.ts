@@ -1,4 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../core/auth/auth.service';
+import { LoginComponent } from '../../features/login/login.component';
 
 @Component({
   selector: 'app-header',
@@ -6,16 +9,46 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  @Input() title: string = 'Agenda - Officina Meccanica di GP Baudino';
-  @Output() ritorno = new EventEmitter<void>();
+  title = 'Officina Meccanica di GP Baudino';
+  isLoggedIn: boolean = false; // Cambia in base alla tua logica di autenticazione
 
-  constructor() {}
+  constructor(private authService: AuthService, private modalService: NgbModal) {
+    this.isLoggedIn = this.authService.isAuthenticated(); // Controlla se l'utente è autenticato
+  }
 
-  // Emette un evento per la chiusura o il ritorno
-  onReturn(): void {
-    this.ritorno.emit();
+  openLoginModal() {
+    const modalRef = this.modalService.open(LoginComponent); // Assicurati di avere un componente di login
+    modalRef.result.then((result) => {
+      if (result) { // Se il login ha avuto successo, aggiorna lo stato
+        this.isLoggedIn = true;
+      }
+    }, (reason) => {
+      // Gestisci la chiusura del modale
+    });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.isLoggedIn = false; // Aggiorna lo stato dell'utente
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,3 +1,8 @@
 {
-    "commentTranslate.targetLanguage": "it"
+    "commentTranslate.targetLanguage": "it",
+    "cSpell.words": [
+        "clienti",
+        "vettura",
+        "vetture"
+    ]
 }

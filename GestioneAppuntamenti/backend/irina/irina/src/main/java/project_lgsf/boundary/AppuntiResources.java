@@ -108,8 +108,8 @@ public class AppuntiResources {
     })
     //@RolesAllowed({"Admin","Appunto"})
     @PermitAll
-    public Appunto findbycliente(@PathParam("cliente") Long cliente) {
-        return storeappunto.find(cliente).orElseThrow(() -> new NotFoundException("cliente non trovato. id=" + cliente));
+    public Appunto findbycliente(@PathParam("appunto") Long appunto) {
+        return storeappunto.find(appunto).orElseThrow(() -> new NotFoundException("appuntonon trovato. id=" + appunto));
     }
     
     

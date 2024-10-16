@@ -1,0 +1,49 @@
+<h1>Gestione Clienti</h1>
+
+<div>
+  <button (click)="apriInserimento()">Inserisci Cliente</button>
+  <select (change)="gestisciSelezione($event)">
+    <option value="inserisci">Inserisci cliente</option>
+    <option value="gestisci">Gestisci clienti</option>
+    <option value="ricerca">Ricerca clienti</option>
+  </select>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Cognome</th> <!-- Aggiunto Cognome -->
+      <th>Targa</th>
+      <th>Contatto</th>
+      <th>Ultimo Intervento</th>
+      <th>Prossimi Appuntamenti</th>
+      <th>Azioni</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cliente of clienti">
+      <td>{{ cliente.nome }}</td>
+      <td>{{ cliente.cognome }}</td> <!-- Aggiunto Cognome -->
+      <td>{{ cliente.targa }}</td>
+      <td>
+        <div *ngIf="cliente.contatto">
+          <div>{{ cliente.contatto.indirizzo }}</div>
+          <div>{{ cliente.contatto.telefono }}</div>
+          <div>{{ cliente.contatto.email }}</div>
+        </div>
+        <div *ngIf="!cliente.contatto">Nessun contatto disponibile</div> <!-- Messaggio se non c'è contatto -->
+      </td>
+      <td>{{ cliente.ultimoIntervento }}</td>
+      <td>{{ cliente.prossimiAppuntamenti ? cliente.prossimiAppuntamenti : 'Nessun appuntamento' }}</td>
+      <td>
+        <button (click)="apriModifica(cliente)">Modifica</button>
+        <button (click)="eliminaCliente(cliente.id)">Elimina</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+

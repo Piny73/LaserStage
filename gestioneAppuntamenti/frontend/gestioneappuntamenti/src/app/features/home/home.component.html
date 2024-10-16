@@ -1,16 +1,78 @@
 <section class="hero">
     <div class="hero-content">
         <h1>Benvenuti all'Officina Meccanica di GP Baudino</h1>
-        <p>Esperienza e professionalità per la manutenzione della tua auto</p>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#infoModal">
+        <p>La tua auto, la nostra passione. Esperienza e professionalità per la manutenzione della tua auto.</p>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#infoModal" aria-label="Informazioni sull'officina">
             Maggiori Info
         </button>
     </div>
 </section>
 
-<!-- Modal per informazioni generiche -->
-<app-modal-basic
-    title="Informazioni sull'Officina"
-    bodyContent="Scopri di più sulla nostra officina, i nostri servizi e la nostra esperienza. Contattaci per ulteriori dettagli."
-></app-modal-basic>
+<main class="main-content">
+    <!-- Contenuto principale -->
+</main>
+
+<section class="services">
+    <h2>I nostri Servizi</h2>
+    <div class="service-item manutenzione">
+        <h3>Manutenzione Auto</h3>
+        <p>Servizi completi per la manutenzione della tua auto.</p>
+    </div>
+    <div class="service-item riparazione">
+        <h3>Riparazioni</h3>
+        <p>Riparazioni rapide e affidabili per ogni tipo di veicolo.</p>
+    </div>
+    <div class="service-item controlli">
+        <h3>Controlli Periodici</h3>
+        <p>Assicurati che la tua auto sia sempre in perfette condizioni.</p>
+    </div>
+</section>
+
+<!-- Sezione Testimonianze -->
+
+<section class="testimonials">
+    <h2>Cosa Dicono i Nostri Clienti</h2>
+    <blockquote>
+        <p>"Servizio eccezionale! La mia auto è come nuova!" - Maria Ross</p>
+    </blockquote>
+    <blockquote>
+        <p>"Professionisti e molto disponibili. Consiglio vivamente!" - Marco Bianchi</p>
+    </blockquote>
+    <div class="testimonial">
+        <img src="/assets/avatar1.jpg" alt="Avatar" class="testimonial-avatar">
+        <p>"Servizio eccellente!"</p>
+        <h5>Mario Rossi</h5>
+    </div>
+</section>
+
+<!-- Modale di Info -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="infoModalLabel">Informazioni Officina</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>La nostra officina offre una vasta gamma di servizi per la manutenzione e riparazione delle auto. Contattaci per maggiori informazioni sui nostri servizi e prezzi!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mostrare un messaggio di errore, se presente -->
+<!--
+<div *ngIf="erroreCaricamento" class="alert alert-danger" role="alert">
+    {{ erroreCaricamento }}
+</div>
+-->
+
+
+
+
+
+
 

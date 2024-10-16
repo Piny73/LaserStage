@@ -1,7 +1,44 @@
-<!-- header.component.html -->
 <header>
-    <div >
-      <h1>{{ title }}</h1>
-      <button (click) = "onclick()">Cliccami</button> 
-    </div>
-  </header>
+ <h1>
+    <header>
+      <img src="/assets/immagini/imm_libri.jpg" style="width: 60%; height: auto;" >
+    </header>
+      </h1>
+</header>
+<nav class="navbar">
+  <ul class="navbar-nav right">
+    <li><button class="btn">Accedi</button></li>
+    <li><button class="btn">Registrati</button></li>
+  </ul>
+  
+  <ul class="navbar-nav left">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Books</a></li>
+  </ul>
+  
+</nav>
+
+
+<header>
+  <img src="assets/immagini/logo2.png" width="100" display="block" >
+  <div>
+    <h1>{{ title }}</h1>
+    <button (click)="toggleLogin()">Accedi</button>
+  </div>
+  <div *ngIf="showLogin">
+    <h2>Login</h2>
+    <form (ngSubmit)="onSubmit()">
+      <!-- Campo email -->
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="email" name="email" required>
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" required>
+      </div>
+      <button type="submit">Accedi</button>
+    </form>
+  </div>
+</header>

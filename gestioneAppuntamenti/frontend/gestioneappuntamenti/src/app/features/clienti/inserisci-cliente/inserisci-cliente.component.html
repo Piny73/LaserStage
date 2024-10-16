@@ -1,0 +1,24 @@
+<h1>Inserisci Cliente</h1>
+<form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+  <label for="nome">Nome:</label>
+  <input id="nome" formControlName="nome" required>
+
+  <label for="cognome">Cognome:</label>
+  <input id="cognome" formControlName="cognome" required>
+
+  <label for="indirizzo">Indirizzo:</label>
+  <input id="indirizzo" formControlName="indirizzo">
+
+  <label for="telefono">Telefono:</label>
+  <input id="telefono" formControlName="telefono" required>
+
+  <label for="email">Email:</label>
+  <input id="email" formControlName="email" required>
+
+  <label for="targa">Targa:</label>
+  <input id="targa" formControlName="targa">
+
+  <button type="submit">Salva</button>
+  <button type="button" (click)="onCancel()">Annulla</button>
+</form>
+

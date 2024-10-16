@@ -1,0 +1,118 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #92d8f7, #92d8f7);
+  padding: 10px;
+  height: 60px;
+  border: 3px solid #850505;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: right;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  
+}
+
+.navbar-nav.left {
+  margin-left: 0;
+}
+
+.navbar-nav.right {
+  margin-left: auto;
+}
+
+.nav-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.nav-item:last-child {
+  margin-right: 0;
+}
+
+.btn {
+  background-color: #ffffff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  border: 3px solid rgb(126, 126, 126);
+  font-family: 'Libre Baskerville', serif;
+
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: 3px solid rgb(126, 126, 126);
+}
+
+.btn-secondary:active {
+  background-color: #5a6268;
+  transform: scale(0.98);
+}
+
+/* Stili responsivi per tablet e smartphone */
+
+/* Tablet (max-width: 768px) */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* Dispone gli elementi in colonna */
+    height: auto;
+    padding: 15px;
+  }
+
+  .navbar-nav {
+    flex-direction: column; /* Dispone gli elementi del menu in colonna */
+    align-items: center;
+  }
+
+  .nav-item {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .nav-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .btn {
+    width: 100%; /* I pulsanti occupano l'intera larghezza */
+    margin-bottom: 10px;
+  }
+}
+
+/* Smartphone (max-width: 480px) */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-item {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .nav-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .btn {
+    width: 100%; /* I pulsanti occupano l'intera larghezza dello schermo */
+    margin-bottom: 10px;
+    font-size: 14px; /* Riduce leggermente la dimensione del testo nei pulsanti */
+  }
+
+  .btn-secondary {
+    font-size: 14px;
+  }
+}

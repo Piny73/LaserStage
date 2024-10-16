@@ -1,30 +1,37 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FeaturesModule } from '../features/features.module';
+import { SharedModule } from '../shared/shared.module';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { ModalBasicComponent } from './modal-basic/modal-basic.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    NavbarComponent,
     FooterComponent,
-    ModalBasicComponent
+    NavbarComponent
   ],
   imports: [
     CommonModule,
-    FeaturesModule
+    SharedModule,
+    FormsModule
   ],
   exports: [
     HeaderComponent,
-    NavbarComponent,
     FooterComponent,
-    ModalBasicComponent
+    NavbarComponent
   ]
 })
 export class LayoutModule { }
+
+
+
+
+
+
+
 
 
 

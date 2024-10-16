@@ -1,14 +1,15 @@
-export interface User {
-  id?: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  pwd?: string;
-  roleuser: UserRoles;
+// user.model.ts
+export class User {
+  id!: number;
+  version!: number;
+  email!: string;
+  firstname!: string;
+  lastname!: string;
+  role!: string;
+
+  constructor() {
+  }
+
 }
 
-export enum UserRoles {
-  ADMIN = 'ADMIN',
-  USER = 'USER'
-}
 

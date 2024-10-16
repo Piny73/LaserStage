@@ -2,48 +2,53 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #34568b;
-    color: #fff;
-    padding: 10px 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #34568b; /* Colore di sfondo dell'header */
+    color: #fff; /* Colore del testo */
+    padding: 10px 20px; /* Spaziatura interna */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra per l'header */
     position: relative;
 }
 
+.header-left {
+    display: flex;
+    align-items: center; /* Allinea il logo e il titolo verticalmente */
+}
+
+.app-header .logo {
+    height: 50px; /* Altezza del logo */
+    margin-right: 20px; /* Spaziatura tra il logo e il titolo */
+}
+
 .header-left h1 {
-    font-size: 1.8em;
-    margin: 0;
+    font-size: 1.8em; /* Dimensione del font per il titolo */
+    margin: 0; /* Rimuove il margine predefinito */
 }
 
 .header-right {
     display: flex;
-    align-items: center;
+    align-items: center; /* Allinea il pulsante di login verticalmente */
+    margin-left: auto; /* Allinea il pulsante a destra */
 }
 
-.login-button {
-    background-color: #007bff;
+/* Aggiungi questo al tuo header.component.css */
+.login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-form input {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .logout-button {
+    background-color: #dc3545; /* Colore rosso per il logout */
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.login-button:hover {
-    background-color: #0056b3;
-}
-
-.modal-content {
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.modal-header {
-    background-color: #007bff;
-    color: white;
-}
-
-.modal-body {
-    padding: 20px;
-}
+  }
+  

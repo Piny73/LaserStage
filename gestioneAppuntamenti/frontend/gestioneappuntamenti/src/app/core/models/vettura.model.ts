@@ -1,17 +1,14 @@
-import { Cliente } from './cliente.model';
 
-export interface Vettura {
-  id?: number;
-  targa: string;
-  marca: string;
-  modello: string;
-  annoProduzione: number;
-  disponibile: boolean;
-  diesel: boolean;
-  benzina: boolean;
-  gpl: boolean;
-  elettrica: boolean;
-  cliente: Cliente;
+export class Vettura {
+  targa! :string;
+  marca! :string;
+  modello? :string;
+  annoProduzione? :number;
+  disponibile! :boolean;
+  constructor(init?: Partial<Vettura>) {
+    Object.assign(this, init);
+  }
 }
+
 
   

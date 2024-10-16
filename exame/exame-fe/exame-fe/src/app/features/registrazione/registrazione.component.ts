@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../../core/services/user.service';
 import { User } from '../../core/models/user.model';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-registrazione',
@@ -28,7 +28,7 @@ export class RegistrazioneComponent implements OnInit {
   
   onSubmit() { /*
     if (this.registrazioneForm.valid) {
-      const user = this.registrazioneForm.value as User; 
+      const user = this.registrazioneForm.value as User;
       this.userService.create(user).subscribe({
         next: (response) => {
           console.log('Registrazione bem-sucedida', response);

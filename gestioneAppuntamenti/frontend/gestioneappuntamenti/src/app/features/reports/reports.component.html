@@ -1,0 +1,56 @@
+<div class="reports">
+    <h2>Report Vetture</h2>
+
+    <div>
+        <h3>Filtra Vetture</h3>
+        <label for="marca">Marca:</label>
+        <input type="text" id="marca" [(ngModel)]="filtroMarca" (input)="filtraVetture()" />
+
+        <label for="disponibilita">Disponibilità:</label>
+        <select id="disponibilita" [(ngModel)]="filtroDisponibilita" (change)="filtraVetture()">
+            <option value="">Tutte</option>
+            <option value="true">Disponibile</option>
+            <option value="false">Non Disponibile</option>
+        </select>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Targa</th>
+                <th>Marca</th>
+                <th>Modello</th>
+                <th>Anno Produzione</th>
+                <th>Disponibile</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let vettura of vetture">
+                <td>{{ vettura.targa }}</td>
+                <td>{{ vettura.marca }}</td>
+                <td>{{ vettura.modello }}</td>
+                <td>{{ vettura.annoProduzione }}</td>
+                <td>{{ vettura.disponibile ? 'Sì' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <h3>Disponibilità Vetture</h3>
+        <ngx-charts-pie-chart>
+            [view]="[700, 400]"  <!-- Dimensione del grafico -->
+            [scheme]="colorScheme"
+            [results]="doughnutChartData" <!-- Assicurati che sia un array di oggetti con nome e valore -->
+            [gradient]="false"
+            [legend]="true"
+            [explodeSlices]="false"
+            [labels]="true"
+            [doughnut]="true"  <!-- Imposta a true per un grafico a torta -->
+            [animations]="true">
+        </ngx-charts-pie-chart>
+    </div>
+</div>
+
+
+
+
