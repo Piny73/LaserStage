@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+/*import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Activity } from '../../../core/models/activity.model';
@@ -206,7 +206,7 @@ export class ActivityFormComponent implements OnInit {
   }
 }
 
-
+*/
 
 
 
@@ -421,15 +421,7 @@ export class ActivityFormComponent implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-/*import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Activity } from '../../../core/models/activity.model';
@@ -608,5 +600,5 @@ export class ActivityFormComponent implements OnInit {
 }
 
 
-*/
+
 

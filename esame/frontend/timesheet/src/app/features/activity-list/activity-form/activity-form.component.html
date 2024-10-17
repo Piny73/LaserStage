@@ -1,20 +1,20 @@
-<div class="form-container">
-  <!-- Elenco delle Attività -->
+<!--div class="form-container">
+  <!- Elenco delle Attività ->
   <h5 class="mb-4">Elenco Attività</h5>
   <div class="table-responsive">
     <app-activity-list (onSelectActivity)="selectActivity($event)"></app-activity-list>
   </div>
 
-  <!-- Form Container -->
+  <!-- Form Container ->
   <div>
     <form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
       <div class="form-container">
         <!-- Hidden Fields -->
         <input type="hidden" formControlName="id">
 
-        <!-- Form Fields -->
+        <!-- Form Fields ->
         <div class="row mb-3">
-          <!-- Descrizione -->
+          <!-- Descrizione ->
           <div class="col-md-6">
             <label for="description" class="form-label">Descrizione</label>
             <input type="text" id="description" formControlName="description" class="form-control" placeholder="Descrizione">
@@ -23,7 +23,7 @@
             </div>
           </div>
           
-          <!-- Proprietario -->
+          <!-- Proprietario ->
           <div class="col-md-6">
             <label for="owner" class="form-label">Proprietario</label>
             <app-cb-user [selectedUser]="currentOwner" (selectedItemChange)="onOwnerSelected($event)">
@@ -34,9 +34,9 @@
           </div>
         </div>
 
-        <!-- Date e Abilita -->
+        <!-- Date e Abilita ->
         <div class="row mb-3">
-          <!-- Data Inizio -->
+          <!-- Data Inizio ->
           <div class="col-md-6">
             <label for="dtstart" class="form-label">Data Inizio</label>
             <input type="date" id="dtstart" formControlName="dtstart" class="form-control">
@@ -45,13 +45,13 @@
             </div>
           </div>
 
-          <!-- Data Fine -->
+          <!-- Data Fine ->
           <div class="col-md-6">
             <label for="dtend" class="form-label">Data Fine</label>
             <input type="date" id="dtend" formControlName="dtend" class="form-control">
           </div>
 
-          <!-- Checkbox Abilita -->
+          <!-- Checkbox Abilita ->
           <div class="d-flex align-items-center col-md-6">
             <div>
               <input type="checkbox" id="enable" formControlName="enable" class="form-check-input">
@@ -60,7 +60,7 @@
           </div>
         </div>
 
-        <!-- Buttons -->
+        <!-- Buttons ->
         <div class="row">
           <div class="col-md-12 d-flex justify-content-end">
             <button type="button" class="btn btn-secondary me-2" (click)="resetForm()">Pulisci</button>
@@ -72,7 +72,7 @@
     </form>
   </div>
 
-  <!-- Save Confirmation -->
+  <!-- Save Confirmation ->
   <div id="save-confirmation" class="dialog-overlay" *ngIf="showSaveDialog">
     <div class="dialog-content text-center">
       <p class="mb-4">Vuoi salvare i cambiamenti?</p>
@@ -83,7 +83,7 @@
     </div>
   </div>
 
-  <!-- Delete Confirmation -->
+  <!- Delete Confirmation ->
   <div id="delete-confirmation" class="dialog-overlay" *ngIf="showDeleteDialog">
     <div class="dialog-content text-center">
       <p class="mb-4">Vuoi eliminare questa attività?</p>
@@ -93,7 +93,7 @@
       </div>
     </div>
   </div>
-</div>
+</div-->
 
 
 
@@ -107,7 +107,7 @@
 
 
 
-<!--div class="form-container">
+<div class="form-container">
   <form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
     <input type="hidden" formControlName="id">
     <input type="hidden" formControlName="ownerid">
@@ -163,7 +163,7 @@
       </div>
     </div>
   </form>
-</div-->
+</div>
 
 
 
