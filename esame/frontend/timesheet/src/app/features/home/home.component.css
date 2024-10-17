@@ -1,5 +1,5 @@
 .home-container {
-  background-image: url('/assets/images/TimesheetSfondoHome.png'); /* Sostituisci con il percorso corretto dell'immagine */
+  background-image: url('assets/sfondohome.png'); /* Sostituisci con il percorso corretto dell'immagine */
   background-size: cover; /* Adatta l'immagine per coprire l'intera area */
   background-position: center; /* Centra l'immagine */
   background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
