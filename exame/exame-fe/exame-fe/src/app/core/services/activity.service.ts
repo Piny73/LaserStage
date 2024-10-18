@@ -1,8 +1,8 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
 import { ApiService } from '../api.service';
 import { Activity } from '../models/activity.model';
-import { HttpHeaders } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,36 +15,36 @@ export class ActivityService {
   constructor(
     private apiService: ApiService
   ) { }
-  
+
   save(_activity: Activity): Observable<Activity> {
-    
+
     const _endpoint = this.endpoint;
-    
-    const headers = new HttpHeaders({ 
+
+    const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
     return this.apiService.post(_endpoint, _activity, headers).pipe(
       map(response => response)
-    ); 
+    );
   }
 
   update(_activity: Activity): Observable<Activity> {
     const _endpoint = this.endpoint;
-    const headers = new HttpHeaders({ 
+    const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
     return this.apiService.put(_endpoint, _activity, headers).pipe(
       map(response => response)
-    ); 
+    );
   }
 
   delete(_activity: Activity): Observable<void> {
     const _endpoint = `${this.endpoint}/${_activity.id}`;
-  
+
     return this.apiService.delete(_endpoint).pipe(
-      map(() => {})
+      map(() => { })
     );
   }
 
@@ -65,7 +65,7 @@ export class ActivityService {
               dtstart: data.dtstart,
               dtend: data.dtend,
               ownerid: data.ownerid,
-              enable:data.enable
+              enable: data.enable
             });
             return ac;
           });

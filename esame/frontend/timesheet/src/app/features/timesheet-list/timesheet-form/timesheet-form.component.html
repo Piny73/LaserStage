@@ -1,0 +1,91 @@
+<!-- Timesheet Form -->
+<div class="form-container">
+    <div>
+        <form [formGroup]="timesheetForm" (ngSubmit)="onSubmit()">
+            <!-- Hidden Fields -->
+            <input type="hidden" formControlName="id">
+            <input type="hidden" formControlName="userid">
+
+            <!-- Form Fields -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="activity" class="form-label">Attività</label>
+                    <select id="activity" formControlName="activityid" class="form-control"
+                        (change)="onActivitySelected($event)">
+                        <option *ngFor="let activity of activityList" [value]="activity.id">{{ activity.description }}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="user" class="form-label">Utente</label>
+                    <select id="user" formControlName="userid" class="form-control" (change)="onUserSelected($event)">
+                        <option *ngFor="let user of userList" [value]="user.id">{{ user.name }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="dtstart" class="form-label">Data Inizio</label>
+                    <input type="date" id="dtstart" formControlName="dtstart" class="form-control" required>
+                    <div *ngIf="timesheetForm.get('dtstart')?.invalid && timesheetForm.get('dtstart')?.touched"
+                        class="text-danger">
+                        Data Inizio obbligatoria.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="dtend" class="form-label">Data Fine</label>
+                    <input type="date" id="dtend" formControlName="dtend" class="form-control">
+                    <div *ngIf="timesheetForm.get('dtend')?.invalid && timesheetForm.get('dtend')?.touched"
+                        class="text-danger">
+                        Data Fine non valida.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <label for="detail" class="form-label">Dettaglio</label>
+                    <textarea id="detail" formControlName="detail" class="form-control" rows="3"
+                        placeholder="Descrizione dettagliata" maxlength="500"></textarea>
+                    <div *ngIf="timesheetForm.get('detail')?.invalid && timesheetForm.get('detail')?.touched"
+                        class="text-danger">
+                        Il dettaglio non può superare i 500 caratteri.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary me-2" (click)="resetForm()">Pulisci</button>
+                    <button type="button" class="btn btn-danger me-2"
+                        (click)="openDeleteConfirmation()">Cancella</button>
+                    <!-- Modifica il tipo del pulsante a "submit" per eseguire il submit -->
+                    <button type="submit" class="btn btn-primary" [disabled]="timesheetForm.invalid">Salva</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Confirmation Dialogs -->
+    <div id="save-confirmation" class="dialog-overlay" *ngIf="showSaveDialog">
+        <div class="dialog-content text-center">
+            <p class="mb-4">Vuoi salvare i cambiamenti?</p>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-success me-2" (click)="confirmSave()">Si</button>
+                <button class="btn btn-secondary" (click)="cancelSave()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="delete-confirmation" class="dialog-overlay" *ngIf="showDeleteDialog">
+        <div class="dialog-content text-center">
+            <p class="mb-4">Vuoi eliminare questo timesheet?</p>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-danger me-2" (click)="confirmDelete()">Si</button>
+                <button class="btn btn-secondary" (click)="cancelDelete()">No</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+[33mf5918e1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mirina[m[33m, [m[1;31morigin/irina[m[33m)[m HEAD@{0}: commit: inizio 16/10/24
+[33m74a2f0d[m HEAD@{1}: commit: fine gg 15/10/24
+[33m1ba9a61[m HEAD@{2}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33mdbc5f0e[m HEAD@{3}: commit: 15/10/24
+[33m7f7156c[m HEAD@{4}: commit: commit nr 4
+[33m8966257[m HEAD@{5}: commit: fine gg 09/10/24
+[33m9db9d98[m HEAD@{6}: commit: second commit
+[33mfe34efa[m HEAD@{7}: commit: first commit
+[33md7fbd41[m[33m ([m[1;32mmain[m[33m)[m HEAD@{8}: checkout: moving from main to irina
+[33md7fbd41[m[33m ([m[1;32mmain[m[33m)[m HEAD@{9}: reset: moving to HEAD
+[33md7fbd41[m[33m ([m[1;32mmain[m[33m)[m HEAD@{10}: checkout: moving from irina to main
+[33md7fbd41[m[33m ([m[1;32mmain[m[33m)[m HEAD@{11}: checkout: moving from main to irina
+[33md7fbd41[m[33m ([m[1;32mmain[m[33m)[m HEAD@{12}: reset: moving to HEAD
+[33md7fbd41[m[33m ([m[1;32mmain[m[33m)[m HEAD@{13}: reset: moving to HEAD
+[33md7fbd41[m[33m ([m[1;32mmain[m[33m)[m HEAD@{14}: commit: first commit
+[33m936f732[m HEAD@{15}: reset: moving to HEAD
+[33m936f732[m HEAD@{16}: commit: first commit
+[33mc5d9b9e[m HEAD@{17}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m953a951[m HEAD@{18}: commit: rifatto clienti
+[33m3258ccb[m HEAD@{19}: pull --tags origin main: Merge made by the 'ort' strategy.
+[33mc34c6c8[m HEAD@{20}: commit: implemntato il layout della home
+[33m748ff4b[m HEAD@{21}: pull --tags origin main: Merge made by the 'ort' strategy.
+[33m0258cc2[m HEAD@{22}: commit: ok
+[33m17bb0a2[m HEAD@{23}: commit: implementato vetture,statische e reports
+[33m695999a[m HEAD@{24}: pull --tags origin main: Merge made by the 'ort' strategy.
+[33mc2c55c0[m HEAD@{25}: commit: ok
+[33m7dc19a1[m HEAD@{26}: commit: ok
+[33m52ce206[m HEAD@{27}: commit (merge): Merge branch 'main' of https://github.com/Piny73/LaserStage
+[33m314f5ac[m HEAD@{28}: reset: moving to HEAD
+[33m314f5ac[m HEAD@{29}: reset: moving to HEAD
+[33m314f5ac[m HEAD@{30}: reset: moving to HEAD
+[33m314f5ac[m HEAD@{31}: commit: 30/09/24
+[33m0450e79[m HEAD@{32}: commit: ok
+[33m6278e87[m HEAD@{33}: commit: ok
+[33m9afef53[m HEAD@{34}: commit: ok
+[33m88072a3[m HEAD@{35}: commit: ok
+[33me67a6d2[m HEAD@{36}: commit: ok
+[33m8c0780c[m HEAD@{37}: commit (merge): Merge branch 'main' of https://github.com/Piny73/LaserStage
+[33m487bf1f[m HEAD@{38}: reset: moving to HEAD
+[33m487bf1f[m HEAD@{39}: commit: ok
+[33mad16af0[m HEAD@{40}: commit: modifiche
+[33mbf2f07f[m HEAD@{41}: commit: correzioni do angular.json e package.json
+[33m66f8f7b[m HEAD@{42}: commit: rimossa dbConnection
+[33m0f87dd2[m HEAD@{43}: commit: 24/09/24
+[33m50c4bee[m HEAD@{44}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m5e0f0cc[m HEAD@{45}: commit: home/dashboard
+[33m83647c5[m HEAD@{46}: commit: aggiornamento fallito
+[33m43e9f20[m HEAD@{47}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33me73b729[m HEAD@{48}: commit: aggiornamento
+[33m47485cd[m HEAD@{49}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33mb944708[m HEAD@{50}: commit: aggiornamento
+[33me792452[m HEAD@{51}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m13e5dbb[m HEAD@{52}: commit: 18/09/24
+[33mffb7c37[m HEAD@{53}: commit: frontend
+[33m2779201[m HEAD@{54}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33me46ae3f[m HEAD@{55}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m56e9577[m HEAD@{56}: commit: continue
+[33m1f957fb[m HEAD@{57}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m6981432[m HEAD@{58}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m54bc3c6[m HEAD@{59}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m4078957[m HEAD@{60}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33mfd51199[m HEAD@{61}: commit: prova
+[33m2688735[m HEAD@{62}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33me866c80[m HEAD@{63}: commit: prova angular
+[33md0fa3c2[m HEAD@{64}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m1e98f3f[m HEAD@{65}: commit: aggiornamento
+[33m0828825[m HEAD@{66}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m20e6e7d[m HEAD@{67}: commit: aggiornamento front-end
+[33m59ec44a[m HEAD@{68}: commit: metodo delete aggiornato
+[33mca679e1[m HEAD@{69}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33ma5e7b80[m HEAD@{70}: commit: modifica delete
+[33me14126b[m HEAD@{71}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m951f186[m HEAD@{72}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m1b1120e[m HEAD@{73}: commit: inizio frontEnd
+[33m07a2cf7[m HEAD@{74}: commit: test api
+[33m3835ecf[m HEAD@{75}: commit: sistemato
+[33ma0e73e6[m HEAD@{76}: commit: agg.
+[33ma336422[m HEAD@{77}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m61baa66[m HEAD@{78}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m5ae3953[m HEAD@{79}: commit: test api
+[33m003126a[m HEAD@{80}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m1d87680[m HEAD@{81}: commit: agg
+[33mcebe83c[m HEAD@{82}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m7508a76[m HEAD@{83}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m2f48e22[m HEAD@{84}: commit: add adapter
+[33me618f41[m HEAD@{85}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33mdc14e3d[m HEAD@{86}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m909e7b8[m HEAD@{87}: commit: aggiornamenti
+[33mc8f4540[m HEAD@{88}: commit: Aggiornamenti
+[33m31dfeb2[m HEAD@{89}: commit: Boundary
+[33m3d3f35f[m HEAD@{90}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33mbbf0f89[m HEAD@{91}: commit: Boundary
+[33m47ab0d6[m HEAD@{92}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33ma187bba[m HEAD@{93}: commit: boundary
+[33mf066829[m HEAD@{94}: commit: configPostman
+[33mf11ea29[m HEAD@{95}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33mf14eff0[m HEAD@{96}: commit: connection ok
+[33mcbd687d[m HEAD@{97}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m68a0aa4[m HEAD@{98}: commit: 23/07/2023
+[33m639dafa[m HEAD@{99}: commit: user
+[33m4eacb5c[m HEAD@{100}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m1eb0873[m HEAD@{101}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m45f3fa4[m HEAD@{102}: commit: Update BaseEntity.java
+[33m18a271d[m HEAD@{103}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m79dffea[m HEAD@{104}: commit: progetto base
+[33me29691d[m HEAD@{105}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33mc2cae41[m HEAD@{106}: pull --ff --recurse-submodules --progress origin: Fast-forward
+[33m5e2d6f4[m HEAD@{107}: pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+[33m8a5469e[m HEAD@{108}: commit: Create Appuntamenti.txt
+[33ma1819dc[m HEAD@{109}: clone: from https://github.com/Piny73/LaserStage.git

@@ -1,0 +1,50 @@
+<!-- Timesheet List -->
+<div class="timesheet-list-container">
+
+    <!-- Se ci sono timesheets, mostra la tabella -->
+    <div *ngIf="timesheets.length > 0; else noTimesheets">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Attività</th>
+                    <th>Utente</th>
+                    <th>Data Inizio</th>
+                    <th>Data Fine</th>
+                    <th>Dettaglio</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let timesheet of timesheets">
+                    <td>{{ timesheet.id }}</td>
+                    <td>{{ timesheet.activityid }}</td> <!-- ID Attività -->
+                    <td>{{ timesheet.userid }}</td> <!-- ID Utente -->
+                    <td>{{ timesheet.dtstart | date: 'dd/MM/yyyy' }}</td> <!-- Data Inizio -->
+                    <td>{{ timesheet.dtend | date: 'dd/MM/yyyy' }}</td> <!-- Data Fine -->
+                    <td>{{ timesheet.detail }}</td> <!-- Dettaglio -->
+                    <td>
+                        <button class="btn btn-sm btn-primary me-2" (click)="editTimesheet(timesheet)">Modifica</button>
+                        <button class="btn btn-sm btn-danger" (click)="confirmDelete(timesheet)">Elimina</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Template per nessun timesheet -->
+    <ng-template #noTimesheets>
+        <p class="text-center">Nessun timesheet trovato.</p>
+    </ng-template>
+
+    <!-- Dialogo di conferma eliminazione -->
+    <div id="delete-confirmation" class="dialog-overlay" *ngIf="showDeleteDialog">
+        <div class="dialog-content text-center">
+            <p class="mb-4">Sei sicuro di voler eliminare questo timesheet?</p>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-danger me-2" (click)="deleteTimesheet()">Sì</button>
+                <button class="btn btn-secondary" (click)="cancelDelete()">No</button>
+            </div>
+        </div>
+    </div>
+</div>

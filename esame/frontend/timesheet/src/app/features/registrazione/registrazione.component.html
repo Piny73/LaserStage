@@ -1,0 +1,49 @@
+<div class="login-container">
+  <form [formGroup]="registrazioneForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Nome</label>
+      <input
+        id="name"
+        formControlName="name"
+        placeholder="Name"
+        class="form-control"
+      />
+      <div *ngIf="registrazioneForm.get('name')?.invalid && registrazioneForm.get('name')?.touched" class="error-message">
+        Username è richiesta
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        formControlName="email"
+        placeholder="Email"
+        class="form-control"
+      />
+      <div *ngIf="registrazioneForm.get('email')?.invalid && registrazioneForm.get('email')?.touched" class="error-message">
+        Email obbligatoria!
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="pwd">Password</label>
+      <input
+        type="password"
+        id="pwd"
+        formControlName="pwd"
+        placeholder="Password"
+        class="form-control"
+      />
+      <div *ngIf="registrazioneForm.get('pwd')?.invalid && registrazioneForm.get('pwd')?.touched" class="error-message">
+        Password obbligatoria!
+      </div>
+    </div>
+    <button type="submit" [disabled]="!registrazioneForm.valid" class="btn btn-primary">Salva</button>
+    <button type="button" class="btn btn-success me-2"  (click)="openLogin()">Cancella</button>
+  </form>
+  
+  <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+  </div>
+</div>
