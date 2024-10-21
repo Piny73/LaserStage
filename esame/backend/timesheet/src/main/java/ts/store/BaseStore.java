@@ -21,13 +21,15 @@ public class BaseStore<TEntity>{
     }
 
 
-    public TEntity save(TEntity obj) {
-        try {
-            return em.merge(obj);
-        } catch (Exception e) {
-            return null;
-        }
+  public TEntity save(TEntity obj) {
+    try {
+        em.persist(obj);
+        return obj; // restituisce l'oggetto salvato
+    } catch (Exception e) {
+        e.printStackTrace(); // Stampa l'eccezione per il debug
+        return null;
     }
+}
 
    
     public TEntity update(TEntity obj) {

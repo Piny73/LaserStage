@@ -1,6 +1,7 @@
 C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\boundary\ActivityResources.java
 C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\boundary\mapping\TimeSheetDTO.java
 C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\entity\adapter\LocalDateTimeAdapter.java
+C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\entity\adapter\TimeSheetAdapter.java
 C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\services\JAXRSConfiguration.java
 C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\services\CorsResponseFilter.java
 C:\LaserStage\LaserStage\esame\backend\timesheet\src\main\java\ts\boundary\mapping\Credential.java

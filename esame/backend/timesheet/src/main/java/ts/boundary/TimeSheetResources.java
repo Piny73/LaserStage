@@ -65,7 +65,7 @@ public class TimeSheetResources {
             timeSheetDTO.dtstart = e.getDtstart();
             timeSheetDTO.dtend = e.getDtend();
             timeSheetDTO.detail = e.getDetail();
-            timeSheetDTO.hoursPerDay = e.getHoursPerDay();  // Usa la mappa di tipo String
+            // Rimozione di hoursPerDay
             timeSheetList.add(timeSheetDTO);
         });
 
@@ -82,7 +82,7 @@ public class TimeSheetResources {
     })
     public Response createTimeSheet(@Valid TimeSheetDTO entity) {
         TimeSheet timeSheet = new TimeSheet();
-        
+
         timeSheet.setActivity(storeActivity.find(entity.activityid)
             .orElseThrow(() -> new NotFoundException("Attività non trovata: " + entity.activityid)));
         timeSheet.setUser(storeUser.find(entity.userid)
@@ -90,7 +90,8 @@ public class TimeSheetResources {
         timeSheet.setDetail(entity.detail);
         timeSheet.setDtstart(entity.dtstart);
         timeSheet.setDtend(entity.dtend);
-        timeSheet.setHoursPerDay(entity.hoursPerDay);  // Usa la mappa di tipo String
+        // Rimozione di hoursPerDay
+        // timeSheet.setHoursPerDay(entity.hoursPerDay);
 
         storeTimeSheet.save(timeSheet);
 
@@ -116,7 +117,8 @@ public class TimeSheetResources {
         found.setDetail(entity.detail);
         found.setDtstart(entity.dtstart);
         found.setDtend(entity.dtend);
-        found.setHoursPerDay(entity.hoursPerDay);  // Usa la mappa di tipo String
+        // Rimozione di hoursPerDay
+        // found.setHoursPerDay(entity.hoursPerDay);
 
         storeTimeSheet.update(found);
         return Response.status(Response.Status.OK).entity(entity).build();
@@ -137,3 +139,5 @@ public class TimeSheetResources {
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 }
+
+

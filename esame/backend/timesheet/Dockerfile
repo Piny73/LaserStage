@@ -1,2 +1,2 @@
 FROM airhacks/glassfish
-COPY ./target/exame.war ${DEPLOYMENT_DIR}
+COPY ./target/esame.war ${DEPLOYMENT_DIR}

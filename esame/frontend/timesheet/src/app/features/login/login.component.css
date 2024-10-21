@@ -1,12 +1,36 @@
 .login-container {
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 2px ridge navy;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #d5e9fc;
-  }
+  position: relative; /* Necessario per posizionare correttamente l'overlay */
+  background-image: url('/assets/logotm.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+/* Overlay semitrasparente */
+.login-container::before {
+  content: '';
+  position: absolute; /* Posiziona l'overlay sopra l'immagine di sfondo */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5); /* Colore bianco con trasparenza */
+  z-index: 1; /* Assicurati che l'overlay sia sopra l'immagine */
+}
+
+/* Contenuto all'interno della login-container */
+.login-container > * {
+  position: relative; /* Rendi il contenuto visibile sopra l'overlay */
+  z-index: 2; /* Assicurati che il contenuto sia sopra l'overlay */
+}
+
   
   h2 {
     text-align: center;

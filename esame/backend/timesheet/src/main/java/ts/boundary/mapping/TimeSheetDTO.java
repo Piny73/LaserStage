@@ -29,7 +29,7 @@ public class TimeSheetDTO {
     public String detail;  
 
     // Mappa per le ore per giorno
-    public Map<String, Integer> hoursPerDay;  // Cambia LocalDate in String
+   // public Map<String, Integer> hoursPerDay;  // Cambia LocalDate in String
 
     @Override
     public String toString() {
@@ -40,9 +40,8 @@ public class TimeSheetDTO {
                ", dtstart=" + dtstart + 
                ", dtend=" + dtend + 
                ", detail='" + detail + '\'' + 
-               ", hoursPerDay=" + hoursPerDay + 
+               //", hoursPerDay=" + hoursPerDay + 
                '}';
     }
 }
-
 

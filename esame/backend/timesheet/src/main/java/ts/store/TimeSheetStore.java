@@ -16,11 +16,12 @@ public class TimeSheetStore extends BaseStore<TimeSheet> {
      * @param userId ID dell'utente.
      * @return lista di timesheet associati all'utente.
      */
-    public List<TimeSheet> all(Long userId) {
-        return getEm().createQuery("SELECT e FROM TimeSheet e WHERE e.user.id = :userId AND e.enable = false", TimeSheet.class)
-                .setParameter("userId", userId)
-                .getResultList();
-    }
+   public List<TimeSheet> all(Long userId) {
+    return getEm().createQuery("SELECT e FROM TimeSheet e WHERE e.user.id = :userId AND e.enable = true", TimeSheet.class)
+            .setParameter("userId", userId)
+            .getResultList();
+}
+
 
     /**
      * Trova un timesheet per ID.
