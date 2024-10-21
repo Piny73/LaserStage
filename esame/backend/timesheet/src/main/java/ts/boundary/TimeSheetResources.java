@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -92,6 +93,11 @@ public class TimeSheetResources {
     })
     @PermitAll
     public Response createTimeSheet(@Valid TimeSheetDTO entity) {
+        // Controllo della validità delle date
+        if (entity.dtend.isBefore(entity.dtstart)) {
+            throw new BadRequestException("dtend deve essere dopo dtstart.");
+        }
+
         TimeSheet ts = new TimeSheet();
         ts.setActivity(storeactivity.find(entity.activityid).orElseThrow(() -> new NotFoundException("activity not found. id=" + entity.activityid)));
         ts.setUser(storeuser.find(entity.userid).orElseThrow(() -> new NotFoundException("user not found. id=" + entity.userid)));
@@ -135,6 +141,11 @@ public class TimeSheetResources {
     @PermitAll
     public Response updateTimeSheet(@PathParam("id") Long id, @Valid TimeSheetDTO entity) {
         TimeSheet found = storets.find(id).orElseThrow(() -> new NotFoundException("TimeSheet non trovato. id=" + id));
+
+        // Controllo della validità delle date
+        if (entity.dtend.isBefore(entity.dtstart)) {
+            throw new BadRequestException("dtend deve essere dopo dtstart.");
+        }
 
         // Aggiorna i dettagli del TimeSheet
         found.setUser(storeuser.find(entity.userid).orElseThrow(() -> new NotFoundException("user not found. id=" + entity.userid)));

@@ -1,66 +1,72 @@
-<!--div class="form-container">
-  <!- Elenco delle Attività ->
-  <h5 class="mb-4">Elenco Attività</h5>
+<div class="form-container">
+  <!-- Elenco delle Attività -->
+  <h5 class="mb-4">Elenco Attività Presenti</h5>
   <div class="table-responsive">
     <app-activity-list (onSelectActivity)="selectActivity($event)"></app-activity-list>
   </div>
 
-  <!-- Form Container ->
+  <!-- Form Container -->
   <div>
     <form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
       <div class="form-container">
         <!-- Hidden Fields -->
-        <input type="hidden" formControlName="id">
+        <input type="hidden" id="id" name="id" formControlName="id">
 
-        <!-- Form Fields ->
+        <!-- Form Fields -->
         <div class="row mb-3">
-          <!-- Descrizione ->
+          <h5 class="mb-4">Crea Nuova Attività</h5>
+
+          <!-- Descrizione -->
           <div class="col-md-6">
             <label for="description" class="form-label">Descrizione</label>
-            <input type="text" id="description" formControlName="description" class="form-control" placeholder="Descrizione">
-            <div *ngIf="activityForm.get('description')?.invalid && activityForm.get('description')?.touched" class="text-danger">
+            <input type="text" id="description" name="description" formControlName="description" class="form-control"
+              placeholder="Descrizione">
+            <div *ngIf="activityForm.get('description')?.invalid && activityForm.get('description')?.touched"
+              class="text-danger">
               Descrizione obbligatoria.
             </div>
           </div>
-          
-          <!-- Proprietario ->
+
+          <!-- Proprietario -->
           <div class="col-md-6">
             <label for="owner" class="form-label">Proprietario</label>
             <app-cb-user [selectedUser]="currentOwner" (selectedItemChange)="onOwnerSelected($event)">
             </app-cb-user>
-            <div *ngIf="activityForm.get('ownerid')?.invalid && activityForm.get('ownerid')?.touched" class="text-danger">
+            <div *ngIf="activityForm.get('ownerid')?.invalid && activityForm.get('ownerid')?.touched"
+              class="text-danger">
               Proprietario obbligatorio.
             </div>
           </div>
         </div>
 
-        <!-- Date e Abilita ->
+        <!-- Date e Abilita -->
         <div class="row mb-3">
-          <!-- Data Inizio ->
+          <!-- Data Inizio -->
           <div class="col-md-6">
             <label for="dtstart" class="form-label">Data Inizio</label>
-            <input type="date" id="dtstart" formControlName="dtstart" class="form-control">
-            <div *ngIf="activityForm.get('dtstart')?.invalid && activityForm.get('dtstart')?.touched" class="text-danger">
+            <input type="datetime-local" id="dtstart" name="dtstart" formControlName="dtstart" class="form-control">
+            <div *ngIf="activityForm.get('dtstart')?.invalid && activityForm.get('dtstart')?.touched"
+              class="text-danger">
               Data Inizio obbligatoria.
             </div>
           </div>
 
-          <!-- Data Fine ->
+          <!-- Data Fine -->
           <div class="col-md-6">
             <label for="dtend" class="form-label">Data Fine</label>
-            <input type="date" id="dtend" formControlName="dtend" class="form-control">
+            <input type="datetime-local" id="dtend" name="dtend" formControlName="dtend" class="form-control">
           </div>
 
-          <!-- Checkbox Abilita ->
+          <!-- Checkbox Abilita -->
           <div class="d-flex align-items-center col-md-6">
             <div>
-              <input type="checkbox" id="enable" formControlName="enable" class="form-check-input">
+              <input type="checkbox" id="enable" name="enable" formControlName="enable" class="form-check-input">
               <label for="enable" class="form-check-label ms-2">Abilita</label>
             </div>
           </div>
         </div>
 
-        <!-- Buttons ->
+        <!-- Buttons -->
         <div class="row">
           <div class="col-md-12 d-flex justify-content-end">
             <button type="button" class="btn btn-secondary me-2" (click)="resetForm()">Pulisci</button>
@@ -72,7 +78,7 @@
     </form>
   </div>
 
-  <!-- Save Confirmation ->
+  <!-- Save Confirmation -->
   <div id="save-confirmation" class="dialog-overlay" *ngIf="showSaveDialog">
     <div class="dialog-content text-center">
       <p class="mb-4">Vuoi salvare i cambiamenti?</p>
@@ -83,7 +89,7 @@
     </div>
   </div>
 
-  <!- Delete Confirmation ->
+  <!-- Delete Confirmation -->
   <div id="delete-confirmation" class="dialog-overlay" *ngIf="showDeleteDialog">
     <div class="dialog-content text-center">
       <p class="mb-4">Vuoi eliminare questa attività?</p>
@@ -93,78 +99,4 @@
       </div>
     </div>
   </div>
-</div-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="form-container">
-  <form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
-    <input type="hidden" formControlName="id">
-    <input type="hidden" formControlName="ownerid">
-
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <label for="description" class="form-label">Descrizione</label>
-        <input type="text" id="description" formControlName="description" class="form-control" placeholder="Descrizione">
-        <div *ngIf="activityForm.get('description')?.invalid && activityForm.get('description')?.touched" class="text-danger">
-          Descrizione obbligatoria.
-        </div>
-      </div>
-      <div class="col-md-6">
-        <label for="owner" class="form-label">Proprietario</label>
-        <app-cb-user [selectedUser]="currentOwner" (selectedItemChange)="onOwnerSelected($event)"></app-cb-user>
-      </div>
-    </div>
-
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <label for="dtstart" class="form-label">Data Inizio</label>
-        <input type="date" id="dtstart" formControlName="dtstart" class="form-control">
-        <div *ngIf="activityForm.get('dtstart')?.invalid && activityForm.get('dtstart')?.touched" class="text-danger">
-          Data Inizio obbligatoria.
-        </div>
-      </div>
-      <div class="col-md-6">
-        <label for="dtend" class="form-label">Data Fine</label>
-        <input type="date" id="dtend" formControlName="dtend" class="form-control">
-        <div *ngIf="activityForm.errors?.['dateInvalid']" class="text-danger">
-          La data di fine non può essere precedente alla data di inizio.
-        </div>
-      </div>
-    </div>
-
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <label for="location" class="form-label">Luogo</label>
-        <input type="text" id="location" formControlName="location" class="form-control" placeholder="Luogo">
-        <div *ngIf="activityForm.get('location')?.invalid && activityForm.get('location')?.touched" class="text-danger">
-          Luogo obbligatorio.
-        </div>
-      </div>
-      <div class="col-md-6">
-        <label for="notes" class="form-label">Note</label>
-        <textarea id="notes" formControlName="notes" class="form-control" placeholder="Note"></textarea>
-      </div>
-    </div>
-
-    <div class="row mb-3">
-      <div class="col-md-12">
-        <button type="submit" class="btn btn-primary">Invia</button>
-      </div>
-    </div>
-  </form>
 </div>
-
-
-
-

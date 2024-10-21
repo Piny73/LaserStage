@@ -1,40 +1,27 @@
 .login-container {
-  width: 300px;
-  margin: 0 auto;
+  background-image: url('/assets/logotm.png'); /* Percorso assoluto */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
+  
   padding: 20px;
-  border: 2px ridge navy;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #d5e9fc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  /* Colore di sfondo semi-trasparente */
+  background-color: rgba(240, 240, 240, 0.7); /* Opacità 0.7 (70%) */
+  
+  color: #333; /* Colore del testo (puoi cambiarlo in base alle tue preferenze) */
 }
 
 h2 {
   text-align: center;
+  color: #333; /* Colore del titolo (puoi modificarlo) */
 }
 
-.form-group {
-  margin-bottom: 15px;
+.form-group label {
+  color: #333; /* Colore delle etichette */
 }
-
-.form-control {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-}
-
-.btn {
-  width: 100%;
-}
-
-.error-message {
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-.alert {
-  margin-top: 15px;
-  text-align: center;
-}
-
-  

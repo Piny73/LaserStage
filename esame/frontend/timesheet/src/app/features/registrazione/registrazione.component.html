@@ -1,18 +1,21 @@
 <div class="login-container">
   <form [formGroup]="registrazioneForm" (ngSubmit)="onSubmit()">
+    <!-- Campo Nome -->
     <div class="form-group">
       <label for="name">Nome</label>
       <input
         id="name"
         formControlName="name"
-        placeholder="Name"
+        placeholder="Nome"
         class="form-control"
+        [ngClass]="{'is-invalid': registrazioneForm.get('name')?.invalid && registrazioneForm.get('name')?.touched}"
       />
       <div *ngIf="registrazioneForm.get('name')?.invalid && registrazioneForm.get('name')?.touched" class="error-message">
-        Username è richiesta
+        Il nome è richiesto.
       </div>
     </div>
 
+    <!-- Campo Email -->
     <div class="form-group">
       <label for="email">Email</label>
       <input
@@ -20,12 +23,17 @@
         formControlName="email"
         placeholder="Email"
         class="form-control"
+        [ngClass]="{'is-invalid': registrazioneForm.get('email')?.invalid && registrazioneForm.get('email')?.touched}"
       />
-      <div *ngIf="registrazioneForm.get('email')?.invalid && registrazioneForm.get('email')?.touched" class="error-message">
-        Email obbligatoria!
+      <div *ngIf="registrazioneForm.get('email')?.errors?.['required'] && registrazioneForm.get('email')?.touched" class="error-message">
+        L'email è obbligatoria.
+      </div>
+      <div *ngIf="registrazioneForm.get('email')?.errors?.['email'] && registrazioneForm.get('email')?.touched" class="error-message">
+        Inserisci un'email valida.
       </div>
     </div>
 
+    <!-- Campo Password -->
     <div class="form-group">
       <label for="pwd">Password</label>
       <input
@@ -34,16 +42,24 @@
         formControlName="pwd"
         placeholder="Password"
         class="form-control"
+        [ngClass]="{'is-invalid': registrazioneForm.get('pwd')?.invalid && registrazioneForm.get('pwd')?.touched}"
       />
-      <div *ngIf="registrazioneForm.get('pwd')?.invalid && registrazioneForm.get('pwd')?.touched" class="error-message">
-        Password obbligatoria!
+      <div *ngIf="registrazioneForm.get('pwd')?.errors?.['required'] && registrazioneForm.get('pwd')?.touched" class="error-message">
+        La password è obbligatoria.
+      </div>
+      <div *ngIf="registrazioneForm.get('pwd')?.errors?.['minlength'] && registrazioneForm.get('pwd')?.touched" class="error-message">
+        La password deve essere lunga almeno 4 caratteri.
       </div>
     </div>
+
+    <!-- Pulsanti -->
     <button type="submit" [disabled]="!registrazioneForm.valid" class="btn btn-primary">Salva</button>
-    <button type="button" class="btn btn-success me-2"  (click)="openLogin()">Cancella</button>
+    <button type="button" class="btn btn-success me-2" (click)="openLogin()">Cancella</button>
   </form>
-  
+
+  <!-- Messaggio di errore -->
   <div *ngIf="errorMessage" class="alert alert-danger">
-      {{ errorMessage }}
+    {{ errorMessage }}
   </div>
 </div>
+

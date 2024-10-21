@@ -58,11 +58,11 @@ public class UsersResources {
         List<UserDTO> usList = new ArrayList<>();
         storeuser.all().forEach(e -> {
             UserDTO us = new UserDTO();
-            us.id = e.getId();
-            us.name = e.getName();
-            us.email = e.getEmail();
-            us.pwd = ""; // Lascia vuota la password per sicurezza
-            usList.add(us); // Aggiungi l'oggetto UserDTO alla lista
+            us.setId(e.getId());
+            us.setName(e.getName());
+            us.setEmail(e.getEmail());
+            us.setPwd(""); // Lascia vuota la password per sicurezza
+            usList.add(us);
         });
         return usList;
     }
@@ -73,18 +73,18 @@ public class UsersResources {
     @Operation(description = "Permette la registrazione di un nuovo utente")
     @APIResponses({
         @APIResponse(responseCode = "201", description = "Nuovo utente creato con successo"),
-        @APIResponse(responseCode = "404", description = "Creazione di utente fallito")
+        @APIResponse(responseCode = "409", description = "Creazione di utente fallito, utente già esistente")
     })
     @PermitAll
     public Response create(@Valid User entity) {
         // Verifica se l'utente esiste già con l'email fornita
         if (storeuser.findUserByLogin(entity.getEmail()).isPresent()) {
-            return Response.status(Response.Status.PRECONDITION_FAILED).build();
+            return Response.status(Response.Status.CONFLICT).entity("Email già in uso").build();
         }
 
         // Verifica che la password abbia almeno 4 caratteri
         if (entity.getPwd().length() < 4) {
-            return Response.status(Response.Status.PRECONDITION_FAILED).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity("La password deve avere almeno 4 caratteri").build();
         }
 
         // Salva l'utente nel database
@@ -101,7 +101,7 @@ public class UsersResources {
     @Operation(description = "Permette fare login e restituisce il token valido")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Login fatto con successo"),
-        @APIResponse(responseCode = "404", description = "Login fallito")
+        @APIResponse(responseCode = "401", description = "Login fallito, credenziali non valide")
     })
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -113,10 +113,10 @@ public class UsersResources {
                                                           Response.status(Response.Status.UNAUTHORIZED).build()));
         // Creazione del DTO per restituire i dati
         UserDTO us = new UserDTO();
-        us.id = u.getId();
-        us.name = u.getName();
-        us.email = u.getEmail();
-        us.pwd = ""; // Non restituiamo mai la password
+        us.setId(u.getId());
+        us.setName(u.getName());
+        us.setEmail(u.getEmail());
+        us.setPwd(""); // Non restituiamo mai la password
 
         return us;
     }
@@ -132,7 +132,7 @@ public class UsersResources {
     @RolesAllowed("Admin")
     public Response delete(@PathParam("id") Long id) {
         // Trova l'utente da eliminare
-        User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("user non trovato. id=" + id));
+        User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("User non trovato. id=" + id));
         // Rimuovi l'utente
         storeuser.remove(found);
         return Response.status(Response.Status.OK).build();
@@ -144,12 +144,12 @@ public class UsersResources {
     @Operation(description = "Aggiorna i dati dell'utente")
     @APIResponses({
         @APIResponse(responseCode = "200", description = "Utente aggiornato con successo"),
-        @APIResponse(responseCode = "404", description = "Aggiornamento fallito")
+        @APIResponse(responseCode = "404", description = "Utente non trovato")
     })
     @RolesAllowed("Admin")
     public User update(@Valid User entity) {
         // Trova l'utente da aggiornare
-        User found = storeuser.find(entity.getId()).orElseThrow(() -> new NotFoundException("user non trovato. id=" + entity.getId()));
+        User found = storeuser.find(entity.getId()).orElseThrow(() -> new NotFoundException("User non trovato. id=" + entity.getId()));
         // Aggiorna l'utente
         return storeuser.update(entity);
     }
