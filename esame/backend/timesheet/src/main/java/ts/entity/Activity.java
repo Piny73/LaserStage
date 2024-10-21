@@ -34,7 +34,7 @@ public class Activity  extends  BaseEntity{
     @JsonbTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime dtend;
     
-    @JsonbTypeAdapter(UserTypeAdapter.class)
+    
     @ManyToOne(optional = true)
     @JoinColumn(name = "owner_id")
     private User owner;

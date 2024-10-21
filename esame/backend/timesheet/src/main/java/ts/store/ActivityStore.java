@@ -4,13 +4,11 @@
  */
 package ts.store;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
-import ts.boundary.mapping.Credential;
 import ts.entity.Activity;
 import ts.entity.User;
 
@@ -25,13 +23,6 @@ public class ActivityStore extends BaseStore<Activity> {
 
     }
 
-     public List<Activity> allbydate(LocalDate date) {
-
-        return getEm().createQuery("select e from Activity e where e.dtstart <= :date and e.dtend >= :date and e.canceled = false", Activity.class)
-                .setParameter("date", date)
-                .getResultList();
-
-    }
     public Optional<Activity> find(Long id) {
 
         Activity found = getEm().find(Activity.class, id);

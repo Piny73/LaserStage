@@ -6,24 +6,24 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class LocalDateTimeAdapter implements JsonbAdapter<LocalDateTime, String> {
-    // Definisce il pattern ISO 8601 con precisione millisecondi
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS");
+
+    // Formatter per la data nel formato ISO 8601 con precisione fino ai minuti (senza secondi)
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
     @Override
     public String adaptToJson(LocalDateTime dateTime) {
-        // Converte LocalDateTime in stringa formattata
+        // Converte LocalDateTime in stringa formattata (senza secondi)
         return dateTime.format(FORMATTER);
     }
 
     @Override
     public LocalDateTime adaptFromJson(String dateTimeStr) {
         try {
-            // Verifica se la stringa termina con 'Z', indica che la data è in UTC
+            // Se la stringa termina con 'Z', indica che è in UTC: la rimuoviamo per gestirla localmente
             if (dateTimeStr.endsWith("Z")) {
-                // Rimuove 'Z' e converte la stringa a LocalDateTime
                 dateTimeStr = dateTimeStr.substring(0, dateTimeStr.length() - 1);
             }
-            // Converte la stringa a LocalDateTime utilizzando il formatter
+            // Converte la stringa a LocalDateTime utilizzando il formatter per gestire solo ore e minuti
             return LocalDateTime.parse(dateTimeStr, FORMATTER);
         } catch (DateTimeParseException e) {
             throw new RuntimeException("Errore nel parsing della data: " + dateTimeStr, e);

@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package ts.entity;
 
 import javax.persistence.Column;
@@ -9,33 +13,20 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity {
-
-    @NotBlank
-    @Column(nullable = false)
-    private String role; // Ad esempio "Admin", "User", ecc.
-
+    
     @NotBlank
     @Column(nullable = false)
     private String name;
-
+     
     @NotBlank
     @Email
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true)    
     private String email;
-
-    @NotBlank // Assicurati che la password non sia vuota
+    
     @Column(nullable = false)    
-    private String pwd; // Si consiglia di gestire le password in modo sicuro, ad esempio, tramite hashing
-
+    private String pwd;
+    
     // Getters e Setters
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public String getName() {
         return name;
     }

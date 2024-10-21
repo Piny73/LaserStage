@@ -1,12 +1,14 @@
 .home-container {
   background-image: url('/assets/sfondohome.png');
-  /* Percorso assoluto */
-
+  /* Sostituisci con il percorso corretto dell'immagine */
   background-size: cover;
+  /* Adatta l'immagine per coprire l'intera area */
   background-position: center;
+  /* Centra l'immagine */
   background-repeat: no-repeat;
   /* Evita che l'immagine si ripeta */
   padding: 20px;
+  /* Aggiungi del padding per creare spazio intorno al contenuto, se necessario */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,8 +35,32 @@
   background-color: #d5e9fc;
   /* Colore di sfondo chiaro */
   border: ridge navy;
-  border-radius: 5px;
   padding: 20px;
+
+  /* Trasforma il box in un ovale */
+  border-radius: 50%;
+  /* Arrotonda il box fino a renderlo ovale */
+  width: 200px;
+  /* Larghezza personalizzata */
+  height: 100px;
+  /* Altezza personalizzata */
+
+  /* Aggiungi un effetto di bagliore alla cornice */
+  box-shadow:
+    0 0 10px rgb(74, 74, 139),
+    /* Bagliore all'esterno */
+    0 0 20px rgb(31, 31, 124),
+    0 0 30px navy;
+  /* Bagliore esteso */
+
+  /* Filtro per aggiungere un leggero bagliore */
+  filter: brightness(1.1);
+
+  /* Centrare il testo all'interno dell'ovale */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .menu-opcoes {
