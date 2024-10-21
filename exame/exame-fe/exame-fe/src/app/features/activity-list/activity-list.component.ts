@@ -1,8 +1,8 @@
 import { Component, EventEmitter, inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
-import { Activity } from '../../core/models/activity.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { catchError, map, Observable, startWith, Subscription } from 'rxjs';
+import { Activity } from '../../core/models/activity.model';
 import { ActivityService } from '../../core/services/activity.service';
-import { Observable, Subscription, map, catchError, startWith } from 'rxjs';
 
 
 interface ActivityData {
