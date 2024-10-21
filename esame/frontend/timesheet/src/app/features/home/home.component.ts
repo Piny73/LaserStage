@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; // Importazione NgbModal
+import { switchMap } from 'rxjs';
 import { Activity } from '../../core/models/activity.model';
 import { TimeSheet } from '../../core/models/timesheet.model';
+import { User } from '../../core/models/user.model';
 import { ActivityService } from '../../core/services/activity.service';
 import { TimesheetService } from '../../core/services/timesheet.service';
-import { switchMap } from 'rxjs';
-import { User } from '../../core/models/user.model';
 import { UserService } from '../../core/services/user.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'; // Importazione NgbModal
 import { ActivityFormComponent } from '../activity-list/activity-form/activity-form.component';
 import { TimesheetFormComponent } from '../timesheet-list/timesheet-form/timesheet-form.component';
 

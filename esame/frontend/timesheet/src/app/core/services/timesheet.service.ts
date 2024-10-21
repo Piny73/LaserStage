@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TimeSheetDTO } from '../models/timesheet.model';
 
@@ -7,7 +7,7 @@ import { TimeSheetDTO } from '../models/timesheet.model';
   providedIn: 'root'
 })
 export class TimesheetService {
-  private baseUrl = 'http://localhost:8080/exame/api/timesheet';
+  private baseUrl = 'http://localhost:8080/esame/api/timesheet';
 
   constructor(private http: HttpClient) {}
 

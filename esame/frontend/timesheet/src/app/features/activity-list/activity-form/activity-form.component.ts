@@ -26,7 +26,7 @@ export class ActivityFormComponent implements OnInit {
     private activityService: ActivityService,
     private utils: UtilsService,
     public activeModal: NgbActiveModal
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -50,46 +50,46 @@ export class ActivityFormComponent implements OnInit {
   }
 
   // Popola il form con i dati dell'attività selezionata
-private populateFormWithActivityData(): void {
-  this.currentOwner = this.activity.ownerid;
+  private populateFormWithActivityData(): void {
+    this.currentOwner = this.activity.ownerid;
 
-  // Se l'attività ha un proprietario, assegna il nome
-  if (this.activity.owner) {
-    this.activity.ownerName = this.activity.owner.name;
-  } else {
-    this.activity.ownerName = 'N/A';
+    // Se l'attività ha un proprietario, assegna il nome
+    if (this.activity.owner) {
+      this.activity.ownerName = this.activity.owner.name;
+    } else {
+      this.activity.ownerName = 'N/A';
+    }
+
+    // Usa UtilsService per formattare le date
+    this.activity.dtstart = this.activity.dtstart
+      ? this.utils.formatDateForBackend(new Date(this.activity.dtstart))
+      : null;
+
+    this.activity.dtend = this.activity.dtend
+      ? this.utils.formatDateForBackend(new Date(this.activity.dtend))
+      : null;
+
+    // Verifica e log dell'ID dell'attività
+    if (!this.activity.id) {
+      console.warn('Attenzione: L\'attività non ha un ID valido:', this.activity);
+    }
+
+    // Assicurati che l'oggetto activity abbia un ID prima di procedere
+    this.activityCopy = { ...this.activity };
+
+    // Aggiorna il form con i dati dell'attività
+    this.activityForm.patchValue({
+      id: this.activity.id || 0,  // Assicurati che l'ID venga popolato
+      description: this.activity.description,
+      ownerid: this.activity.ownerid,
+      dtstart: this.activity.dtstart,
+      dtend: this.activity.dtend,
+      enable: this.activity.enable,
+      ownerName: this.activity.ownerName
+    });
+
+    console.log('Form popolato con dati attività:', this.activityForm.value);
   }
-
-  // Usa UtilsService per formattare le date
-  this.activity.dtstart = this.activity.dtstart 
-    ? this.utils.formatDateForBackend(new Date(this.activity.dtstart)) 
-    : null;
-
-  this.activity.dtend = this.activity.dtend 
-    ? this.utils.formatDateForBackend(new Date(this.activity.dtend)) 
-    : null;
-
-  // Verifica e log dell'ID dell'attività
-  if (!this.activity.id) {
-    console.warn('Attenzione: L\'attività non ha un ID valido:', this.activity);
-  }
-
-  // Assicurati che l'oggetto activity abbia un ID prima di procedere
-  this.activityCopy = { ...this.activity };
-
-  // Aggiorna il form con i dati dell'attività
-  this.activityForm.patchValue({
-    id: this.activity.id || 0,  // Assicurati che l'ID venga popolato
-    description: this.activity.description,
-    ownerid: this.activity.ownerid,
-    dtstart: this.activity.dtstart,
-    dtend: this.activity.dtend,
-    enable: this.activity.enable,
-    ownerName: this.activity.ownerName
-  });
-
-  console.log('Form popolato con dati attività:', this.activityForm.value);
-}
 
   // Gestisce l'invio del form
   onSubmit(): void {
@@ -162,7 +162,7 @@ private populateFormWithActivityData(): void {
   // Elimina l'attività corrente
   deleteObject(): void {
     const activityId = this.activityForm.value.id;
-  
+
     if (activityId && activityId !== 0) {
       console.log('Tentativo di eliminazione dell\'attività con ID:', activityId); // Verifica l'ID
       this.activityService.delete(activityId).subscribe({

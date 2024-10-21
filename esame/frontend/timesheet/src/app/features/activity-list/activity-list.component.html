@@ -13,7 +13,7 @@
         <tr>
           <th scope="col">Seleziona</th>
           <th scope="col">Descrizione</th>
-          <th scope="col">Proprietario</th> <!-- Visualizza il nome del proprietario -->
+          <th scope="col">Proprietario</th>
           <th scope="col">Data Inizio</th>
           <th scope="col">Data Fine</th>
         </tr>
@@ -21,10 +21,13 @@
       <tbody>
         <tr *ngFor="let ac of activityData.activityList">
           <td>
-            <input type="radio" (change)="selectActivity(ac)" [checked]="selectedActivities.includes(ac)">
+            <label>
+              <input type="radio" (change)="selectActivity(ac)" [checked]="selectedActivities.length === 1 && selectedActivities[0] === ac">
+              Seleziona
+            </label>
           </td>
           <td>{{ ac.description }}</td>
-          <td>{{ ac.ownerName }}</td> <!-- Visualizza il nome del proprietario -->
+          <td>{{ ac.ownerName }}</td>
           <td>{{ ac.dtstart | date: 'short' }}</td>
           <td>{{ ac.dtend | date: 'short' }}</td>
         </tr>

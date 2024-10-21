@@ -10,7 +10,7 @@ import { Activity } from '../models/activity.model';
 })
 export class ActivityService {
 
-  private readonly endpoint = 'activities'; // Endpoint per le attività
+  private readonly endpoint = 'activity'; // Endpoint per le attività
   private activityList: Activity[] = []; // Cache locale delle attività
   private activitySelected!: Activity; // Memorizza l'attività selezionata
 
