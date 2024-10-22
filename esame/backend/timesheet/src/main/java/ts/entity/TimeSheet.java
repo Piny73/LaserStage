@@ -5,6 +5,7 @@
 package ts.entity;
 
 import java.time.LocalDateTime;
+import javax.json.bind.annotation.JsonbDateFormat; // Importa JsonbDateFormat
 import javax.json.bind.annotation.JsonbTypeAdapter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,43 +14,37 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import ts.entity.adapter.ActivityTypeAdapter;
 import ts.entity.adapter.LocalDateTimeAdapter;
-import ts.entity.adapter.TimeSheetAdapter;
+import ts.entity.adapter.UserTypeAdapter;
 
 @Entity
 @Table(name = "timesheet")
 public class TimeSheet extends BaseEntity {
-
     
+    @JsonbTypeAdapter(ActivityTypeAdapter.class)
     @ManyToOne(optional = false)
-    @JoinColumn(name = "activity_id", nullable = false)
+    @JoinColumn(name = "activity_id")
     private Activity activity;
 
+    @JsonbTypeAdapter(UserTypeAdapter.class)
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
-
-    @JsonbTypeAdapter(LocalDateTimeAdapter.class)
+    
     @NotNull
     @Column(nullable = false)
+    @JsonbTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime dtstart;
-
-    @JsonbTypeAdapter(LocalDateTimeAdapter.class)
+    
     @NotNull
     @Column(nullable = false)
+    @JsonbTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime dtend;
 
     @NotBlank
-    @Column(nullable = false)
+    @Column(nullable = false)    
     private String detail;
-
-    @Column(nullable = false)
-    private boolean enable;
-
-    // Rimozione dell'ElementCollection per gestire la mappa delle ore per giorno
-    // private Map<String, Integer> hoursPerDay = new HashMap<>();
-
-    // Getters e Setters
 
     public Activity getActivity() {
         return activity;
@@ -90,22 +85,4 @@ public class TimeSheet extends BaseEntity {
     public void setDetail(String detail) {
         this.detail = detail;
     }
-
-    public boolean isEnable() {
-        return enable;
-    }
-
-    public void setEnable(boolean enable) {
-        this.enable = enable;
-    }
-
-    // Rimuovere i metodi get/set per hoursPerDay
-    // public Map<String, Integer> getHoursPerDay() {
-    //     return hoursPerDay;
-    // }
-
-    // public void setHoursPerDay(Map<String, Integer> hoursPerDay) {
-    //     this.hoursPerDay = hoursPerDay;
-    // }
-
 }

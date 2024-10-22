@@ -10,29 +10,20 @@ import ts.entity.TimeSheet;
 @Transactional(Transactional.TxType.REQUIRED)
 public class TimeSheetStore extends BaseStore<TimeSheet> {
 
-    /**
-     * Recupera tutti i timesheet per un dato utente che non sono stati annullati.
-     * 
-     * @param userId ID dell'utente.
-     * @return lista di timesheet associati all'utente.
-     */
-   public List<TimeSheet> all(Long userId) {
-    return getEm().createQuery("SELECT e FROM TimeSheet e WHERE e.user.id = :userId AND e.enable = true", TimeSheet.class)
-            .setParameter("userId", userId)
-            .getResultList();
-}
+    // Recupera tutti i TimeSheet per un dato utente, escludendo quelli cancellati
+    public List<TimeSheet> all(Long id) {
+        return getEm().createQuery("select e from TimeSheet e where e.user.id = :id and e.canceled = false", TimeSheet.class)
+    .setParameter("id", id)
+    .getResultList();
 
+    }
 
-    /**
-     * Trova un timesheet per ID.
-     * 
-     * @param id ID del timesheet.
-     * @return Optional contenente il timesheet se trovato, altrimenti vuoto.
-     */
+    // Trova un TimeSheet per ID
     public Optional<TimeSheet> find(Long id) {
         TimeSheet found = getEm().find(TimeSheet.class, id);
-        return Optional.ofNullable(found);
+        return found == null ? Optional.empty() : Optional.of(found);
     }
 }
+
 
 

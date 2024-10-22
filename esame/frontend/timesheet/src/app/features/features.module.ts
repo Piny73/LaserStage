@@ -1,19 +1,19 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '../shared/shared.module';
 
 // Componenti specifici del modulo
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
+import { ActivityFormComponent } from './activity-list/activity-form/activity-form.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ActivityRowComponent } from './activity-list/activity-row/activity-row.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrazioneComponent } from './registrazione/registrazione.component';
+import { TimesheetFormComponent } from './timesheet-list/timesheet-form/timesheet-form.component';
 import { TimesheetListComponent } from './timesheet-list/timesheet-list.component';
 import { TimesheetRowComponent } from './timesheet-list/timesheet-row/timesheet-row.component';
-import { RegistrazioneComponent } from './registrazione/registrazione.component';
-import { ActivityFormComponent } from './activity-list/activity-form/activity-form.component';
-import { TimesheetFormComponent } from './timesheet-list/timesheet-form/timesheet-form.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +24,8 @@ import { TimesheetFormComponent } from './timesheet-list/timesheet-form/timeshee
     ActivityFormComponent,
     TimesheetListComponent,
     TimesheetRowComponent,
-    TimesheetFormComponent, // Dichiarazione qui
-    RegistrazioneComponent
+    TimesheetFormComponent,
+    RegistrazioneComponent// Dichiarazione qui
   ],
   imports: [
     CommonModule,
@@ -41,8 +41,8 @@ import { TimesheetFormComponent } from './timesheet-list/timesheet-form/timeshee
     ActivityFormComponent,
     TimesheetListComponent,
     TimesheetRowComponent,
-    TimesheetFormComponent, // Esportazione qui
-    RegistrazioneComponent
+    TimesheetFormComponent,
+    RegistrazioneComponent // Esportazione qui
   ]
 })
 export class FeaturesModule { }
