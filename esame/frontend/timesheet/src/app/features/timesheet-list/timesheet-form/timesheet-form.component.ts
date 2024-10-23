@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { TimesheetService } from '../../../core/services/timesheet.service';
-import { UtilsService } from '../../../core/utils.service';
+import { Activity } from '../../../core/models/activity.model';
 import { TimeSheetDTO } from '../../../core/models/timesheet.model';
 import { User } from '../../../core/models/user.model';
-import { Activity } from '../../../core/models/activity.model';
-import { UserService } from '../../../core/services/user.service';
 import { ActivityService } from '../../../core/services/activity.service';
+import { TimesheetService } from '../../../core/services/timesheet.service';
+import { UserService } from '../../../core/services/user.service';
+import { UtilsService } from '../../../core/utils.service';
 
 @Component({
   selector: 'app-timesheet-form',
@@ -47,10 +47,10 @@ export class TimesheetFormComponent implements OnInit {
   private initializeForm(): void {
     this.timesheetForm = this.fb.group({
       id: [null],
-      userId: [null, Validators.required], // Corretto per l'uso del camelCase
-      activityId: [null, Validators.required], // Corretto per l'uso del camelCase
+      userId: [null, Validators.required],
+      activityId: [null, Validators.required],
       dtstart: ['', Validators.required],
-      dtend: [''],
+      dtend: ['', Validators.required], // Aggiunto Validators.required per dtend
       detail: ['', [Validators.required, Validators.maxLength(500)]]
     });
   }
@@ -103,10 +103,15 @@ export class TimesheetFormComponent implements OnInit {
   // Gestione dell'invio del form
   onSubmit(): void {
     if (this.timesheetForm.valid) {
-      this.save(); // Chiama il metodo di salvataggio
+      this.confirmSave(); // Chiama il metodo di conferma salvataggio
     } else {
       this.timesheetForm.markAllAsTouched(); // Mostra gli errori di validazione
     }
+  }
+
+  // Aggiungi un metodo pubblico per chiamare save
+  public onSave(): void {
+    this.save();
   }
 
   // Salva i dati del timesheet
@@ -114,7 +119,10 @@ export class TimesheetFormComponent implements OnInit {
     const timesheetData: TimeSheetDTO = {
       ...this.timesheetForm.value,
       dtstart: this.utils.formatDateForBackend(new Date(this.timesheetForm.value.dtstart)),
-      dtend: this.utils.formatDateForBackend(new Date(this.timesheetForm.value.dtend))
+      dtend: this.utils.formatDateForBackend(new Date(this.timesheetForm.value.dtend)),
+      detail: this.timesheetForm.value.detail,
+      activityid: this.timesheetForm.value.activityId,
+      userid: this.timesheetForm.value.userId
     };
 
     if (timesheetData.id) {
@@ -166,7 +174,17 @@ export class TimesheetFormComponent implements OnInit {
     this.showDeleteDialog = false; // Chiudi il dialog di conferma eliminazione
   }
 
-  openDeleteConfirmation(): void {
-    this.showDeleteDialog = true; // Apri il dialogo di conferma eliminazione
+  // Esegui l'eliminazione del timesheet
+  deleteTimesheet(): void {
+    if (this.timesheet && this.timesheet.id) {
+      this.timesheetService.deleteTimesheet(this.timesheet.id).subscribe({
+        next: () => {
+          console.log('Eliminazione completata con successo');
+          this.reload.emit(true);
+          this.activeModal.close();
+        },
+        error: (error) => this.handleError(error, 'Errore durante l\'eliminazione')
+      });
+    }
   }
 }

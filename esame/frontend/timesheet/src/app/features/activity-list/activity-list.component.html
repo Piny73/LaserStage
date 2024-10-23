@@ -16,6 +16,7 @@
           <th scope="col">Proprietario</th>
           <th scope="col">Data Inizio</th>
           <th scope="col">Data Fine</th>
+          <th scope="col">Azione</th> <!-- Nuova intestazione -->
         </tr>
       </thead>
       <tbody>
@@ -30,6 +31,10 @@
           <td>{{ ac.ownerName }}</td>
           <td>{{ ac.dtstart | date: 'short' }}</td>
           <td>{{ ac.dtend | date: 'short' }}</td>
+          <td>
+            <button (click)="openDetail(content)" class="btn btn-primary btn-sm">Modifica</button>
+            <button (click)="deleteActivity(ac)" class="btn btn-danger btn-sm">Elimina</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -38,4 +43,5 @@
       Nessuna attività da caricare
     </div>
   </ng-container>
+  
 </div>

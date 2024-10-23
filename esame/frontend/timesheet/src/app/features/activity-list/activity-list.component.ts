@@ -1,9 +1,8 @@
-import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef } from '@angular/core';
-import { Activity } from '../../core/models/activity.model';
+import { Component, EventEmitter, inject, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { catchError, map, Observable, of, startWith } from 'rxjs';
+import { Activity } from '../../core/models/activity.model';
 import { ActivityService } from '../../core/services/activity.service';
-import { Observable, of } from 'rxjs';
-import { map, catchError, startWith } from 'rxjs';
 
 interface ActivityData {
   loading: boolean;
@@ -22,6 +21,7 @@ export class ActivityListComponent implements OnInit, OnChanges {
 
   @Output() onSelectActivity = new EventEmitter<Activity>();
   @Input() isUpdated!: number;
+  @ViewChild('content', { static: true }) content!: TemplateRef<any>;
 
   title = 'Activity';
   activityData$!: Observable<ActivityData>;
@@ -88,7 +88,8 @@ export class ActivityListComponent implements OnInit, OnChanges {
   }
 
   // Apertura del dettaglio/modifica dell'attività
-  openDetail(content: TemplateRef<any>) {
+  openDetail(content: TemplateRef<any>, activity?: Activity) {
+    this.activityService.setActivitySelected(activity!); // Memorizza l'attività selezionata per la modifica
     this.modalService.open(content, { size: 'xl' });
   }
 

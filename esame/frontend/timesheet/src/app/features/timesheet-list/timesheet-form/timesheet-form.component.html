@@ -1,5 +1,5 @@
 <div class="form-container">
-  <h5 class="mb-4">Compila il Timesheet</h5>
+  <h5 class="mb-4">Il Timesheet</h5>
   <form [formGroup]="timesheetForm" (ngSubmit)="onSubmit()">
     <!-- Hidden Fields -->
     <input type="hidden" formControlName="id">
@@ -41,7 +41,7 @@
       <div class="col-md-6">
         <label for="dtend" class="form-label">Data Fine</label>
         <input type="datetime-local" id="dtend" formControlName="dtend" class="form-control">
-        <div *ngIf="timesheetForm.get('dtend')?.invalid && timesheetForm.get('dtend')?.touched" class="text-danger">
+        <div *ngIf="timesheetForm.get('dtend')?.invalid && timesheetForm.get('dtend')?.touched && !timesheetForm.get('dtend')?.valid" class="text-danger">
           Data Fine non valida.
         </div>
       </div>
@@ -61,7 +61,7 @@
     <div class="row">
       <div class="col-md-12 d-flex justify-content-end">
         <button type="button" class="btn btn-secondary me-2" (click)="resetForm()">Pulisci</button>
-        <button type="button" class="btn btn-danger me-2" (click)="openDeleteConfirmation()">Cancella</button>
+        <button type="button" class="btn btn-danger me-2" (click)="confirmDelete()">Cancella</button>
         <button type="submit" class="btn btn-primary" [disabled]="timesheetForm.invalid">Salva</button>
       </div>
     </div>
@@ -72,7 +72,7 @@
     <div class="dialog-content text-center">
       <p class="mb-4">Vuoi salvare i cambiamenti?</p>
       <div class="d-flex justify-content-center">
-        <button class="btn btn-success me-2" (click)="confirmSave()">Sì</button>
+        <button class="btn btn-success me-2" (click)="onSave()">Salva</button>
         <button class="btn btn-secondary" (click)="cancelSave()">No</button>
       </div>
     </div>
