@@ -4,8 +4,8 @@ import javax.json.bind.adapter.JsonbAdapter;
 import javax.json.JsonObject;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
-import ts.entity.TimeSheet;  // Assicurati di avere l'import corretto per la tua entità TimeSheet
-import ts.store.TimeSheetStore; // Assicurati di avere l'import corretto per il tuo store
+import ts.entity.TimeSheet;  
+import ts.store.TimeSheetStore; 
 
 public class TimeSheetAdapter implements JsonbAdapter<TimeSheet, JsonObject> {
 

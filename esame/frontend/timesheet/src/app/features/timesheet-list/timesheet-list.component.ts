@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TimesheetService } from '../../core/services/timesheet.service';
-import { TimeSheetDTO } from '../../core/models/timesheet.model';
-import { finalize } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { finalize } from 'rxjs/operators';
+import { TimeSheetDTO } from '../../core/models/timesheet.model';
+import { TimesheetService } from '../../core/services/timesheet.service';
 import { TimesheetFormComponent } from './timesheet-form/timesheet-form.component';
 
 @Component({
@@ -65,7 +65,7 @@ export class TimesheetListComponent implements OnInit {
       dtstart: null, // Imposta null per le date di inizio e fine
       dtend: null,
       detail: '', // Dettagli vuoti per un nuovo timesheet
-      hoursPerDay: {} // Inizializza hoursPerDay come un oggetto vuoto
+      
     };
   }
 

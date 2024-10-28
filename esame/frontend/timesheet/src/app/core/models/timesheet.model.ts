@@ -10,9 +10,7 @@ export class TimeSheet {
   dtend!: string | null;            // Data e ora di fine
   user!: User;                      // Oggetto utente associato
   activity!: Activity;              // Oggetto attività associata
-  hoursPerDay!: {                  // Ore per giorno
-    [date: string]: number;         // La chiave è una stringa (data), il valore è un numero di ore
-  };
+
 
   constructor(init?: Partial<TimeSheet>) {
     Object.assign(this, init);      // Assegna valori iniziali se forniti
@@ -26,8 +24,6 @@ export interface TimeSheetDTO {
   dtstart: string | null;          // Data e ora di inizio
   dtend: string | null;            // Data e ora di fine
   detail: string;                  // Dettagli del lavoro svolto
-  hoursPerDay: {                  // Ore per giorno
-    [date: string]: number;         // La chiave è una stringa (data), il valore è un numero di ore
-  };
+
 }
 

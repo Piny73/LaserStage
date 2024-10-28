@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package ts.store;
 
 import java.util.List;
@@ -10,20 +14,19 @@ import ts.entity.TimeSheet;
 @Transactional(Transactional.TxType.REQUIRED)
 public class TimeSheetStore extends BaseStore<TimeSheet> {
 
-    // Recupera tutti i TimeSheet per un dato utente, escludendo quelli cancellati
     public List<TimeSheet> all(Long id) {
+
         return getEm().createQuery("select e from TimeSheet e where e.user.id = :id and e.canceled = false", TimeSheet.class)
-    .setParameter("id", id)
-    .getResultList();
+                .setParameter("id", id)
+                .getResultList();
 
     }
 
-    // Trova un TimeSheet per ID
     public Optional<TimeSheet> find(Long id) {
+
         TimeSheet found = getEm().find(TimeSheet.class, id);
+
         return found == null ? Optional.empty() : Optional.of(found);
+
     }
 }
-
-
-

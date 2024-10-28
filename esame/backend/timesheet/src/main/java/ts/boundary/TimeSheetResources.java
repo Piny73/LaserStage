@@ -29,13 +29,14 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import ts.boundary.mapping.ActivityDTO;
 import ts.entity.User;
 import ts.boundary.mapping.TimeSheetDTO;
+import ts.entity.Activity;
 import ts.entity.TimeSheet;
 import ts.store.ActivityStore;
 import ts.store.TimeSheetStore;
 import ts.store.UserStore;
-
 
 @Path("timesheet")
 @Tag(name = "TimeSheet Management", description = "TimeSheet Business Logic")
@@ -43,21 +44,20 @@ import ts.store.UserStore;
 public class TimeSheetResources {
     
     @Inject
-    private UserStore storeuser;
+    private UserStore userStore;
 
     @Inject
-    private ActivityStore storeactivity;
+    private ActivityStore activityStore;
     
     @Inject
-    private TimeSheetStore storets;
+    private TimeSheetStore timeSheetStore;
 
     @Context
     ResourceContext rc;
     
     @Context
     UriInfo uriInfo;
-        
-   
+
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -66,93 +66,94 @@ public class TimeSheetResources {
         @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
         @APIResponse(responseCode = "404", description = "Elenco non trovato")
     })
-    @PermitAll
-    public List<TimeSheetDTO> all(@PathParam("id") Long id, @DefaultValue("1") @QueryParam("page") int page, @DefaultValue("10") @QueryParam("size") int size) {
-        User found = storeuser.find(id).orElseThrow(() -> new NotFoundException("user not found. id=" + id));
+    public List<TimeSheetDTO> all(@PathParam("id") Long id, 
+                                   @DefaultValue("1") @QueryParam("page") int page, 
+                                   @DefaultValue("10") @QueryParam("size") int size) {
+        User foundUser = userStore.find(id).orElseThrow(() -> new NotFoundException("User not found. id=" + id));
         
-        List<TimeSheetDTO> tsList = new ArrayList<>();
+        List<TimeSheetDTO> timeSheetList = new ArrayList<>();
         
-        storets.all(id).forEach(e -> {
-            TimeSheetDTO ts = new TimeSheetDTO();
-            ts.id = e.getId();
-            ts.activityid = e.getActivity().getId();
-            ts.userid = e.getUser().getId();
-            ts.dtstart = e.getDtstart();
-            ts.dtend = e.getDtend();
-            ts.detail = e.getDetail();
+        timeSheetStore.all(id).forEach(e -> {
+            TimeSheetDTO timeSheetDTO = new TimeSheetDTO();
+            timeSheetDTO.id = e.getId();
+            timeSheetDTO.activityid = e.getActivity().getId();
+            timeSheetDTO.userid = e.getUser().getId();
+            timeSheetDTO.dtstart = e.getDtstart();
+            timeSheetDTO.dtend = e.getDtend();
+            timeSheetDTO.detail = e.getDetail();
             
-            tsList.add(ts);
-        
+            timeSheetList.add(timeSheetDTO);
         });
         
-        return tsList;
+        return timeSheetList;
     }
 
-       
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "New TimeSheet")
+    @Operation(description = "Crea un nuovo TimeSheet")
     @APIResponses({
-        @APIResponse(responseCode = "201", description = "Success"),
-        @APIResponse(responseCode = "404", description = "Failed")
+        @APIResponse(responseCode = "201", description = "Successo nella creazione"),
+        @APIResponse(responseCode = "404", description = "Fallimento nella creazione")
     })
-    @PermitAll
     public Response createTimeSheet(@Valid TimeSheetDTO entity) {
+        TimeSheet timeSheet = new TimeSheet();
+        timeSheet.setActivity(activityStore.find(entity.activityid)
+            .orElseThrow(() -> new NotFoundException("Activity not found. id=" + entity.activityid)));
+        timeSheet.setUser(userStore.find(entity.userid)
+            .orElseThrow(() -> new NotFoundException("User not found. id=" + entity.userid)));
+        timeSheet.setDetail(entity.detail);
+        timeSheet.setDtstart(entity.dtstart);
+        timeSheet.setDtend(entity.dtend);
         
-        TimeSheet ts = new TimeSheet();
-        ts.setActivity(storeactivity.find(entity.activityid).orElseThrow(() -> new NotFoundException("activity not founded. id=" + entity.activityid)));
-        ts.setUser(storeuser.find(entity.userid).orElseThrow(() -> new NotFoundException("user not found. id=" + entity.userid)));
-        ts.setDetail(entity.detail);
-        ts.setDtstart(entity.dtstart);
-        ts.setDtend(entity.dtend);
+        timeSheet = timeSheetStore.save(timeSheet);
+        entity.id = timeSheet.getId();
         
-        ts = storets.save(ts);
-        entity.id = ts.getId();
         return Response.status(Response.Status.CREATED)
                 .entity(entity)
                 .build();
     }
     
-    
     @DELETE
     @Path("{id}")
-    @Operation(description = "Cancel TimeSheed tramite l'ID")
+    @Operation(description = "Cancella il TimeSheet tramite l'ID")
     @APIResponses({
-        @APIResponse(responseCode = "200", description = "Success"),
-        @APIResponse(responseCode = "404", description = "Failed")
+        @APIResponse(responseCode = "200", description = "Successo nella cancellazione"),
+        @APIResponse(responseCode = "404", description = "Fallimento nella cancellazione")
     })
     @Produces(MediaType.APPLICATION_JSON)
-    @PermitAll
     public Response deleteTimeSheet(@PathParam("id") Long id) {
-        TimeSheet found = storets.find(id).orElseThrow(() -> new NotFoundException("TimeSheet non trovato. id=" + id));
-       found.setCanceled(true);
-        storets.remove(found);
-        return Response.status(Response.Status.OK)
-                .build();
-    }
-    
-    
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(description = "Update TimeSheet")
-    @APIResponses({
-        @APIResponse(responseCode = "200", description = "Utente aggirnato con successo"),
-        @APIResponse(responseCode = "404", description = "Aggiornamento falito")
-            
-    })
-    public Response updateTimeSheet(@Valid TimeSheetDTO entity) {
-        TimeSheet found = storets.find(entity.id).orElseThrow(() -> new NotFoundException("TimeSheet not founded. id=" + entity.id));
-        found.setUser(storeuser.find(entity.userid).orElseThrow(() -> new NotFoundException("user not found. id=" + entity.userid)));
-        found.setDtstart(entity.dtstart);
-        found.setDtend(entity.dtend);
-        found.setDetail(entity.detail);
+        TimeSheet foundTimeSheet = timeSheetStore.find(id)
+            .orElseThrow(() -> new NotFoundException("TimeSheet not found. id=" + id));
+        foundTimeSheet.setCanceled(true);
+        timeSheetStore.remove(foundTimeSheet);
         
         return Response.status(Response.Status.OK)
                 .build();
     }
     
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(description = "Aggiorna il TimeSheet")
+    @APIResponses({
+        @APIResponse(responseCode = "200", description = "Aggiornamento avvenuto con successo"),
+        @APIResponse(responseCode = "404", description = "Fallimento nell'aggiornamento")
+    })
+    public Response updateTimeSheet(@Valid TimeSheetDTO entity) {
+        TimeSheet foundTimeSheet = timeSheetStore.find(entity.id)
+            .orElseThrow(() -> new NotFoundException("TimeSheet not found. id=" + entity.id));
+        
+        foundTimeSheet.setUser(userStore.find(entity.userid)
+            .orElseThrow(() -> new NotFoundException("User not found. id=" + entity.userid)));
+        foundTimeSheet.setDtstart(entity.dtstart);
+        foundTimeSheet.setDtend(entity.dtend);
+        foundTimeSheet.setDetail(entity.detail);
+        
+        timeSheetStore.update(foundTimeSheet);
+        
+        return Response.status(Response.Status.OK)
+                .entity(entity)
+                .build();
+    }
 }
-
-

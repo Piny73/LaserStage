@@ -32,23 +32,27 @@ public class BaseStore<TEntity>{
 }
 
    
-    public TEntity update(TEntity obj) {
-        try {
-            return em.merge(obj);
-        } catch (Exception e) {
-            return null;
-        }
+ public TEntity update(TEntity obj) {
+    try {
+        return em.merge(obj);
+    } catch (Exception e) {
+        throw new RuntimeException("Failed to update entity", e);
     }
+}
 
-
-    public boolean remove(TEntity obj) {
-        try {
-            update(obj);
+public boolean remove(TEntity obj) {
+    try {
+        if (obj != null) {
+            em.remove(em.contains(obj) ? obj : em.merge(obj));
             return true;
-        } catch (Exception e) {
-            return false;
+        } else {
+            throw new IllegalArgumentException("Entity cannot be null");
         }
+    } catch (Exception e) {
+        throw new RuntimeException("Failed to remove entity", e);
     }
+}
+
     
     public void delete(Long id, Class<TEntity> entityClass) {
        

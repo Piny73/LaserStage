@@ -1,5 +1,5 @@
 <div class="form-container">
-  <h5 class="mb-4">Il Timesheet</h5>
+  <h5 class="mb-4">I Timesheet</h5>
   <form [formGroup]="timesheetForm" (ngSubmit)="onSubmit()">
     <!-- Hidden Fields -->
     <input type="hidden" formControlName="id">
@@ -40,7 +40,7 @@
 
       <div class="col-md-6">
         <label for="dtend" class="form-label">Data Fine</label>
-        <input type="datetime-local" id="dtend" formControlName="dtend" class="form-control">
+        <input type="datetime-local" id="dtend" formControlName="dtend" class="form-control" required>
         <div *ngIf="timesheetForm.get('dtend')?.invalid && timesheetForm.get('dtend')?.touched && !timesheetForm.get('dtend')?.valid" class="text-danger">
           Data Fine non valida.
         </div>
@@ -89,3 +89,4 @@
     </div>
   </div>
 </div>
+
