@@ -5,6 +5,8 @@
 package ts.entity;
 
 import java.time.LocalDateTime;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.json.bind.annotation.JsonbDateFormat; // Importa JsonbDateFormat
 import javax.json.bind.annotation.JsonbTypeAdapter;
 import javax.persistence.Column;
@@ -85,4 +87,17 @@ public class TimeSheet extends BaseEntity {
     public void setDetail(String detail) {
         this.detail = detail;
     }
+    // Aggiungo il metodo toJsonSlice() per serializzare l'oggetto in JSON
+    @Override
+       public JsonObject toJsonSlice() {
+        return Json.createObjectBuilder()
+                .add("id", this.getId())  // Assumendo che BaseEntity abbia un metodo getId()
+                .add("activityId", this.activity.getId())  // Assicurati che Activity abbia un metodo getId()
+                .add("userId", this.user.getId())  // Assicurati che User abbia un metodo getId()
+                .add("dtstart", this.dtstart.toString())  // Converte LocalDateTime in String
+                .add("dtend", this.dtend.toString())  // Converte LocalDateTime in String
+                .add("detail", this.detail)
+                .build();
+    }
 }
+

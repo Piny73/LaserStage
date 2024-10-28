@@ -5,7 +5,6 @@
 package ts.boundary.mapping;
 
 import java.time.LocalDateTime;
-import javax.json.bind.annotation.JsonbDateFormat;
 import javax.json.bind.annotation.JsonbTypeAdapter;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

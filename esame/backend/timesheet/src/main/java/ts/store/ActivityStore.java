@@ -3,7 +3,6 @@ package ts.store;
 import java.util.List;
 import java.util.Optional;
 import javax.enterprise.context.RequestScoped;
-import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 import ts.entity.Activity;
 
