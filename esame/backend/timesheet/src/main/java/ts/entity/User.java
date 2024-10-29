@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ts.entity;
 
 import java.util.Set;
@@ -14,19 +10,35 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "user")
-public class User extends  BaseEntity{
-    
+public class User extends BaseEntity {
+
+    @NotBlank
+    @Column(nullable = false, unique = true) // Assicurati che l'username sia unico
+    private String username; 
+
     @NotBlank
     @Column(nullable = false)
     private String name;
-     
+
     @NotBlank
     @Email
-    @Column(nullable = false, unique = true)    
+    @Column(nullable = false, unique = true)
     private String email;
-    
-    @Column(nullable = false)    
+
+    @Column(nullable = false)
     private String pwd;
+
+    @ElementCollection
+    private Set<String> roles;
+
+    // Getters e Setters
+    public String getUsername() {
+        return username; // Getter per username
+    }
+
+    public void setUsername(String username) {
+        this.username = username; // Setter per username
+    }
 
     public String getName() {
         return name;
@@ -51,9 +63,6 @@ public class User extends  BaseEntity{
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
-    
-    @ElementCollection
-    private Set<String> roles;
 
     public Set<String> getRoles() {
         return roles;
@@ -62,5 +71,4 @@ public class User extends  BaseEntity{
     public void setRoles(Set<String> roles) {
         this.roles = roles;
     }
-    
 }

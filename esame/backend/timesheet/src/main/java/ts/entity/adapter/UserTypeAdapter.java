@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ts.entity.adapter;
 
 import javax.json.bind.adapter.JsonbAdapter;
@@ -15,24 +11,39 @@ import ts.entity.User;
  *
  * @author AndreLima
  */
-public class UserTypeAdapter implements JsonbAdapter<User, JsonObject>  {
+public class UserTypeAdapter implements JsonbAdapter<User, JsonObject> {
     
     @Inject
     UserStore store;
 
     @Override
     public JsonObject adaptToJson(User entity) throws Exception {
-        return entity.toJsonSlice();
+        // Assicurati che l'entità non sia null
+        if (entity == null) {
+            return null; // Gestisci il caso null
+        }
+        return entity.toJsonSlice(); // Assicurati che toJsonSlice restituisca un JsonObject valido
     }
 
     @Override
     public User adaptFromJson(JsonObject json) throws Exception {
-        if (!json.containsKey("id")) {
-            return null;
+        if (!json.containsKey("id") && !json.containsKey("username")) {
+            throw new IllegalArgumentException("JSON deve contenere l'id o il username"); // Aggiunto controllo per l'id o username
         }
-        return store.find(json.getJsonNumber("id").longValue()).orElseThrow(() -> new NotFoundException("UserTypeAdapter.adaptFromJson not found"));
+
+        // Cerca l'utente per id o username
+        User user = null;
+        if (json.containsKey("id")) {
+            Long id = json.getJsonNumber("id").longValue();
+            user = store.find(id)
+                .orElseThrow(() -> new NotFoundException("Utente non trovato con id: " + id)); // Messaggio d'errore migliorato
+        } else if (json.containsKey("username")) {
+            String username = json.getString("username");
+            user = store.findByUsername(username)
+                .orElseThrow(() -> new NotFoundException("Utente non trovato con username: " + username)); // Messaggio d'errore migliorato
+        }
+
+        return user; // Ritorna l'utente trovato
     }
-    
-    
-    
 }
+

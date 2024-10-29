@@ -36,10 +36,22 @@ public class UserStore extends BaseStore<User> {
         }
     }
 
+    public Optional<User> findByUsername(String username) { // Nuovo metodo per trovare l'utente per username
+        try {
+            return Optional.of(
+                    getEm().createQuery("select e from User e where e.username = :username and e.canceled = false", User.class)
+                            .setParameter("username", username)
+                            .getSingleResult()
+            );
+        } catch (NoResultException ex) {
+            return Optional.empty();
+        }
+    }
+
     public Optional<User> login(Credential credential) {
         try {
             return Optional.of(
-                    getEm().createQuery("select e from User e where e.email = :usr and e.pwd = :pwd and e.canceled = false", User.class)
+                    getEm().createQuery("select e from User e where (e.email = :usr or e.username = :usr) and e.pwd = :pwd and e.canceled = false", User.class)
                             .setParameter("usr", credential.usr)
                             .setParameter("pwd", credential.pwd)
                             .getSingleResult()
@@ -73,6 +85,8 @@ public class UserStore extends BaseStore<User> {
         }
     }
 }
+
+
 
 //classe UserStore con l'implementare l'hashing delle password utilizzando SHA-256.Ho anche incluso la logica per hashare la password quando un utente viene salvato o aggiornato
 /*

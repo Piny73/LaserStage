@@ -87,7 +87,36 @@ public class TimeSheetResources {
         
         return timeSheetList;
     }
+ // Nuovo metodo per recuperare i timesheet per nome utente
+    @GET
+    @Path("/by-username")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(description = "Restituisce l'elenco di TimeSheet per nome utente")
+    @APIResponses({
+        @APIResponse(responseCode = "200", description = "Elenco ritornato con successo"),
+        @APIResponse(responseCode = "404", description = "Elenco non trovato")
+    })
+    public List<TimeSheetDTO> getTimesheetsByUsername(@QueryParam("username") String username) {
+        User foundUser = userStore.findByUsername(username)
+            .orElseThrow(() -> new NotFoundException("User not found. username=" + username));
 
+        List<TimeSheetDTO> timeSheetList = new ArrayList<>();
+        
+        timeSheetStore.all(foundUser.getId()).forEach(e -> {
+            TimeSheetDTO timeSheetDTO = new TimeSheetDTO();
+            timeSheetDTO.id = e.getId();
+            timeSheetDTO.activityid = e.getActivity().getId();
+            timeSheetDTO.userid = e.getUser().getId();
+            timeSheetDTO.dtstart = e.getDtstart();
+            timeSheetDTO.dtend = e.getDtend();
+            timeSheetDTO.detail = e.getDetail();
+            
+            timeSheetList.add(timeSheetDTO);
+        });
+        
+        return timeSheetList;
+    }
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
