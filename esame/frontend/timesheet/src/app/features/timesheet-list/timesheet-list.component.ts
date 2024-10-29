@@ -26,19 +26,22 @@ export class TimesheetListComponent implements OnInit {
     this.loadTimesheets();
   }
 
-  // Carica i timesheet dal servizio
-  private loadTimesheets(): void {
+  loadTimesheets(userId: number = 1, page: number = 0, size: number = 10): void { // Aggiunti i parametri
     this.loading = true;
     this.errorMessage = '';
-    this.timesheetService.getTimesheets().pipe(
-      finalize(() => this.loading = false) // Disabilita l'indicatore di caricamento alla fine della richiesta
-    ).subscribe(
+    
+    this.timesheetService.getTimeSheets(userId, page, size).subscribe( // Passati i parametri
       (data: TimeSheetDTO[]) => {
+        console.log('Timesheets caricati:', data); // Log per il debug
         this.timesheets = data;
       },
-      (error: any) => {
+      (error) => {
+        this.loading = false;
         this.errorMessage = 'Errore durante il caricamento dei timesheet.';
         console.error(this.errorMessage, error);
+      },
+      () => {
+        this.loading = false; // Assicurati di impostare loading a false quando il caricamento è completato
       }
     );
   }
@@ -65,7 +68,6 @@ export class TimesheetListComponent implements OnInit {
       dtstart: null, // Imposta null per le date di inizio e fine
       dtend: null,
       detail: '', // Dettagli vuoti per un nuovo timesheet
-      
     };
   }
 
@@ -101,3 +103,5 @@ export class TimesheetListComponent implements OnInit {
     this.showDeleteDialog = false;
   }
 }
+
+

@@ -1,51 +1,58 @@
-<div class="form-container">
-  <h5 class="mb-4">Elenco dei Timesheet</h5>
+<div class="timesheet-list">
+  <h2>Elenco dei Timesheets</h2>
 
-  <!-- Se ci sono timesheets, mostra la tabella -->
-  <div *ngIf="timesheets.length > 0; else noTimesheets">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Attività</th>
-          <th>Utente</th>
-          <th>Data Inizio</th>
-          <th>Data Fine</th>
-          <th>Dettaglio</th>
-          <th>Azioni</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let timesheet of timesheets">
-          <td>{{ timesheet.id }}</td>
-          <td>{{ timesheet.activityId }}</td> <!-- ID Attività -->
-          <td>{{ timesheet.userId }}</td> <!-- ID Utente -->
-          <td>{{ timesheet.dtstart | date: 'dd/MM/yyyy HH:mm' }}</td> <!-- Data Inizio -->
-          <td>{{ timesheet.dtend | date: 'dd/MM/yyyy HH:mm' }}</td> <!-- Data Fine -->
-          <td>{{ timesheet.detail }}</td> <!-- Dettaglio -->
-          <td>
-            <button class="btn btn-sm btn-primary me-2" (click)="openTimesheetModal(timesheet)">Modifica</button>
-            <button class="btn btn-sm btn-danger" (click)="confirmDelete(timesheet)">Elimina</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Indicatore di caricamento -->
+  <div *ngIf="loading" class="loading-spinner">Caricamento in corso...</div>
+
+  <!-- Messaggio di errore -->
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <!-- Tabella dei timesheets -->
+  <table *ngIf="!loading && !errorMessage && timesheets.length > 0" class="table">
+    <thead>
+      <tr>
+        <th>Utente</th>
+        <th>Attività</th>
+        <th>Inizio</th>
+        <th>Fine</th>
+        <th>Dettagli</th>
+        <th>Azioni</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let timesheet of timesheets">
+        <td>{{ timesheet.userId }}</td>
+        <td>{{ timesheet.activityId }}</td>
+        <td>{{ timesheet.dtstart | date:'short' }}</td> <!-- Formatta la data -->
+        <td>{{ timesheet.dtend | date:'short' }}</td> <!-- Formatta la data -->
+        <td>{{ timesheet.detail }}</td>
+        <td>
+          <button class="btn btn-warning" (click)="openTimesheetModal(timesheet)">Modifica</button>
+          <button class="btn btn-danger" (click)="confirmDelete(timesheet)">Elimina</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Messaggio per lista vuota -->
+  <div *ngIf="!loading && !errorMessage && timesheets.length === 0" class="no-data-message">
+    Nessun timesheet trovato.
   </div>
 
-  <!-- Template per nessun timesheet -->
-  <ng-template #noTimesheets>
-    <p class="text-center">Nessun timesheet trovato.</p>
-  </ng-template>
-
   <!-- Dialogo di conferma eliminazione -->
-  <div id="delete-confirmation" class="dialog-overlay" *ngIf="showDeleteDialog">
-    <div class="dialog-content text-center">
-      <p class="mb-4">Sei sicuro di voler eliminare questo timesheet?</p>
-      <div class="d-flex justify-content-center">
-        <button class="btn btn-danger me-2" (click)="deleteTimesheet()">Sì</button>
-        <button class="btn btn-secondary" (click)="cancelDelete()">No</button>
+  <div *ngIf="showDeleteDialog" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Conferma Eliminazione</h5>
+        <button type="button" class="close" (click)="cancelDelete()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Sei sicuro di voler eliminare questo timesheet?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cancelDelete()">Annulla</button>
+        <button type="button" class="btn btn-danger" (click)="deleteTimesheet()">Elimina</button>
       </div>
     </div>
   </div>
 </div>
-

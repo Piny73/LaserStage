@@ -1,13 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TimeSheetDTO } from '../models/timesheet.model';
+import { TimeSheet, TimeSheetDTO } from '../models/timesheet.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimesheetService {
-  private baseUrl = 'http://localhost:8080/esame/api/timesheet';
+  private apiUrl = 'http://localhost:8080/esame/api/timesheet';
 
   constructor(private http: HttpClient) {}
 
@@ -15,8 +15,8 @@ export class TimesheetService {
    * Ottiene tutti i Timesheet.
    * @returns Un Observable che emette un array di TimeSheetDTO.
    */
-  getTimesheets(): Observable<TimeSheetDTO[]> {
-    return this.http.get<TimeSheetDTO[]>(this.baseUrl);
+  getTimeSheets(userId: number, page: number, size: number): Observable<TimeSheet[]> {
+    return this.http.get<TimeSheet[]>(`${this.apiUrl}/${userId}?page=${page}&size=${size}`);
   }
 
   /**
@@ -26,7 +26,7 @@ export class TimesheetService {
    */
   save(timesheetData: TimeSheetDTO): Observable<TimeSheetDTO> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<TimeSheetDTO>(this.baseUrl, timesheetData, { headers });
+    return this.http.post<TimeSheetDTO>(this.apiUrl, timesheetData, { headers });
   }
 
   /**
@@ -36,7 +36,7 @@ export class TimesheetService {
    */
   updateTimesheet(timesheetData: TimeSheetDTO): Observable<TimeSheetDTO> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put<TimeSheetDTO>(`${this.baseUrl}/${timesheetData.id}`, timesheetData, { headers });
+    return this.http.put<TimeSheetDTO>(`${this.apiUrl}/${timesheetData.id}`, timesheetData, { headers });
   }
 
   /**
@@ -45,7 +45,7 @@ export class TimesheetService {
    * @returns Un Observable che completa senza emettere valori.
    */
   deleteTimesheet(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
 

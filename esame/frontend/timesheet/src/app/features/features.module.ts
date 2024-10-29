@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 
 // Componenti specifici del modulo
@@ -25,12 +25,13 @@ import { TimesheetRowComponent } from './timesheet-list/timesheet-row/timesheet-
     TimesheetListComponent,
     TimesheetRowComponent,
     TimesheetFormComponent,
-    RegistrazioneComponent// Dichiarazione qui
+    RegistrazioneComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
+    NgbModalModule,
     NgbModule
   ],
   exports: [
@@ -42,7 +43,7 @@ import { TimesheetRowComponent } from './timesheet-list/timesheet-row/timesheet-
     TimesheetListComponent,
     TimesheetRowComponent,
     TimesheetFormComponent,
-    RegistrazioneComponent // Esportazione qui
+    RegistrazioneComponent
   ]
 })
 export class FeaturesModule { }
