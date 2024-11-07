@@ -5,10 +5,10 @@ import { Activity } from '../../core/models/activity.model';
 import { TimeSheet } from '../../core/models/timesheet.model';
 import { User } from '../../core/models/user.model';
 import { ActivityService } from '../../core/services/activity.service';
-import { TimesheetService } from '../../core/services/timesheet.service';
 import { UserService } from '../../core/services/user.service';
 import { ActivityFormComponent } from '../activity-list/activity-form/activity-form.component';
 import { TimesheetFormComponent } from '../timesheet-list/timesheet-form/timesheet-form.component';
+import { TimeSheetService } from '../../core/services/timesheet.service';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +25,7 @@ export class HomeComponent {
 
   constructor(
     public activityService: ActivityService,
-    private timeSheetService: TimesheetService,
+    private timeSheetService: TimeSheetService,
     private userService: UserService,
     private modalService: NgbModal // Servizio per gestire il modal
   ) {}

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
 
@@ -32,7 +32,8 @@ import { TimesheetRowComponent } from './timesheet-list/timesheet-row/timesheet-
     ReactiveFormsModule,
     SharedModule,
     NgbModalModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   exports: [
     LoginComponent,
@@ -47,5 +48,4 @@ import { TimesheetRowComponent } from './timesheet-list/timesheet-row/timesheet-
   ]
 })
 export class FeaturesModule { }
-
 

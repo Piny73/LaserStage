@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { finalize } from 'rxjs/operators';
 import { TimeSheetDTO } from '../../core/models/timesheet.model';
-import { TimesheetService } from '../../core/services/timesheet.service';
+
 import { TimesheetFormComponent } from './timesheet-form/timesheet-form.component';
+import { TimeSheetService } from '../../core/services/timesheet.service';
 
 @Component({
   selector: 'app-timesheet-list',
@@ -18,7 +19,7 @@ export class TimesheetListComponent implements OnInit {
   errorMessage = ''; // Messaggio di errore
 
   constructor(
-    private timesheetService: TimesheetService,
+    private timeSheetService: TimeSheetService,
     private modalService: NgbModal
   ) {}
 
@@ -30,7 +31,7 @@ export class TimesheetListComponent implements OnInit {
     this.loading = true;
     this.errorMessage = '';
     
-    this.timesheetService.getTimeSheets(userId, page, size).subscribe( // Passati i parametri
+    this.timeSheetService.getTimeSheets(userId, page, size).subscribe( // Passati i parametri
       (data: TimeSheetDTO[]) => {
         console.log('Timesheets caricati:', data); // Log per il debug
         this.timesheets = data;
@@ -82,7 +83,7 @@ export class TimesheetListComponent implements OnInit {
     if (this.timesheetToDelete) {
       this.loading = true;
       this.errorMessage = '';
-      this.timesheetService.deleteTimesheet(this.timesheetToDelete.id).pipe(
+      this.timeSheetService.deleteTimesheet(this.timesheetToDelete.id).pipe(
         finalize(() => this.loading = false)
       ).subscribe(
         () => {

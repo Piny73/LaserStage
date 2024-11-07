@@ -5,9 +5,9 @@ import { Activity } from '../../../core/models/activity.model';
 import { TimeSheetDTO } from '../../../core/models/timesheet.model';
 import { User } from '../../../core/models/user.model';
 import { ActivityService } from '../../../core/services/activity.service';
-import { TimesheetService } from '../../../core/services/timesheet.service';
 import { UserService } from '../../../core/services/user.service';
 import { UtilsService } from '../../../core/utils.service';
+import { TimeSheetService } from '../../../core/services/timesheet.service';
 
 @Component({
   selector: 'app-timesheet-form',
@@ -27,7 +27,7 @@ export class TimesheetFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private timesheetService: TimesheetService,
+    private timeSheetService: TimeSheetService,
     private utils: UtilsService,
     public activeModal: NgbActiveModal,
     private userService: UserService,
@@ -126,7 +126,7 @@ export class TimesheetFormComponent implements OnInit {
     };
 
     if (timesheetData.id) {
-      this.timesheetService.updateTimesheet(timesheetData).subscribe({
+      this.timeSheetService.updateTimesheet(timesheetData).subscribe({
         next: () => {
           console.log('Aggiornamento completato con successo');
           this.reload.emit(true);
@@ -135,7 +135,7 @@ export class TimesheetFormComponent implements OnInit {
         error: (error) => this.handleError(error, 'Errore durante l\'aggiornamento')
       });
     } else {
-      this.timesheetService.save(timesheetData).subscribe({
+      this.timeSheetService.save(timesheetData).subscribe({
         next: () => {
           console.log('Creazione completata con successo');
           this.reload.emit(true);
@@ -177,13 +177,14 @@ export class TimesheetFormComponent implements OnInit {
   // Esegui l'eliminazione del timesheet
   deleteTimesheet(): void {
     if (this.timesheet && this.timesheet.id) {
-      this.timesheetService.deleteTimesheet(this.timesheet.id).subscribe({
+      this.timeSheetService.deleteTimesheet(this.timesheet.id).subscribe({
         next: () => {
           console.log('Eliminazione completata con successo');
           this.reload.emit(true);
           this.activeModal.close();
         },
-        error: (error) => this.handleError(error, 'Errore durante l\'eliminazione')
+        error: (error: any) => this.handleError(error, 'Errore durante l\'aggiornamento')
+
       });
     }
   }

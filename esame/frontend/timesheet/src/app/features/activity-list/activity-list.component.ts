@@ -25,30 +25,40 @@ export class ActivityListComponent implements OnInit, OnChanges {
 
   title = 'Activity';
   activityData$!: Observable<ActivityData>;
-  selectedActivities: Activity[] = []; // Gestione della selezione multipla di attività
+  selectedActivity: Activity | null = null;
+
+  searchTerm: string = '';
+  sortOrder: string = 'asc';
+
+  filteredActivities: Activity[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalItems: number = 0;
 
   constructor(private activityService: ActivityService) {}
 
   ngOnInit() {
-    this.load();
+    this.loadActivities();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const cur_up = changes['isUpdated'].currentValue != null ? changes['isUpdated'].currentValue : 0;
-    const cur_last = changes['isUpdated'].previousValue != null ? changes['isUpdated'].previousValue : 0;
-
-    if (cur_up > cur_last) {
-      this.load();
+    if (changes['isUpdated']) {
+      this.loadActivities();
     }
   }
 
-  load(): void {
+  loadActivities(): void {
     this.activityData$ = this.activityService.fill().pipe(
-      map((data: Activity[]) => ({
-        loading: false,
-        activityList: data,
-        error: null
-      })),
+      map((data: Activity[]) => {
+        this.totalItems = data.length;
+        this.filteredActivities = data;  // Memorizziamo tutte le attività da filtrare e paginare
+        this.updatePageActivities();
+        return {
+          loading: false,
+          activityList: data,
+          error: null,
+        };
+      }),
       catchError(error => {
         console.error('Errore durante il caricamento delle attività:', error);
         return of({
@@ -61,48 +71,68 @@ export class ActivityListComponent implements OnInit, OnChanges {
     );
   }
 
-  // Selezione di una attività
-  selectActivity(activity: Activity): void {
-    if (activity.owner) {
-      activity.ownerid = activity.owner.id; // Imposta correttamente l'ownerid dall'oggetto owner
-    }
-    this.onSelectActivity.emit(activity); // Emissione dell'evento con l'attività selezionata
+  updatePageActivities(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.filteredActivities = this.filteredActivities.slice(startIndex, endIndex);
   }
 
-  // Metodo per cancellare una singola attività
+  goToPage(page: number): void {
+    this.currentPage = page;
+    this.updatePageActivities();
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.totalItems / this.itemsPerPage);
+  }
+
+  selectActivity(activity: Activity): void {
+    this.selectedActivity = activity; 
+    this.onSelectActivity.emit(activity);
+  }
+
   deleteActivity(activity: Activity): void {
     if (activity.id && confirm(`Sei sicuro di voler eliminare l'attività "${activity.description}" di "${activity.ownerName}"?`)) {
-      console.log('Eliminazione dell\'attività con ID:', activity.id); // Debug per verificare l'ID
       this.activityService.delete(activity.id).subscribe({
         next: () => {
-          console.log('Attività eliminata con successo:', activity.id);
-          this.load(); // Ricarica la lista delle attività dopo la cancellazione
+          this.loadActivities(); 
+          this.selectedActivity = null; // Deseleziona dopo l'eliminazione
         },
         error: (error: any) => {
           console.error('Errore durante l\'eliminazione dell\'attività', error);
         }
       });
-    } else {
-      console.error('ID attività non valido o non presente:', activity.id);
     }
   }
 
-  // Apertura del dettaglio/modifica dell'attività
-  openDetail(content: TemplateRef<any>, activity?: Activity) {
-    this.activityService.setActivitySelected(activity!); // Memorizza l'attività selezionata per la modifica
+  openDetail(content: TemplateRef<any>, activity?: Activity): void {
+    this.activityService.setActivitySelected(activity!);
     this.modalService.open(content, { size: 'xl' });
   }
 
-  // Apertura per creare una nuova attività
-  openNew(content: TemplateRef<any>){
-    this.selectedActivities = []; // Svuota la selezione per una nuova attività
+  openNew(content: TemplateRef<any>): void {
+    this.selectedActivity = null; 
     this.modalService.open(content, { size: 'xl' });
   }
 
-  // Quando ricevi l'evento di reload, chiama load()
-  reload(load: boolean) {
-    if (load) {
-      this.load(); // Ricarica la lista
-    }
+  filterActivities(): void {
+    this.activityData$.subscribe(data => {
+      const allActivities = data.activityList || [];
+      this.filteredActivities = allActivities.filter(activity => 
+        activity.description.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+      this.totalItems = this.filteredActivities.length;
+      this.currentPage = 1; 
+      this.updatePageActivities();
+    });
+  }
+
+  sortActivities(): void {
+    this.filteredActivities.sort((a, b) => {
+      const dateA = a.dtstart ? new Date(a.dtstart).getTime() : 0;
+      const dateB = b.dtstart ? new Date(b.dtstart).getTime() : 0;
+      return this.sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+    });
+    this.updatePageActivities(); 
   }
 }

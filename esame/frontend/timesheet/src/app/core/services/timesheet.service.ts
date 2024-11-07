@@ -6,7 +6,7 @@ import { TimeSheet, TimeSheetDTO } from '../models/timesheet.model';
 @Injectable({
   providedIn: 'root'
 })
-export class TimesheetService {
+export class TimeSheetService {
   private apiUrl = 'http://localhost:8080/esame/api/timesheet';
 
   constructor(private http: HttpClient) {}

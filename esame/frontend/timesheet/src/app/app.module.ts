@@ -11,7 +11,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent
-    // Rimosso TimesheetFormComponent da qui
+    
   ],
   imports: [
     BrowserModule,
@@ -19,7 +19,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     LayoutModule,
     ReactiveFormsModule,
     FormsModule,
-    FeaturesModule, // Importa correttamente il modulo delle funzionalità
+    FeaturesModule, 
     HttpClientModule,
     NgbModalModule
   ],
