@@ -7,10 +7,7 @@ import javax.ws.rs.NotFoundException;
 import ts.store.UserStore;
 import ts.entity.User;
 
-/**
- *
- * @author AndreLima
- */
+
 public class UserTypeAdapter implements JsonbAdapter<User, JsonObject> {
     
     @Inject
@@ -27,21 +24,15 @@ public class UserTypeAdapter implements JsonbAdapter<User, JsonObject> {
 
     @Override
     public User adaptFromJson(JsonObject json) throws Exception {
-        if (!json.containsKey("id") && !json.containsKey("username")) {
-            throw new IllegalArgumentException("JSON deve contenere l'id o il username"); // Aggiunto controllo per l'id o username
+        if (!json.containsKey("id")) {
+            throw new IllegalArgumentException("JSON deve contenere l'id"); // Aggiunto controllo per l'id
         }
 
-        // Cerca l'utente per id o username
+        // Cerca l'utente per id
         User user = null;
-        if (json.containsKey("id")) {
-            Long id = json.getJsonNumber("id").longValue();
-            user = store.find(id)
-                .orElseThrow(() -> new NotFoundException("Utente non trovato con id: " + id)); // Messaggio d'errore migliorato
-        } else if (json.containsKey("username")) {
-            String username = json.getString("username");
-            user = store.findByUsername(username)
-                .orElseThrow(() -> new NotFoundException("Utente non trovato con username: " + username)); // Messaggio d'errore migliorato
-        }
+        Long id = json.getJsonNumber("id").longValue();
+        user = store.find(id)
+            .orElseThrow(() -> new NotFoundException("Utente non trovato con id: " + id)); // Messaggio d'errore migliorato
 
         return user; // Ritorna l'utente trovato
     }

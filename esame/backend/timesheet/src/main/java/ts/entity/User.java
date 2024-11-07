@@ -12,10 +12,7 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "user")
 public class User extends BaseEntity {
 
-    @NotBlank
-    @Column(nullable = false, unique = true) // Assicurati che l'username sia unico
-    private String username; 
-
+   
     @NotBlank
     @Column(nullable = false)
     private String name;
@@ -32,14 +29,7 @@ public class User extends BaseEntity {
     private Set<String> roles;
 
     // Getters e Setters
-    public String getUsername() {
-        return username; // Getter per username
-    }
-
-    public void setUsername(String username) {
-        this.username = username; // Setter per username
-    }
-
+  
     public String getName() {
         return name;
     }
@@ -64,11 +54,5 @@ public class User extends BaseEntity {
         this.pwd = pwd;
     }
 
-    public Set<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<String> roles) {
-        this.roles = roles;
-    }
+  
 }

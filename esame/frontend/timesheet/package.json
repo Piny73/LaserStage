@@ -25,6 +25,7 @@
     "@ng-bootstrap/ng-bootstrap": "^17.0.1",
     "bootstrap": "^5.3.3",
     "core-js": "^3.38.1",
+    "exame-fe": "file:",
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

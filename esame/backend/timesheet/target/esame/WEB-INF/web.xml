@@ -16,8 +16,8 @@
         <name>java:global/jdbc/esame</name>
         <class-name>com.mysql.cj.jdbc.MysqlConnectionPoolDataSource</class-name>
         <url>jdbc:mysql://localhost:3306/esame?useSSL=false</url>
-        <user>timesheet</user>
-        <password>timesheet</password>
+        <user>esame</user>
+        <password>esame</password>
     </data-source>
     
     
