@@ -39,7 +39,7 @@ public class UserStore extends BaseStore<User> {
     public Optional<User> login(Credential credential) {
         try {
             return Optional.of(
-                    getEm().createQuery("select e from User e where (e.email = :usr or e.username = :usr) and e.pwd = :pwd and e.canceled = false", User.class)
+                    getEm().createQuery("select e from User e where e.email = :usr and e.pwd = :pwd and e.canceled = false", User.class)
                             .setParameter("usr", credential.usr)
                             .setParameter("pwd", credential.pwd)
                             .getSingleResult()

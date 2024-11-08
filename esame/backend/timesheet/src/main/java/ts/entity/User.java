@@ -25,8 +25,7 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String pwd;
 
-    @ElementCollection
-    private Set<String> roles;
+ 
 
     // Getters e Setters
   

@@ -7,9 +7,9 @@ public class UserDTO {
     
     public Long id;
     
-    @NotBlank
+   /* @NotBlank
     public String username; // Aggiunto campo username
-
+*/
     @NotBlank
     public String name;
 
@@ -26,7 +26,7 @@ public class UserDTO {
     public String toString() {
         return "UserDTO{" + 
                "id=" + id + 
-               ", username='" + username + '\'' +  // Includi username nel toString
+              // ", username='" + username + '\'' +  // Includi username nel toString
                ", name='" + name + '\'' + 
                ", email='" + email + '\'' + 
                ", pwd='" + pwd + '\'' + 

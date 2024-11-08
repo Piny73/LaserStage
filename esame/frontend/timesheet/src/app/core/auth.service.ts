@@ -9,10 +9,14 @@ import { User } from './models/user.model';
   providedIn: 'root'
 })
 export class AuthService {
+  
 
   private readonly endpoint = 'users/login'; //endpoint di login
+  private currentUser: User| null=null;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) { 
+    this.currentUser = this.getUser();
+  }
 
   login(login: Login): Observable<any> {
     const loginData = login;
@@ -24,6 +28,7 @@ export class AuthService {
       map(response => {
         if (typeof response === 'string') {
           this.saveUserInLocalStorage(response);
+          this.currentUser = this.getUser();
         } else {
           console.error('Errore: il valore di response non è una stringa', response);
         }
@@ -31,28 +36,28 @@ export class AuthService {
       })
     );
   }
+  getCurrentUser(): User | null {
+    return this.currentUser; // Restituisce l'oggetto utente corrente
+  }
+ 
 
   getUser(): User | null {
+    // Ricava l'utente dal localStorage come hai già implementato
     try {
       const localUser = localStorage.getItem('user');
 
       if (localUser) {
-        try {
-          if (this.isValidUser(localUser)?.id) {
-            return this.isValidUser(localUser);
-          } else {
-            console.log('Error localstorage');
-            this.logout();
-          }
-        } catch (e) {
-          console.error('Erro localstorage:', e);
+        const parsedUser = JSON.parse(localUser); // Assicurati di fare il parsing
+        if (this.isValidUser(parsedUser)) {
+          return parsedUser;
+        } else {
+          console.log('Error localstorage');
           this.logout();
         }
       }
     } catch {
       console.warn('Erro localStore:');
     }
-
     return null;
   }
 

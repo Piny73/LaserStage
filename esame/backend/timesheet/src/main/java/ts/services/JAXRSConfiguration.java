@@ -1,6 +1,5 @@
 package ts.services;
 
-import javax.annotation.security.DeclareRoles;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import org.eclipse.microprofile.auth.LoginConfig;
@@ -15,7 +14,7 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
  */
 @SecurityScheme(securitySchemeName = "jwt", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "jwt")
 @LoginConfig(authMethod = "MP-JWT", realmName = "MP-JWT")
-@DeclareRoles({"Admin", "User"})
+//@DeclareRoles({"Admin", "User"})
 @ApplicationPath("api")
 public class JAXRSConfiguration extends Application {
 

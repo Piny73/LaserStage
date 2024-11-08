@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { catchError, map, Observable, of, startWith } from 'rxjs';
 import { Activity } from '../../core/models/activity.model';
 import { ActivityService } from '../../core/services/activity.service';
+import { AuthService } from '../../core/auth.service';
 
 interface ActivityData {
   loading: boolean;
@@ -16,7 +17,8 @@ interface ActivityData {
   styleUrls: ['./activity-list.component.css']
 })
 export class ActivityListComponent implements OnInit, OnChanges {
-
+  activities: Activity[] = []; // Assicurati di avere il modello Activity
+  errorMessage: string = '';
   private modalService = inject(NgbModal);
 
   @Output() onSelectActivity = new EventEmitter<Activity>();
@@ -35,9 +37,9 @@ export class ActivityListComponent implements OnInit, OnChanges {
   itemsPerPage: number = 10;
   totalItems: number = 0;
 
-  constructor(private activityService: ActivityService) {}
+  constructor(private activityService: ActivityService, private authService: AuthService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadActivities();
   }
 
@@ -50,12 +52,17 @@ export class ActivityListComponent implements OnInit, OnChanges {
   loadActivities(): void {
     this.activityData$ = this.activityService.fill().pipe(
       map((data: Activity[]) => {
-        this.totalItems = data.length;
-        this.filteredActivities = data;  // Memorizziamo tutte le attività da filtrare e paginare
+        const currentUser = this.authService.getCurrentUser(); // Recupera l'utente loggato
+        const userActivities = currentUser // Filtra le attività per l'utente attualmente loggato
+          ? data.filter(activity => activity.ownerid === currentUser.id) 
+          : [];
+  
+        this.totalItems = userActivities.length;
+        this.filteredActivities = userActivities; // Memorizza le attività filtrate
         this.updatePageActivities();
         return {
           loading: false,
-          activityList: data,
+          activityList: userActivities,
           error: null,
         };
       }),
@@ -70,7 +77,6 @@ export class ActivityListComponent implements OnInit, OnChanges {
       startWith({ loading: true, activityList: null, error: null })
     );
   }
-
   updatePageActivities(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
