@@ -1,0 +1,38 @@
+<div class="table-responsive">
+  <ng-container *ngIf="activityData$ | async as activityData">
+    <div *ngIf="activityData.loading" class="alert alert-info">
+      Caricamento delle attività in corso...
+    </div>
+
+    <div *ngIf="activityData.error" class="alert alert-danger">
+      {{ activityData.error }}
+    </div>
+
+    <table *ngIf="!activityData.loading && activityData.activityList?.length" class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Seleziona</th>
+          <th scope="col">Descrizione</th>
+          <th scope="col">Proprietario</th> <!-- Visualizza il nome del proprietario -->
+          <th scope="col">Data Inizio</th>
+          <th scope="col">Data Fine</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ac of activityData.activityList">
+          <td>
+            <input type="radio" (change)="selectActivity(ac)" [checked]="selectedActivities.includes(ac)">
+          </td>
+          <td>{{ ac.description }}</td>
+          <td>{{ ac.ownerName }}</td> <!-- Visualizza il nome del proprietario -->
+          <td>{{ ac.dtstart | date: 'short' }}</td>
+          <td>{{ ac.dtend | date: 'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="!activityData.loading && !activityData.activityList?.length" class="alert alert-warning">
+      Nessuna attività da caricare
+    </div>
+  </ng-container>
+</div>

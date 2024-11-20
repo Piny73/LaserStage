@@ -1,0 +1,92 @@
+<div class="form-container">
+  <h5 class="mb-4">I Timesheet</h5>
+  <form [formGroup]="timesheetForm" (ngSubmit)="onSubmit()">
+    <!-- Hidden Fields -->
+    <input type="hidden" formControlName="id">
+
+    <!-- Form Fields -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="activity" class="form-label">Attività</label>
+        <select id="activity" formControlName="activityId" class="form-control" (change)="onActivitySelected($event)">
+          <option value="" disabled selected>Seleziona un'attività</option>
+          <option *ngFor="let activity of activityList" [value]="activity.id">{{ activity.description }}</option>
+        </select>
+        <div *ngIf="timesheetForm.get('activityId')?.invalid && timesheetForm.get('activityId')?.touched" class="text-danger">
+          Attività obbligatoria.
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="user" class="form-label">Utente</label>
+        <select id="user" formControlName="userId" class="form-control" (change)="onUserSelected($event)">
+          <option value="" disabled selected>Seleziona un utente</option>
+          <option *ngFor="let user of userList" [value]="user.id">{{ user.name }}</option>
+        </select>
+        <div *ngIf="timesheetForm.get('userId')?.invalid && timesheetForm.get('userId')?.touched" class="text-danger">
+          Utente obbligatorio.
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="dtstart" class="form-label">Data Inizio</label>
+        <input type="datetime-local" id="dtstart" formControlName="dtstart" class="form-control" required>
+        <div *ngIf="timesheetForm.get('dtstart')?.invalid && timesheetForm.get('dtstart')?.touched" class="text-danger">
+          Data Inizio obbligatoria.
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="dtend" class="form-label">Data Fine</label>
+        <input type="datetime-local" id="dtend" formControlName="dtend" class="form-control" required>
+        <div *ngIf="timesheetForm.get('dtend')?.invalid && timesheetForm.get('dtend')?.touched && !timesheetForm.get('dtend')?.valid" class="text-danger">
+          Data Fine non valida.
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <label for="detail" class="form-label">Dettaglio</label>
+        <textarea id="detail" formControlName="detail" class="form-control" rows="3" placeholder="Descrizione dettagliata" maxlength="500"></textarea>
+        <div *ngIf="timesheetForm.get('detail')?.invalid && timesheetForm.get('detail')?.touched" class="text-danger">
+          Il dettaglio non può superare i 500 caratteri.
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-end">
+        <button type="button" class="btn btn-secondary me-2" (click)="resetForm()">Pulisci</button>
+        <button type="button" class="btn btn-danger me-2" (click)="confirmDelete()">Cancella</button>
+        <button type="submit" class="btn btn-primary" [disabled]="timesheetForm.invalid">Salva</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Save Confirmation -->
+  <div id="save-confirmation" class="dialog-overlay" *ngIf="showSaveDialog">
+    <div class="dialog-content text-center">
+      <p class="mb-4">Vuoi salvare i cambiamenti?</p>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-success me-2" (click)="onSave()">Salva</button>
+        <button class="btn btn-secondary" (click)="cancelSave()">No</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation -->
+  <div id="delete-confirmation" class="dialog-overlay" *ngIf="showDeleteDialog">
+    <div class="dialog-content text-center">
+      <p class="mb-4">Vuoi eliminare questo timesheet?</p>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-danger me-2" (click)="confirmDelete()">Sì</button>
+        <button class="btn btn-secondary" (click)="cancelDelete()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+

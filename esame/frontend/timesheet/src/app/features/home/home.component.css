@@ -1,0 +1,134 @@
+.home-container {
+  background-image: url('/assets/sfondohome.png');
+  /* Sostituisci con il percorso corretto dell'immagine */
+  background-size: cover;
+  /* Adatta l'immagine per coprire l'intera area */
+  background-position: center;
+  /* Centra l'immagine */
+  background-repeat: no-repeat;
+  /* Evita che l'immagine si ripeta */
+  padding: 20px;
+  /* Aggiungi del padding per creare spazio intorno al contenuto, se necessario */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.alunno-nome {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #FFA500;
+  /* Colore arancio-giallo per il testo */
+  text-shadow:
+    1px 1px 0 navy,
+    /* Ombra in basso a destra */
+    -1px -1px 0 navy,
+    /* Ombra in alto a sinistra */
+    -1px 1px 0 navy,
+    /* Ombra in basso a sinistra */
+    1px -1px 0 navy;
+  /* Ombra in alto a destra */
+  background-color: #d5e9fc;
+  /* Colore di sfondo chiaro */
+  border: ridge navy;
+  padding: 20px;
+
+  /* Trasforma il box in un ovale */
+  border-radius: 50%;
+  /* Arrotonda il box fino a renderlo ovale */
+  width: 200px;
+  /* Larghezza personalizzata */
+  height: 100px;
+  /* Altezza personalizzata */
+
+  /* Aggiungi un effetto di bagliore alla cornice */
+  box-shadow:
+    0 0 10px rgb(74, 74, 139),
+    /* Bagliore all'esterno */
+    0 0 20px rgb(31, 31, 124),
+    0 0 30px navy;
+  /* Bagliore esteso */
+
+  /* Filtro per aggiungere un leggero bagliore */
+  filter: brightness(1.1);
+
+  /* Centrare il testo all'interno dell'ovale */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.menu-opcoes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-item {
+  font-size: 1.5rem;
+  text-decoration: none;
+  margin: 1rem 0;
+  padding: 1rem 2rem;
+  background-color: #d5e9fc;
+  /* Colore di sfondo chiaro */
+  color: navy;
+  border: ridge navy;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.menu-item:hover {
+  background-color: #007bff;
+  color: black;
+}
+
+/* Stile per il modal (inizialmente nascosto) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 400px;
+  border-radius: 10px;
+}
+
+/* Stile per il bottone di chiusura */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Stile per i campi editabili nel modal */
+.modal input,
+.modal textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  box-sizing: border-box;
+}

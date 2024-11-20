@@ -1,0 +1,91 @@
+/* Table Container */
+.table-responsive {
+  background-color: #f0f8ff; /* Light blue background */
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  border: 2px ridge #1e90ff; /* Ridge border with blue color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  margin-bottom: 20px;
+}
+
+/* Table Styles */
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px; /* Padding in cells */
+  vertical-align: middle; /* Align text in the middle */
+  border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+  border-bottom: 2px solid #1e90ff; /* Blue bottom border */
+  color: #1e90ff; /* Blue text for header */
+  font-weight: bold;
+  background-color: #f0f8ff; /* Same background as container */
+}
+
+.table tbody tr:hover {
+  background-color: #f5f5f5; /* Slightly darker background on hover */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(30, 144, 255, 0.1); /* Light blue striping */
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: #ffffff; /* White for even rows */
+}
+
+.table th {
+  text-align: left;
+  padding: 10px;
+}
+
+.table td {
+  border-bottom: 1px solid #dee2e6;
+  color: #333;
+}
+
+/* Select Button in Table */
+.btn-select {
+  background-color: #1e90ff;
+  border-color: #1e90ff;
+  color: white;
+}
+
+.btn-select:hover {
+  background-color: #4169e1; /* Darker blue on hover */
+}
+
+/* Error/Warning Messages */
+.alert {
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.alert-info {
+  background-color: #d0eaff; /* Light blue background for info */
+  color: #1e90ff; /* Blue text */
+}
+
+.alert-danger {
+  background-color: #ffe6e6; /* Light red background */
+  color: #ff6347; /* Tomato red text */
+}
+
+.alert-warning {
+  background-color: #fffacd; /* Light yellow background */
+  color: #ff6347; /* Tomato red text */
+}
+
+/* Checkbox */
+.table .form-check-input {
+  accent-color: #1e90ff; /* Blue checkbox */
+}

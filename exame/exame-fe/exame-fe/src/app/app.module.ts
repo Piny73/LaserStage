@@ -2,6 +2,7 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FeaturesModule } from './features/features.module'; // Modulo delle feature (contiene i componenti specifici come HomeComponent)
@@ -20,6 +21,11 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     LayoutModule,
     ReactiveFormsModule,
     FormsModule,
+
+    FeaturesModule,
+    HttpClientModule,
+    NgbModalModule
+
     FeaturesModule, // Modulo con i componenti specifici dell'applicazione
     HttpClientModule, // Aggiunto HttpClientModule 
     NgbModalModule // Aggiungi NgbModalModule qui per abilitare i modali di ng-bootstrap

@@ -1,0 +1,98 @@
+<div class="form-container">
+  <!-- Elenco delle Attività ->
+  <h5 class="mb-4">Elenco Attività Presenti</h5>
+  <div class="table-responsive">
+    <app-activity-list (onSelectActivity)="selectActivity($event)"></app-activity-list>
+  </div-->
+
+  <!-- Form Container -->
+  <div>
+    <form [formGroup]="activityForm" (ngSubmit)="onSubmit()">
+      <div class="form-container">
+        <!-- Hidden Fields -->
+        <input type="hidden" id="id" name="id" formControlName="id">
+
+        <!-- Form Fields -->
+        <div class="row mb-3">
+          <h5 class="mb-4">Crea Nuova Attività</h5>
+
+          <!-- Descrizione -->
+          <div class="col-md-6">
+            <label for="description" class="form-label">Descrizione</label>
+            <input type="text" id="description" name="description" formControlName="description" class="form-control" placeholder="Descrizione">
+            <div *ngIf="activityForm.get('description')?.invalid && activityForm.get('description')?.touched" class="text-danger">
+              Descrizione obbligatoria.
+            </div>
+          </div>
+          
+          <!-- Proprietario -->
+          <div class="col-md-6">
+            <label for="owner" class="form-label">Proprietario</label>
+            <app-cb-user [selectedUser]="currentOwner" (selectedItemChange)="onOwnerSelected($event)">
+            </app-cb-user>
+            <div *ngIf="activityForm.get('ownerid')?.invalid && activityForm.get('ownerid')?.touched" class="text-danger">
+              Proprietario obbligatorio.
+            </div>
+          </div>
+        </div>
+
+        <!-- Date e Abilita -->
+        <div class="row mb-3">
+          <!-- Data Inizio -->
+          <div class="col-md-6">
+            <label for="dtstart" class="form-label">Data Inizio</label>
+            <input type="datetime-local" id="dtstart" name="dtstart" formControlName="dtstart" class="form-control">
+            <div *ngIf="activityForm.get('dtstart')?.invalid && activityForm.get('dtstart')?.touched" class="text-danger">
+              Data Inizio obbligatoria.
+            </div>
+          </div>
+
+          <!-- Data Fine -->
+          <div class="col-md-6">
+            <label for="dtend" class="form-label">Data Fine</label>
+            <input type="datetime-local" id="dtend" name="dtend" formControlName="dtend" class="form-control">
+          </div>
+
+          <!-- Checkbox Abilita -->
+          <div class="d-flex align-items-center col-md-6">
+            <div>
+              <input type="checkbox" id="enable" name="enable" formControlName="enable" class="form-check-input">
+              <label for="enable" class="form-check-label ms-2">Abilita</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="row">
+          <div class="col-md-12 d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary me-2" (click)="resetForm()">Pulisci</button>
+            <button type="button" class="btn btn-danger me-2" (click)="openDeleteConfirmation()">Cancella</button>
+            <button type="submit" class="btn btn-primary">Salva</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Save Confirmation -->
+  <div id="save-confirmation" class="dialog-overlay" *ngIf="showSaveDialog">
+    <div class="dialog-content text-center">
+      <p class="mb-4">Vuoi salvare i cambiamenti?</p>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-success me-2" (click)="confirmSave()">Si</button>
+        <button class="btn btn-secondary" (click)="cancelSave()">No</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation -->
+  <div id="delete-confirmation" class="dialog-overlay" *ngIf="showDeleteDialog">
+    <div class="dialog-content text-center">
+      <p class="mb-4">Vuoi eliminare questa attività?</p>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-danger me-2" (click)="confirmDelete()">Si</button>
+        <button class="btn btn-secondary" (click)="cancelDelete()">No</button>
+      </div>
+    </div>
+  </div>
+</div>

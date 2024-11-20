@@ -1,0 +1,103 @@
+/* Form Container */
+.form-container {
+    background-color: #f0f8ff; /* Light blue background */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    border: 2px ridge #1e90ff; /* Ridge border with blue color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    margin-bottom: 20px;
+  }
+  
+  /* Labels */
+  .form-label {
+    font-weight: bold;
+    color: #1e90ff; /* Blue color for labels */
+  }
+  
+  /* Input Fields */
+  .form-control {
+    border-radius: 5px; /* Rounded input fields */
+    border: 2px solid #1e90ff; /* Blue border */
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #4169e1; /* Darker blue on focus */
+    box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+  }
+  
+  /* Error Message */
+  .text-danger {
+    color: red;
+    font-size: 0.875rem; /* Smaller error text */
+  }
+  
+  /* Checkboxes */
+  .form-check-input {
+    accent-color: #1e90ff; /* Blue checkbox color */
+  }
+  
+  /* Buttons */
+  .btn {
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+  
+  .btn-primary {
+    cursor: pointer;
+    background-color: #1e90ff;
+    border-color: #1e90ff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #4169e1; /* Darker blue on hover */
+  }
+  
+  .btn-secondary {
+    background-color: #dcdcdc;
+    border-color: #dcdcdc;
+  }
+  
+  .btn-danger {
+    background-color: #ff6347;
+    border-color: #ff6347;
+  }
+  
+  .btn-success {
+    background-color: #32cd32;
+    border-color: #32cd32;
+  }
+  
+  /* Dialog Overlay */
+  .dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Transparent dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Dialog Content */
+  .dialog-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px ridge #1e90ff; /* Ridge border for dialogs */
+    width: 400px;
+  }
+  
+  .dialog-content p {
+    font-size: 1.2rem;
+    color: #1e90ff; /* Blue text for dialogs */
+  }
+  
+  .dialog-content .btn {
+    margin-top: 10px;
+  }
+  

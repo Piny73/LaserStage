@@ -1,0 +1,12 @@
+<div class="w-100">
+  <select class="form-control" id="user" (change)="onSelected($event)">
+    <option [value]="-1" [selected]="selectedItem === -1">-- Seleziona una User --</option>
+    <option *ngFor="let us of userList" 
+            [value]="us.id" 
+            [selected]="selectedItem === us.id">
+      {{ us.name }}
+    </option>
+  </select>
+</div>
+
+  

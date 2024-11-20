@@ -1,0 +1,31 @@
+.app-navbar {
+    background-color: #343a40; /* Colore di sfondo scuro */
+    padding: 10px 20px; /* Padding per dare un po' di spazio */
+}
+
+.navbar-nav .nav-link {
+    color: #0a1af8; /* Colore del testo */
+    padding: 10px 15px; /* Padding per i link */
+    transition: background-color 0.3s; /* Transizione per l'effetto hover */
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: #8b8c8d; /* Colore di sfondo al passaggio del mouse */
+    border-radius: 5px; /* Angoli arrotondati */
+}
+
+.navbar-toggler {
+    background-color: #d2d6ec; /* Colore del bottone toggler */
+}
+
+.navbar-toggler-icon {
+    background-image: url("/assets/images/Immagine logo.png"); /* Icona del toggler bianca */
+}
+
+.navbar-collapse {
+    justify-content: flex-end; /* Allinea i link a destra */
+}
+
+
+
+

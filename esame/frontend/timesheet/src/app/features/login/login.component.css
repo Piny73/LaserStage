@@ -1,0 +1,63 @@
+.login-container {
+  position: relative; /* Necessario per posizionare correttamente l'overlay */
+  background-image: url('/assets/logotm.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+/* Overlay semitrasparente */
+.login-container::before {
+  content: '';
+  position: absolute; /* Posiziona l'overlay sopra l'immagine di sfondo */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5); /* Colore bianco con trasparenza */
+  z-index: 1; /* Assicurati che l'overlay sia sopra l'immagine */
+}
+
+/* Contenuto all'interno della login-container */
+.login-container > * {
+  position: relative; /* Rendi il contenuto visibile sopra l'overlay */
+  z-index: 2; /* Assicurati che il contenuto sia sopra l'overlay */
+}
+
+  
+  h2 {
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .alert {
+    margin-top: 15px;
+    text-align: center;
+  }
+  

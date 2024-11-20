@@ -1,0 +1,30 @@
+/* Stili di base per il footer */
+.app-footer {
+    background-color: #343a40; /* Colore di sfondo grigio scuro */
+    color: white; /* Colore del testo bianco */
+    text-align: center; /* Allinea il testo al centro */
+    padding: 20px 0; /* Padding verticale */
+    position: relative; /* Posizionamento relativo per gestire il layout */
+    bottom: 0; /* Fissa il footer in basso se necessario */
+    width: 100%; /* Larghezza completa */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2); /* Ombra leggera */
+}
+
+/* Stile dei link nel footer */
+.app-footer a {
+    color: white; /* Colore del testo dei link */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    margin: 0 10px; /* Spazio orizzontale tra i link */
+    transition: color 0.3s; /* Transizione per effetto hover */
+}
+
+/* Effetto hover per i link */
+.app-footer a:hover {
+    color: #007bff; /* Colore blu al passaggio del mouse */
+}
+
+/* Stile per i diritti d'autore */
+.app-footer .copyright {
+    font-size: 0.9rem; /* Dimensione del font per il copyright */
+    margin-top: 10px; /* Spazio sopra il copyright */
+}

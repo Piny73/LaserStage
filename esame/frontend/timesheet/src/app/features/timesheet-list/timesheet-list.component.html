@@ -1,0 +1,58 @@
+<div class="timesheet-list">
+  <h2>Elenco dei Timesheets</h2>
+
+  <!-- Indicatore di caricamento -->
+  <div *ngIf="loading" class="loading-spinner">Caricamento in corso...</div>
+
+  <!-- Messaggio di errore -->
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <!-- Tabella dei timesheets -->
+  <table *ngIf="!loading && !errorMessage && timesheets.length > 0" class="table">
+    <thead>
+      <tr>
+        <th>Utente</th>
+        <th>Attività</th>
+        <th>Inizio</th>
+        <th>Fine</th>
+        <th>Dettagli</th>
+        <th>Azioni</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let timesheet of timesheets">
+        <td>{{ timesheet.userId }}</td>
+        <td>{{ timesheet.activityId }}</td>
+        <td>{{ timesheet.dtstart | date:'short' }}</td> <!-- Formatta la data -->
+        <td>{{ timesheet.dtend | date:'short' }}</td> <!-- Formatta la data -->
+        <td>{{ timesheet.detail }}</td>
+        <td>
+          <button class="btn btn-warning" (click)="openTimesheetModal(timesheet)">Modifica</button>
+          <button class="btn btn-danger" (click)="confirmDelete(timesheet)">Elimina</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Messaggio per lista vuota -->
+  <div *ngIf="!loading && !errorMessage && timesheets.length === 0" class="no-data-message">
+    Nessun timesheet trovato.
+  </div>
+
+  <!-- Dialogo di conferma eliminazione -->
+  <div *ngIf="showDeleteDialog" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Conferma Eliminazione</h5>
+        <button type="button" class="close" (click)="cancelDelete()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Sei sicuro di voler eliminare questo timesheet?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cancelDelete()">Annulla</button>
+        <button type="button" class="btn btn-danger" (click)="deleteTimesheet()">Elimina</button>
+      </div>
+    </div>
+  </div>
+</div>
